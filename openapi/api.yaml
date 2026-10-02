@@ -1,0 +1,1604 @@
+# Generated from contracts/api.openapi.yaml by tooling/public-openapi.mjs — do not edit by hand.
+# Only the routes reachable from outside (/api/public/*) are listed.
+openapi: 3.1.0
+info:
+  title: kramr API
+  version: 0.28.0
+  description: Material lending management for a youth organisation or association. Generated from the Zod schemas in @kramr/shared — do not edit by hand.
+  license:
+    name: MIT
+    identifier: MIT
+paths:
+  /api/public/branding:
+    get:
+      operationId: getBranding
+      summary: The organisation’s name and logo addresses
+      description: "Public (FR-91): the sign-in and request pages that show the organisation have no session. `name` is `null` while none is maintained — the interface then shows kramr’s own name; `logoSvgUrl` / `logoPngUrl` are `null` where no logo is stored in that format and otherwise carry a `v` parameter that changes with the file, so a replaced logo is fetched again. Counts against the read budget of `/api/public/*`."
+      responses:
+        "200":
+          description: The appearance as it stands.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BrandingResponse"
+  /api/public/branding/logo/{format}:
+    get:
+      operationId: getBrandingLogoFile
+      summary: The stored logo in one format
+      description: "Public. The SVG is delivered as `image/svg+xml` with `Content-Security-Policy: sandbox` and `X-Content-Type-Options: nosniff` — meant for an `<img>`, never for inlining; the PNG as `image/png`. Served with `Cache-Control: public`; the address carries the version, so a replaced logo is a new address."
+      parameters:
+        - name: format
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - svg
+              - png
+      responses:
+        "200":
+          description: The logo file.
+          content:
+            image/svg+xml:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: The format is neither `svg` nor `png`.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: No logo is stored in that format.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/settings:
+    get:
+      operationId: getPublicSettings
+      summary: The settings a visitor may read without signing in
+      description: 'Anonymous: no session, no cookie. A closed list — today only the form of address ("Du" or "Sie") the embed and request pages render their German texts in. No other setting is readable here.'
+      responses:
+        "200":
+          description: The public settings.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicSettingsResponse"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/embeds/{embedId}:
+    get:
+      operationId: getPublicEmbed
+      summary: An embed and the categories in its scope
+      description: "Anonymous (FR-15, ADR 0028): no session, no cookie. The theme the embed page follows and the category tree the embed covers — categories outside the scope are not named, and a category whose parent is outside the scope has no parent."
+      parameters:
+        - name: embedId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The embed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicEmbedResponse"
+        "404":
+          description: No such embed (unknown or deleted).
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/requests/{token}:
+    get:
+      operationId: getPublicBookingRequest
+      summary: A booking request behind its link
+      description: "Anonymous (FR-87, ADR 0029): the link is the only credential. Answers the request for the editor (`editable`) or the status page, with the availability of every position in the request period while it is open (FR-63). The first call of a link that was never opened stretches a self-service link to its full term. **An unknown, malformed, expired, revoked or anonymised link is one and the same 404** — nothing says which. The page sends `Referrer-Policy: no-referrer`; the path is never logged."
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: The link of the request (43 characters, base64url). The only credential.
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9_-]{43}$
+      responses:
+        "200":
+          description: The request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicBookingRequestResponse"
+        "404":
+          description: No usable link.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    put:
+      operationId: savePublicBookingRequest
+      summary: Saves an open booking request
+      description: Replaces period, group, note and all positions (FR-87, question 260). `version` is the one the caller last read; another version is a `409` of type `request-version-conflict` and nothing is written. A request that is no longer open is a `409` of type `request-not-editable`. A position must be a material the link may choose from (FR-62; an embed request its embed's scope, question 261 d); positions already in the request may stay.
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: The link of the request (43 characters, base64url). The only credential.
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9_-]{43}$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveBookingRequest"
+      responses:
+        "200":
+          description: The request as saved, with its new version.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicBookingRequestResponse"
+        "400":
+          description: A field is malformed, the period is incomplete or reversed, a material appears twice, there are more positions than the limit allows, or a position is not a material this link may choose.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: No usable link.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: "`request-version-conflict`: another version was saved first. `request-not-editable`: the request was submitted or closed."
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The write budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/requests/{token}/submit:
+    post:
+      operationId: submitPublicBookingRequest
+      summary: Submits an open booking request
+      description: "Moves the request to the inbox of the staff (FR-87, ADR 0029). Needs a period and at least one position, **not** availability: positions that are not free are accepted and marked on the status page. `version` must be the current one. Afterwards the request can only be read and withdrawn."
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: The link of the request (43 characters, base64url). The only credential.
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9_-]{43}$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitBookingRequest"
+      responses:
+        "200":
+          description: The submitted request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicBookingRequestResponse"
+        "400":
+          description: The request has no period or no position.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: No usable link.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: "`request-version-conflict` or `request-not-editable`, as for a save."
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The write budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/requests/{token}/withdraw:
+    post:
+      operationId: withdrawPublicBookingRequest
+      summary: Withdraws a booking request
+      description: Open or submitted requests can be withdrawn by whoever holds the link, until staff take them over (FR-87, question 260). The link then works for 30 more days, at most 180 from creation (question 268); after 90 days the request is deleted (question 269).
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: The link of the request (43 characters, base64url). The only credential.
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9_-]{43}$
+      responses:
+        "200":
+          description: The withdrawn request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicBookingRequestResponse"
+        "404":
+          description: No usable link.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: "`request-not-editable`: the request was taken over, declined or closed already."
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The write budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/requests/{token}/items:
+    get:
+      operationId: listPublicRequestItems
+      summary: The materials a request may choose from
+      description: "The picker of the editor (FR-87, question 261 d): an embed request chooses within its embed's scope, a staff-issued one (and one whose embed was deleted, question 271) among all active, online visible materials. The availability is that of the request period, for one piece, from the same function as the public list (FR-63); without a period there is none. Only for an open request."
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: The link of the request (43 characters, base64url). The only credential.
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9_-]{43}$
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: One page.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicItemListResponse"
+        "404":
+          description: No usable link, or the request is no longer open.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/requests/{token}/items/{itemId}/images/{imageId}/{variant}:
+    get:
+      operationId: getPublicRequestItemImageFile
+      summary: A derivative of an image of a material of a request
+      description: "Like the image of an embed, for a link that belongs to no embed (FR-21). Only `large` and `thumb`, only for a material this link may see. Served with `Cache-Control: private`, because the path carries the link."
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: The link of the request (43 characters, base64url). The only credential.
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9_-]{43}$
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: imageId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: variant
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - large
+              - thumb
+      responses:
+        "200":
+          description: The image file.
+          content:
+            image/webp:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: No usable link, or no such image of a visible material.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/embeds/{embedId}/requests:
+    post:
+      operationId: startPublicBookingRequest
+      summary: Starts a booking request from an embed
+      description: "Anonymous (FR-87, question 258 a): name, e-mail address and mobile number; the link to the request is sent to the address, which confirms it. `itemId` is the one position carried over from the material page. **The answer is the same for every well-formed start** — a link was sent, the address already has three open or submitted requests (question 272), or the honeypot field `website` was filled — so it never tells whether an address is known."
+      parameters:
+        - name: embedId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartBookingRequest"
+      responses:
+        "202":
+          description: Accepted; a link is sent if the start was not turned away silently.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StartBookingRequestResponse"
+        "400":
+          description: A field is missing or malformed, or `itemId` is not a material of this embed.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: No such embed (unknown or deleted).
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The write budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/embeds/{embedId}/items:
+    get:
+      operationId: listPublicItems
+      summary: The materials an embed shows
+      description: Only active, online visible materials (FR-62) inside the embed scope (FR-86), ordered by name — by closeness when searching. With a period every material carries its availability state and free count (FR-63); materials that are not available are listed too. `category` narrows within the scope and never widens it.
+      parameters:
+        - name: embedId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: search
+          in: query
+          required: false
+          description: A term longer than 100 characters is cut off there.
+          schema:
+            type: string
+        - name: category
+          in: query
+          required: false
+          description: A category id; empty or absent means every category of the scope.
+          schema:
+            type: string
+            format: uuid
+        - name: availableFrom
+          in: query
+          required: false
+          description: Start of the period, an ISO instant. Both ends are needed; an unusable pair is ignored.
+          schema:
+            type: string
+            format: date-time
+        - name: availableTo
+          in: query
+          required: false
+          description: End of the period (exclusive), an ISO instant after `availableFrom`.
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 48
+            default: 24
+      responses:
+        "200":
+          description: One page of materials and the total.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicItemListResponse"
+        "400":
+          description: A query parameter is malformed.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: No such embed.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/embeds/{embedId}/items/{itemId}:
+    get:
+      operationId: getPublicItem
+      summary: One material with its description, public parameters, images and set contents
+      description: Answers 404 alike for a material that does not exist, is archived, is hidden online or lies outside the embed scope — the response never tells which. Public parameters are those flagged public that hold a value (FR-85). The components of a set are named with their quantity; only a component that is itself visible in this embed carries an `itemId`.
+      parameters:
+        - name: embedId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: availableFrom
+          in: query
+          required: false
+          description: Start of the period, an ISO instant. Both ends are needed; an unusable pair is ignored.
+          schema:
+            type: string
+            format: date-time
+        - name: availableTo
+          in: query
+          required: false
+          description: End of the period (exclusive), an ISO instant after `availableFrom`.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: The material.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicItemDetailResponse"
+        "400":
+          description: A path or query parameter is malformed.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: No such embed, or the material is not visible in it.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/embeds/{embedId}/items/{itemId}/images/{imageId}/{variant}:
+    get:
+      operationId: getPublicItemImageFile
+      summary: A derivative of an image of a visible material, as WebP
+      description: "Only `large` and `thumb`, never the original, and only for a material that is visible in the embed. Served with `Cache-Control: public`. Counts against the read budget. An image that is removed or not ready is a 404 like any other."
+      parameters:
+        - name: embedId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: imageId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: variant
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - large
+              - thumb
+      responses:
+        "200":
+          description: The image file.
+          content:
+            image/webp:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: A path parameter is malformed.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: No such image in a material visible in this embed.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+components:
+  schemas:
+    PublicItemDetailResponse:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        item:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+            name:
+              type: string
+            categoryId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+            categoryPath:
+              type: array
+              items:
+                type: string
+            titleImageId:
+              anyOf:
+                - type: string
+                  format: uuid
+                  pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                - type: "null"
+            stockType:
+              type: string
+              enum:
+                - quantity
+                - unit
+            stock:
+              type: integer
+              minimum: 0
+              maximum: 9007199254740991
+            isKit:
+              type: boolean
+            componentCount:
+              anyOf:
+                - type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
+                - type: "null"
+            priceInternalCents:
+              anyOf:
+                - type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
+                - type: "null"
+            priceExternalCents:
+              anyOf:
+                - type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
+                - type: "null"
+            priceUnit:
+              type: string
+              enum:
+                - flat
+                - per_day
+            availability:
+              anyOf:
+                - type: object
+                  properties:
+                    state:
+                      type: string
+                      enum:
+                        - available
+                        - probablyUnavailable
+                        - unavailable
+                    free:
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                  required:
+                    - state
+                    - free
+                  additionalProperties: false
+                - type: "null"
+            description:
+              type:
+                - string
+                - "null"
+            priceNote:
+              type:
+                - string
+                - "null"
+            isMandatorySet:
+              type: boolean
+            imageIds:
+              type: array
+              items:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  unit:
+                    type:
+                      - string
+                      - "null"
+                  dataType:
+                    type: string
+                    enum:
+                      - text
+                      - number
+                      - date
+                      - enum
+                      - boolean
+                  value:
+                    type:
+                      - string
+                      - number
+                      - boolean
+                required:
+                  - name
+                  - unit
+                  - dataType
+                  - value
+                additionalProperties: false
+            components:
+              anyOf:
+                - type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      quantity:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                      itemId:
+                        anyOf:
+                          - type: string
+                            format: uuid
+                            pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                          - type: "null"
+                    required:
+                      - name
+                      - quantity
+                      - itemId
+                    additionalProperties: false
+                - type: "null"
+          required:
+            - id
+            - name
+            - categoryId
+            - categoryPath
+            - titleImageId
+            - stockType
+            - stock
+            - isKit
+            - componentCount
+            - priceInternalCents
+            - priceExternalCents
+            - priceUnit
+            - availability
+            - description
+            - priceNote
+            - isMandatorySet
+            - imageIds
+            - parameters
+            - components
+          additionalProperties: false
+      required:
+        - item
+      additionalProperties: false
+    StartBookingRequestResponse:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        status:
+          type: string
+          const: link_requested
+      required:
+        - status
+      additionalProperties: false
+    StartBookingRequest:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+          pattern: ^[^\p{Cc}]*$
+        email:
+          type: string
+          format: email
+          pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+        mobile:
+          type: string
+          minLength: 1
+          maxLength: 50
+          pattern: ^[0-9 +\-()/]+$
+        organisation:
+          default: null
+          anyOf:
+            - type: string
+              minLength: 1
+              maxLength: 200
+              pattern: ^[^\p{Cc}]*$
+            - type: "null"
+        itemId:
+          default: null
+          anyOf:
+            - type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+            - type: "null"
+        website:
+          default: ""
+          type: string
+          maxLength: 500
+      required:
+        - name
+        - email
+        - mobile
+        - organisation
+        - itemId
+        - website
+      additionalProperties: false
+    PublicItemListResponse:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+              name:
+                type: string
+              categoryId:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+              categoryPath:
+                type: array
+                items:
+                  type: string
+              titleImageId:
+                anyOf:
+                  - type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  - type: "null"
+              stockType:
+                type: string
+                enum:
+                  - quantity
+                  - unit
+              stock:
+                type: integer
+                minimum: 0
+                maximum: 9007199254740991
+              isKit:
+                type: boolean
+              componentCount:
+                anyOf:
+                  - type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  - type: "null"
+              priceInternalCents:
+                anyOf:
+                  - type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  - type: "null"
+              priceExternalCents:
+                anyOf:
+                  - type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  - type: "null"
+              priceUnit:
+                type: string
+                enum:
+                  - flat
+                  - per_day
+              availability:
+                anyOf:
+                  - type: object
+                    properties:
+                      state:
+                        type: string
+                        enum:
+                          - available
+                          - probablyUnavailable
+                          - unavailable
+                      free:
+                        type: integer
+                        minimum: 0
+                        maximum: 9007199254740991
+                    required:
+                      - state
+                      - free
+                    additionalProperties: false
+                  - type: "null"
+            required:
+              - id
+              - name
+              - categoryId
+              - categoryPath
+              - titleImageId
+              - stockType
+              - stock
+              - isKit
+              - componentCount
+              - priceInternalCents
+              - priceExternalCents
+              - priceUnit
+              - availability
+            additionalProperties: false
+        total:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        page:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+      required:
+        - items
+        - total
+        - page
+        - pageSize
+      additionalProperties: false
+    SubmitBookingRequest:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+      required:
+        - version
+      additionalProperties: false
+    SaveBookingRequest:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        version:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        pickupAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+            - type: "null"
+        returnAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+            - type: "null"
+        organisation:
+          anyOf:
+            - type: string
+              maxLength: 200
+              pattern: ^[^\p{Cc}]*$
+            - type: "null"
+        note:
+          anyOf:
+            - type: string
+              maxLength: 2000
+            - type: "null"
+        lines:
+          maxItems: 200
+          type: array
+          items:
+            type: object
+            properties:
+              itemId:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+              quantity:
+                type: integer
+                minimum: 1
+                maximum: 999
+            required:
+              - itemId
+              - quantity
+            additionalProperties: false
+      required:
+        - version
+        - pickupAt
+        - returnAt
+        - organisation
+        - note
+        - lines
+      additionalProperties: false
+    PublicBookingRequestResponse:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        request:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+                - open
+                - submitted
+                - taken_over
+                - declined
+                - withdrawn
+                - expired
+            origin:
+              type: string
+              enum:
+                - self_service
+                - staff_issued
+            editable:
+              type: boolean
+            version:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            requester:
+              anyOf:
+                - type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    mobile:
+                      type: string
+                  required:
+                    - name
+                    - email
+                    - mobile
+                  additionalProperties: false
+                - type: "null"
+            contactName:
+              type:
+                - string
+                - "null"
+            organisation:
+              type:
+                - string
+                - "null"
+            pickupAt:
+              anyOf:
+                - type: string
+                  format: date-time
+                  pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                - type: "null"
+            returnAt:
+              anyOf:
+                - type: string
+                  format: date-time
+                  pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                - type: "null"
+            note:
+              type:
+                - string
+                - "null"
+            lineLimit:
+              type: integer
+              minimum: -9007199254740991
+              maximum: 9007199254740991
+            lines:
+              type: array
+              items:
+                type: object
+                properties:
+                  itemId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  quantity:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                  item:
+                    anyOf:
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                            pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                          name:
+                            type: string
+                          categoryId:
+                            type: string
+                            format: uuid
+                            pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                          categoryPath:
+                            type: array
+                            items:
+                              type: string
+                          titleImageId:
+                            anyOf:
+                              - type: string
+                                format: uuid
+                                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                              - type: "null"
+                          stockType:
+                            type: string
+                            enum:
+                              - quantity
+                              - unit
+                          stock:
+                            type: integer
+                            minimum: 0
+                            maximum: 9007199254740991
+                          isKit:
+                            type: boolean
+                          componentCount:
+                            anyOf:
+                              - type: integer
+                                minimum: 0
+                                maximum: 9007199254740991
+                              - type: "null"
+                          priceInternalCents:
+                            anyOf:
+                              - type: integer
+                                minimum: 0
+                                maximum: 9007199254740991
+                              - type: "null"
+                          priceExternalCents:
+                            anyOf:
+                              - type: integer
+                                minimum: 0
+                                maximum: 9007199254740991
+                              - type: "null"
+                          priceUnit:
+                            type: string
+                            enum:
+                              - flat
+                              - per_day
+                          availability:
+                            anyOf:
+                              - type: object
+                                properties:
+                                  state:
+                                    type: string
+                                    enum:
+                                      - available
+                                      - probablyUnavailable
+                                      - unavailable
+                                  free:
+                                    type: integer
+                                    minimum: 0
+                                    maximum: 9007199254740991
+                                required:
+                                  - state
+                                  - free
+                                additionalProperties: false
+                              - type: "null"
+                        required:
+                          - id
+                          - name
+                          - categoryId
+                          - categoryPath
+                          - titleImageId
+                          - stockType
+                          - stock
+                          - isKit
+                          - componentCount
+                          - priceInternalCents
+                          - priceExternalCents
+                          - priceUnit
+                          - availability
+                        additionalProperties: false
+                      - type: "null"
+                required:
+                  - itemId
+                  - quantity
+                  - item
+                additionalProperties: false
+            submittedAt:
+              anyOf:
+                - type: string
+                  format: date-time
+                  pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                - type: "null"
+            closedAt:
+              anyOf:
+                - type: string
+                  format: date-time
+                  pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                - type: "null"
+            bookingReference:
+              type:
+                - string
+                - "null"
+            declineReason:
+              type:
+                - string
+                - "null"
+            linkValidUntil:
+              type: string
+              format: date-time
+              pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+            categories:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  name:
+                    type: string
+                  parentId:
+                    anyOf:
+                      - type: string
+                        format: uuid
+                        pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                      - type: "null"
+                required:
+                  - id
+                  - name
+                  - parentId
+                additionalProperties: false
+          required:
+            - status
+            - origin
+            - editable
+            - version
+            - requester
+            - contactName
+            - organisation
+            - pickupAt
+            - returnAt
+            - note
+            - lineLimit
+            - lines
+            - submittedAt
+            - closedAt
+            - bookingReference
+            - declineReason
+            - linkValidUntil
+            - categories
+          additionalProperties: false
+      required:
+        - request
+      additionalProperties: false
+    PublicEmbedResponse:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        embed:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+            theme:
+              type: string
+              enum:
+                - auto
+                - light
+                - dark
+            background:
+              type: string
+              enum:
+                - opaque
+                - transparent
+          required:
+            - id
+            - theme
+            - background
+          additionalProperties: false
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+              name:
+                type: string
+              parentId:
+                anyOf:
+                  - type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  - type: "null"
+            required:
+              - id
+              - name
+              - parentId
+            additionalProperties: false
+      required:
+        - embed
+        - categories
+      additionalProperties: false
+    PublicSettingsResponse:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        addressForm:
+          type: string
+          enum:
+            - informal
+            - formal
+      required:
+        - addressForm
+      additionalProperties: false
+    ProblemDetails:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          minimum: 400
+          maximum: 599
+        detail:
+          type: string
+        instance:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+              message:
+                type: string
+              code:
+                type: string
+            required:
+              - path
+              - message
+              - code
+            additionalProperties: false
+        retryAfter:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        affectedItemCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        requestStatus:
+          type: string
+          enum:
+            - open
+            - submitted
+            - taken_over
+            - declined
+            - withdrawn
+            - expired
+        takeoverPreview:
+          type: object
+          properties:
+            lines:
+              type: array
+              items:
+                type: object
+                properties:
+                  itemId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  name:
+                    type: string
+                  quantity:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                  issue:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - archived
+                          - kit-only
+                          - not-enough-units
+                          - kit-component-unavailable
+                      - type: "null"
+                required:
+                  - itemId
+                  - name
+                  - quantity
+                  - issue
+                additionalProperties: false
+            fixedContact:
+              anyOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    firstName:
+                      type: string
+                      minLength: 1
+                    lastName:
+                      type: string
+                      minLength: 1
+                    email:
+                      type:
+                        - string
+                        - "null"
+                    mobile:
+                      type:
+                        - string
+                        - "null"
+                    birthDate:
+                      anyOf:
+                        - type: string
+                          format: date
+                          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))$
+                        - type: "null"
+                    organisation:
+                      type:
+                        - string
+                        - "null"
+                    address:
+                      type:
+                        - string
+                        - "null"
+                    anonymisedAt:
+                      anyOf:
+                        - type: string
+                          format: date-time
+                          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                        - type: "null"
+                  required:
+                    - id
+                    - firstName
+                    - lastName
+                    - email
+                    - mobile
+                    - birthDate
+                    - organisation
+                    - address
+                    - anonymisedAt
+                  additionalProperties: false
+                - type: "null"
+            contactSuggestions:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  firstName:
+                    type: string
+                    minLength: 1
+                  lastName:
+                    type: string
+                    minLength: 1
+                  email:
+                    type:
+                      - string
+                      - "null"
+                  mobile:
+                    type:
+                      - string
+                      - "null"
+                  birthDate:
+                    anyOf:
+                      - type: string
+                        format: date
+                        pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))$
+                      - type: "null"
+                  organisation:
+                    type:
+                      - string
+                      - "null"
+                  address:
+                    type:
+                      - string
+                      - "null"
+                  anonymisedAt:
+                    anyOf:
+                      - type: string
+                        format: date-time
+                        pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                      - type: "null"
+                required:
+                  - id
+                  - firstName
+                  - lastName
+                  - email
+                  - mobile
+                  - birthDate
+                  - organisation
+                  - address
+                  - anonymisedAt
+                additionalProperties: false
+            newContactDraft:
+              anyOf:
+                - type: object
+                  properties:
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    email:
+                      type: string
+                    mobile:
+                      type: string
+                    organisation:
+                      type:
+                        - string
+                        - "null"
+                  required:
+                    - firstName
+                    - lastName
+                    - email
+                    - mobile
+                    - organisation
+                  additionalProperties: false
+                - type: "null"
+            notFreeCount:
+              type: integer
+              minimum: 0
+              maximum: 9007199254740991
+          required:
+            - lines
+            - fixedContact
+            - contactSuggestions
+            - newContactDraft
+            - notFreeCount
+          additionalProperties: false
+      required:
+        - type
+        - title
+        - status
+      additionalProperties: false
+    BrandingResponse:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        name:
+          type:
+            - string
+            - "null"
+        logoSvgUrl:
+          type:
+            - string
+            - "null"
+        logoPngUrl:
+          type:
+            - string
+            - "null"
+      required:
+        - name
+        - logoSvgUrl
+        - logoPngUrl
+      additionalProperties: false

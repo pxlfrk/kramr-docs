@@ -1,0 +1,149 @@
+---
+import { BaseLayout, SiteFooter, SiteHeader } from '@prosefly/astro-theme-lotus/layouts';
+import { CTA, FeatureCard, FeatureGrid, Hero, PageSection } from '@prosefly/astro-theme-lotus/blocks';
+import { Icon } from '@prosefly/astro-components';
+import { home } from '../data/home.de';
+
+// The base path is added to every site link after the build (plugins/base-path.mjs).
+const actions = (list: readonly object[]) => [...list] as never;
+---
+
+<BaseLayout title={home.title} description={home.hero.description}>
+  <SiteHeader surface />
+
+  <main>
+    <Hero
+      eyebrow={home.hero.eyebrow}
+      title={home.hero.title}
+      description={home.hero.description}
+      actions={actions(home.hero.actions)}
+    />
+
+    <PageSection id="problem" padding="md">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-(--lotus-text-strong) sm:text-3xl">{home.problem.title}</h2>
+        <p class="mt-4 leading-7 text-(--lotus-text)">{home.problem.description}</p>
+        <ul class="mt-6 space-y-2 text-(--lotus-text)">
+          {
+            home.problem.points.map((point) => (
+              <li class="flex gap-3">
+                <Icon name="lucide:circle-alert" class="mt-1 size-4 shrink-0 text-(--lotus-text-muted)" />
+                <span>{point}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </PageSection>
+
+    <PageSection id="funktionen" padding="md">
+      <h2 class="text-2xl font-semibold text-(--lotus-text-strong) sm:text-3xl">{home.features.title}</h2>
+      <p class="mt-3 max-w-2xl text-(--lotus-text-muted)">{home.features.description}</p>
+      <FeatureGrid class="mt-8">
+        {home.features.items.map((item) => <FeatureCard {...item} />)}
+      </FeatureGrid>
+    </PageSection>
+
+    <PageSection id="ablauf" padding="md">
+      <h2 class="text-2xl font-semibold text-(--lotus-text-strong) sm:text-3xl">{home.how.title}</h2>
+      <p class="mt-3 max-w-2xl text-(--lotus-text-muted)">{home.how.description}</p>
+      <ol class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {
+          home.how.steps.map((step, index) => (
+            <li class="rounded-xl border border-(--lotus-border-muted) p-5">
+              <span class="font-mono text-sm text-(--lotus-text-muted)">{index + 1}</span>
+              <h3 class="mt-2 font-semibold text-(--lotus-text-strong)">{step.title}</h3>
+              <p class="mt-1 text-sm leading-6 text-(--lotus-text)">{step.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </PageSection>
+
+    {
+      home.screenshots.items.length > 0 && (
+        <PageSection id="screenshots" padding="md">
+          <h2 class="text-2xl font-semibold text-(--lotus-text-strong) sm:text-3xl">{home.screenshots.title}</h2>
+          <p class="mt-3 max-w-2xl text-(--lotus-text-muted)">{home.screenshots.description}</p>
+          <div class="mt-8 grid gap-6 md:grid-cols-2">
+            {home.screenshots.items.map((shot) => (
+              <figure>
+                <img
+                  src={shot.src}
+                  alt={shot.alt}
+                  loading="lazy"
+                  class="w-full rounded-xl border border-(--lotus-border-muted)"
+                />
+                <figcaption class="mt-2 text-sm text-(--lotus-text-muted)">{shot.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </PageSection>
+      )
+    }
+
+    <PageSection id="dokumentation" padding="md">
+      <h2 class="text-2xl font-semibold text-(--lotus-text-strong) sm:text-3xl">{home.docs.title}</h2>
+      <p class="mt-3 max-w-2xl text-(--lotus-text-muted)">{home.docs.description}</p>
+      <FeatureGrid columns={4} class="mt-8">
+        {
+          home.docs.audiences.map((audience) => (
+            <FeatureCard
+              icon={audience.icon}
+              title={audience.title}
+              description={`${audience.description} ${audience.label} →`}
+              href={audience.href}
+            />
+          ))
+        }
+      </FeatureGrid>
+    </PageSection>
+
+    <PageSection id="community" padding="md">
+      <div class="grid gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="text-2xl font-semibold text-(--lotus-text-strong) sm:text-3xl">{home.community.title}</h2>
+          <p class="mt-3 leading-7 text-(--lotus-text)">{home.community.description}</p>
+          <ul class="mt-5 space-y-2">
+            {
+              home.community.links.map((link) => (
+                <li>
+                  <a
+                    class="underline underline-offset-4 hover:text-(--lotus-accent)"
+                    href={link.href}
+                    {...('external' in link && link.external ? { rel: 'noopener' } : {})}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div id="roadmap">
+          <h2 class="text-2xl font-semibold text-(--lotus-text-strong) sm:text-3xl">{home.roadmap.title}</h2>
+          <p class="mt-3 leading-7 text-(--lotus-text)">{home.roadmap.description}</p>
+          <ul class="mt-5 list-disc space-y-2 pl-5 text-(--lotus-text)">
+            {home.roadmap.items.map((item) => <li>{item}</li>)}
+          </ul>
+          <p class="mt-4">
+            <a class="underline underline-offset-4 hover:text-(--lotus-accent)" href={home.roadmap.link.href} rel="noopener">
+              {home.roadmap.link.label}
+            </a>
+          </p>
+        </div>
+      </div>
+    </PageSection>
+
+    <PageSection id="los-geht-es" padding="md">
+      <CTA
+        variant="accent"
+        title={home.cta.title}
+        description={home.cta.description}
+        actions={actions(home.cta.actions)}
+      />
+    </PageSection>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
