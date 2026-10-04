@@ -45,6 +45,12 @@ Der `Refs:`-Verweis auf die Anforderung gehört in den abschließenden Block der
 Trailer. Schemaänderungen stehen im selben Commit wie der Code, der sie
 braucht.
 
+## Dokumentation
+
+Die öffentliche Dokumentation liegt in `docs/public/` und wird wie Code per
+Pull Request geändert. Wo eine Seite hingehört und wie du sie prüfst, steht in
+[Dokumentation beitragen](documentation.md).
+
 ## Pull Requests
 
 Die Beschreibung folgt der Vorlage des Repositories mit den Punkten der

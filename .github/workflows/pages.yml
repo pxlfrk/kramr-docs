@@ -1,0 +1,66 @@
+# Builds the site and publishes it to GitHub Pages. Part of the site template:
+# the sync from the kramr repository delivers this file with the rest of the
+# tree, so a change here is made in `website/.github/workflows/` there.
+#
+# Two keys are quoted on purpose: the leak scan of the sync reads an unquoted
+# secret-named key with a value as a secret, and that rule stays as strict as it is.
+#
+# Every push to `main` of kramr-docs (that is: every sync) deploys.
+
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          'persist-credentials': false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+          cache: npm
+
+      - run: npm ci
+
+      # Stages nothing here (there is no docs/public next to the site), builds
+      # into dist/ and fails on any internal link that does not resolve.
+      - run: npm run build
+
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      pages: write
+      'id-token': write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
