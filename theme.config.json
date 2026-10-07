@@ -3,6 +3,7 @@
   "name": "kramr",
   "description": "Materialverwaltung für Jugendverbände und Vereine: Ausleihe, Bestand und Verfügbarkeit an einem Ort.",
   "favicon": "/favicon.svg",
+  "logo": "/logo.svg",
   "docsBase": "/docs",
   "defaultLocale": "root",
   "locales": {
@@ -19,10 +20,6 @@
     {
       "label": "Betreiber",
       "href": "/docs/admin/installation/"
-    },
-    {
-      "label": "Mitwirkende",
-      "href": "/docs/developer/contributing/"
     },
     {
       "label": "API",
@@ -64,8 +61,8 @@
       ]
     },
     {
-      "label": "Für Mitwirkende",
-      "icon": "lucide:git-pull-request",
+      "label": "Für Entwickler",
+      "icon": "lucide:code-xml",
       "items": [
         {
           "autogenerate": {
@@ -88,10 +85,6 @@
           {
             "label": "Betreiber",
             "href": "/docs/admin/installation/"
-          },
-          {
-            "label": "Mitwirkende",
-            "href": "/docs/developer/contributing/"
           },
           {
             "label": "API-Referenz",

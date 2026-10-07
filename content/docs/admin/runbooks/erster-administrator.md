@@ -28,3 +28,10 @@ kann.
 
 Im Gruppenmodus wirkt die Variable nicht. Für den Wechsel zurück auf `local`
 ist sie aber nötig.
+
+## Weitere Personen
+
+Der erste Login einer Person legt ihr Konto an.
+Es beginnt ohne Zugriff.
+Ein Admin vergibt die passende Rolle in der Nutzerverwaltung, danach gilt sie ab der nächsten Anfrage.
+So bekommt nicht jedes Mitglied des Anmeldedienstes automatisch Lesezugriff auf die Kontaktdaten.

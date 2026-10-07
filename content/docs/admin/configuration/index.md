@@ -23,3 +23,5 @@ Weiterführend:
 - [Umgebungsvariablen](umgebungsvariablen.md)
 - [Anmeldung und Rollen](anmeldung-und-rollen.md)
 - [Benachrichtigungen](benachrichtigungen.md)
+- [Schlüssel für Anfrage-Links](anfrage-link-schluessel.md)
+- [Einstellungen](einstellungen.md)

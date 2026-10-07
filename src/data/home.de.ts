@@ -147,13 +147,6 @@ export const home = {
         href: '/docs/admin/installation/',
       },
       {
-        icon: 'lucide:git-pull-request',
-        title: 'Für Mitwirkende',
-        description: 'Architektur, Entwicklung und wie ihr beitragt.',
-        label: 'Zur Entwicklerdokumentation',
-        href: '/docs/developer/contributing/',
-      },
-      {
         icon: 'lucide:code-xml',
         title: 'API-Referenz',
         description: 'Die öffentlichen Schnittstellen, zum Beispiel für die Einbettung.',
@@ -167,9 +160,7 @@ export const home = {
     description:
       'kramr ist freie Software unter der MIT-Lizenz. Fragen, Fehler und Ideen sind auf GitHub willkommen.',
     links: [
-      { label: 'Quellcode auf GitHub', href: github, external: true },
       { label: 'Fehler melden oder Idee einreichen', href: `${github}/issues`, external: true },
-      { label: 'Beitragen', href: '/docs/developer/contributing/' },
     ] satisfies Link[],
   },
   roadmap: {
@@ -198,7 +189,6 @@ export const home = {
         variant: 'solid',
         color: 'accent',
       },
-      { label: 'Auf GitHub ansehen', href: github, external: true, variant: 'outline' },
     ],
   },
 } as const;

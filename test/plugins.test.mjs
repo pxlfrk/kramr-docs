@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { addBase } from '../plugins/base-path.mjs';
+import dropDuplicateTitle from '../plugins/drop-duplicate-title.mjs';
 import { resolveDocLink } from '../plugins/relative-doc-links.mjs';
 
 const BASE = '/kramr-docs';
@@ -33,6 +34,7 @@ test('NFR-21: the base path is put in front of site links in attributes, JSON an
   const input = [
     '<a href="/docs/user/faq/">x</a>',
     '<link href="/favicon.svg">',
+    '<img src="/logo.svg">',
     '<a href="/">home</a>',
     '{"href":"/docs/a/","u":"/api/"}',
     "fetch('/docs/search.json')",
@@ -41,6 +43,7 @@ test('NFR-21: the base path is put in front of site links in attributes, JSON an
   const out = addBase(input, BASE);
   assert.match(out, /href="\/kramr-docs\/docs\/user\/faq\/"/);
   assert.match(out, /href="\/kramr-docs\/favicon.svg"/);
+  assert.match(out, /src="\/kramr-docs\/logo.svg"/);
   assert.match(out, /href="\/kramr-docs\/"/);
   assert.match(out, /"href":"\/kramr-docs\/docs\/a\/","u":"\/kramr-docs\/api\/"/);
   assert.match(out, /fetch\('\/kramr-docs\/docs\/search.json'\)/);
@@ -63,4 +66,28 @@ test('NFR-21: an empty base path changes nothing', () => {
   const input = '<a href="/docs/a/">x</a>';
   assert.equal(addBase(input, '/'), input);
   assert.equal(addBase(input, ''), input);
+});
+
+function heading(depth, text) {
+  return { type: 'heading', depth, children: [{ type: 'text', value: text }] };
+}
+
+function dropTitle(children, title) {
+  const tree = { type: 'root', children };
+  dropDuplicateTitle()(tree, { data: { astro: { frontmatter: { title } } } });
+  return tree.children;
+}
+
+test('NFR-21: the first heading is dropped when it repeats the page title', () => {
+  const body = { type: 'paragraph', children: [] };
+  assert.deepEqual(dropTitle([heading(1, 'Erster Administrator'), body], 'Erster Administrator'), [
+    body,
+  ]);
+});
+
+test('NFR-21: a first heading that differs from the title, or is not an H1, stays', () => {
+  const other = [heading(1, 'Etwas anderes')];
+  assert.equal(dropTitle(other, 'Erster Administrator').length, 1);
+  const section = [heading(2, 'Erster Administrator')];
+  assert.equal(dropTitle(section, 'Erster Administrator').length, 1);
 });

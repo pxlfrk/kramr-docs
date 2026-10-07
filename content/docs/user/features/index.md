@@ -16,6 +16,13 @@ order: 20
   mit eigenen Eigenschaften beschrieben und mit Fotos versehen.
 - **Sets:** Ein Set bündelt mehrere Materialien. Ist es ein Pflichtset, wird
   beim Buchen jede Komponente mitgebucht.
+- **Wer darf ausleihen:** Bei jedem Material legst du fest, ob es an den
+  **internen** Personenkreis (Jugendgruppen), den **externen** Personenkreis
+  (Privatpersonen) oder an beide verliehen wird; Vorgabe ist beide. Ein
+  Personenkreis, der das Material nicht ausleihen darf, hat dafür keinen
+  Preis. Ist ein Material für keinen von beiden verleihbar, bleibt es im
+  Bestand, kann aber nur für die Eigennutzung gebucht oder gesperrt werden.
+  Ein Set ist nur dann verleihbar, wenn alle seine Bestandteile es sind.
 - **Archivieren statt löschen:** Material wird nie gelöscht, sondern
   archiviert; die Historie bleibt erhalten.
 - **Suche:** Die Suche findet Material auch bei Umlauten und kleinen
@@ -37,6 +44,14 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
 - **Zeiträume:** Ein Zeitraum reicht vom Abholen bis zur Rückgabe. Endet eine
   Buchung um 18 Uhr und beginnt die nächste um 18 Uhr, gibt es keinen
   Konflikt.
+- **Verleihart:** Jede Ausleihe ist **intern**, **extern** oder
+  **Eigennutzung**. Die Verleihart bestimmt den Tarif und welches Material
+  gebucht werden darf: Eine interne oder externe Ausleihe nimmt nur Material
+  auf, das für diesen Personenkreis verleihbar ist (nicht Auswählbares ist
+  mit dem Grund markiert). Die Eigennutzung gilt für jedes Material, kostet
+  nichts und gehört zu einem Kontakt der eigenen Organisation. Wählst du so
+  einen Kontakt, steht die Verleihart fest auf Eigennutzung. Spätere
+  Änderungen am Material ändern bestehende Buchungen nicht.
 - **Rückgabe:** Bei der Rückgabe wird je Position festgehalten, was in
   Ordnung, beschädigt oder verloren ist. Eine Rückgabe kann auf mehrere Tage
   verteilt sein.
@@ -45,7 +60,10 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
 
 ## Kontakte
 
-Ein Kontakt ist immer eine Person. Das Geburtsdatum ist freiwillig. Wer lange
+Ein Kontakt ist immer eine Person. Das Geburtsdatum ist freiwillig. Personen
+der eigenen Organisation markierst du als **Eigene Organisation**; für sie ist
+die Handynummer freiwillig, die E-Mail-Adresse bleibt Pflicht, und sie leihen
+nur für die Eigennutzung aus. Wer lange
 nichts ausgeliehen hat, wird als Vorschlag zum **Anonymisieren** angezeigt;
 das geschieht nie automatisch. Beim Anonymisieren bleibt die Buchungshistorie
 erhalten, die persönlichen Daten werden entfernt.
@@ -63,4 +81,23 @@ Mit der Einbettung können Besucher einer Vereins-Website die Materialliste
 sehen und eine Buchungsanfrage stellen. Sie erhalten per E-Mail einen Link,
 mit dem sie die Anfrage zusammenstellen, speichern und einreichen. Die
 Sachbearbeitung prüft die Anfrage im Bereich „Anfragen" und übernimmt sie als
-Entwurf oder lehnt sie mit Begründung ab.
+Entwurf oder lehnt sie mit Begründung ab. Material, das nur für einen
+Personenkreis verleihbar ist, trägt in der Einbettung einen Hinweis; Material,
+das an niemanden verleihbar ist, wird gezeigt, lässt sich aber nicht anfragen.
+Bei der Übernahme wählt die Sachbearbeitung die Verleihart; Positionen, die
+dafür nicht verleihbar sind, nennt der Dialog vorab und übernimmt sie nicht.
+
+## Mehr dazu
+
+- [Buchungsstatus und Übergänge](../booking-status/index.md)
+- [Konflikte und Sperren](../conflicts-and-blocks/index.md)
+- [Abholung und Rückgabe](../pickup-and-return/index.md)
+- [Sets](../kits/index.md)
+- [Verleih-Einschränkung und Eigennutzung](../lending-restrictions/index.md)
+- [Preise und Tarife](../pricing/index.md)
+- [Kalenderansicht](../calendar/index.md)
+- [Posteingang und Benachrichtigungen](../notifications/index.md)
+- [Material per CSV importieren](../export-and-import/index.md)
+- [Kontakte anonymisieren](../anonymisation/index.md)
+- [Rollen und Rechte](../roles/index.md)
+- [Glossar](../glossary/index.md)

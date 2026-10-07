@@ -37,6 +37,19 @@ Schemaänderungen laufen in zwei Releases (erst ergänzen, später entfernen).
 So läuft die vorherige Version noch gegen das neue Schema, was den Rückweg
 einfach hält.
 
+## Wenn eine Migration an vorhandenen Daten scheitert
+
+Die meisten Migrationen legen nur Neues an.
+Stellt eine Migration eine Bedingung an eine bereits gefüllte Tabelle, etwa einen eindeutigen Namen, und verletzen vorhandene Zeilen sie, bricht die Migration ab und der Container startet nicht.
+Das ist Absicht: Welche von zwei Zeilen bleibt, ist eine fachliche Entscheidung, die eine Migration nicht still treffen darf.
+
+1. Lies die Meldung in `docker compose logs app`. Sie nennt die verletzte Bedingung.
+2. Finde die betroffenen Zeilen mit einer Abfrage, die dieselbe Vergleichsregel nutzt wie die Bedingung.
+3. Entscheide, welche Zeile bleibt, und führe die Zeilen zusammen. Hängen andere Tabellen an der aufzugebenden Zeile, hänge sie zuerst um, sonst verweigert der Fremdschlüssel das Löschen.
+4. Starte den Container neu. Die Migration läuft erneut.
+
+Ziehe vorher ein Backup.
+
 ## Zurückgehen
 
 Siehe [Rollback](../runbooks/rollback.md).

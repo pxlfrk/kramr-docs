@@ -56,13 +56,15 @@ direkt aus dem Internet erreichbar.
 5. **Ersten Administrator festlegen:** siehe
    [Erster Administrator](../runbooks/erster-administrator.md).
 6. **Reverse Proxy einrichten:** siehe [Reverse Proxy](reverse-proxy.md).
-7. **Backup einrichten und die Wiederherstellung einmal proben:** siehe
+7. **Sicherheit prüfen:** Gehe die Checkliste unter [Sicherheit](../sicherheit/index.md) durch.
+8. **Backup einrichten und die Wiederherstellung einmal proben:** siehe
    [Backup und Wiederherstellung](../backup/index.md). Ein Backup, das sich
    nicht zurückspielen lässt, ist keines.
 
 ## Eigenschaften des Images
 
 - Läuft als Nicht-Root-Benutzer.
+- Nutzt einen Init-Prozess als PID 1, damit das Stoppsignal ankommt und die Anwendung ihre Datenbankverbindungen sauber schließt.
 - Enthält nur das Kompilat, das Frontend und die Produktionsabhängigkeiten.
 - Enthält keine Geheimnisse; alles Vertrauliche kommt aus der Umgebung.
 - Hat einen eigenen Health-Check auf `/healthz`.
@@ -74,3 +76,21 @@ direkt aus dem Internet erreichbar.
 Die Datenbank hat keinen veröffentlichten Port. Zwei benannte Volumes halten
 den Zustand: `db-data` (Datenbank) und `uploads` (Material-Bilder). Beide
 gehören ins Backup.
+
+## Auslieferung der Oberfläche
+
+Die Anwendung liefert die Weboberfläche aus demselben Container und damit von derselben Adresse wie die Schnittstelle.
+Eine CORS-Konfiguration gibt es deshalb nicht und braucht es nicht.
+Alle Routen der Schnittstelle liegen unter `/api`; nur `/healthz` liegt daneben, weil Container-Check und Proxy darauf zeigen.
+Jeder andere Pfad gehört der Oberfläche, damit ein Lesezeichen oder ein Neuladen in der Anwendung landet.
+Ein unbekannter Pfad unter `/api` antwortet mit einem Fehlerobjekt, nie mit einer Seite.
+
+Dateien mit Fingerabdruck unter `/assets/` liefert die Anwendung mit einem Jahr Cache aus, `index.html` ohne Cache.
+Nach einem Update läuft ein Browser so nie mit dem alten Bundle gegen die neue Schnittstelle.
+Der Proxy darf diese Cache-Header nicht überschreiben.
+
+## Rückkehradresse beim Anbieter
+
+Die Rückkehradresse beim OIDC-Anbieter lautet `<öffentliche-url>/api/auth/callback`.
+Hast du früher eine andere eingetragen, passe sie beim Anbieter an, **bevor** du aktualisierst.
+Sonst scheitert jede Anmeldung beim Anbieter, bevor sie kramr erreicht.

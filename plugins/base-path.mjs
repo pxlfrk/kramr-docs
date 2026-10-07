@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const TEXT_FILES = /\.(html|json|js|txt|md|xml)$/;
-const PREFIXES = ['/docs/', '/api/', '/favicon.svg', '/llms.txt', '/search.json'];
+const PREFIXES = ['/docs/', '/api/', '/favicon.svg', '/logo.svg', '/llms.txt', '/search.json'];
 
 /** Pure: rewrites root-relative site links in `text`. */
 export function addBase(text, base, site = '') {

@@ -3,6 +3,7 @@ import lotus from '@prosefly/astro-theme-lotus';
 import sitemap from '@astrojs/sitemap';
 import basePath from './plugins/base-path.mjs';
 import relativeDocLinks from './plugins/relative-doc-links.mjs';
+import dropDuplicateTitle from './plugins/drop-duplicate-title.mjs';
 
 const ICONIFY_DEFAULT = 'https://api.iconify.design';
 const iconifyApi = process.env['ICONIFY_API'] ?? ICONIFY_DEFAULT;
@@ -32,6 +33,6 @@ export default defineConfig({
   base,
   // The theme links to the docs root, which has no page of its own.
   redirects: { '/docs': '/docs/user/getting-started/' },
-  markdown: { remarkPlugins: [relativeDocLinks] },
+  markdown: { remarkPlugins: [relativeDocLinks, dropDuplicateTitle] },
   integrations: [lotus({ iconify: { apiBase: iconifyApi } }), sitemap(), basePath({ base, site })],
 });

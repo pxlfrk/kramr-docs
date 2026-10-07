@@ -19,7 +19,10 @@ order: 30
 4. **Genehmigen:** Die Buchung vom Entwurf auf „Genehmigt" setzen. Erst jetzt
    zählt das Material als belegt.
 5. **Abholung:** Beim Abholen auf „Abgeholt" setzen. Wird nur ein Teil
-   abgeholt, lässt sich das je Position festhalten.
+   abgeholt, lässt sich das je Position festhalten. Sind weniger Stück im
+   Lager, als gebucht wurden (etwa nach einer verlorenen Rückgabe), lässt sich
+   die Abholung nicht erfassen: Dann die Menge in der Buchung verringern oder
+   die Position entfernen.
 6. **Rückgabe:** Bei der Rückgabe je Position erfassen, wie viel in Ordnung,
    beschädigt oder verloren ist, und die Buchung auf „Zurückgegeben" setzen.
 
@@ -27,7 +30,8 @@ order: 30
 
 Soll Material zum Beispiel für eine Reparatur nicht verfügbar sein, legst du
 eine **Sperre** an. Sie funktioniert wie eine Ausleihe, hat aber keinen
-Kontakt.
+Kontakt. Dafür kannst du ihr einen **Titel** geben, der in der Übersicht und im
+Kalender anstelle des Ausleihers steht und bei der Suche gefunden wird.
 
 ## Einen Fehler zurücknehmen
 

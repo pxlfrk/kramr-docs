@@ -24,6 +24,22 @@ Beide müssen vom **selben Zeitpunkt** stammen. Das mitgelieferte Skript
 veröffentlicht sie nur gemeinsam. Scheitert ein Schritt, bleibt das vorige
 Paar unberührt.
 
+## Das Bilder-Volume
+
+Das Original eines Bildes steht nur im Volume `uploads`.
+Die beiden Ableitungen (`large.webp`, `thumb.webp`) ließen sich aus dem Original neu erzeugen, die Anwendung tut das aber nicht von selbst.
+Das Skript archiviert das Volume deshalb mit.
+Es nutzt dafür einen einmaligen Container des Dienstes `db`, der das Volume schreibgeschützt einhängt; die Anwendung läuft dabei weiter.
+
+Datenbank und Volume passen nur zusammen, wenn beide vom selben Zeitpunkt stammen.
+Beim Einspielen gehören die Dateien mit gleichem Zeitstempel zusammen.
+Ist eine Bildzeile da, die Datei aber nicht (oder umgekehrt), zeigt die Karte das Bild als „noch nicht verfügbar“.
+Entfernen und erneutes Hochladen behebt das.
+Ein täglicher Aufräum-Job löscht Dateien erst sieben Tage nach dem Entfernen eines Bildes.
+Ein Volume aus einem älteren Backup ist deshalb nie zu voll, nur womöglich um solche Bilder reicher.
+
+Beim Entpacken bleiben die Eigentümer der Dateien erhalten, sodass die Anwendung sie weiter lesen und schreiben kann.
+
 ## Einstellungen des Skripts
 
 | Variable | Bedeutung |
