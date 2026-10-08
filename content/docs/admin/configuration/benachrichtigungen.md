@@ -2,7 +2,7 @@
 title: Benachrichtigungen
 description: E-Mail und Webhook einrichten, Erinnerungen und Zustellung verstehen.
 audience: admin
-order: 40
+order: 24
 ---
 
 # Benachrichtigungen

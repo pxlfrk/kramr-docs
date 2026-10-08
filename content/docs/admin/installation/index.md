@@ -20,15 +20,14 @@ direkt aus dem Internet erreichbar.
 
 ## Schritte
 
-1. **Dateien holen:** Compose-Datei und Produktivvorlage laden, ohne das
-   Repository zu klonen:
+1. **Dateien holen:** Compose-Datei und Produktivvorlage von dieser Seite laden:
 
    ```bash
    mkdir -p /opt/kramr && cd /opt/kramr
    curl -fsSL -o compose.yaml \
-     https://raw.githubusercontent.com/pxlfrk/kramr/main/compose.yaml
+     https://pxlfrk.github.io/kramr-docs/downloads/compose.yaml
    curl -fsSL -o .env \
-     https://raw.githubusercontent.com/pxlfrk/kramr/main/ops/production.env.example
+     https://pxlfrk.github.io/kramr-docs/downloads/production.env.example
    ```
 
    Verwende die Produktivvorlage, nicht die Entwicklungsvorlage des Projekts:
@@ -38,11 +37,10 @@ direkt aus dem Internet erreichbar.
 2. **Client beim OIDC-Anbieter anlegen:** Redirect-URI
    `<öffentliche-url>/api/auth/callback`, Post-Logout-URI
    `<öffentliche-url>/`, Scopes mindestens `openid profile email`.
-3. **`.env` ausfüllen:** Datenbankpasswort, die drei OIDC-Werte, die
-   öffentliche URL und `KRAMR_IMAGE_TAG` mit der gewünschten
-   [Version](https://github.com/pxlfrk/kramr/releases). Das Tag ist immer eine
-   feste Version, nie `latest`. Alle Variablen:
-   [Umgebungsvariablen](../configuration/umgebungsvariablen.md).
+3. **`.env` ausfüllen:** Datenbankpasswort, die drei OIDC-Werte, die öffentliche URL und `KRAMR_IMAGE_TAG` mit der gewünschten Version.
+   Das Tag ist immer eine feste Version, nie `latest`.
+   Die verfügbaren Tags stehen vorübergehend in der [Paketübersicht des Images](https://github.com/users/pxlfrk/packages/container/package/kramr).
+   Alle Variablen: [Umgebungsvariablen](../configuration/umgebungsvariablen.md).
 4. **Starten:**
 
    ```bash
@@ -62,6 +60,8 @@ direkt aus dem Internet erreichbar.
    nicht zurückspielen lässt, ist keines.
 
 ## Eigenschaften des Images
+
+Das Image ist vorübergehend öffentlich abrufbar, siehe die [Paketübersicht](https://github.com/users/pxlfrk/packages/container/package/kramr).
 
 - Läuft als Nicht-Root-Benutzer.
 - Nutzt einen Init-Prozess als PID 1, damit das Stoppsignal ankommt und die Anwendung ihre Datenbankverbindungen sauber schließt.

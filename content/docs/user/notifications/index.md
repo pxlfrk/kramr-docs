@@ -2,7 +2,7 @@
 title: Posteingang und Benachrichtigungen
 description: Die Glocke in der Kopfzeile und wie du einstellst, was du erhältst.
 audience: user
-order: 28
+order: 48
 ---
 
 # Posteingang und Benachrichtigungen

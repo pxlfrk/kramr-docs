@@ -2,15 +2,14 @@
 title: Updates und Migrationen
 description: Eine neue Version einspielen, Datenbankmigrationen verstehen, bei Problemen zurückgehen.
 audience: admin
-order: 10
+order: 33
 ---
 
 # Updates und Migrationen
 
-Produktiv läuft immer eine **feste Version** (`KRAMR_IMAGE_TAG`). Welche
-Versionen es gibt, zeigt die Seite
-[Releases](https://github.com/pxlfrk/kramr/releases). Admins sehen in den
-Einstellungen außerdem, ob eine neuere Version vorliegt.
+Produktiv läuft immer eine **feste Version** (`KRAMR_IMAGE_TAG`).
+Welche Versionen es gibt, zeigt die [Paketübersicht des Images](https://github.com/users/pxlfrk/packages/container/package/kramr), was sich geändert hat, die Seite [Neuigkeiten](../../user/release-notes/index.md).
+Admins sehen in den Einstellungen außerdem, ob eine neuere Version vorliegt.
 
 ## Ablauf eines Updates
 

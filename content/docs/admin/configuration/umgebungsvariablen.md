@@ -2,12 +2,12 @@
 title: Umgebungsvariablen
 description: Die wichtigsten Umgebungsvariablen von kramr mit Bedeutung und Standardwert.
 audience: admin
-order: 20
+order: 21
 ---
 
 # Umgebungsvariablen
 
-Die Produktivvorlage `ops/production.env.example` im Projekt enthält die
+Die [Produktivvorlage](https://pxlfrk.github.io/kramr-docs/downloads/production.env.example) enthält die
 Variablen, die du für den Betrieb setzt. Diese Seite führt alle auf. Echte Werte gehören nur in die `.env` auf dem Server. Ungültige
 Werte führen zu einem Startabbruch mit einer klaren Meldung.
 

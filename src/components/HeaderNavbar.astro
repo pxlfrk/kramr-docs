@@ -1,0 +1,45 @@
+---
+/**
+ * Header navigation: a link to the landing page, a divider, then the
+ * documentation links (`siteNav` in theme.config.json) with the same icons as
+ * the footer.
+ */
+import { Icon } from '@prosefly/astro-components';
+import rawThemeConfig from 'virtual:prosefly/lotus/config';
+import { navIcons } from '../data/footer';
+
+interface Props {
+  currentPath?: string;
+  mobile?: boolean;
+}
+
+const { currentPath, mobile = false } = Astro.props;
+const siteNav = (rawThemeConfig as { siteNav?: { label: string; href: string }[] }).siteNav ?? [];
+// `/docs/user/getting-started/` belongs to `/docs/user/`, `/api/` to itself.
+const section = (href: string) => `${href.split('/').slice(0, 3).join('/')}/`;
+const link =
+  'lotus-focus-ring inline-flex items-center gap-1.5 rounded-(--lotus-radius-md) text-sm font-medium text-(--lotus-text) transition-colors hover:text-(--lotus-accent) aria-[current=page]:text-(--lotus-accent)';
+---
+
+<nav class:list={[mobile ? 'space-y-1' : 'flex min-w-0 items-center gap-5']}>
+  <a class:list={[link, mobile ? 'px-3 py-2' : '']} href="/">
+    <Icon name="lucide:house" class="size-4" aria-hidden="true" />
+    <span>Startseite</span>
+  </a>
+  <span
+    aria-hidden="true"
+    class:list={[mobile ? 'mx-3 block h-px bg-(--lotus-border-muted)' : 'h-5 w-px bg-(--lotus-border-muted)']}
+  ></span>
+  {
+    siteNav.map((item) => (
+      <a
+        class:list={[link, mobile ? 'px-3 py-2' : '']}
+        href={item.href}
+        aria-current={currentPath?.startsWith(section(item.href)) ? 'page' : undefined}
+      >
+        {navIcons[item.href] && <Icon name={navIcons[item.href]} class="size-4" aria-hidden="true" />}
+        <span>{item.label}</span>
+      </a>
+    ))
+  }
+</nav>

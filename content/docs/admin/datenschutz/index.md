@@ -2,7 +2,7 @@
 title: Datenschutzbegehren
 description: Löschung, Speicherbegrenzung und Auskunft für Kontakte und Buchungsanfragen, mit den festen Aufbewahrungsfristen.
 audience: admin
-order: 10
+order: 41
 ---
 
 # Datenschutzbegehren

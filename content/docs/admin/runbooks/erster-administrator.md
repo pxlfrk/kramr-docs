@@ -2,7 +2,7 @@
 title: Erster Administrator
 description: Den ersten Admin nach der Installation festlegen und die Hilfsvariable wieder entfernen.
 audience: admin
-order: 20
+order: 12
 ---
 
 # Erster Administrator

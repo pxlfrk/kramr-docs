@@ -2,7 +2,7 @@
 title: Konfiguration
 description: Wie kramr konfiguriert wird – Umgebungsvariablen für Infrastruktur, Einstellungen in der Oberfläche für Fachliches.
 audience: admin
-order: 10
+order: 20
 ---
 
 # Konfiguration

@@ -2,7 +2,7 @@
 title: Rollback
 description: Zur vorherigen Version zurückkehren, mit und ohne Schemaänderung.
 audience: admin
-order: 30
+order: 34
 ---
 
 # Rollback

@@ -2,7 +2,7 @@
 title: Konflikte und Sperren
 description: Wie kramr Überschneidungen anzeigt, was „Trotzdem genehmigen“ bedeutet und wofür eine Sperre dient.
 audience: user
-order: 22
+order: 42
 ---
 
 # Konflikte und Sperren

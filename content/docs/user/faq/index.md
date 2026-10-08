@@ -2,7 +2,7 @@
 title: Häufige Fragen
 description: Antworten auf typische Fragen zu Anmeldung, Rollen, Buchungen und Daten.
 audience: user
-order: 40
+order: 60
 ---
 
 # Häufige Fragen

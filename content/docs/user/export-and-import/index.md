@@ -2,7 +2,7 @@
 title: Material per CSV importieren
 description: Bestehenden Bestand mit einer CSV-Datei anlegen.
 audience: user
-order: 29
+order: 47
 ---
 
 # Material per CSV importieren

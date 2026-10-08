@@ -1,0 +1,125 @@
+# Production-like stack: the application and its database, nothing else.
+# TLS, the public hostname and coarse rate limiting live in the reverse proxy
+# in front of this (NFR-10, NFR-12) — any proxy that forwards X-Forwarded-*
+# correctly will do (ADR 0012).
+#
+# Values come from a local .env file; see .env.example. No secret has a default
+# here on purpose: a stack that starts with a built-in password is a stack that
+# runs with one in production.
+
+name: kramr
+
+services:
+  db:
+    # Pinned to a digest so a Postgres patch release cannot change behaviour
+    # under a fixed tag; Renovate keeps the digest current (docker:pinDigests).
+    image: postgres:18-alpine@sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873
+    restart: unless-stopped
+    environment:
+      # The names on the left are what the postgres image itself requires; the
+      # values come from KRAMR_DB_* in .env so every variable this
+      # stack reads carries the KRAMR_ prefix.
+      POSTGRES_DB: ${KRAMR_DB_NAME:?set KRAMR_DB_NAME in .env}
+      POSTGRES_USER: ${KRAMR_DB_USER:?set KRAMR_DB_USER in .env}
+      POSTGRES_PASSWORD: ${KRAMR_DB_PASSWORD:?set KRAMR_DB_PASSWORD in .env}
+      # Keeps the server itself in UTC; the application pins its session too.
+      TZ: UTC
+    volumes:
+      # Postgres 18's Docker image stores data under a major-version subdirectory
+      # (PGDATA=/var/lib/postgresql/18/docker) and expects the mount one level up,
+      # at /var/lib/postgresql — mounting /var/lib/postgresql/data makes it refuse
+      # to start. See docker-library/postgres#37.
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  app:
+    build:
+      context: .
+      dockerfile: ops/Dockerfile
+    # A tagged version, never "latest" (NFR-10): no default on purpose, so a
+    # forgotten variable stops the stack instead of pulling whatever is newest.
+    image: ghcr.io/pxlfrk/kramr:${KRAMR_IMAGE_TAG:?set KRAMR_IMAGE_TAG in .env}
+    restart: unless-stopped
+    # The image and its application tree are immutable at runtime. Writable
+    # paths are declared explicitly below.
+    read_only: true
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      KRAMR_SERVER_PORT: 3000
+      KRAMR_DB_URL: postgresql://${KRAMR_DB_USER}:${KRAMR_DB_PASSWORD}@db:5432/${KRAMR_DB_NAME}
+      KRAMR_LOG_LEVEL: ${KRAMR_LOG_LEVEL:-info}
+      # Required here although the application has a default: behind the proxy
+      # a forgotten value means an OIDC callback to localhost and a login that
+      # always fails, so the stack refuses to start instead.
+      KRAMR_SERVER_PUBLIC_URL: ${KRAMR_SERVER_PUBLIC_URL:?set KRAMR_SERVER_PUBLIC_URL in .env}
+      KRAMR_SERVER_TRUST_PROXY: ${KRAMR_SERVER_TRUST_PROXY:-true}
+      KRAMR_SERVER_FORCE_HTTPS: ${KRAMR_SERVER_FORCE_HTTPS:-false}
+      # Required — the application refuses to start without them (FR-40).
+      KRAMR_OIDC_ISSUER_URL: ${KRAMR_OIDC_ISSUER_URL:?set KRAMR_OIDC_ISSUER_URL in .env}
+      KRAMR_OIDC_CLIENT_ID: ${KRAMR_OIDC_CLIENT_ID:?set KRAMR_OIDC_CLIENT_ID in .env}
+      KRAMR_OIDC_CLIENT_SECRET: ${KRAMR_OIDC_CLIENT_SECRET:?set KRAMR_OIDC_CLIENT_SECRET in .env}
+      KRAMR_OIDC_SCOPES: ${KRAMR_OIDC_SCOPES:-openid profile email}
+      KRAMR_AUTH_RATE_LIMIT: ${KRAMR_AUTH_RATE_LIMIT:-20}
+      KRAMR_AUTH_RATE_WINDOW_SECONDS: ${KRAMR_AUTH_RATE_WINDOW_SECONDS:-60}
+      KRAMR_PUBLIC_RATE_LIMIT_READ: ${KRAMR_PUBLIC_RATE_LIMIT_READ:-600}
+      KRAMR_PUBLIC_RATE_LIMIT_WRITE: ${KRAMR_PUBLIC_RATE_LIMIT_WRITE:-20}
+      KRAMR_PUBLIC_RATE_WINDOW_SECONDS: ${KRAMR_PUBLIC_RATE_WINDOW_SECONDS:-60}
+      # Everything below is optional. `${VAR:-}` hands an unset variable on as an
+      # empty string, which the application reads as "not set" (loadConfig) —
+      # so leaving one out of .env behaves like leaving it out of the
+      # environment. Every variable in ops/env-registry.yaml that an operator may set has to
+      # be listed here: the service takes no `env_file`, so a name missing from
+      # this block never reaches the container, however carefully it is set in
+      # .env (OPS-001). The CI job `image` checks that they arrive.
+      #
+      # Deliberately absent: KRAMR_SERVER_PORT is fixed above; KRAMR_PATH_MIGRATIONS,
+      # KRAMR_PATH_CHANGELOG, KRAMR_PATH_FRONTEND and KRAMR_BUILD_VERSION/KRAMR_BUILD_COMMIT/KRAMR_BUILD_TIME
+      # are set by the image itself (ops/Dockerfile) — passing them on empty
+      # would blank the image's own values.
+      KRAMR_AUTH_BOOTSTRAP_ADMIN_SUBJECT: ${KRAMR_AUTH_BOOTSTRAP_ADMIN_SUBJECT:-}
+      KRAMR_OIDC_ROLES_SOURCE: ${KRAMR_OIDC_ROLES_SOURCE:-}
+      KRAMR_OIDC_ROLES_GROUPS_CLAIM: ${KRAMR_OIDC_ROLES_GROUPS_CLAIM:-}
+      KRAMR_OIDC_ROLES_GROUP_ADMIN: ${KRAMR_OIDC_ROLES_GROUP_ADMIN:-}
+      KRAMR_OIDC_ROLES_GROUP_STAFF: ${KRAMR_OIDC_ROLES_GROUP_STAFF:-}
+      KRAMR_OIDC_ROLES_GROUP_READ_ONLY: ${KRAMR_OIDC_ROLES_GROUP_READ_ONLY:-}
+      KRAMR_OIDC_ROLES_REFRESH_MINUTES: ${KRAMR_OIDC_ROLES_REFRESH_MINUTES:-}
+      KRAMR_NOTIFICATION_SMTP_HOST: ${KRAMR_NOTIFICATION_SMTP_HOST:-}
+      KRAMR_NOTIFICATION_SMTP_PORT: ${KRAMR_NOTIFICATION_SMTP_PORT:-}
+      KRAMR_NOTIFICATION_SMTP_SECURE: ${KRAMR_NOTIFICATION_SMTP_SECURE:-}
+      KRAMR_NOTIFICATION_SMTP_USER: ${KRAMR_NOTIFICATION_SMTP_USER:-}
+      KRAMR_NOTIFICATION_SMTP_PASSWORD: ${KRAMR_NOTIFICATION_SMTP_PASSWORD:-}
+      KRAMR_NOTIFICATION_SMTP_FROM: ${KRAMR_NOTIFICATION_SMTP_FROM:-}
+      KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS: ${KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS:-}
+      KRAMR_REQUEST_LINK_KEY: ${KRAMR_REQUEST_LINK_KEY:-}
+      KRAMR_DEFAULT_REMINDER_LEAD_TIME_DAYS: ${KRAMR_DEFAULT_REMINDER_LEAD_TIME_DAYS:-}
+      KRAMR_DEFAULT_CONTACT_INACTIVITY_PERIOD_DAYS: ${KRAMR_DEFAULT_CONTACT_INACTIVITY_PERIOD_DAYS:-}
+      KRAMR_DEFAULT_UPDATE_CHECK_ENABLED: ${KRAMR_DEFAULT_UPDATE_CHECK_ENABLED:-}
+      KRAMR_DEFAULT_ADDRESS_FORM: ${KRAMR_DEFAULT_ADDRESS_FORM:-}
+      KRAMR_SERVER_BODY_LIMIT: ${KRAMR_SERVER_BODY_LIMIT:-}
+      KRAMR_UPDATE_GITHUB_REPO: ${KRAMR_UPDATE_GITHUB_REPO:-}
+      # The images volume below (FR-21, ADR 0009).
+      KRAMR_PATH_UPLOADS: /app/uploads
+      TMPDIR: /tmp
+    ports:
+      # Bound to loopback: the reverse proxy is the only thing that should
+      # reach the application directly. Needed only for a proxy running on the
+      # host — a proxy container on this stack's network reaches the app as
+      # `app:3000`, so remove this entry there (docs/public/admin/installation/reverse-proxy.md).
+      - '127.0.0.1:${KRAMR_PUBLISH_PORT:-3000}:3000'
+    volumes:
+      # The item images (FR-21, ADR 0009): originals and their derivatives.
+      - uploads:/app/uploads
+    tmpfs:
+      # Temporary files must not become image layers or persistent host data.
+      - /tmp:rw,noexec,nosuid,nodev,size=64m
+
+volumes:
+  db-data:
+  uploads:

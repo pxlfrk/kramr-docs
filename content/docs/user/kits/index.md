@@ -2,7 +2,7 @@
 title: Sets
 description: Mehrere Materialien zu einem Set bündeln und was das beim Buchen bedeutet.
 audience: user
-order: 24
+order: 44
 ---
 
 # Sets

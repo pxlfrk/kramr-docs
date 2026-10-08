@@ -2,7 +2,7 @@
 title: Sicherheit
 description: Das Sicherheitsmodell von kramr und was du als Betreiber dafür einrichten musst.
 audience: admin
-order: 10
+order: 40
 ---
 
 # Sicherheit

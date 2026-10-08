@@ -2,7 +2,7 @@
 title: Neuigkeiten
 description: Was sich in den Versionen von kramr für Anwender geändert hat.
 audience: user
-order: 50
+order: 80
 ---
 
 # Neuigkeiten

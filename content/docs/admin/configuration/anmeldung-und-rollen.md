@@ -2,7 +2,7 @@
 title: Anmeldung und Rollen
 description: OIDC-Anbieter anbinden und Rollen entweder lokal oder aus Gruppen vergeben.
 audience: admin
-order: 30
+order: 23
 ---
 
 # Anmeldung und Rollen

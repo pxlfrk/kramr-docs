@@ -1,0 +1,60 @@
+# Optional Caddy overlay; see the operator guide, page "Reverse Proxy".
+#
+#   docker compose -f compose.yaml -f compose.caddy.yaml up -d
+#
+# Adds a caddy-docker-proxy in front of the stack and expresses the proxy rules
+# as labels on the `app` service. Deliberately NOT folded into compose.yaml:
+# labels there would hard-wire one proxy and break the swappability NFR-16 and
+# ADR 0012 require. This file is an illustration, not a supported deployment.
+#
+# It satisfies the same five invariants as the reverse proxy examples: TLS terminated
+# here (ACME), X-Forwarded-* set by Caddy, WebSocket upgrade forwarded,
+# /healthz exempt from the rate limit, body limit aligned to KRAMR_SERVER_BODY_LIMIT.
+#
+# SECURITY: caddy-docker-proxy reads the label config from the Docker API, so it
+# needs the Docker socket. That is a host-root capability — a compromise of this
+# container is a compromise of the host — and it is inherent to this class of
+# proxy (traefik, nginx-proxy, …). The `:ro` on the mount does NOT contain it:
+# the Docker API is fully usable over a read-only-mounted socket. Prefer the
+# native Caddyfile from docs/public/admin/installation/reverse-proxy.md where this tradeoff is not
+# acceptable; if you do run this overlay, put a socket proxy
+# (e.g. tecnativa/docker-socket-proxy) in front and scope it to the read-only
+# endpoints caddy-docker-proxy actually calls.
+
+services:
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:2.13-alpine@sha256:3e6cf4a6382da0cd14108a69929d7f8cc59e9a59cae4c9795071fa392ffa8036
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      CADDY_INGRESS_NETWORKS: kramr_default
+    volumes:
+      # Host-root capability — see the SECURITY note above.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy-data:/data
+      - caddy-config:/config
+
+  app:
+    # The app port stays on loopback (compose.yaml); Caddy reaches it over the
+    # compose network, so no extra published port is needed here.
+    labels:
+      caddy: kramr.example.org
+      caddy.encode: zstd gzip
+      caddy.request_body.max_size: 11MB
+      caddy.reverse_proxy: '{{upstreams 3000}}'
+      # /healthz without the rate limit.
+      caddy.@healthz.path: /healthz
+      caddy.0_reverse_proxy: '@healthz {{upstreams 3000}}'
+      # Fine-grained auth limit at the edge, on top of the in-process guard.
+      # Needs a Caddy build with the caddy-ratelimit module; drop this block if
+      # the image does not carry it.
+      caddy.@auth.path: /api/auth/*
+      caddy.rate_limit.zone_auth.key: '{remote_host}'
+      caddy.rate_limit.zone_auth.events: '10'
+      caddy.rate_limit.zone_auth.window: 1m
+
+volumes:
+  caddy-data:
+  caddy-config:

@@ -34,5 +34,17 @@ export default defineConfig({
   // The theme links to the docs root, which has no page of its own.
   redirects: { '/docs': '/docs/user/getting-started/' },
   markdown: { remarkPlugins: [relativeDocLinks, dropDuplicateTitle] },
-  integrations: [lotus({ iconify: { apiBase: iconifyApi } }), sitemap(), basePath({ base, site })],
+  integrations: [
+    lotus({
+      iconify: { apiBase: iconifyApi },
+      // The footer shows an icon per link (src/data/footer.ts); the header starts with
+      // a link to the landing page.
+      components: {
+        FooterLinks: './src/components/FooterLinks.astro',
+        HeaderNavbar: './src/components/HeaderNavbar.astro',
+      },
+    }),
+    sitemap(),
+    basePath({ base, site }),
+  ],
 });

@@ -2,7 +2,7 @@
 title: Schlüssel für Anfrage-Links
 description: Mit KRAMR_REQUEST_LINK_KEY können Mitarbeitende ausgestellte Anfrage-Links erneut kopieren.
 audience: admin
-order: 40
+order: 25
 ---
 
 # Schlüssel für Anfrage-Links

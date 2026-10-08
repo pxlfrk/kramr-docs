@@ -2,7 +2,7 @@
 title: Einstellungen
 description: Die fachlichen Einstellungen von kramr mit Typ, Standardwert und Bedeutung.
 audience: admin
-order: 30
+order: 22
 ---
 
 # Einstellungen

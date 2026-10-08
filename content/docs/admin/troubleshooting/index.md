@@ -2,7 +2,7 @@
 title: Fehlerbehebung
 description: Typische Startprobleme und Fehlerbilder und wie du sie einordnest.
 audience: admin
-order: 10
+order: 36
 ---
 
 # Fehlerbehebung

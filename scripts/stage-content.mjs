@@ -10,6 +10,7 @@
  *
  *   docs/public/**                ->  content/docs/**   (only Markdown pages)
  *   contracts/api.openapi.yaml    ->  openapi/api.yaml  (public routes only)
+ *   compose.yaml, compose.caddy.yaml, ops/production.env.example  ->  public/downloads/  (the operator guide links them)
  *
  * Also copies Scalar's standalone bundle to `public/vendor/scalar.js`.
  * When `../docs/public` does not exist (the generated repository) it does
@@ -47,6 +48,17 @@ for (const entry of await readdir(SOURCE, { withFileTypes: true })) {
   if (entry.isDirectory()) {
     await cp(join(SOURCE, entry.name), join(TARGET, entry.name), { recursive: true });
   }
+}
+
+// The two files the operator guide offers for download. The same list is in
+// tooling/docs-sync.mjs (`DOWNLOADS`), which puts them into `kramr-docs`.
+await mkdir(join(SITE_ROOT, 'public', 'downloads'), { recursive: true });
+for (const [source, name] of [
+  ['compose.yaml', 'compose.yaml'],
+  ['compose.caddy.yaml', 'compose.caddy.yaml'],
+  ['ops/production.env.example', 'production.env.example'],
+]) {
+  await cp(join(SITE_ROOT, '..', source), join(SITE_ROOT, 'public', 'downloads', name));
 }
 
 const derive = spawnSync(

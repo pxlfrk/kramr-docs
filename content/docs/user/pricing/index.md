@@ -2,7 +2,7 @@
 title: Preise und Tarife
 description: Wie der Preis eines Materials in zwei Tarifen geführt wird und welcher für eine Buchung gilt.
 audience: user
-order: 26
+order: 46
 ---
 
 # Preise und Tarife

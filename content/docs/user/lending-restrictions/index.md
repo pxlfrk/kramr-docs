@@ -2,7 +2,7 @@
 title: Verleih-Einschränkung und Eigennutzung
 description: Festlegen, an wen ein Material verliehen wird, und Ausleihen der eigenen Organisation.
 audience: user
-order: 25
+order: 45
 ---
 
 # Verleih-Einschränkung und Eigennutzung

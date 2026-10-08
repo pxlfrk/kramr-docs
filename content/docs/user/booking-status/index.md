@@ -2,7 +2,7 @@
 title: Buchungsstatus und Übergänge
 description: Die Status einer Buchung, wie sie sich ändern und was in welchem Status noch bearbeitet werden kann.
 audience: user
-order: 21
+order: 40
 ---
 
 # Buchungsstatus und Übergänge

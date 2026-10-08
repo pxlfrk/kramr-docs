@@ -2,7 +2,7 @@
 title: Kontakte anonymisieren
 description: Was beim Anonymisieren eines Kontakts passiert und wann kramr es vorschlägt.
 audience: user
-order: 30
+order: 49
 ---
 
 # Kontakte anonymisieren

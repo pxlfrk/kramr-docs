@@ -4,7 +4,7 @@
  * The site is published under the project path of GitHub Pages
  * (`/kramr-docs/`). Astro applies `base` to its own assets, but the Lotus theme
  * writes root-relative links (`/docs/…`, `/api/`, `/`) into its header, sidebar,
- * search index and client scripts without it. The theme is used unchanged, so
+ * search index and client scripts without it. The theme is not patched, so
  * after the build the known site-internal prefixes are rewritten in the
  * generated files. `scripts/check-build.mjs` proves that
  * nothing was missed: it fails the build when an internal link does not resolve.
@@ -13,8 +13,16 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const TEXT_FILES = /\.(html|json|js|txt|md|xml)$/;
-const PREFIXES = ['/docs/', '/api/', '/favicon.svg', '/logo.svg', '/llms.txt', '/search.json'];
+const TEXT_FILES = /\.(html|json|js|css|txt|md|xml)$/;
+const PREFIXES = [
+  '/docs/',
+  '/api/',
+  '/favicon.svg',
+  '/logo.svg',
+  '/fonts/',
+  '/llms.txt',
+  '/search.json',
+];
 
 /** Pure: rewrites root-relative site links in `text`. */
 export function addBase(text, base, site = '') {

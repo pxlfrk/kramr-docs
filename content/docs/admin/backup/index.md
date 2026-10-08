@@ -2,7 +2,7 @@
 title: Backup und Wiederherstellung
 description: Datenbank und Bilder gemeinsam sichern und beides wieder einspielen.
 audience: admin
-order: 10
+order: 31
 ---
 
 # Backup und Wiederherstellung

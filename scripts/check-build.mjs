@@ -33,6 +33,22 @@ let checked = 0;
 let pages = 0;
 
 for await (const file of walk(DIST)) {
+  if (file.endsWith('.css')) {
+    // Fonts and other files a stylesheet loads must exist as well.
+    const css = await readFile(file, 'utf8');
+    for (const match of css.matchAll(/url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g)) {
+      const url = (match[1] ?? '').split('#')[0]?.split('?')[0] ?? '';
+      if (url === '' || url.startsWith('data:') || /^[a-z][a-z0-9+.-]*:/i.test(url)) continue;
+      checked += 1;
+      if (!url.startsWith('/'))
+        problems.push(`${file.slice(DIST.length)}: relative url ${match[1]}`);
+      else if (!url.startsWith(`${BASE}/`))
+        problems.push(`${file.slice(DIST.length)}: url without the base path ${match[1]}`);
+      else if (!resolves(url.slice(BASE.length)))
+        problems.push(`${file.slice(DIST.length)}: missing file ${match[1]}`);
+    }
+    continue;
+  }
   if (!file.endsWith('.html')) continue;
   pages += 1;
   const html = await readFile(file, 'utf8');

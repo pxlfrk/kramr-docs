@@ -2,7 +2,7 @@
 title: Reverse Proxy
 description: Was der Reverse Proxy vor kramr leisten muss – TLS, Header, Limits, Einbettungen.
 audience: admin
-order: 20
+order: 11
 ---
 
 # Reverse Proxy
@@ -170,10 +170,12 @@ Du erfüllst Anforderung 6, indem du diesen Logger in den globalen Optionen auss
 
 ### Caddy mit caddy-docker-proxy
 
-`compose.caddy.yaml` im Projekt ist ein optionales Overlay.
+`compose.caddy.yaml` ist ein optionales Overlay.
 Es fügt einen `caddy-docker-proxy`-Container hinzu und hängt die Regeln als Labels an den Dienst `app`:
 
 ```bash
+curl -fsSL -o compose.caddy.yaml \
+  https://pxlfrk.github.io/kramr-docs/downloads/compose.caddy.yaml
 docker compose -f compose.yaml -f compose.caddy.yaml up -d
 ```
 

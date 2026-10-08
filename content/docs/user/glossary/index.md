@@ -2,7 +2,7 @@
 title: Glossar
 description: Die Begriffe von kramr in einfachen Worten.
 audience: user
-order: 60
+order: 70
 ---
 
 # Glossar

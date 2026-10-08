@@ -1,0 +1,176 @@
+/*
+ * The look of the whole site: documentation and landing page share one palette.
+ * It is loaded after the Lotus styles (`head` in theme.config.json) and only sets
+ * the theme's own tokens, so the light / dark / auto switch of the theme keeps
+ * working unchanged. Dark applies for `data-theme="dark"` and, for
+ * `data-theme="system"`, when the system asks for it.
+ */
+/*
+ * Fonts are served from the site itself (public/fonts, SIL OFL, licence texts next
+ * to the files): the reader's browser contacts no font service. Only the Latin
+ * subset (with umlauts and typographic punctuation) is shipped.
+ */
+@font-face {
+  font-family: 'Hanken Grotesk Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/hanken-grotesk-latin-wght-normal.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('/fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('/fonts/dm-mono-latin-500-normal.woff2') format('woff2');
+}
+
+:root {
+  --lotus-font-sans: 'Hanken Grotesk Variable', var(--lotus-system-sans);
+  --lotus-font-mono: 'DM Mono', var(--lotus-system-mono);
+  --kramr-font-display:
+    'Bricolage Grotesque Variable', 'Hanken Grotesk Variable', var(--lotus-system-sans);
+}
+
+/* Paper, ink, signal orange: the light palette. */
+[data-theme='light'],
+[data-theme='system'] {
+  --lotus-background: #f3eee3;
+  --lotus-text-strong: #1b241f;
+  --lotus-text: #2d3832;
+  --lotus-text-muted: #4a544d;
+  --lotus-text-subtle: #5b645d;
+  --lotus-border-muted: #d8d0be;
+  --lotus-border-subtle: #e4ddcc;
+  --lotus-border-hover: #b8ae96;
+  --lotus-surface: #fbf8f1;
+  --lotus-code-surface: #fbf8f1;
+  --lotus-code-border: #d8d0be;
+  --lotus-accent: #b93a14;
+  --lotus-accent-contrast: #ffffff;
+
+  --kramr-orange: #d9461b;
+  --kramr-on-orange: #ffffff;
+  --kramr-green: #1f4d3a;
+  --kramr-mustard: #e9b949;
+  --kramr-calm: #dce3d6;
+  --kramr-mock: #ffffff;
+  --kramr-bar: #f7f3ea;
+  --kramr-shadow: #1b241f;
+  --kramr-inv-bg: #1b241f;
+  --kramr-inv-ink: #f3eee3;
+  --kramr-inv-edge: #1b241f;
+}
+
+[data-theme='dark'] {
+  --lotus-background: #12181a;
+  --lotus-text-strong: #ece6d8;
+  --lotus-text: #d6d1c4;
+  --lotus-text-muted: #b1b8b0;
+  --lotus-text-subtle: #9aa39b;
+  --lotus-border-muted: #33403f;
+  --lotus-border-subtle: #2a3534;
+  --lotus-border-hover: #4b5b59;
+  --lotus-surface: #1b2326;
+  --lotus-code-surface: #1b2326;
+  --lotus-code-border: #33403f;
+  --lotus-accent: #ff9068;
+  --lotus-accent-contrast: #1a0f0a;
+
+  --kramr-orange: #f2764a;
+  --kramr-on-orange: #1a0f0a;
+  --kramr-green: #8ccba7;
+  --kramr-mustard: #e9b949;
+  --kramr-calm: #1f2b26;
+  --kramr-mock: #1b2326;
+  --kramr-bar: #222c2f;
+  --kramr-shadow: #000000;
+  --kramr-inv-bg: #0a0e0f;
+  --kramr-inv-ink: #ece6d8;
+  --kramr-inv-edge: #33403f;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme='system'] {
+    --lotus-background: #12181a;
+    --lotus-text-strong: #ece6d8;
+    --lotus-text: #d6d1c4;
+    --lotus-text-muted: #b1b8b0;
+    --lotus-text-subtle: #9aa39b;
+    --lotus-border-muted: #33403f;
+    --lotus-border-subtle: #2a3534;
+    --lotus-border-hover: #4b5b59;
+    --lotus-surface: #1b2326;
+    --lotus-code-surface: #1b2326;
+    --lotus-code-border: #33403f;
+    --lotus-accent: #ff9068;
+    --lotus-accent-contrast: #1a0f0a;
+
+    --kramr-orange: #f2764a;
+    --kramr-on-orange: #1a0f0a;
+    --kramr-green: #8ccba7;
+    --kramr-mustard: #e9b949;
+    --kramr-calm: #1f2b26;
+    --kramr-mock: #1b2326;
+    --kramr-bar: #222c2f;
+    --kramr-shadow: #000000;
+    --kramr-inv-bg: #0a0e0f;
+    --kramr-inv-ink: #ece6d8;
+    --kramr-inv-edge: #33403f;
+  }
+}
+
+/* Headings in the documentation use the display face of the landing page. */
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: var(--kramr-font-display);
+  letter-spacing: -0.015em;
+}
+
+/*
+ * Footer: brand block on the left, links on the right, the legal line across
+ * both below. On documentation pages the sticky header already carries the
+ * links, so the footer shrinks to the legal line.
+ */
+footer.lotus-border-subtle > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem 2.5rem;
+}
+@media (min-width: 1024px) {
+  footer.lotus-border-subtle > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+footer.lotus-border-subtle .k-legal {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--lotus-border-subtle);
+  text-align: center;
+}
+footer.lotus-border-subtle:has(.k-legal-only) > div {
+  padding-block: 1.25rem;
+}
+footer.lotus-border-subtle:has(.k-legal-only) > div > :not(.k-legal-only) {
+  display: none;
+}
+footer.lotus-border-subtle .k-legal-only {
+  padding-top: 0;
+  border-top: 0;
+}

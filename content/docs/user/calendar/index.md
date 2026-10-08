@@ -2,7 +2,7 @@
 title: Kalenderansicht
 description: Die Buchungsübersicht als Kalender mit Wochen- und Monatsansicht.
 audience: user
-order: 27
+order: 43
 ---
 
 # Kalenderansicht

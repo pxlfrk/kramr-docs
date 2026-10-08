@@ -38,6 +38,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         hideClientButton: true,
         hideTestRequestButton: true,
         withDefaultFonts: false,
+        // The site's own fonts (public/fonts), no font service.
+        customCss:
+          'html .scalar-app { --scalar-font: "Hanken Grotesk Variable", system-ui, sans-serif; --scalar-font-code: "DM Mono", ui-monospace, monospace; }',
         showDeveloperTools: 'never',
         defaultOpenFirstTag: true,
         agent: { disabled: true },

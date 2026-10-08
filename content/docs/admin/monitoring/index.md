@@ -2,7 +2,7 @@
 title: Überwachung
 description: Health-Endpunkt, Versionsabfrage und Logs von kramr.
 audience: admin
-order: 10
+order: 35
 ---
 
 # Überwachung

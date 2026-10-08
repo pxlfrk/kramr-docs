@@ -2,7 +2,7 @@
 title: Rollen und Rechte
 description: Was Admin, Staff, ReadOnly und Kein Zugriff in kramr dürfen.
 audience: user
-order: 31
+order: 50
 ---
 
 # Rollen und Rechte

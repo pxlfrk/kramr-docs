@@ -2,7 +2,7 @@
 title: Betriebsabläufe
 description: Kurze Abläufe für Ersteinrichtung, Rollback und Wiederherstellung.
 audience: admin
-order: 10
+order: 30
 ---
 
 # Betriebsabläufe

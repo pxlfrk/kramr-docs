@@ -2,7 +2,7 @@
 title: Backup einspielen
 description: Datenbank und Bilder aus einem Backup wiederherstellen.
 audience: admin
-order: 40
+order: 32
 ---
 
 # Backup einspielen

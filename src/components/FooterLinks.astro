@@ -1,0 +1,42 @@
+---
+/**
+ * Footer of the whole site, next to the theme's brand block. On the landing
+ * page: the links with an icon each and, below both, the legal line. On the
+ * documentation pages the header stays in view, so there only the legal line
+ * is shown (the stylesheet hides the rest).
+ */
+import { Icon } from '@prosefly/astro-components';
+import { footerLinks, legal } from '../data/footer';
+
+const year = new Date().getFullYear();
+const docsPage = Astro.url.pathname.includes('/docs/');
+---
+
+{
+  !docsPage && (
+    <ul class="flex flex-wrap gap-x-8 gap-y-3 text-sm lg:justify-end lg:self-start">
+      {footerLinks.map((link) => (
+        <li>
+          <a
+            class="lotus-focus-ring inline-flex items-center gap-2.5 font-medium text-(--lotus-text) transition-colors hover:text-(--lotus-accent)"
+            href={link.href}
+            rel={link.external ? 'noreferrer' : undefined}
+            target={link.external ? '_blank' : undefined}
+          >
+            <Icon name={link.icon} class="size-5" aria-hidden="true" />
+            <span>{link.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+<p class:list={['k-legal text-sm text-(--lotus-text-muted)', docsPage && 'k-legal-only']}>
+  © {year} {legal.name} · {legal.note} ·{' '}
+  <a
+    class="lotus-focus-ring font-medium text-(--lotus-text) underline underline-offset-4 transition-colors hover:text-(--lotus-accent)"
+    href={legal.imprint.href}
+    rel="noreferrer"
+    target="_blank">{legal.imprint.label}</a
+  >
+</p>

@@ -14,32 +14,25 @@
   },
   "siteNav": [
     {
-      "label": "Anwender",
+      "label": "Anwender-Handbuch",
       "href": "/docs/user/getting-started/"
     },
     {
-      "label": "Betreiber",
+      "label": "Betreiber-Guide",
       "href": "/docs/admin/installation/"
     },
     {
-      "label": "API",
+      "label": "API-Referenz",
       "href": "/api/"
     }
   ],
-  "socials": [
-    {
-      "label": "GitHub",
-      "href": "https://github.com/pxlfrk/kramr",
-      "external": true,
-      "icon": "github"
-    }
-  ],
+  "socials": [],
   "search": {
     "provider": "local"
   },
   "docsNav": [
     {
-      "label": "Für Anwender",
+      "label": "Anwender-Handbuch",
       "icon": "lucide:users",
       "items": [
         {
@@ -50,7 +43,7 @@
       ]
     },
     {
-      "label": "Für Betreiber",
+      "label": "Betreiber-Guide",
       "icon": "lucide:server",
       "items": [
         {
@@ -73,36 +66,7 @@
     }
   ],
   "footer": {
-    "copyright": "kramr ist freie Software (MIT-Lizenz).",
-    "sections": [
-      {
-        "title": "Dokumentation",
-        "links": [
-          {
-            "label": "Anwender",
-            "href": "/docs/user/getting-started/"
-          },
-          {
-            "label": "Betreiber",
-            "href": "/docs/admin/installation/"
-          },
-          {
-            "label": "API-Referenz",
-            "href": "/api/"
-          }
-        ]
-      },
-      {
-        "title": "Projekt",
-        "links": [
-          {
-            "label": "GitHub",
-            "href": "https://github.com/pxlfrk/kramr",
-            "external": true
-          }
-        ]
-      }
-    ]
+    "copyright": "Materialverleih für Jugendverbände und Vereine."
   },
   "pageActions": [
     {
@@ -116,5 +80,35 @@
   ],
   "iconify": {
     "preload": ["lucide:chevrons-up-down"]
+  },
+  "credits": false,
+  "head": [
+    {
+      "tag": "link",
+      "attrs": {
+        "rel": "preload",
+        "as": "font",
+        "type": "font/woff2",
+        "href": "/fonts/hanken-grotesk-latin-wght-normal.woff2",
+        "crossorigin": "anonymous"
+      }
+    },
+    {
+      "tag": "link",
+      "attrs": {
+        "rel": "preload",
+        "as": "font",
+        "type": "font/woff2",
+        "href": "/fonts/bricolage-grotesque-latin-wght-normal.woff2",
+        "crossorigin": "anonymous"
+      }
+    },
+    {
+      "tag": "style",
+      "src": "src/styles/kramr.css"
+    }
+  ],
+  "markdown": {
+    "packageManagerTabs": false
   }
 }
