@@ -25,4 +25,14 @@ Beachte:
 ## Export
 
 Bestand und Buchungen lassen sich als CSV-Datei weitergeben, etwa für eine Auskunft an eine Person.
-Eine eigene Schaltfläche dafür bietet die Oberfläche derzeit nicht; der Export steht über die Schnittstelle bereit.
+
+Den **Bestand** exportierst du direkt in der Oberfläche, mit jeder Rolle:
+
+1. Öffne die Bestandsübersicht und wähle im Menü „Weitere Aktionen“ die Aktion „Bestand exportieren (CSV)“.
+2. Dein Browser lädt die Datei `kramr-bestand.csv` herunter.
+
+Die Datei enthält alle Materialien, auch archivierte, eine Zeile je Material.
+Sie ist UTF-8-kodiert und mit Komma getrennt, damit sie dieselbe Form wie die Import-Vorlage hat.
+Excel und LibreOffice öffnen sie; ein deutsches Excel zeigt sie bei einem Doppelklick eventuell in einer einzigen Spalte, dann hilft „Daten → Aus Text/CSV“.
+
+Für die **Buchungen** bietet die Oberfläche derzeit keine eigene Schaltfläche; der Export steht über die Schnittstelle bereit.
