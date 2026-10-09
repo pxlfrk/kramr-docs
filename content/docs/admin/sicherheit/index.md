@@ -89,6 +89,8 @@ Das schützt vor einer versehentlich oder böswillig eingetragenen internen Adre
 Es ist ein Grundschutz.
 Ein Hostname, der erst beim Senden auf eine interne Adresse zeigt, wird nicht erkannt.
 Lass deshalb nur Admins die Einstellungen ändern und vergib die Rolle sparsam.
+Jede Änderung einer Einstellung hält kramr im Änderungsprotokoll fest: wer, wann, welcher Schlüssel, alter und neuer Wert.
+So lässt sich nachvollziehen, wann die Webhook-Adresse umgestellt wurde.
 
 `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS` ist die bewusste Ausnahme für ein legitimes internes Ziel, zum Beispiel einen Chat-Server im selben Docker-Netz.
 Trage dort nur Hosts ein, die du wirklich meinst.
