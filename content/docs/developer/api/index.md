@@ -30,7 +30,7 @@ Bilder werden nur in den Größen `large` und `thumb` ausgeliefert, nie als Orig
 - **Ohne Anmeldung:** Die öffentlichen Routen brauchen weder Sitzung noch Cookie.
 - **Rate-Limit:** Lesende und schreibende Anfragen haben je Client-Adresse getrennte Budgets. Das Limit gilt auch für unbekannte Pfade unter `/api/public/*`. Bei Überschreitung antwortet kramr mit `429`. Die Werte stellt der Betreiber ein.
 - **Zwischenspeicher:** JSON-Antworten und Fehler sind nie zwischenspeicherbar (`Cache-Control: no-store`). Bilder einer Einbettung sind öffentlich zwischenspeicherbar.
-- **Fehlerformat:** Fehler kommen als JSON im Format `application/problem+json` mit einem stabilen Typ und einem Titel.
+- **Fehlerformat:** Fehler kommen als JSON im Format `application/problem+json` mit einem stabilen Typ und einem Titel. Das Fehlerobjekt nennt außerdem die `requestId`; dieselbe Kennung steht im Antwortkopf `X-Request-Id` und in den Logzeilen der Anfrage.
 
 ## Anfrage-Links
 
