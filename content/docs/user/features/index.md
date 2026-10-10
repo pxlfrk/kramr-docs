@@ -27,6 +27,16 @@ order: 20
   Ein Set ist nur dann verleihbar, wenn alle seine Bestandteile es sind.
 - **Archivieren statt löschen:** Material wird nie gelöscht, sondern
   archiviert; die Historie bleibt erhalten.
+- **Mehrere Materialien auf einmal ändern:**
+  In der Bestandsübersicht haken Mitarbeitende Materialien an.
+  Dann ändern sie Kategorie, Lagerort, Online-Sichtbarkeit oder Verleihbarkeit oder archivieren und reaktivieren die Auswahl.
+  Die Änderung gilt für alle angehakten Materialien oder für keines.
+  Ist in der neuen Kategorie schon ein Material mit demselben Namen, wird nichts gespeichert, und die Meldung nennt jedes betroffene Material.
+  Gehen dabei Werte verloren, fragt die Anwendung vorher nach und nennt die betroffenen Materialien.
+  Das betrifft Parameter, die in der neuen Kategorie nicht gelten, und den Preis eines Personenkreises, der nicht mehr ausleihen darf.
+  Der bisherige Wert steht danach in der Historie des Materials.
+  Macht man einen Personenkreis wieder verleihbar, bleibt der Preis leer, und leer heißt kostenlos.
+  Die Auswahl gilt für die angezeigte Seite, höchstens 100 Materialien.
 - **Suche:** Die Suche findet Material auch bei Umlauten und kleinen
   Tippfehlern.
 
