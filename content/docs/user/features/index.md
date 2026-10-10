@@ -14,6 +14,8 @@ order: 20
   mit eigener Bezeichnung (zum Beispiel jedes Zelt für sich).
 - **Kategorien, Parameter, Bilder:** Material wird nach Kategorien geordnet,
   mit eigenen Eigenschaften beschrieben und mit Fotos versehen.
+  In der Bestandsübersicht blendest du über **Ansicht** die Parameter als zusätzliche Spalten ein.
+  Angeboten werden die Parameter der gewählten Kategorie, ohne Kategorie alle.
 - **Sets:** Ein Set bündelt mehrere Materialien. Ist es ein Pflichtset, wird
   beim Buchen jede Komponente mitgebucht.
 - **Wer darf ausleihen:** Bei jedem Material legst du fest, ob es an den
