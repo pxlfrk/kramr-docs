@@ -37,6 +37,12 @@ order: 20
   Der bisherige Wert steht danach in der Historie des Materials.
   Macht man einen Personenkreis wieder verleihbar, bleibt der Preis leer, und leer heißt kostenlos.
   Die Auswahl gilt für die angezeigte Seite, höchstens 100 Materialien.
+- **Raster statt Tabelle:**
+  Neben **Ansicht** schaltest du die Bestandsübersicht von der Tabelle auf ein Raster aus Karten mit Titelbild um.
+  Das Raster zeigt dieselben Treffer und behält Suche und Filter.
+  Eine Karte nennt Kategorie, Standort, Bestand, beide Preise und, wenn ein Zeitraum gewählt ist, wie viele frei sind.
+  Im Raster wählst du im Menü **Ansicht** die Sortierung und die Kartengröße.
+  Ankreuzen, Aufklappen und die Parameter-Spalten gibt es nur in der Tabelle.
 - **Suche:** Die Suche findet Material auch bei Umlauten und kleinen
   Tippfehlern.
 
