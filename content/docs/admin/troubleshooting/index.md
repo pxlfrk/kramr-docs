@@ -70,6 +70,9 @@ Zeitpunkt überein. Entferne das Bild und lade es erneut hoch.
 Ohne `KRAMR_NOTIFICATION_SMTP_HOST` startet die Anwendung zwar, markiert
 Mails aber als fehlgeschlagen. Prüfe Host, Port, Zugangsdaten und Absender.
 
+Steht in der Fehlermeldung STARTTLS, bietet dein Mailserver keine verschlüsselte Verbindung an.
+Was dann zu tun ist, steht unter [Benachrichtigungen](../configuration/benachrichtigungen.md) im Abschnitt „Verschlüsselte Verbindung“.
+
 ## Eine Person aussperren oder abmelden
 
 Alle Sitzungen einer Person lassen sich beenden, indem du ihre Zeilen in der

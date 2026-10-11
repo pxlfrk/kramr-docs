@@ -74,6 +74,7 @@ Ohne `KRAMR_SERVER_TRUST_PROXY=true` teilen sich alle Besucher die Adresse des P
 | `KRAMR_NOTIFICATION_SMTP_HOST` | nein | - | Mailserver. Ohne diese Variable ist der Mailversand nicht eingerichtet; die Anwendung startet trotzdem. Die übrigen `KRAMR_NOTIFICATION_SMTP_*` wirken nur, wenn sie gesetzt ist. |
 | `KRAMR_NOTIFICATION_SMTP_PORT` | nein | `587` | Port des Mailservers. |
 | `KRAMR_NOTIFICATION_SMTP_SECURE` | nein | `false` | Verbindung von Anfang an verschlüsseln (üblich bei Port 465). |
+| `KRAMR_NOTIFICATION_SMTP_REQUIRE_TLS` | nein | `true` | Ohne `KRAMR_NOTIFICATION_SMTP_SECURE` nur über STARTTLS senden; bietet der Server es nicht an, scheitert die Mail. Nur für ein Relay ohne Verschlüsselung im eigenen Netz auf `false` stellen; die Anwendung warnt dann beim Start. |
 | `KRAMR_NOTIFICATION_SMTP_USER` | nein | - | Benutzer am Mailserver; leer für ein Relay ohne Anmeldung. |
 | `KRAMR_NOTIFICATION_SMTP_PASSWORD` | nein | - | Passwort am Mailserver. |
 | `KRAMR_NOTIFICATION_SMTP_FROM` | sobald der Mailserver gesetzt ist | - | Absenderadresse jeder ausgehenden Mail. |
