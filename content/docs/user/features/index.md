@@ -62,6 +62,13 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
 - **Zeiträume:** Ein Zeitraum reicht vom Abholen bis zur Rückgabe. Endet eine
   Buchung um 18 Uhr und beginnt die nächste um 18 Uhr, gibt es keinen
   Konflikt.
+- **Material auswählen:** Material kommt über den Knopf „Material hinzufügen“ in eine Buchung oder Sperre.
+  Er ist gesperrt, bis Abhol- und Rückgabetermin eingetragen sind, damit die Auswahl zeigt, was im Zeitraum frei ist.
+  Der Dialog sucht in Name, Kategorie und Beschreibung und lässt sich nach Kategorie, Standort, „Nur im Zeitraum Freie“ und „Nur Ausgewählte“ eingrenzen.
+  Mehrere Materialien, Mengen und Einheiten gehen mit „Übernehmen“ in einem Schritt in die Buchung; die Auswahl bleibt beim Wechsel der Filter erhalten.
+  „Bilder anzeigen“ blendet Titelbilder ein und ist standardmäßig aus; die Einstellung merkt sich der Browser je Gerät.
+  Material, das schon in der Buchung steht, ist mit „In der Buchung“ markiert; bei Material mit Einheiten sind nur die schon gebuchten Einheiten gesperrt.
+  Mehr als im Zeitraum frei ist, lässt sich weiter wählen; es erscheint nur ein Hinweis auf den Konflikt.
 - **Verleihart:** Jede Ausleihe ist **intern**, **extern** oder
   **Eigennutzung**. Die Verleihart bestimmt den Tarif und welches Material
   gebucht werden darf: Eine interne oder externe Ausleihe nimmt nur Material
