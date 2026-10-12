@@ -13,6 +13,59 @@ Technische Release Notes zu jeder Version stehen außerdem auf der Seite „Rele
 
 <!-- release-notes:start - generated from CHANGELOG.md, do not edit -->
 
+## Version 1.6.0 (12.10.2026)
+
+### Verbesserungen
+
+- 📦 Die Bestandsübersicht lässt sich neben der Tabelle als Raster aus Karten mit Titelbild anzeigen, wobei Suche, Filter und Sortierung bleiben und die Kartengröße im Menü „Ansicht“ gewählt wird.
+- 📦 In der Bestandsübersicht lassen sich über „Ansicht“ die Parameter eines Materials als zusätzliche Spalten einblenden, angeboten werden die Parameter der gewählten Kategorie oder ohne Kategorie alle.
+- 📦 In der Bestandsübersicht lassen sich mehrere angehakte Materialien auf einmal in eine andere Kategorie oder an einen anderen Lagerort legen, online ein- oder ausblenden, für Personenkreise verleihbar oder nicht verleihbar machen sowie archivieren und reaktivieren.
+- 📦 Bei Sammelaktionen fragt die Anwendung vorher mit den betroffenen Materialien nach, wenn dabei ein Wert verloren geht, und speichert nichts, sobald ein Material gegen eine Regel verstößt.
+- 📦 Die Bestandsübersicht bietet im Menü „Weitere Aktionen“ jetzt „Bestand exportieren (CSV)“, die Datei enthält alle Materialien samt archivierter, öffnet sich in Excel mit richtigen Umlauten und steht auch Nutzern mit der Rolle „Nur-Lesen“ zur Verfügung.
+- 📦 Neu ist die Auswertung der Nutzung: Sie zeigt je Material, wie oft und wie lange es im gewählten Zeitraum verliehen war, wie stark es ausgelastet war, wann es zuletzt verliehen wurde und wie oft es beschädigt oder verloren zurückkam.
+- 📦 Die Auswertung der Nutzung öffnet sich in der Bestandsübersicht unter „Weitere Aktionen“, steht je Material im Abschnitt „Nutzung“ (bei Einzelmaterial je Einheit) und lässt sich als CSV herunterladen.
+- 📦 Im Material-Formular stehen „Online sichtbar“, die Verleihbarkeit und die Preise jetzt gemeinsam in der Karte „Verfügbarkeit und Preis“, die Kontrollkästchen sind zu Schaltern geworden, und ein kostenloser Tarif zeigt im Preisfeld „kostenlos“.
+- 📋 Material kommt in eine Buchung oder Sperre jetzt über den Dialog „Material hinzufügen“, in dem sich mit Suche, Filtern nach Kategorie und Standort, freier Menge im Zeitraum und optionalen Titelbildern mehrere Materialien, Mengen und Einheiten in einem Schritt übernehmen lassen.
+- 📋 Der Dialog „Material hinzufügen“ lässt sich bedienen, sobald Abhol- und Rückgabetermin eingetragen sind.
+- 📋 In der Buchungsanfrage lassen sich im Dialog „Material hinzufügen“ mehrere Materialien ankreuzen, die Menge steht gleich in der Zeile, und ist mehr gewünscht als im Zeitraum frei, weist die Zeile darauf hin.
+- 📋 Die Bestandteile eines Pflicht-Sets stehen in einer Buchung jetzt in einem Streifen unter der Position, statt eine Zeile je Bestandteil zu belegen.
+- 📋 Im Buchungsdetail legt „Duplizieren“ aus einer Ausleihe oder Sperre eine neue an, in der Ausleiher, Verleihart, Material und zusätzliche Empfänger schon eingetragen sind und nur der Zeitraum neu gewählt wird.
+- 📋 Beim Duplizieren fehlt Material, das nicht mehr buchbar ist, und wird über dem Formular genannt, und die Historie der neuen Buchung verweist auf das Original.
+- 📋 Ist der Ausleiher noch kein Kontakt, lässt er sich im Feld „Ausleiher“ über „Kontakt anlegen“ anlegen, ohne die Buchung zu verlassen, und bei gleicher E-Mail-Adresse weist die Anwendung auf den vorhandenen Kontakt hin.
+- 📋 Beim Anlegen und Bearbeiten einer Buchung oder Sperre zeigt das Rückgabedatum zunächst den Abholtag, die Uhrzeit wird selbst gewählt, und ein schon gesetzter Rückgabetermin bleibt unberührt.
+- 📋 Wer eine Zahlung erlässt, muss jetzt einen Grund angeben, der in der Bezahlung der Buchung und in der Historie steht.
+- ⚙️ Administratoren können in den Einstellungen externe Kalender als ICS-Adresse (iCal) einbinden, deren Termine im Buchungskalender nur lesend als Hinweis mit Kalender-Symbol erscheinen, kein Material blockieren und sich im Kalendermenü pro Kalender ein- und ausblenden lassen.
+- ⚙️ Benachrichtigungen führen mit einem Klick zur Buchung: Der Webhook-Text endet mit der Adresse der Buchung, und die E-Mails an die Sachbearbeitung haben die Schaltfläche „Buchung öffnen“.
+- ⚙️ Die Meldung über einen Konflikt nach einer Bestandsminderung geht jetzt auch an den Webhook.
+- ⚙️ In der Nutzerverwaltung bleibt „Als Kontakt anlegen“ auf einem Tablet eine Schaltfläche mit Symbol, und Rollenauswahl, Name und E-Mail-Adresse bleiben lesbar.
+- 🖥️ Die Auswahllisten der Filter zeigen ihren Pfeil jetzt einheitlich rechts und in derselben Stärke wie der Zeitraum-Filter.
+
+### Fehlerbehebungen
+
+- 📦 Werden mehr Stück als verloren oder beschädigt zurückgegeben, als im Bestand sind, geht der Bestand auf 0 und die Rückgabe bleibt gespeichert, die Historie nennt den Fehlbetrag, und das Zurücksetzen der Rückgabe gibt nur zurück, was abgezogen wurde.
+- 📦 Eine Einheit, die schon vor einer Rückgabe archiviert war, bleibt auch nach dem Zurücksetzen der Rückgabe archiviert.
+- 📦 Ein Material, das sich während des Bearbeitens geändert hat, etwa durch eine Rückgabe, lässt sich nicht mehr mit einer veralteten Bearbeitungsansicht überschreiben, stattdessen lädt die Seite neu und weist darauf hin.
+- 📦 Ein Preis von 0 gilt jetzt überall als kostenlos, genau wie ein leeres Preisfeld, sodass Anzeige und der Filter „kostenpflichtig“ nicht mehr auseinanderlaufen, und bereits gespeicherte Preise von 0 werden auf „kostenlos“ umgestellt.
+- 📋 Werden zwei sich überschneidende Buchungsentwürfe gleichzeitig genehmigt, fragt die Anwendung bei der zweiten Genehmigung nach „Trotzdem genehmigen“, statt beide stillschweigend zu genehmigen.
+- 📋 Die Abholung lässt sich nicht mehr zurücknehmen, sobald für die Buchung eine Rückgabe erfasst wurde.
+- 📋 Holen zwei Personen gleichzeitig Positionen derselben Buchung ab, bleibt keine Abholung mehr halb gespeichert und ohne Eintrag in der Historie.
+- 📋 Das Feld „Einheit“ einer Position in der Buchung ist breiter, sodass auch längere Bezeichnungen vollständig lesbar sind.
+
+### Unter der Haube
+
+- 📦 Im CSV-Export werden jetzt auch Felder entschärft, die mit einem Zeilenumbruch oder mit Leerzeichen vor einem Formelzeichen beginnen.
+- 📋 Die E-Mail mit dem Link zur Buchungsanfrage grüßt jetzt ohne Namen, damit kein frei in das öffentliche Formular getippter Text unter dem Absender der Organisation an eine unbestätigte Adresse geht, die E-Mails zu Übernahme und Ablehnung nennen den Namen weiterhin.
+- 📋 Eine Menge über 999.999 Stück in einer Buchungsposition oder Rückgabe wird mit einer klaren Fehlermeldung abgelehnt, statt einen Serverfehler auszulösen.
+- 👤 Die Kontaktlisten liefern nur noch die Spalten der Liste, Geburtsdatum und Adresse werden erst beim Öffnen eines Kontakts geladen.
+- ⚙️ Änderungen an den Einstellungen, etwa an der Webhook-Adresse, werden jetzt im Änderungsprotokoll festgehalten.
+- ⚙️ E-Mails gehen nur noch verschlüsselt an den Mailserver, und wer einen internen Mailserver ohne Verschlüsselung nutzt, muss das ausdrücklich abschalten (Betreiber-Dokumentation: Benachrichtigungen, „Verschlüsselte Verbindung“).
+- ⚙️ Die Webhook-Adresse und die Adressen externer Kalender lehnen beim Speichern jetzt weitere interne Adressbereiche ab, und für ein Webhook-Ziel in einem solchen Bereich ist eine ausdrückliche Freigabe nötig (Betreiber-Dokumentation: Sicherheit, „Webhooks und ausgehende Verbindungen“).
+- ⚙️ Schreibende Anfragen, die ein Browser von einer fremden Seite aus an die Anwendung schickt, werden jetzt abgewiesen, wobei die Einbettung für die Website ausgenommen ist und der Reverse Proxy dafür richtig eingerichtet sein muss (Betreiber-Dokumentation: Sicherheit, „Herkunft schreibender Anfragen“).
+- ⚙️ Das Anfrage-Limit lässt sich nicht mehr durch wechselnde IPv6-Adressen umgehen, und eine Abweisung wird nur noch einmal je Adresse und Zeitfenster protokolliert.
+- ⚙️ Bei einem Datenbankfehler schreibt die Anwendung nur noch Fehlercode, Einschränkung und Tabelle ins Protokoll, nicht mehr die Werte, die der Fehler enthalten kann, auch beim Anlegen und Freigeben einer Buchung, bei der Konfliktprüfung und bei Fehlern der Aufgabenplanung.
+- ⚙️ Eine endgültig gescheiterte E-Mail nennt im Protokoll die Empfängeradresse nicht mehr.
+- 🖥️ Jede Anfrage trägt jetzt eine Kennung, die in Fehlermeldungen und im Protokoll des Servers wiederkehrt, sodass sich ein gemeldeter Fehler leichter nachvollziehen lässt.
+
 ## Version 1.5.1 (07.10.2026)
 
 ### Verbesserungen
@@ -24,7 +77,7 @@ Technische Release Notes zu jeder Version stehen außerdem auf der Seite „Rele
 
 - 📋 Sperren gelten nach ihrem Ende nicht mehr als überfällig, lösen keine Erinnerung „Überfällige Rückgabe“ mehr aus, und genehmigte Sperren mit abgelaufenem Zeitraum stehen nicht mehr im Arbeitsvorrat der Startseite.
 - 📋 Eine Buchung lässt sich nicht mehr abholen, wenn weniger Stück im Lager sind als gebucht (zum Beispiel nach einer verlorenen oder beschädigten Rückgabe); der Hinweis nennt, wie sich das lösen lässt.
-- 👤 In der Nutzerverwaltung entfällt „Als Kontakt anlegen“, wenn es für das Konto schon einen Kontakt der Eigenen Organisation gibt.
+- 👤 In der Nutzerverwaltung entfällt „Als Kontakt anlegen“, wenn es für das Konto schon einen Kontakt der eigenen Organisation gibt.
 
 ### Unter der Haube
 
