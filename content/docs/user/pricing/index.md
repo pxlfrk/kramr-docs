@@ -26,3 +26,13 @@ Die Eigennutzung hat keinen Tarif und kostet nichts.
 
 In der Buchungsübersicht kannst du nach der Verleihart filtern, auch mit einem Klick auf ihre Kennzeichnung in einer Zeile.
 Der Filter „kostenpflichtig“ oder „kostenlos“ bezieht sich auf die enthaltenen Materialien, die im Tarif dieser Buchung einen Preis haben.
+
+## Betrag und Bezahlung einer Buchung
+
+In der Karte „Bezahlung“ der Buchung trägst du den Betrag und den Bezahlt-Status von Hand ein.
+Die Karte speichert sofort, mit ihrem eigenen „Speichern“.
+Wählst du den Status „Erlassen“, erscheint darunter das Pflichtfeld „Grund für den Erlass“.
+Trage dort keine Personendaten ein.
+Der Grund steht in der Karte beim Status und in der Historie der Buchung.
+Wechselt der Status später wieder weg von „Erlassen“, verschwindet der Grund aus der Karte; die Historie behält ihn.
+Bei einer Buchung, deren Zahlung schon vor dieser Funktion erlassen war, bleibt der Grund leer.
