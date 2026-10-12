@@ -84,10 +84,11 @@ Die Sachbearbeitung der Anfragen ist nicht öffentlich.
 
 ## Webhooks und ausgehende Verbindungen
 
-Die Webhook-Adresse in den Einstellungen lehnt kramr beim Speichern ab, wenn sie offensichtlich auf ein internes Ziel zeigt: den eigenen Rechner, private Adressbereiche, Link-Local-Adressen einschließlich der Metadaten-Adresse von Cloud-Anbietern und die IPv6-Entsprechungen.
+Die Webhook-Adresse in den Einstellungen lehnt kramr beim Speichern ab, wenn sie offensichtlich auf ein internes Ziel zeigt: den eigenen Rechner, private Adressbereiche, Link-Local-Adressen einschließlich der Metadaten-Adresse von Cloud-Anbietern, den Adressbereich für Carrier-Grade-NAT (`100.64.0.0/10`), das NAT64-Präfix (`64:ff9b::/96`) und die IPv6-Entsprechungen.
 Das schützt vor einer versehentlich oder böswillig eingetragenen internen Adresse.
 Es ist ein Grundschutz.
 Ein Hostname, der erst beim Senden auf eine interne Adresse zeigt, wird nicht erkannt.
+Für die Adressen externer Kalender (ICS) gilt dieselbe Prüfung, eine Ausnahme gibt es dort nicht.
 Lass deshalb nur Admins die Einstellungen ändern und vergib die Rolle sparsam.
 Jede Änderung einer Einstellung hält kramr im Änderungsprotokoll fest: wer, wann, welcher Schlüssel, alter und neuer Wert.
 So lässt sich nachvollziehen, wann die Webhook-Adresse umgestellt wurde.

@@ -69,6 +69,11 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
   „Bilder anzeigen“ blendet Titelbilder ein und ist standardmäßig aus; die Einstellung merkt sich der Browser je Gerät.
   Material, das schon in der Buchung steht, ist mit „In der Buchung“ markiert; bei Material mit Einheiten sind nur die schon gebuchten Einheiten gesperrt.
   Mehr als im Zeitraum frei ist, lässt sich weiter wählen; es erscheint nur ein Hinweis auf den Konflikt.
+- **Ausleiher neu anlegen:** Gibt es die Person noch nicht, endet die Liste im Feld „Ausleiher“ in der Zeile „Kontakt anlegen“.
+  Der Dialog fragt nach Vorname, Nachname, E-Mail-Adresse und Handynummer und optional nach der Organisation; Adresse und Geburtsdatum lassen sich später im Kontakt ergänzen.
+  Hat schon ein Kontakt dieselbe E-Mail-Adresse, weist kramr darauf hin und bietet an, ihn zu wählen.
+  Nach dem Speichern ist der neue Kontakt der Ausleiher; alles andere in der Buchung bleibt, wie du es eingetragen hast.
+  Das geht beim Anlegen und beim Bearbeiten einer Buchung, solange der Ausleiher noch änderbar ist.
 - **Verleihart:** Jede Ausleihe ist **intern**, **extern** oder
   **Eigennutzung**. Die Verleihart bestimmt den Tarif und welches Material
   gebucht werden darf: Eine interne oder externe Ausleihe nimmt nur Material

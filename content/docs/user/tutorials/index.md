@@ -14,6 +14,7 @@ order: 30
 2. **Buchung anlegen:** Unter „Buchungen" eine neue Ausleihe beginnen. Kontakt,
    Zeitraum und zuständige Person wählen, dann das Material mit Mengen
    hinzufügen. Die Verfügbarkeit im Zeitraum wird angezeigt.
+   Gibt es die Person noch nicht, legst du sie im Feld „Ausleiher" über „Kontakt anlegen" an, ohne die Buchung zu verlassen.
 3. **Konflikte ansehen:** Zeigt kramr einen Konflikt, gibt es zu wenig Bestand
    im Zeitraum. Zeitraum oder Menge ändern oder bewusst weitermachen.
 4. **Genehmigen:** Die Buchung vom Entwurf auf „Genehmigt" setzen. Erst jetzt

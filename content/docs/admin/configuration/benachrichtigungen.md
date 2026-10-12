@@ -24,6 +24,10 @@ Der Zugang zum Mailserver steht nur in Umgebungsvariablen:
 | `KRAMR_NOTIFICATION_SMTP_USER`, `KRAMR_NOTIFICATION_SMTP_PASSWORD` | – | Zugangsdaten; leer für ein Relay ohne Anmeldung. |
 | `KRAMR_NOTIFICATION_SMTP_FROM` | – | Absenderadresse. Pflicht, sobald ein Mailserver gesetzt ist. |
 
+Die Mails an die Sachbearbeitung zu einer Buchung enden mit der Schaltfläche „Buchung öffnen“.
+Im Klartext steht dieselbe Adresse darunter.
+Eine Adresse ohne Konto in kramr, etwa auf der Liste der ständigen Empfänger oder als zusätzlicher Empfänger einer Buchung, bekommt die Mail ohne Schaltfläche und Adresse, weil sie die Buchung nicht öffnen kann.
+
 ### Verschlüsselte Verbindung
 
 kramr schickt Zugangsdaten und Mails nur verschlüsselt an den Mailserver.
@@ -51,6 +55,39 @@ Ziele ab (lokale Adressen, private Netze). Für ein bewusst internes Ziel,
 etwa einen Chat-Dienst im selben Docker-Netz, trägt der Betreiber den Host in
 `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS` ein (kommagetrennt). Das ist eine
 Ausnahme, keine allgemeine Freigabeliste.
+
+kramr schickt je Ereignis einen POST mit genau einem Feld, `text`, auf Deutsch.
+Der Text beginnt mit einem Symbol für das Ereignis, es folgen Betreff und Einzelheiten, und die letzte Zeile ist die Adresse der Buchung:
+
+```json
+{
+  "text": "🆕 Neue Buchung B27-42\n\nEine neue Buchung wurde angelegt.\n\nBuchung: B27-42\nZeitraum: 10.06.2027, 08:00 – 12.06.2027, 18:00\nAusleiher: Hanna Müller\nMaterial: Gaskocher (3)\nZuständig: Sam Weber\n\nhttps://kramr.example.org/bookings/3f2c…"
+}
+```
+
+Die Adresse baut kramr aus `KRAMR_SERVER_PUBLIC_URL`.
+Sie steht ohne Markdown-Auszeichnung da, damit sie in jedem Ziel lesbar bleibt.
+
+| Symbol | Ereignis |
+| --- | --- |
+| 🆕 | Buchung angelegt |
+| ⏰ | Erinnerung vor der Abholung |
+| ⚠️ | Überfällige Rückgabe |
+| 🔀 | Konflikt bei einer Buchung oder durch eine Bestandsminderung |
+| ✅ | Buchung trotz Konflikt genehmigt |
+
+Eine Nachricht entsteht nur, wenn das Ereignis mindestens einen Mail-Empfänger hat.
+Die Bestandsminderung meldet kramr je Prüflauf in einer Nachricht mit allen betroffenen Buchungen und je einer Adresse.
+Eine Buchung, die dabei in Konflikt geraten ist, erscheint nur in dieser Nachricht und nicht zusätzlich als eigene 🔀-Nachricht.
+
+### Rocket.Chat
+
+1. In Rocket.Chat unter *Administration → Integrationen* einen **eingehenden Webhook** für den gewünschten Kanal anlegen und dessen Adresse kopieren.
+2. Die Adresse als `notification.webhook_url` in den Einstellungen eintragen.
+3. Läuft Rocket.Chat im selben Docker-Netz oder unter einer privaten Adresse, den Host zusätzlich in `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS` eintragen, sonst lehnt kramr das Ziel beim Speichern ab.
+
+Microsoft Teams ist nicht unterstützt.
+Teams erwartet eine Adaptive Card statt eines einfachen `text`-Feldes.
 
 ## Zeitplan
 
