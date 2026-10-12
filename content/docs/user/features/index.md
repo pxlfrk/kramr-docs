@@ -43,6 +43,10 @@ order: 20
   Eine Karte nennt Kategorie, Standort, Bestand, beide Preise und, wenn ein Zeitraum gewählt ist, wie viele frei sind.
   Im Raster wählst du im Menü **Ansicht** die Sortierung und die Kartengröße.
   Ankreuzen, Aufklappen und die Parameter-Spalten gibt es nur in der Tabelle.
+- **Auswertung:**
+  Über „Weitere Aktionen“ in der Bestandsübersicht öffnest du die Auswertung.
+  Sie zeigt je Material für einen Zeitraum, wie oft und wie lange es verliehen war, wie stark es ausgelastet war und wie oft es beschädigt oder verloren zurückkam.
+  Dieselben Zahlen stehen im Abschnitt „Nutzung“ des Materials, und die Tabelle lässt sich als CSV herunterladen.
 - **Suche:** Die Suche findet Material auch bei Umlauten und kleinen
   Tippfehlern.
 
@@ -122,6 +126,14 @@ das an niemanden verleihbar ist, wird gezeigt, lässt sich aber nicht anfragen.
 Bei der Übernahme wählt die Sachbearbeitung die Verleihart; Positionen, die
 dafür nicht verleihbar sind, nennt der Dialog vorab und übernimmt sie nicht.
 
+Wer eine Anfrage zusammenstellt, öffnet „Material hinzufügen" und hakt dort beliebig viele Materialien an.
+Die Menge tragen sie gleich in der Zeile ein.
+„Nur Ausgewählte" zeigt, was schon angehakt ist, auch nach einer neuen Suche.
+Erst „Übernehmen" legt die Auswahl als Positionen in die Anfrage, „Abbrechen" verwirft sie.
+Ist mehr gewünscht, als im gespeicherten Zeitraum frei ist, weist die Zeile darauf hin.
+Übernehmen lässt sich die Auswahl trotzdem, die Geschäftsstelle prüft das.
+Hat die Anfrage die Höchstzahl an Positionen erreicht, sind die übrigen Kontrollkästchen gesperrt.
+
 ## Mehr dazu
 
 - [Buchungsstatus und Übergänge](../booking-status/index.md)
@@ -133,6 +145,7 @@ dafür nicht verleihbar sind, nennt der Dialog vorab und übernimmt sie nicht.
 - [Kalenderansicht](../calendar/index.md)
 - [Posteingang und Benachrichtigungen](../notifications/index.md)
 - [Material per CSV importieren](../export-and-import/index.md)
+- [Auswertung der Nutzung](../usage/index.md)
 - [Kontakte anonymisieren](../anonymisation/index.md)
 - [Rollen und Rechte](../roles/index.md)
 - [Glossar](../glossary/index.md)

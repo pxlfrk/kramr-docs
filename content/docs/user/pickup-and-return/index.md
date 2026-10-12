@@ -31,6 +31,7 @@ Bei jeder Rückgabe hältst du fest, in welchem Zustand das Material zurückkomm
 - Eine einzelne Einheit hat genau eine Zeile.
 - Eine Rückgabe darf auf mehrere Tage verteilt sein.
 - **Beschädigt und verloren** verringern beide den Bestand um ihre Menge oder archivieren die Einheit. Sie unterscheiden sich nur darin, was die Historie festhält.
+- Wurde mehr als „verloren“ oder „beschädigt“ gemeldet, als im Bestand ist, geht der Bestand auf 0; die Rückgabe wird trotzdem gespeichert, und die Historie des Materials nennt den Fehlbetrag.
 - Sinkt der Bestand so, dass eine genehmigte Buchung mehr verlangt, als vorhanden ist, bekommt diese Buchung einen Konflikt-Hinweis, und die zuständige Person wird benachrichtigt.
 
-Nimmst du „Zurückgegeben“ zurück, entfernt kramr die erfassten Rückgaben und deren Wirkung auf den Bestand.
+Nimmst du „Zurückgegeben“ zurück, entfernt kramr die erfassten Rückgaben und gibt dem Bestand zurück, was sie abgezogen haben.
