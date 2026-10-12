@@ -74,6 +74,11 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
   Hat schon ein Kontakt dieselbe E-Mail-Adresse, weist kramr darauf hin und bietet an, ihn zu wählen.
   Nach dem Speichern ist der neue Kontakt der Ausleiher; alles andere in der Buchung bleibt, wie du es eingetragen hast.
   Das geht beim Anlegen und beim Bearbeiten einer Buchung, solange der Ausleiher noch änderbar ist.
+- **Buchung duplizieren:** Wiederkehrende Ausleihen oder Sperren legst du aus einer bestehenden Buchung an: Im Buchungsdetail öffnet „Duplizieren“ das Formular vorbefüllt mit Ausleiher, Verleihart, Material mit Menge bzw. Einheit und den zusätzlichen Empfängern, bei einer Sperre mit ihrem Titel.
+  Zeitraum und Bemerkung trägst du neu ein; Status, Betrag, Zahlung und alles zu Abholung und Rückgabe kommen nicht mit.
+  Was nicht mehr buchbar ist, etwa archiviertes Material oder ein anonymisierter Kontakt, fehlt im Entwurf; ein Hinweis über dem Formular nennt es.
+  Die neue Buchung zeigt in ihrer Historie, von welcher Buchung sie stammt.
+  Das geht für Administration und Sachbearbeitung in jedem Status, nicht für die Rolle „Nur lesen“.
 - **Verleihart:** Jede Ausleihe ist **intern**, **extern** oder
   **Eigennutzung**. Die Verleihart bestimmt den Tarif und welches Material
   gebucht werden darf: Eine interne oder externe Ausleihe nimmt nur Material

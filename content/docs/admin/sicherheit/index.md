@@ -52,9 +52,25 @@ Dort liegt auch das grobe Rate-Limit.
 - **Hinter einem Proxy `true`.** Sonst sieht kramr für alle Besucher die Adresse des Proxys. Das Rate-Limit und die Logs behandeln dann alle als einen Client.
 - **Ohne Proxy `false`.** Sonst kann jeder Client seine Adresse und das Protokoll selbst bestimmen und damit das Rate-Limit umgehen.
 - Der Proxy muss `X-Forwarded-For`, `X-Forwarded-Proto` und `X-Forwarded-Host` korrekt setzen und fremde Werte überschreiben.
+- Eine IPv6-Adresse zählt kramr als ihr ganzes /64-Netz, weil ein Client darin beliebig die Adresse wechseln kann.
+  Hinter einem Proxy gilt das für die weitergegebene Client-Adresse.
+- Eine Abweisung durch das Limit steht je Client und Zeitfenster nur einmal im Protokoll.
 
 Die Datenbank hat keinen veröffentlichten Port.
 Das soll so bleiben.
+
+## Herkunft schreibender Anfragen
+
+Das Cookie der Sitzung schützt vor Anfragen von fremden Websites, nicht vor Anfragen von einer Schwester-Adresse derselben Organisation, etwa `www.verein.de` an `kramr.verein.de`.
+Deshalb weist kramr jede schreibende Anfrage unter `/api` ab, die der Browser als fremd kennzeichnet.
+Dazu liest es `Sec-Fetch-Site`; fehlt die Zeile, vergleicht es `Origin` mit `KRAMR_SERVER_PUBLIC_URL`.
+Fehlen beide, lässt kramr die Anfrage durch: Ein Browser sendet sie bei einem solchen Angriff immer, Skripte und Werkzeuge gegen die Schnittstelle bleiben möglich.
+Die öffentlichen Routen unter `/api/public/*` sind ausgenommen, weil Einbettungen auf fremden Websites sie aufrufen.
+
+Das verlangt zwei Dinge von dir:
+
+- **`KRAMR_SERVER_PUBLIC_URL` ist die Adresse, unter der die Leute kramr öffnen.** Bei einem Browser ohne `Sec-Fetch-Site` weist kramr sonst die eigene Oberfläche ab.
+- **Der Proxy reicht `Origin` und `Sec-Fetch-Site` unverändert durch.** Er darf sie nicht entfernen oder umschreiben.
 
 ## Sicherheits-Header
 
@@ -121,7 +137,8 @@ Datensicherungen enthalten Daten bis zu ihrer eigenen Löschung weiter; wäge da
 - [ ] Anbieter-Adresse mit `https://`.
 - [ ] `KRAMR_SERVER_TRUST_PROXY` passt zur Aufstellung (hinter einem Proxy `true`).
 - [ ] Datenbank ohne veröffentlichten Port; die Anwendung nur über den Proxy erreichbar.
-- [ ] Proxy überschreibt keine Sicherheits-Header, vor allem nicht für `/embed/*`.
+- [ ] Proxy überschreibt keine Sicherheits-Header, vor allem nicht für `/embed/*`, und reicht `Origin` und `Sec-Fetch-Site` unverändert durch.
+- [ ] `KRAMR_SERVER_PUBLIC_URL` ist die Adresse, unter der die Leute kramr öffnen.
 - [ ] Proxy protokolliert Anfrage-Links nicht.
 - [ ] Body-Limit des Proxys mindestens 11 MB.
 - [ ] Allow-List der Einbettung enthält nur eigene Websites.
