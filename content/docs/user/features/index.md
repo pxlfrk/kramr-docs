@@ -73,6 +73,11 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
   „Bilder anzeigen“ blendet Titelbilder ein und ist standardmäßig aus; die Einstellung merkt sich der Browser je Gerät.
   Material, das schon in der Buchung steht, ist mit „In der Buchung“ markiert; bei Material mit Einheiten sind nur die schon gebuchten Einheiten gesperrt.
   Mehr als im Zeitraum frei ist, lässt sich weiter wählen; es erscheint nur ein Hinweis auf den Konflikt.
+  Ein loses Set reserviert seine Bestandteile nicht mit; wer sie halten will, wählt sie als eigene Positionen.
+  Hat man ein loses Set angehakt, nimmt „Bestandteile mit auswählen“ in seiner Zeile die Bestandteile mit, mit der Menge laut Set mal Zahl der Sets, und ein Hinweis darunter nennt, was dazukam.
+  Die Mengen lassen sich danach in der Zeile des Bestandteils ändern; ändert sich die Menge des Sets, bietet die Zeile „Bestandteile anpassen“ an.
+  Bei Bestandteilen mit Einheiten klappt die Zeile auf, die Einheiten wählt man selbst.
+  Bestandteile, die schon in der Buchung stehen, für die Verleihart nicht verleihbar oder nur im Set buchbar sind, werden übersprungen und im Hinweis genannt.
 - **Ausleiher neu anlegen:** Gibt es die Person noch nicht, endet die Liste im Feld „Ausleiher“ in der Zeile „Kontakt anlegen“.
   Der Dialog fragt nach Vorname, Nachname, E-Mail-Adresse und Handynummer und optional nach der Organisation; Adresse und Geburtsdatum lassen sich später im Kontakt ergänzen.
   Hat schon ein Kontakt dieselbe E-Mail-Adresse, weist kramr darauf hin und bietet an, ihn zu wählen.
