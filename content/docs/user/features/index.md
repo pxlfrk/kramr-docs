@@ -74,6 +74,7 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
 - **Material auswählen:** Material kommt über den Knopf „Material hinzufügen“ in eine Buchung oder Sperre.
   Er ist gesperrt, bis Abhol- und Rückgabetermin eingetragen sind, damit die Auswahl zeigt, was im Zeitraum frei ist.
   Der Dialog sucht in Name, Kategorie und Beschreibung und lässt sich nach Kategorie, Standort, „Nur im Zeitraum Freie“ und „Nur Ausgewählte“ eingrenzen.
+  „Nur Ausgewählte“ zeigt auch, was die Buchung schon enthält.
   Mehrere Materialien, Mengen und Einheiten gehen mit „Übernehmen“ in einem Schritt in die Buchung; die Auswahl bleibt beim Wechsel der Filter erhalten.
   „Bilder anzeigen“ blendet Titelbilder ein und ist standardmäßig aus; die Einstellung merkt sich der Browser je Gerät.
   Material, das schon in der Buchung steht, ist mit „In der Buchung“ markiert; bei Material mit Einheiten sind nur die schon gebuchten Einheiten gesperrt.
@@ -138,7 +139,7 @@ dafür nicht verleihbar sind, nennt der Dialog vorab und übernimmt sie nicht.
 
 Wer eine Anfrage zusammenstellt, öffnet „Material hinzufügen" und hakt dort beliebig viele Materialien an.
 Die Menge tragen sie gleich in der Zeile ein.
-„Nur Ausgewählte" zeigt, was schon angehakt ist, auch nach einer neuen Suche.
+„Nur Ausgewählte" zeigt, was schon angehakt ist, und das, was die Anfrage schon enthält; „Bilder anzeigen" blendet die Bilder aus und ist hier standardmäßig an.
 Erst „Übernehmen" legt die Auswahl als Positionen in die Anfrage, „Abbrechen" verwirft sie.
 Ist mehr gewünscht, als im gespeicherten Zeitraum frei ist, weist die Zeile darauf hin.
 Übernehmen lässt sich die Auswahl trotzdem, die Geschäftsstelle prüft das.
