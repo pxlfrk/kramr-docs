@@ -53,6 +53,10 @@ Ziehe vorher ein Backup.
 
 Siehe [Rollback](../runbooks/rollback.md).
 
+Hinweis zum Archivieren von Buchungen: Die Migration `0065` ergänzt die Spalte `archived_at` an den Buchungen.
+Die vorherige Version kennt sie nicht, dort sind archivierte Buchungen wieder für alle sichtbar, und das Genehmigen eines archivierten Entwurfs scheitert an einer Tabellenbedingung.
+Nach einer Rückkehr auf die neue Version gilt wieder alles wie zuvor.
+
 ## PostgreSQL-Hauptversion wechseln
 
 Mit Produktivdaten genügt es **nicht**, das Image-Tag zu ändern; das

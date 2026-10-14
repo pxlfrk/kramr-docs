@@ -16,7 +16,7 @@ Erst die Administration vergibt eine Rolle.
 | Kein Zugriff | Angemeldet sein, sonst nichts. |
 | ReadOnly | Alles ansehen, nichts ändern. |
 | Staff | Material, Kontakte, Buchungen und Anfragen vollständig verwalten, Material importieren, Kontakte anonymisieren und den Posteingang nutzen. |
-| Admin | Alles, was Staff darf, und zusätzlich Nutzer, Rollen und Einstellungen verwalten. |
+| Admin | Alles, was Staff darf, und zusätzlich Nutzer, Rollen und Einstellungen verwalten sowie Buchungen archivieren. |
 
 - Die Bereiche **Nutzer und Rollen** und **System** (Einstellungen) sehen nur Administratoren. Für alle anderen sind sie nicht sichtbar.
 - Die Stammdaten (Kategorien, Standorte, Parameter-Typen) pflegt Staff. ReadOnly sieht sie.

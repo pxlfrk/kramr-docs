@@ -1669,6 +1669,13 @@ components:
             - newContactDraft
             - notFreeCount
           additionalProperties: false
+        bookingReference:
+          type: string
+        archiveBlockedBy:
+          type: string
+          enum:
+            - status
+            - payment-open
       required:
         - type
         - title

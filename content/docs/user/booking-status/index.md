@@ -50,6 +50,22 @@ Zwei Schritte löschen erfasste Tatsachen und fragen vorher nach:
 
 Jede Änderung steht in der Historie.
 
+## Buchungen archivieren
+
+Eine falsch oder zum Test angelegte Buchung löschst du nicht, die Administration **archiviert** sie.
+Das geht im Buchungsdetail über „Archivieren“, die Buchung oder Sperre verschwindet danach aus den Listen, dem Kalender und der Auswertung und belegt kein Material mehr.
+Nichts geht verloren: Nummer und Historie bleiben, und „Reaktivieren“ bringt die Buchung im selben Status zurück.
+
+- **Archivierbar** sind Entwurf, Storniert und Zurückgegeben.
+  Eine genehmigte oder abgeholte Buchung stornierst du vorher oder gibst sie zurück.
+- **Eine offene Zahlung** verhindert das Archivieren eines Entwurfs und einer zurückgegebenen Buchung; setze sie vorher auf „Bezahlt“ oder „Erlassen“.
+  Bei einer stornierten Buchung stört sie nicht.
+- **Sichtbar** ist eine archivierte Buchung nur für die Administration: in der Buchungsübersicht und im Kalender über „Ansicht“ → „Archivierte anzeigen“, in den Buchungslisten eines Kontakts oder Materials immer, jeweils mit dem Merkmal „Archiviert“.
+  Alle anderen sehen unter der Adresse nur einen Hinweis mit der Buchungsnummer.
+- **Schreibgeschützt:** Eine archivierte Buchung lässt sich nicht ändern, bis sie reaktiviert ist.
+- **Keine Nachricht:** Archivieren und Reaktivieren lösen keine Benachrichtigung aus und stehen in der Historie.
+- **Auswertung:** Eine archivierte zurückgegebene Ausleihe fehlt in der [Auswertung der Nutzung](../usage/index.md), auch für vergangene Zeiträume; nach dem Reaktivieren zählt sie wieder.
+
 ## Schnell ausleihen
 
 Neben dem normalen Weg über den Entwurf gibt es „Buchung anlegen und direkt genehmigen“.
