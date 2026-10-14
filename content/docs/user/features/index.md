@@ -7,6 +7,11 @@ order: 20
 
 # Funktionen im Überblick
 
+## Suche
+
+Ein Suchfeld in der Kopfzeile (Strg + K) findet Buchungen, Material und Kontakte zugleich und springt mit einem Treffer direkt auf das Detail.
+Die Einzelheiten stehen unter [Suche in der Kopfzeile](../search/index.md).
+
 ## Material
 
 - **Mengen- und Einzelmaterial:** Ein Material wird entweder über eine

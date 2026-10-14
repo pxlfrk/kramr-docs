@@ -39,6 +39,8 @@ Werte führen zu einem Startabbruch mit einer klaren Meldung.
 | `KRAMR_LOG_LEVEL` | nein | `info` | `fatal`, `error`, `warn`, `info`, `debug` oder `trace`. Wirkt nach einem Neustart des Containers. |
 | `KRAMR_PATH_UPLOADS` | nein | im Image `/app/uploads` | Ort der Material-Bilder; im Compose-Stack das Volume `uploads`. Gehört ins Backup. |
 | `KRAMR_UPDATE_GITHUB_REPO` | nein | Projekt-Repository | Repository (`Eigentümer/Name`), gegen dessen neuestes Release die Versionsprüfung vergleicht. Forks tragen ihr eigenes ein. |
+| `KRAMR_SEARCH_RATE_LIMIT` | nein | `120` | Anfragen je angemeldetem Nutzer und Zeitfenster an die globale Suche in der Kopfzeile. |
+| `KRAMR_SEARCH_RATE_WINDOW_SECONDS` | nein | `60` | Länge dieses Zeitfensters in Sekunden. |
 
 ## Anmeldung
 
