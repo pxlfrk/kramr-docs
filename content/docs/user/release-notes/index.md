@@ -13,17 +13,35 @@ Technische Release Notes zu jeder Version stehen außerdem auf der Seite „Rele
 
 <!-- release-notes:start - generated from CHANGELOG.md, do not edit -->
 
-## Version 1.6.0 (12.10.2026)
+## Version 1.7.0 (14.10.2026)
+
+### Neue Funktionen
+
+- 🖥️ In der Kopfzeile sucht ein Suchfeld (Strg + K) in Buchungen, Material und Kontakten zugleich und springt mit einem Treffer direkt auf die Buchung, das Material oder den Kontakt.
 
 ### Verbesserungen
+
+- 📋 In der Materialauswahl einer Buchung nimmt der Button „Bestandteile mit auswählen“ an einem angehakten losen Set dessen Bestandteile mit - was übersprungen wurde, steht mit Grund darunter.
+- 📋 Administratoren können eine Buchung oder Sperre archivieren, statt sie zu löschen: Sie verschwindet aus Listen, Kalender und Auswertung, belegt kein Material mehr und lässt sich über „Archivierte anzeigen“ wiederfinden und reaktivieren.
+
+### Unter der Haube
+
+- 📋 Die Buchungsübersicht prüft Konflikte für alle Zeilen gemeinsam und bleibt dadurch auch mit vielen Buchungen zügig.
+
+## Version 1.6.0 (12.10.2026)
+
+### Neue Funktionen
 
 - 📦 Die Bestandsübersicht lässt sich neben der Tabelle als Raster aus Karten mit Titelbild anzeigen, wobei Suche, Filter und Sortierung bleiben und die Kartengröße im Menü „Ansicht“ gewählt wird.
 - 📦 In der Bestandsübersicht lassen sich über „Ansicht“ die Parameter eines Materials als zusätzliche Spalten einblenden, angeboten werden die Parameter der gewählten Kategorie oder ohne Kategorie alle.
 - 📦 In der Bestandsübersicht lassen sich mehrere angehakte Materialien auf einmal in eine andere Kategorie oder an einen anderen Lagerort legen, online ein- oder ausblenden, für Personenkreise verleihbar oder nicht verleihbar machen sowie archivieren und reaktivieren.
-- 📦 Bei Sammelaktionen fragt die Anwendung vorher mit den betroffenen Materialien nach, wenn dabei ein Wert verloren geht, und speichert nichts, sobald ein Material gegen eine Regel verstößt.
-- 📦 Die Bestandsübersicht bietet im Menü „Weitere Aktionen“ jetzt „Bestand exportieren (CSV)“, die Datei enthält alle Materialien samt archivierter, öffnet sich in Excel mit richtigen Umlauten und steht auch Nutzern mit der Rolle „Nur-Lesen“ zur Verfügung.
 - 📦 Neu ist die Auswertung der Nutzung: Sie zeigt je Material, wie oft und wie lange es im gewählten Zeitraum verliehen war, wie stark es ausgelastet war, wann es zuletzt verliehen wurde und wie oft es beschädigt oder verloren zurückkam.
 - 📦 Die Auswertung der Nutzung öffnet sich in der Bestandsübersicht unter „Weitere Aktionen“, steht je Material im Abschnitt „Nutzung“ (bei Einzelmaterial je Einheit) und lässt sich als CSV herunterladen.
+
+### Verbesserungen
+
+- 📦 Bei Sammelaktionen fragt die Anwendung vorher mit den betroffenen Materialien nach, wenn dabei ein Wert verloren geht, und speichert nichts, sobald ein Material gegen eine Regel verstößt.
+- 📦 Die Bestandsübersicht bietet im Menü „Weitere Aktionen“ jetzt „Bestand exportieren (CSV)“, die Datei enthält alle Materialien samt archivierter, öffnet sich in Excel mit richtigen Umlauten und steht auch Nutzern mit der Rolle „Nur-Lesen“ zur Verfügung.
 - 📦 Im Material-Formular stehen „Online sichtbar“, die Verleihbarkeit und die Preise jetzt gemeinsam in der Karte „Verfügbarkeit und Preis“, die Kontrollkästchen sind zu Schaltern geworden, und ein kostenloser Tarif zeigt im Preisfeld „kostenlos“.
 - 📋 Material kommt in eine Buchung oder Sperre jetzt über den Dialog „Material hinzufügen“, in dem sich mit Suche, Filtern nach Kategorie und Standort, freier Menge im Zeitraum und optionalen Titelbildern mehrere Materialien, Mengen und Einheiten in einem Schritt übernehmen lassen.
 - 📋 Der Dialog „Material hinzufügen“ lässt sich bedienen, sobald Abhol- und Rückgabetermin eingetragen sind.
