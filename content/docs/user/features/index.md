@@ -84,6 +84,11 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
   Die Mengen lassen sich danach in der Zeile des Bestandteils ändern; ändert sich die Menge des Sets, bietet die Zeile „Bestandteile anpassen“ an.
   Bei Bestandteilen mit Einheiten klappt die Zeile auf, die Einheiten wählt man selbst.
   Bestandteile, die schon in der Buchung stehen, für die Verleihart nicht verleihbar oder nur im Set buchbar sind, werden übersprungen und im Hinweis genannt.
+  Die mit ausgewählten Bestandteile stehen danach unter ihrem Set, eingerückt, mit einer gestrichelten Linie und der Marke „aus Set“.
+  Die Zugehörigkeit ist nur eine Anzeige: Jeder Bestandteil bleibt eine eigene Position, die du ändern oder entfernen kannst.
+  Bei einem Pflicht-Set zeigt das Buchungsformular die mitreservierten Bestandteile als nur lesbare Zeilen unter dem Set, mit einer durchgezogenen Linie.
+  Entfernst du ein Set, zu dem Bestandteile gehören, fragt kramr „Bestandteile auch entfernen?“: „Mit entfernen“ nimmt sie mit, „Behalten“ lässt sie als gewöhnliche Positionen stehen.
+  Dieselbe Darstellung gilt im Buchungsdetail, bei der Rückgabe, in der Positionsliste der Übersicht und im Kalender.
 - **Ausleiher neu anlegen:** Gibt es die Person noch nicht, endet die Liste im Feld „Ausleiher“ in der Zeile „Kontakt anlegen“.
   Der Dialog fragt nach Vorname, Nachname, E-Mail-Adresse und Handynummer und optional nach der Organisation; Adresse und Geburtsdatum lassen sich später im Kontakt ergänzen.
   Hat schon ein Kontakt dieselbe E-Mail-Adresse, weist kramr darauf hin und bietet an, ihn zu wählen.
@@ -144,6 +149,9 @@ Erst „Übernehmen" legt die Auswahl als Positionen in die Anfrage, „Abbreche
 Ist mehr gewünscht, als im gespeicherten Zeitraum frei ist, weist die Zeile darauf hin.
 Übernehmen lässt sich die Auswahl trotzdem, die Geschäftsstelle prüft das.
 Hat die Anfrage die Höchstzahl an Positionen erreicht, sind die übrigen Kontrollkästchen gesperrt.
+Ist ein loses Set angehakt, nimmt „Bestandteile mit auswählen" seine Bestandteile mit; jeder zählt als eigene Position und steht danach unter dem Set, mit der Marke „aus Set".
+Was nicht mehr unter die Höchstzahl passt oder nicht angeboten wird, übernimmt der Knopf nicht und nennt es darunter.
+Entfernt man ein Set, fragt die Seite, ob die Bestandteile mit entfernt werden.
 
 ## Mehr dazu
 

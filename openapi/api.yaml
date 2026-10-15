@@ -1127,6 +1127,8 @@ components:
                         - state
                       additionalProperties: false
                   - type: "null"
+              isMandatorySet:
+                type: boolean
             required:
               - id
               - name
@@ -1144,6 +1146,7 @@ components:
               - lendableExternal
               - availability
               - units
+              - isMandatorySet
             additionalProperties: false
         total:
           type: integer
@@ -1226,10 +1229,18 @@ components:
                 type: integer
                 minimum: 1
                 maximum: 999
+              pickedWithKitId:
+                default: null
+                anyOf:
+                  - type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  - type: "null"
             required:
               - itemId
               - unitId
               - quantity
+              - pickedWithKitId
             additionalProperties: false
       required:
         - version
@@ -1329,6 +1340,12 @@ components:
                     type: integer
                     minimum: 1
                     maximum: 9007199254740991
+                  pickedWithKitId:
+                    anyOf:
+                      - type: string
+                        format: uuid
+                        pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                      - type: "null"
                   item:
                     anyOf:
                       - type: object
@@ -1456,6 +1473,7 @@ components:
                   - itemId
                   - unitId
                   - quantity
+                  - pickedWithKitId
                   - item
                   - unit
                 additionalProperties: false
@@ -1738,6 +1756,12 @@ components:
                     type: integer
                     minimum: 1
                     maximum: 9007199254740991
+                  pickedWithKitId:
+                    anyOf:
+                      - type: string
+                        format: uuid
+                        pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                      - type: "null"
                   issue:
                     anyOf:
                       - type: string
@@ -1755,6 +1779,7 @@ components:
                   - unitLabel
                   - name
                   - quantity
+                  - pickedWithKitId
                   - issue
                 additionalProperties: false
             fixedContact:
