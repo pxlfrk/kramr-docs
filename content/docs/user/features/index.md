@@ -32,6 +32,10 @@ Die Einzelheiten stehen unter [Suche in der Kopfzeile](../search/index.md).
   Ein Set ist nur dann verleihbar, wenn alle seine Bestandteile es sind.
 - **Archivieren statt löschen:** Material wird nie gelöscht, sondern
   archiviert; die Historie bleibt erhalten.
+- **Zugehörigkeit zu Sets:**
+  Ein Material zeigt, in welchen Sets es Bestandteil ist, als Badge „In n Sets“ in der Bestandsübersicht und als Karte „Bestandteil von“ im Materialdetail.
+  Wer ein Material archiviert, das in aktiven Sets steckt, wird vorher gefragt; die Sets bleiben unverändert.
+  Mehr dazu unter [Sets](../kits/index.md).
 - **Mehrere Materialien auf einmal ändern:**
   In der Bestandsübersicht haken Mitarbeitende Materialien an.
   Dann ändern sie Kategorie, Lagerort, Online-Sichtbarkeit oder Verleihbarkeit oder archivieren und reaktivieren die Auswahl.

@@ -26,3 +26,23 @@ Bei jedem Bestandteil legst du zusätzlich fest, ob er auch einzeln gebucht werd
 
 Änderst du die Zusammensetzung eines Sets, ändert das keine bereits gebuchte Position.
 Eine Buchung hält den Stand fest, der beim Buchen galt.
+
+## In welchen Sets steckt ein Material?
+
+Ein Material zeigt dir, in welchen Sets es Bestandteil ist.
+
+- In der Bestandsübersicht steht unter dem Namen das Badge „In 2 Sets“.
+  Ein Klick darauf klappt die Sets darunter auf, mit Art, Menge je Set und dem Badge „Archiviert“ bei archivierten Sets.
+  Der Pfeil vor dem Namen klappt wie bisher die Einheiten auf.
+- Im Raster trägt die Karte dasselbe Badge, ohne aufzuklappen.
+- Im Materialdetail zeigt die Karte „Bestandteil von“ dieselben Sets, und der Kopf nennt die Zahl der aktiven.
+- Die Zahl in „In n Sets“ zählt nur aktive Sets, die aufgeklappte Liste und die Karte nennen auch archivierte.
+
+Alle Rollen sehen das, auch die reine Leserolle.
+
+## Einen Bestandteil archivieren
+
+Ist ein Material Bestandteil mindestens eines aktiven Sets, fragt kramr vor dem Archivieren nach und nennt die Sets.
+Das gilt im Materialdetail und in der Sammelbearbeitung der Bestandsübersicht, dort mit den betroffenen Materialien und ihren Sets.
+Bestätigst du, wird das Material archiviert, und die Zusammensetzung der Sets bleibt unverändert.
+Es gibt keine Sperre, und das Reaktivieren fragt nie nach.
