@@ -2007,6 +2007,52 @@ components:
           enum:
             - status
             - payment-open
+        pickupShortfalls:
+          type: array
+          items:
+            type: object
+            properties:
+              itemId:
+                type: string
+              unitId:
+                type:
+                  - string
+                  - "null"
+              stockQuantity:
+                anyOf:
+                  - type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  - type: "null"
+              outstanding:
+                type: integer
+                minimum: 0
+                maximum: 9007199254740991
+              demand:
+                type: integer
+                exclusiveMinimum: 0
+                maximum: 9007199254740991
+              heldBy:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    reference:
+                      type: string
+                  required:
+                    - id
+                    - reference
+                  additionalProperties: false
+            required:
+              - itemId
+              - unitId
+              - stockQuantity
+              - outstanding
+              - demand
+              - heldBy
+            additionalProperties: false
       required:
         - type
         - title
