@@ -156,6 +156,10 @@ Hat die Anfrage die Höchstzahl an Positionen erreicht, sind die übrigen Kontro
 Ist ein loses Set angehakt, nimmt „Bestandteile mit auswählen" seine Bestandteile mit; jeder zählt als eigene Position und steht danach unter dem Set, mit der Marke „aus Set".
 Was nicht mehr unter die Höchstzahl passt oder nicht angeboten wird, übernimmt der Knopf nicht und nennt es darunter.
 Entfernt man ein Set, fragt die Seite, ob die Bestandteile mit entfernt werden.
+Bei einem Material mit Einheiten steht in der Zeile jeder gewählten Einheit ein Auswahlfeld.
+Damit tauscht man die Einheit, ohne die Position zu entfernen; die Einheiten stehen mit ihrem Zustand im gespeicherten Zeitraum da, und was schon in der Anfrage steht, ist gesperrt.
+Eine Position ohne Einheit bietet dasselbe Feld mit „Geschäftsstelle wählt“; wählt man dort eine Einheit, wird ein Stück davon zur Position mit dieser Einheit, die übrigen bleiben ohne Einheit.
+Mehrere Positionen desselben Materials stehen zusammen unter einer Überschrift mit Bild, Name und Kategorie.
 
 ## Mehr dazu
 
