@@ -13,6 +13,22 @@ Technische Release Notes zu jeder Version stehen außerdem auf der Seite „Rele
 
 <!-- release-notes:start - generated from CHANGELOG.md, do not edit -->
 
+## Version 1.7.1 (16.10.2026)
+
+### Verbesserungen
+
+- 📦 Ein Material zeigt jetzt, in welchen Sets es Bestandteil ist: als Badge „In n Sets“ in der Bestandsübersicht, das die Sets aufklappt, und als Karte „Bestandteil von“ im Materialdetail.
+- 📦 Archivierst du ein Material, das Bestandteil aktiver Sets ist, fragt kramr vorher nach und nennt die Sets – auch in der Sammelbearbeitung; gesperrt ist nichts.
+- 📋 Bestandteile, die mit einem losen Set ausgewählt wurden, stehen in Buchung, Rückgabe, Übersicht, Kalender und Anfrage eingerückt unter ihrem Set, und beim Entfernen des Sets fragt kramr, ob sie mit entfernt werden sollen.
+- 📋 Die Materialauswahl der Buchungsanfrage hat den Knopf „Bestandteile mit auswählen“ für lose Sets.
+- 📋 In der Materialauswahl einer Buchung und einer Buchungsanfrage zeigt „Nur Ausgewählte“ jetzt auch das Material, das schon in der Buchung bzw. Anfrage steht.
+- 📋 Die Materialauswahl der Buchungsanfrage hat den Schalter „Bilder anzeigen“, mit dem sich die Bilder ausblenden lassen.
+- 📋 Bei Material mit Einzeleinheiten können Anfragende die Einheiten jetzt selbst wählen: schon im Materialdetail der Einbettung und in der Materialauswahl der Anfrage, mit dem Zustand jeder Einheit im gewählten Zeitraum. Die Geschäftsstelle sieht die gewählten Einheiten in der Anfrage und übernimmt sie in die Buchung.
+
+### Fehlerbehebungen
+
+- 🖥️ Ein geöffneter Auswahldialog hat nur noch eine Rollleiste; die Seite dahinter rollt nicht mehr mit.
+
 ## Version 1.7.0 (14.10.2026)
 
 ### Neue Funktionen

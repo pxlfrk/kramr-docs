@@ -8,7 +8,7 @@
  * the private monorepo this script produces the same layout from the single
  * sources, so `npm run build` here builds what `kramr-docs` will build:
  *
- *   docs/public/**                ->  content/docs/**   (only Markdown pages)
+ *   docs/public/**                ->  content/docs/**   (only Markdown pages; the release notes list is rendered from CHANGELOG.md)
  *   contracts/api.openapi.yaml    ->  openapi/api.yaml  (public routes only)
  *   compose.yaml, compose.caddy.yaml, ops/production.env.example  ->  public/downloads/  (the operator guide links them)
  *
@@ -17,10 +17,10 @@
  * nothing. Both targets are generated and git-ignored.
  */
 import { spawnSync } from 'node:child_process';
-import { cp, mkdir, rm, readdir } from 'node:fs/promises';
+import { cp, mkdir, readFile, rm, readdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const SITE_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE = join(SITE_ROOT, '..', 'docs', 'public');
@@ -49,6 +49,21 @@ for (const entry of await readdir(SOURCE, { withFileTypes: true })) {
     await cp(join(SOURCE, entry.name), join(TARGET, entry.name), { recursive: true });
   }
 }
+
+// The release notes page is committed with an empty block; the list is
+// rendered from CHANGELOG.md here, as `tooling/docs-sync.mjs stage` does for
+// `kramr-docs`.
+const { fill } = await import(
+  pathToFileURL(join(SITE_ROOT, '..', 'tooling', 'release-notes.mjs')).href
+);
+const notesPage = join(TARGET, 'user', 'release-notes', 'index.md');
+await writeFile(
+  notesPage,
+  fill(
+    await readFile(notesPage, 'utf8'),
+    await readFile(join(SITE_ROOT, '..', 'CHANGELOG.md'), 'utf8'),
+  ),
+);
 
 // The two files the operator guide offers for download. The same list is in
 // tooling/docs-sync.mjs (`DOWNLOADS`), which puts them into `kramr-docs`.
