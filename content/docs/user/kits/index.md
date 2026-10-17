@@ -29,6 +29,25 @@ Bei einer losen Gruppe gibt es diese Einstellung nicht.
 Änderst du die Zusammensetzung eines Sets, ändert das keine bereits gebuchte Position.
 Eine Buchung hält den Stand fest, der beim Buchen galt.
 
+## Ein Pflicht-Set in der Buchung ändern
+
+Solange von einem Pflicht-Set nichts abgeholt ist, kannst du es in der Buchung bearbeiten.
+
+- **Hinzufügen:** „Material hinzufügen“ bietet auch Pflicht-Sets an.
+  Ein neues Set nimmt die heutige Zusammensetzung, wie beim Anlegen der Buchung.
+- **Entfernen:** „Entfernen“ in der Zeile des Sets nimmt das Set samt seinen Bestandteilen aus der Buchung.
+  Es fragt nicht nach den Bestandteilen, denn sie gehören zum Set.
+- **Menge ändern:** Bei einem Set, das in Mengen geführt wird, ändert die Menge in der Zeile auch die Bestandteile.
+  kramr rechnet dabei vom gebuchten Stand: Hat die Buchung 4 Heringe für 1 Set, sind es bei 3 Sets 12, auch wenn das Set inzwischen anders zusammengesetzt ist.
+  Bei Bestandteilen mit Einheiten wählt kramr für mehr Sets weitere freie Einheiten; bei weniger Sets fallen die zuletzt gewählten weg, die übrigen bleiben reserviert.
+  Die Zeile sagt „Die Bestandteile werden beim Speichern angepasst.“, bis du speicherst.
+- **Set mit Einheiten:** Wechselst du die Einheit des Sets, ist das Entfernen und Hinzufügen in einem Schritt.
+
+Reichen die Einheiten eines Bestandteils nicht aus, lehnt kramr das Speichern ab und nennt das Set.
+Sind nur belegte Einheiten frei, nimmt kramr diese und zeigt wie üblich den Konflikt-Hinweis.
+Ist vom Set oder einem Bestandteil schon etwas abgeholt, bleibt das Set fest: Die Zeile lässt sich weder ändern noch entfernen.
+Die Historie der Buchung nennt die geänderten Bestandteile mit ihrem Set.
+
 ## In welchen Sets steckt ein Material?
 
 Ein Material zeigt dir, in welchen Sets es Bestandteil ist.

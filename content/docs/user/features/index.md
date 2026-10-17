@@ -87,6 +87,7 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
   Hat man ein loses Set angehakt, nimmt „Bestandteile mit auswählen“ in seiner Zeile die Bestandteile mit, mit der Menge laut Set mal Zahl der Sets, und ein Hinweis darunter nennt, was dazukam.
   Die Mengen lassen sich danach in der Zeile des Bestandteils ändern; ändert sich die Menge des Sets, bietet die Zeile „Bestandteile anpassen“ an.
   Dasselbe gilt in der Buchung selbst, beim Anlegen und beim Bearbeiten: Ändert man dort die Menge eines losen Sets, bietet seine Zeile „Bestandteile anpassen“ an.
+  Ein Pflicht-Set lässt sich beim Bearbeiten hinzufügen, entfernen und in der Menge ändern, solange nichts davon abgeholt ist; seine Bestandteile folgen beim Speichern (siehe [Sets](../kits/index.md)).
   Bei Bestandteilen mit Einheiten klappt die Zeile auf, die Einheiten wählt man selbst.
   Bestandteile, die schon in der Buchung stehen, für die Verleihart nicht verleihbar oder nur im Set buchbar sind, werden übersprungen und im Hinweis genannt.
   Die mit ausgewählten Bestandteile stehen danach unter ihrem Set, eingerückt, mit einer gestrichelten Linie und der Marke „aus Set“.
