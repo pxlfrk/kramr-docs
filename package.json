@@ -18,18 +18,18 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.10",
-    "@astrojs/mdx": "8.0.2",
+    "@astrojs/mdx": "8.1.0",
     "@astrojs/sitemap": "3.7.4",
-    "@prosefly/astro-components": "0.7.1",
-    "@prosefly/astro-theme-lotus": "0.8.0",
-    "@scalar/api-reference": "1.73.0",
+    "@prosefly/astro-components": "0.8.4",
+    "@prosefly/astro-theme-lotus": "0.9.1",
+    "@scalar/api-reference": "1.75.0",
     "@tailwindcss/vite": "4.3.3",
-    "astro": "7.3.5",
+    "astro": "7.4.0",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   },
   "overrides": {
-    "@ai-sdk/provider-utils": "4.0.33",
+    "@ai-sdk/provider-utils": "4.0.61",
     "postcss-selector-parser": "7.1.6"
   }
 }
