@@ -35,3 +35,22 @@ Bei jeder Rückgabe hältst du fest, in welchem Zustand das Material zurückkomm
 - Sinkt der Bestand so, dass eine genehmigte Buchung mehr verlangt, als vorhanden ist, bekommt diese Buchung einen Konflikt-Hinweis, und die zuständige Person wird benachrichtigt.
 
 Nimmst du „Zurückgegeben“ zurück, entfernt kramr die erfassten Rückgaben und gibt dem Bestand zurück, was sie abgezogen haben.
+
+## Eine erfasste Rückgabe korrigieren
+
+Die Rückgabe-Ansicht hat zwei Reiter.
+Unter **Offen** gibst du die Rückgabe ein, unter **Erfasst** siehst du alle bisher erfassten Rückgaben je Position, auch von vollständig zurückgegebenen Positionen.
+Bei einer zurückgegebenen Buchung führt **Rückgabe ansehen** in der Aktionsbox direkt auf **Erfasst**.
+
+Hast du eine Rückgabe falsch erfasst, korrigierst du genau diese eine:
+
+1. Öffne **Erfasst** und wähle bei der Rückgabe **Korrigieren**.
+2. kramr fragt nach und nennt die Rückgabe und was die Korrektur für den Bestand bedeutet, etwa „Bestand +2“ oder „Einheit wird reaktiviert“.
+   Ist die Buchung schon zurückgegeben, steht dort auch, dass sie danach wieder Abgeholt ist.
+3. Haben andere Buchungen das Material inzwischen abgeholt, warnt kramr und nennt sie.
+   Du kannst trotzdem korrigieren.
+4. Nach dem Bestätigen ist die Rückgabe entfernt, und ihre Werte stehen unter **Offen** als Eingabe.
+   Ändere sie und buche sie mit **Erfasste Rückgaben buchen** neu.
+
+Ist die Bezeichnung einer verlorenen oder beschädigten Einheit inzwischen an eine andere Einheit vergeben, bleibt die Einheit archiviert, und kramr weist darauf hin.
+Eine archivierte Buchung lässt sich nicht korrigieren.
