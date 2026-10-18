@@ -54,3 +54,34 @@ Hast du eine Rückgabe falsch erfasst, korrigierst du genau diese eine:
 
 Ist die Bezeichnung einer verlorenen oder beschädigten Einheit inzwischen an eine andere Einheit vergeben, bleibt die Einheit archiviert, und kramr weist darauf hin.
 Eine archivierte Buchung lässt sich nicht korrigieren.
+
+## Die Packliste drucken
+
+Für eine Buchung oder Sperre im Status Genehmigt oder Abgeholt erzeugt kramr ein Arbeitsblatt zum Drucken.
+Öffne die Buchung und wähle in der Aktionsbox **Packliste**; das PDF öffnet sich in einem neuen Tab, und du druckst es von dort.
+Das können alle, die die Buchung sehen dürfen, auch mit der Rolle „Nur lesen“.
+Für einen Entwurf, eine zurückgegebene und eine stornierte Buchung gibt es keine Packliste.
+
+Das Blatt ist für den Schwarz-Weiß-Druck gemacht und enthält:
+
+- Kopf mit Name und Logo der Organisation, Status und Buchungsnummer;
+- Abholung und Rückgabe, Kontakt mit Name und Handynummer, Zuständige, Art und Bemerkung, bei einem Konflikt einen Hinweis;
+- alle Positionen in einer Tabelle, nach Lagerort gruppiert; ein langer Materialname bricht in seiner Zeile um; die Bestandteile eines Pflicht-Sets stehen eingerückt unter dem Set;
+- zwei Kästchen je Position für die Ausgabe: **Gepackt**, wenn das Material bereitliegt, und **Mitgenommen**, wenn es übergeben wurde;
+- drei schmale Spalten für die Rückgabe (in Ordnung, beschädigt, verloren) und eine Notiz; setze ein Kreuz, bei Teilmengen trägst du die Anzahl in die Notiz ein;
+- auf der letzten Seite einer Ausleihe die Felder für die Bestätigung von Ausgabe und Rückgabe mit Name, Datum und Unterschrift.
+
+Auf jeder Seite stehen ein QR-Code, der Stand des Ausdrucks mit der Person, die ihn erzeugt hat, und „Seite x / y“.
+Eine Sperre hat keine Rückgabe und keine Bestätigungsfelder.
+
+### Ist der Ausdruck noch aktuell?
+
+Scanne den QR-Code mit dem Telefon.
+Er öffnet die Buchung in kramr (nach der Anmeldung) und zeigt oben, ob der Ausdruck noch stimmt:
+
+- **Ausdruck aktuell:** Die Buchung ist seit dem Ausdruck unverändert.
+- **Seit dem Ausdruck geändert:** Termine, Kontakt, Zuständige, Bemerkung, Status oder Positionen weichen vom Blatt ab. Erzeuge die Packliste neu und drucke sie noch einmal.
+
+Eine erfasste Rückgabe oder Zahlung macht den Ausdruck nicht ungültig, ebenso wenig ein Konflikt.
+kramr speichert nichts über Ausdrucke und zeigt deshalb nicht, was sich geändert hat.
+Im QR-Code stehen keine personenbezogenen Daten, nur die Adresse der Buchung und eine Prüfsumme.
