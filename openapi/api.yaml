@@ -1646,8 +1646,34 @@ components:
           enum:
             - informal
             - formal
+        legalLinks:
+          type: object
+          properties:
+            privacyPolicyUrl:
+              type:
+                - string
+                - "null"
+            links:
+              maxItems: 4
+              type: array
+              items:
+                type: object
+                properties:
+                  label:
+                    type: string
+                  url:
+                    type: string
+                required:
+                  - label
+                  - url
+                additionalProperties: false
+          required:
+            - privacyPolicyUrl
+            - links
+          additionalProperties: false
       required:
         - addressForm
+        - legalLinks
       additionalProperties: false
     ProblemDetails:
       $schema: https://json-schema.org/draft/2020-12/schema
