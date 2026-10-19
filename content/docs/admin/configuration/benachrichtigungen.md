@@ -49,12 +49,10 @@ zur Anfrage per E-Mail kommt.
 
 ## Webhook
 
-Das Ziel und die Auswahl der Ereignisse stellt ein Admin unter *Verwaltung →
-System → Einstellungen* ein. Beim Speichern lehnt kramr offensichtlich interne
-Ziele ab (lokale Adressen, private Netze). Für ein bewusst internes Ziel,
-etwa einen Chat-Dienst im selben Docker-Netz, trägt der Betreiber den Host in
-`KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS` ein (kommagetrennt). Das ist eine
-Ausnahme, keine allgemeine Freigabeliste.
+Das Ziel und die Auswahl der Ereignisse stellt ein Admin unter *Verwaltung → System → Benachrichtigungen* ein.
+Beim Speichern lehnt kramr offensichtlich interne Ziele ab (lokale Adressen, private Netze).
+Für ein bewusst internes Ziel, etwa einen Chat-Dienst im selben Docker-Netz, trägt der Betreiber den Host in `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS` ein (kommagetrennt).
+Das ist eine Ausnahme, keine allgemeine Freigabeliste.
 
 kramr schickt je Ereignis einen POST mit genau einem Feld, `text`, auf Deutsch.
 Der Text beginnt mit einem Symbol für das Ereignis, es folgen Betreff und Einzelheiten, und die letzte Zeile ist die Adresse der Buchung:

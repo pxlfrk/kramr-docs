@@ -7,7 +7,7 @@ order: 22
 
 # Einstellungen
 
-Die fachlichen Werte ändert ein Administrator in der Oberfläche unter *Verwaltung → System → Einstellungen*.
+Die fachlichen Werte ändert ein Administrator in der Oberfläche unter *Verwaltung*, in den Gruppen *Organisation* und *System*.
 Sie liegen in der Datenbank und gelten sofort, ohne Neustart.
 Einige haben einen Startwert aus einer Umgebungsvariable; der gilt nur, bis die Einstellung zum ersten Mal gespeichert wurde.
 Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
@@ -22,7 +22,7 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `notification.notify_creator` | Ja oder Nein | `false` | Ob auch die Person, die eine Buchung angelegt hat, die Benachrichtigungen zu dieser Buchung erhält, zusätzlich zur zuständigen Person. |
 | `notification.notify_admins_on_new_booking` | Ja oder Nein | `false` | Ob alle Administratoren beim Anlegen einer Buchung benachrichtigt werden. |
 | `notification.always_notify_recipients` | Mailadressen, durch Komma getrennt | leer | Adressen, die jede Benachrichtigung erhalten, unabhängig von den beiden Schaltern darüber. |
-| `update_check.enabled` | Ja oder Nein | `true`, Startwert aus `KRAMR_DEFAULT_UPDATE_CHECK_ENABLED` | Ob die Einstellungen-Seite bei GitHub nach einem neueren Release fragen darf. Ausgeschaltet findet kein ausgehender Aufruf statt. |
+| `update_check.enabled` | Ja oder Nein | `true`, Startwert aus `KRAMR_DEFAULT_UPDATE_CHECK_ENABLED` | Ob die Einstellungsseite *Version & Updates* bei GitHub nach einem neueren Release fragen darf. Ausgeschaltet findet kein ausgehender Aufruf statt. |
 | `embed.allowed_origins` | Webadressen, eine je Eintrag | leer (keine fremde Einbettung) | Die Webseiten, die eine Einbettung in einem Rahmen anzeigen dürfen. Geändert wird sie unter: Verwaltung der Einbettungen. |
 | `organisation.name` | Text | leer (kramr zeigt seinen eigenen Namen) | Name der Organisation in der Kopfzeile, auf der Anmelde- und den Anfrageseiten und in E-Mails. Höchstens 80 Zeichen. |
 | `legal.privacy_policy_url` | Text | leer (keine Datenschutzerklärung verlinkt) | Adresse der Datenschutzerklärung, nur mit `https://`. Sie steht als Fußzeile auf den Anfrageseiten und der Anmeldeseite sowie in den E-Mails an Anfragende, und die Seite zum Anfordern des Links verlinkt sie im Datenschutzhinweis. |
@@ -31,9 +31,26 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 
 <!-- settings-registry:end -->
 
+## Wo welche Einstellung steht
+
+Jede Seite hat ihren eigenen Knopf *Speichern*; er speichert nur die Felder dieser Seite.
+Wer eine Seite mit ungespeicherten Änderungen verlässt, wird vorher gefragt.
+Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in einem eigenen Kasten mit dem Hinweis „Wird sofort gespeichert“.
+
+| Gruppe | Seite | Inhalt |
+| --- | --- | --- |
+| Organisation | Auftritt | `organisation.name`, `ui.address_form` und die Logos für Oberfläche und E-Mails |
+| Organisation | Recht & Datenschutz | `legal.privacy_policy_url`, `legal.links` und `contacts.inactivity_period_days` |
+| System | Benachrichtigungen | `reminder.lead_time_days`, die Empfänger (`notification.notify_creator`, `notification.notify_admins_on_new_booking`, `notification.always_notify_recipients`) und `notification.webhook_url`; darunter die fehlgeschlagenen Benachrichtigungen der letzten 7 Tage |
+| System | Externe Kalender | die eingebundenen Kalender, siehe [Externe Kalender](externe-kalender.md) |
+| System | Website-Einbindung | `embed.allowed_origins` und die Einbettungen |
+| System | Version & Updates | die laufende Version und `update_check.enabled` |
+
+Die frühere Adresse `/settings` führt auf die Seite *Auftritt*.
+
 ## Rechtliche Links
 
-Unter *Rechtliche Links* pflegst du die Datenschutzerklärung und bis zu vier weitere Links, zum Beispiel Impressum, Kontakt oder die Website des Vereins.
+Auf der Seite *Recht & Datenschutz* pflegst du die Datenschutzerklärung und bis zu vier weitere Links, zum Beispiel Impressum, Kontakt oder die Website des Vereins.
 Jeder Link besteht aus einer Beschriftung (höchstens 40 Zeichen, eine Zeile) und einer Adresse, die mit `https://` beginnt und keine Zugangsdaten enthält.
 Die weiteren Links lassen sich hinzufügen, verschieben und entfernen; die Reihenfolge ist die der Anzeige, die Datenschutzerklärung steht immer zuerst.
 

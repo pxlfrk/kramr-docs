@@ -96,7 +96,7 @@ Einrichtung und Fehlersuche stehen unter [Benachrichtigungen](benachrichtigungen
 | --- | --- | --- | --- |
 | `KRAMR_DEFAULT_REMINDER_LEAD_TIME_DAYS` | nein | `2` | Startwert der Einstellung `reminder.lead_time_days`. Vorlauf der Abhol-Erinnerung in Tagen. Ganze Zahl ab `0`. |
 | `KRAMR_DEFAULT_CONTACT_INACTIVITY_PERIOD_DAYS` | nein | `1095` | Startwert der Einstellung `contacts.inactivity_period_days`. Nach so vielen Tagen ohne Buchung wird ein Kontakt zum Anonymisieren vorgeschlagen. Ganze Zahl ab `0`. |
-| `KRAMR_DEFAULT_UPDATE_CHECK_ENABLED` | nein | `true` | Startwert der Einstellung `update_check.enabled`. Ob die Einstellungen-Seite bei GitHub nach einem neueren Release fragen darf. `false` für Server ohne ausgehende Verbindung. |
+| `KRAMR_DEFAULT_UPDATE_CHECK_ENABLED` | nein | `true` | Startwert der Einstellung `update_check.enabled`. Ob die Einstellungsseite *Version & Updates* bei GitHub nach einem neueren Release fragen darf. `false` für Server ohne ausgehende Verbindung. |
 | `KRAMR_DEFAULT_ADDRESS_FORM` | nein | `informal` | Startwert der Einstellung `ui.address_form`. Ob die deutschen Texte „Du“ (`informal`) oder „Sie“ (`formal`) sagen, in E-Mails, Einbettung und Anfrageseiten. |
 
 Diese Variablen gelten nur, solange die Einstellung in der Oberfläche noch nicht gespeichert wurde. Die Einstellungen stehen unter [Einstellungen](einstellungen.md).

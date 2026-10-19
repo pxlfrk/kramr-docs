@@ -8,7 +8,7 @@ order: 26
 # Externe Kalender
 
 Veranstaltungen, die außerhalb von kramr gepflegt werden, zum Beispiel im Kalender des Stadtjugendrings oder der Gemeinde, lassen sich als Hinweis in den Buchungskalender einblenden.
-Ein Admin richtet sie unter *Verwaltung → System → Einstellungen* in der Karte *Externe Kalender* ein.
+Ein Admin richtet sie unter *Verwaltung → System → Externe Kalender* ein.
 
 ## Was kramr damit tut
 
