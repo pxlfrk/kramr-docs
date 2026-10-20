@@ -13,6 +13,33 @@ Technische Release Notes zu jeder Version stehen außerdem auf der Seite „Rele
 
 <!-- release-notes:start - generated from CHANGELOG.md, do not edit -->
 
+## Version 1.8.0 (20.10.2026)
+
+### Neue Funktionen
+
+- ⚙️ Unter den Einstellungen gibt es die neue Seite „E-Mail-Texte“: Ein Administrator passt dort Betreff und Text der vier E-Mails an Anfragende an, je in einer Du- und einer Sie-Fassung, und sieht vorab, wie die E-Mail aussieht.
+- ⚙️ Unter den Einstellungen pflegt ein Administrator jetzt die Datenschutzerklärung und bis zu vier weitere Links wie das Impressum; sie erscheinen als Fußzeile auf den Seiten für Buchungsanfragen und der Anmeldeseite sowie unter den E-Mails an Anfragende, und der Datenschutzhinweis beim Anfordern des Links verweist auf die Datenschutzerklärung.
+- 📋 Zu einer genehmigten oder abgeholten Buchung und zu einer Sperre gibt es jetzt eine Packliste als PDF zum Drucken: mit Kästchen zum Abhaken beim Packen und bei der Übergabe, Spalten für den Zustand bei der Rückgabe und Feldern für die Unterschrift. Ein QR-Code auf jeder Seite öffnet die Buchung und zeigt, ob der Ausdruck noch aktuell ist.
+- 📋 Eine falsch erfasste Rückgabe lässt sich einzeln korrigieren, auch während einer Teilrückgabe und nach der Rückgabe der ganzen Buchung; die Rückgabe-Ansicht trennt dazu „Offen“ und „Erfasst“, und bei einer zurückgegebenen Buchung führt „Rückgabe ansehen“ direkt dorthin.
+- 📋 Ein Pflicht-Set lässt sich in einer bestehenden Buchung hinzufügen, entfernen und in der Menge ändern, solange nichts davon abgeholt ist; die Bestandteile folgen beim Speichern, und die Historie nennt sie mit ihrem Set.
+
+### Fehlerbehebungen
+
+- 📦 „Nur im Set buchbar“ gibt es nur noch bei den Bestandteilen eines Pflicht-Sets; bei einer losen Gruppe ist die Einstellung nicht mehr sichtbar, denn dort wäre der Bestandteil nirgends buchbar gewesen.
+- 📦 Ein Material, das nur im Set buchbar ist, trägt jetzt das Badge „Nur im Set“, und die Karte „Bestandteil von“ nennt das Set dazu.
+- 📋 Die Materialauswahl sperrt Material, das nur im Set buchbar ist, mit diesem Grund; eine trotzdem abgelehnte Position meldet es auf Deutsch.
+- 📋 Lose Sets sehen in der Buchung jetzt aus wie Pflicht-Sets, mit Set-Symbol und Kennzeichnung am Set selbst; in der Bearbeitung stehen die Mengen eines Sets und seiner Bestandteile in einer Spalte.
+- 📋 Nach dem Bearbeiten einer Buchung stehen neu hinzugefügte Materialien, zum Beispiel die Bestandteile eines losen Sets, sofort mit Namen da und nicht erst nach einem Neuladen.
+- 📋 Scheitert das Abholen, weil Material nicht im Lager ist, nennt die Meldung jetzt das Material, den Bestand und die Buchung, in der es noch ausgeliehen ist.
+- 📋 In der Buchung steht an einer offenen Position schon vor dem Abholen, wenn das Material noch in einer anderen Buchung ausgeliehen ist oder der Bestand nicht reicht.
+- 📋 Die Historie einer Buchung nennt bei jeder erfassten oder zurückgenommenen Rückgabe das Material, das verloren, beschädigt oder in Ordnung zurückkam.
+- 📋 Beim Bearbeiten einer Buchung steht bei archiviertem Material wieder der Name, und archiviertes Material lässt sich nicht mehr abholen; der Konflikt nennt archiviertes Material jetzt als Ursache.
+
+### Verbesserungen
+
+- ⚙️ Die Einstellungen sind auf eigene Seiten verteilt – Auftritt, Recht & Datenschutz, Benachrichtigungen, Externe Kalender und Version & Updates – in den Verwaltungsgruppen „Organisation“ und „System“, und jede Seite speichert nur ihre eigenen Felder; auf schmalen Bildschirmen steht die Navigation der Verwaltung als Leiste über dem Inhalt.
+- 📋 Ändert man in einer Buchung die Menge eines losen Sets, bietet die Zeile „Bestandteile anpassen“ an: Die Mengen der Bestandteile folgen auf Knopfdruck, und ein Hinweis nennt, was sich geändert hat. Das gilt beim Anlegen und beim Bearbeiten.
+
 ## Version 1.7.1 (16.10.2026)
 
 ### Verbesserungen

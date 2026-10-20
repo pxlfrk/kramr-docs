@@ -27,6 +27,10 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `organisation.name` | Text | leer (kramr zeigt seinen eigenen Namen) | Name der Organisation in der Kopfzeile, auf der Anmelde- und den Anfrageseiten und in E-Mails. Höchstens 80 Zeichen. |
 | `legal.privacy_policy_url` | Text | leer (keine Datenschutzerklärung verlinkt) | Adresse der Datenschutzerklärung, nur mit `https://`. Sie steht als Fußzeile auf den Anfrageseiten und der Anmeldeseite sowie in den E-Mails an Anfragende, und die Seite zum Anfordern des Links verlinkt sie im Datenschutzhinweis. |
 | `legal.links` | Liste aus Beschriftung und Adresse (höchstens 4) | leer (keine weiteren Links) | Bis zu 4 weitere Links aus Beschriftung und Adresse, zum Beispiel Impressum oder Kontakt, nur mit `https://`. Sie stehen in der gepflegten Reihenfolge hinter der Datenschutzerklärung. |
+| `request_mail.link_self_service` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail mit dem Link zur Anfrage, wenn die anfragende Person ihn selbst angefordert hat, je in einer Du- und einer Sie-Fassung. Gepflegt auf der Seite *E-Mail-Texte*. |
+| `request_mail.link_staff_issued` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail mit dem Link zur Anfrage, den die Geschäftsstelle ausgestellt hat, je in einer Du- und einer Sie-Fassung. |
+| `request_mail.taken_over` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, dass die Anfrage übernommen wurde, je in einer Du- und einer Sie-Fassung. |
+| `request_mail.declined` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, dass die Anfrage abgelehnt wurde, je in einer Du- und einer Sie-Fassung; der Text muss die Begründung enthalten. |
 | `ui.address_form` | Auswahl | `informal`, Startwert aus `KRAMR_DEFAULT_ADDRESS_FORM` | Ob die deutschen Texte „Du“ (`informal`) oder „Sie“ (`formal`) sagen. Die öffentlichen Seiten lesen sie ohne Anmeldung. |
 
 <!-- settings-registry:end -->
@@ -41,6 +45,7 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 | --- | --- | --- |
 | Organisation | Auftritt | `organisation.name`, `ui.address_form` und die Logos für Oberfläche und E-Mails |
 | Organisation | Recht & Datenschutz | `legal.privacy_policy_url`, `legal.links` und `contacts.inactivity_period_days` |
+| Organisation | E-Mail-Texte | die vier `request_mail.*`-Texte, siehe [E-Mail-Texte](#e-mail-texte-an-anfragende) |
 | System | Benachrichtigungen | `reminder.lead_time_days`, die Empfänger (`notification.notify_creator`, `notification.notify_admins_on_new_booking`, `notification.always_notify_recipients`) und `notification.webhook_url`; darunter die fehlgeschlagenen Benachrichtigungen der letzten 7 Tage |
 | System | Externe Kalender | die eingebundenen Kalender, siehe [Externe Kalender](externe-kalender.md) |
 | System | Website-Einbindung | `embed.allowed_origins` und die Einbettungen |
@@ -62,3 +67,32 @@ Ohne gepflegte Links erscheint nirgends eine Fußzeile.
 Eine E-Mail hält die Links fest, die beim Einreihen galten; eine spätere Änderung wirkt erst auf neue Mails.
 Die Links öffnen in einem neuen Fenster.
 Umgibt die einbettende Website den Code mit einem eigenen `sandbox`-Attribut, braucht es dort `allow-popups`, damit der Link im Datenschutzhinweis aufgeht.
+
+## E-Mail-Texte an Anfragende
+
+Auf der Seite *E-Mail-Texte* änderst du Betreff und Text der vier E-Mails, die Anfragende erhalten: den Link zur Anfrage (selbst angefordert oder von der Geschäftsstelle ausgestellt), die Übernahme und die Ablehnung.
+Jede E-Mail gibt es in einer Du- und einer Sie-Fassung; welche verschickt wird, bestimmt die eingestellte Anrede.
+Eine Fassung ist entweder ganz die Vorgabe oder ganz angepasst, teilweise leere Felder nimmt kramr nicht an.
+„Auf Vorgabe zurücksetzen“ stellt die Vorgabe wieder her, bei den Link-Mails auch die Sicherheitshinweise.
+Gibt es keine angepasste Fassung für die eingestellte Anrede, verwendet kramr die Vorgabe.
+
+Der Text ist reiner Text: Eine Leerzeile trennt Absätze, HTML und Markdown gibt es nicht.
+Der Betreff darf höchstens 150 Zeichen lang sein und steht zugleich als Überschrift in der E-Mail, jedes Textfeld höchstens 2000 Zeichen.
+Bei den Link-Mails legen die beiden Textfelder fest, wo die Schaltfläche „Anfrage ausfüllen“ steht.
+Kopf mit Logo und Name, Anrede, Schaltfläche, Fuß und die rechtlichen Links bleiben immer erhalten.
+
+Im Text stehen Platzhalter in doppelten geschweiften Klammern; welche eine E-Mail kennt, zeigt der Editor darunter:
+
+| Platzhalter | Wert | Verfügbar in |
+| --- | --- | --- |
+| `{{gueltig_bis}}` | Bis wann der Link der Anfrage gilt, als Datum | allen vier |
+| `{{buchungsnummer}}` | Die Buchungsnummer, zum Beispiel B26-1 | Anfrage übernommen |
+| `{{begruendung}}` | Die Begründung der Ablehnung; Pflicht im Text, nicht im Betreff | Anfrage abgelehnt |
+| `{{organisation}}` | Der Name der Organisation, sonst „kramr“ | allen vier |
+
+Ein unbekannter oder in dieser E-Mail nicht erlaubter Platzhalter wird beim Speichern abgewiesen.
+Die Vorschau zeigt die E-Mail mit Beispieldaten als HTML und darunter als Klartext; sie speichert nichts.
+
+Eine E-Mail hält den Text fest, mit dem sie eingereiht wurde; eine spätere Änderung wirkt erst auf neue E-Mails.
+Die E-Mails an Mitarbeitende lassen sich nicht anpassen.
+Änderungen stehen im Verlauf der Einstellungen.
