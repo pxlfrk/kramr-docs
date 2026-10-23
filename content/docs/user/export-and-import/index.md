@@ -20,6 +20,8 @@ Beachte:
 - kramr liest nur die Spalten der Vorlage.
 - Der Import legt **nur neue** Materialien an. Bestehende Materialien ändert er nicht.
 - Nach dem Import steht eine Zusammenfassung da, zum Beispiel „12 von 14 Zeilen angelegt, 2 übersprungen“. Eine Tabelle nennt für jede übersprungene Zeile die Zeile, die Spalte und das Problem. Korrigiere diese Zeilen und importiere die Datei erneut oder lege das Material von Hand an.
+- Eine Datei darf höchstens 1000 Zeilen mit Material enthalten. Teile größere Bestände auf mehrere Dateien auf.
+- Eine Datei aus dem Export lässt sich wieder importieren. Das Hochkomma („'“), das der Export vor einen Text setzt, der mit „=“, „+“, „-“ oder „@“ beginnt, entfernt der Import wieder.
 - Wird die Datei gar nicht gelesen, nennt kramr das mit einer Meldung.
 
 ## Export
@@ -33,6 +35,8 @@ Den **Bestand** exportierst du direkt in der Oberfläche, mit jeder Rolle:
 
 Die Datei enthält alle Materialien, auch archivierte, eine Zeile je Material.
 Sie ist UTF-8-kodiert und mit Komma getrennt, damit sie dieselbe Form wie die Import-Vorlage hat.
+Beginnt ein Text mit „=“, „+“, „-“ oder „@“ – auch erst nach einem Semikolon, etwa in der Liste der Positionen einer Buchung –, setzt der Export ein Hochkomma („'“) davor.
+So liest die Tabellenkalkulation ihn als Text und führt keine Formel aus.
 Excel und LibreOffice öffnen sie; ein deutsches Excel zeigt sie bei einem Doppelklick eventuell in einer einzigen Spalte, dann hilft „Daten → Aus Text/CSV“.
 
 Für die **Buchungen** bietet die Oberfläche derzeit keine eigene Schaltfläche; der Export steht über die Schnittstelle bereit.
