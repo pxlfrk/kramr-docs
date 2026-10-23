@@ -63,6 +63,7 @@ Anmelden. Das ist die Frist, binnen der ein Rechteentzug beim Anbieter wirkt.
 **Ein Wechsel der Quelle** stellt beim Start alle Rollen zurück und beendet
 alle Sitzungen. Für den Wechsel zurück auf `local` wird
 `KRAMR_AUTH_BOOTSTRAP_ADMIN_SUBJECT` benötigt, damit danach jemand Admin ist.
+Der Admin-Bootstrap gilt nur für das Konto dieses Subjects beim konfigurierten Anbieter (`KRAMR_OIDC_ISSUER_URL`); ein gleichnamiges Konto eines früheren Anbieters wird nicht befördert.
 
 Weitere Hinweise zum Gruppenmodus:
 
@@ -76,8 +77,8 @@ Weitere Hinweise zum Gruppenmodus:
   Das Log der Anwendung nennt den Grund.
 - Kann die Rolle beim Login nicht gespeichert werden, schlägt die Anmeldung fehl.
   Es entsteht keine Sitzung mit einer Rolle aus der Zeit davor.
-- Liefert der Anbieter den Claim als einen Text statt als Liste, trennt kramr die Gruppennamen an Leerzeichen.
-  Wähle dann Gruppennamen ohne Leerzeichen, sonst würde „kramr admin“ als „kramr“ und „admin“ gelesen.
+- Liefert der Anbieter den Claim als einen Text statt als Liste, gilt der ganze Text als eine Gruppe, auch mit Leerzeichen.
+  Mehrere Gruppen müssen als Liste kommen; ein Text wie „Gast kramr_admin“ ist die eine Gruppe „Gast kramr_admin“ und macht niemanden zum Admin.
 - Sind die Gruppen-Variablen gesetzt, obwohl die Quelle `local` ist, nennt das Log sie einmal als ignoriert.
 
 Der Wechsel der Quelle geschieht beim Start in einer Transaktion, bevor die Anwendung Anfragen annimmt.
@@ -93,10 +94,17 @@ Die Anmeldung ist der einzige Zugang zu kramr, eine Installation ohne Anbieter w
 Die Discovery beim Anbieter läuft erst beim ersten Login, nicht beim Start.
 Ein Neustart während einer Störung des Anbieters führt also nicht zu einem Container, der nicht einmal `/healthz` beantwortet.
 
-Klartext-HTTP zum Anbieter ist nur für einen Anbieter auf demselben Rechner erlaubt, gedacht für Tests.
-Jede andere `http://`-Adresse als Issuer lehnt kramr ab.
+Klartext-HTTP ist nur für eine Adresse auf demselben Rechner erlaubt, gedacht für Tests.
+Jede andere `http://`-Adresse als `KRAMR_OIDC_ISSUER_URL` oder `KRAMR_SERVER_PUBLIC_URL` lehnt kramr beim Start ab und nennt die Variable.
 
-Die Anmelde-Routen haben ein eigenes Rate-Limit (`KRAMR_AUTH_RATE_LIMIT`).
+**Der Anbieter muss die E-Mail-Adresse als bestätigt melden.**
+kramr nimmt die Adresse aus dem ID-Token nur über, wenn dort `"email_verified": true` steht und der Scope `email` freigegeben ist.
+Sonst bleibt die Adresse des Kontos leer, auch eine früher gespeicherte verschwindet bei der nächsten Anmeldung, und die Person bekommt keine Mails.
+Das Log nennt es mit dem Satz „carries an e-mail address that is not verified“ bzw. „not marked verified“.
+Prüfen kannst du es, indem du dich einmal anmeldest und in der Nutzerverwaltung nachsiehst, ob die Adresse erscheint.
+Liefert dein Anbieter den Claim nicht, stelle ihn dort ein (bei vielen heißt die Option „E-Mail bestätigt“ oder „Email verified“).
+
+Die Anmelde-Routen haben ein eigenes Rate-Limit (`KRAMR_AUTH_RATE_LIMIT`); die Abfrage der eigenen Sitzung (`GET /api/auth/session`) zählt nicht mit.
 Der Zähler liegt im Arbeitsspeicher des Prozesses und läuft je Client-Adresse.
 `KRAMR_SERVER_TRUST_PROXY` entscheidet, ob die weitergereichte oder die direkte Adresse zählt.
 `/healthz` ist bewusst nicht begrenzt.
@@ -109,8 +117,11 @@ eintritt. Beide Werte sind fest und nicht konfigurierbar.
 Die Frist von acht Stunden zählt ab der letzten Anfrage und beginnt bei jeder neuen von vorn, ein Arbeitstag unterbricht sich also nicht.
 Die sieben Tage zählen ab der Anmeldung und werden nie verschoben.
 
+Das automatische Abfragen der Glocke (ungelesene Benachrichtigungen, jede Minute) verlängert die Frist von acht Stunden nicht: Ein Tab, der nur offen herumliegt, hält die Sitzung nicht am Leben.
+Meldet sich jemand im selben Browser neu an, endet dabei die Sitzung, die der Browser noch trug.
+
 Eine abgelaufene Sitzung löscht kramr bei der nächsten Anfrage.
-Sitzungen, zu denen nie wieder eine Anfrage kommt, räumt eine stündliche Aufgabe weg.
+Sitzungen, zu denen nie wieder eine Anfrage kommt, räumt eine stündliche Aufgabe weg, im Gruppenmodus auch die, die älter sind als `KRAMR_OIDC_ROLES_REFRESH_MINUTES`.
 Das ist reine Aufräumarbeit: Eine abgelaufene Zeile kann niemanden anmelden.
 
 ### Alle Sitzungen einer Person beenden

@@ -18,13 +18,15 @@ Die Anmeldung läuft über OIDC bei einem Anbieter deiner Wahl, siehe [Anmeldung
 Damit gelten die Regeln deines Anbieters für Passwörter, zweiten Faktor und Sperren.
 
 - **Zugriff beim Anbieter beschränken.** Sonst kann sich jedes Konto des Anbieters anmelden, nicht nur Mitglieder deiner Organisation. Es erhält zwar keine Rechte, legt aber ein Konto an.
-- **Verschlüsselte Verbindung.** Die Adresse des Anbieters muss `https://` sein. Klartext erlaubt kramr nur für einen Anbieter auf demselben Rechner, gedacht für Tests. Jede andere `http://`-Adresse lehnt kramr beim Start ab.
+- **Verschlüsselte Verbindung.** Die Adresse des Anbieters muss `https://` sein. Klartext erlaubt kramr nur für einen Anbieter auf demselben Rechner, gedacht für Tests. Jede andere `http://`-Adresse als Issuer oder als öffentliche Adresse (`KRAMR_SERVER_PUBLIC_URL`) lehnt kramr beim Start ab.
 - **Begrenzung der Anmeldeversuche.** Die Anmelde-Routen haben ein eigenes Limit je Client-Adresse (`KRAMR_AUTH_RATE_LIMIT`), zusätzlich zum groben Limit deines Proxys.
 
 ## Sitzungen
 
 Sitzungen liegen serverseitig in der Datenbank, nicht als Token im Browser.
 Der Browser hält nur einen zufälligen Wert in einem Cookie.
+Über `https://` trägt der Cookie das Präfix `__Host-`: Der Browser nimmt ihn nur an, wenn er verschlüsselt, ohne Domain-Angabe und für die ganze Adresse gesetzt wird, sodass eine Schwester-Subdomain (zum Beispiel `www.verein.de`) keinen gleichnamigen Cookie unterschieben kann.
+Ein doppelt gesendeter Cookie gilt als nicht vorhanden.
 Eine Sitzung endet nach acht Stunden ohne Aktivität oder sieben Tage nach der Anmeldung.
 Beide Werte sind fest.
 Ein Datenbank-Abzug oder ein Backup enthält keine verwendbaren Anmeldungen.
