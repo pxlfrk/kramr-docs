@@ -11,6 +11,28 @@ Produktiv läuft immer eine **feste Version** (`KRAMR_IMAGE_TAG`).
 Welche Versionen es gibt, zeigt die [Paketübersicht des Images](https://github.com/users/pxlfrk/packages/container/package/kramr), was sich geändert hat, die Seite [Neuigkeiten](../../user/release-notes/index.md).
 Admins sehen in den Einstellungen außerdem, ob eine neuere Version vorliegt.
 
+## Image prüfen (empfohlen)
+
+Jedes Release-Image ist signiert und trägt eine Herkunftsangabe (Repository, Commit, Workflow, Lauf).
+Die Prüfung ist eine Empfehlung, keine Voraussetzung der Installation.
+Sie braucht [cosign](https://docs.sigstore.dev/cosign/installation/).
+`<digest>` steht in den Release-Notes der Version (`sha256:…`).
+
+```bash
+cosign verify ghcr.io/pxlfrk/kramr@<digest> \
+  --certificate-identity https://github.com/pxlfrk/kramr/.github/workflows/release.yml@refs/heads/main \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+```
+
+```bash
+cosign verify-attestation ghcr.io/pxlfrk/kramr@<digest> --type slsaprovenance1 \
+  --certificate-identity https://github.com/pxlfrk/kramr/.github/workflows/release.yml@refs/heads/main \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+```
+
+Wurde die Version durch einen von Hand gesetzten Tag veröffentlicht, endet die Identität auf `@refs/tags/vX.Y.Z` statt auf `@refs/heads/main`.
+Wer geprüft hat, setzt in der `.env` den Digest mit: `KRAMR_IMAGE_TAG=vX.Y.Z@sha256:…`, damit nicht später ein umgehängter Tag geladen wird.
+
 ## Ablauf eines Updates
 
 1. **Backup ziehen**, siehe [Backup](../backup/index.md).

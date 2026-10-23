@@ -63,6 +63,7 @@ direkt aus dem Internet erreichbar.
 
 Das Image ist vorübergehend öffentlich abrufbar, siehe die [Paketübersicht](https://github.com/users/pxlfrk/packages/container/package/kramr).
 
+- Ist signiert; wie man das prüft, steht unter [Updates](../upgrades/index.md#image-prüfen-empfohlen).
 - Läuft als Nicht-Root-Benutzer.
 - Nutzt einen Init-Prozess als PID 1, damit das Stoppsignal ankommt und die Anwendung ihre Datenbankverbindungen sauber schließt.
 - Enthält nur das Kompilat, das Frontend und die Produktionsabhängigkeiten.
