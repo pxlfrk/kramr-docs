@@ -180,6 +180,7 @@ docker compose -f compose.yaml -f compose.caddy.yaml up -d
 ```
 
 Die Anforderungen oben gelten unverändert.
+Anders als die Caddyfile oben setzt das Overlay kein Rate-Limit für die Anmeldung, weil das Standard-Image von Caddy dafür kein Modul mitbringt; es bleibt die Begrenzung der Anmeldeversuche in der Anwendung.
 Das Overlay ist bewusst nicht Teil von `compose.yaml`, damit dort kein Proxy fest verdrahtet ist.
 
 Andere Proxys wie Traefik sind zulässig, solange sie die Anforderungen erfüllen.

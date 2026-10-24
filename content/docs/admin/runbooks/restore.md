@@ -11,6 +11,7 @@ Dump und Bilder-Archiv mit **demselben Zeitstempel** gehören zusammen. Setze
 das Image-Tag, unter dem der Dump entstanden ist. Die Schritte nehmen an, dass
 die Variablen `KRAMR_DB_USER`, `KRAMR_DB_NAME` und `KRAMR_PUBLISH_PORT` in
 deiner Shell gesetzt sind und der Proxy auf dem Host läuft.
+Liegt das Backup verschlüsselt außer Haus, entschlüssele es zuerst nach `/var/backups/kramr`, zum Beispiel mit `rclone copy crypt-remote:kramr-backups /var/backups/kramr --include '*<Stempel>*'`.
 
 ```bash
 # 1. Anwendung stoppen, Datenbank leer neu anlegen

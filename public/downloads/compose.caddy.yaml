@@ -7,9 +7,10 @@
 # labels there would hard-wire one proxy and break the swappability NFR-16 and
 # ADR 0012 require. This file is an illustration, not a supported deployment.
 #
-# It satisfies the same five invariants as the reverse proxy examples: TLS terminated
-# here (ACME), X-Forwarded-* set by Caddy, WebSocket upgrade forwarded,
-# /healthz exempt from the rate limit, body limit aligned to KRAMR_SERVER_BODY_LIMIT.
+# It satisfies the reverse proxy invariants: TLS terminated here (ACME),
+# X-Forwarded-* set by Caddy, WebSocket upgrade forwarded, /healthz outside any
+# limit, body limit aligned to KRAMR_SERVER_BODY_LIMIT. Unlike the native
+# Caddyfile it sets no edge rate limit (see below).
 #
 # SECURITY: caddy-docker-proxy reads the label config from the Docker API, so it
 # needs the Docker socket. That is a host-root capability — a compromise of this
@@ -44,16 +45,14 @@ services:
       caddy.encode: zstd gzip
       caddy.request_body.max_size: 11MB
       caddy.reverse_proxy: '{{upstreams 3000}}'
-      # /healthz without the rate limit.
+      # /healthz as its own route, so an edge limit added later leaves it out.
       caddy.@healthz.path: /healthz
       caddy.0_reverse_proxy: '@healthz {{upstreams 3000}}'
-      # Fine-grained auth limit at the edge, on top of the in-process guard.
-      # Needs a Caddy build with the caddy-ratelimit module; drop this block if
-      # the image does not carry it.
-      caddy.@auth.path: /api/auth/*
-      caddy.rate_limit.zone_auth.key: '{remote_host}'
-      caddy.rate_limit.zone_auth.events: '10'
-      caddy.rate_limit.zone_auth.window: 1m
+      # No rate limit here: the stock image has no rate-limit module, and a limit
+      # that is not bound to the auth paths would throttle the whole site. The
+      # in-process guard (KRAMR_AUTH_RATE_LIMIT) covers sign-in; an edge limit
+      # needs a Caddy build with caddy-ratelimit (see the native Caddyfile in
+      # docs/public/admin/installation/reverse-proxy.md).
 
 volumes:
   caddy-data:

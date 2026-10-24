@@ -59,6 +59,27 @@ Ein nächtlicher Cron-Eintrag genügt:
 
 Der Dump enthält nur Hashes der Sitzungen, keine verwendbaren Anmeldungen.
 
+## Backups schützen
+
+Der Dump enthält Personendaten der Kontakte.
+Das Skript legt Verzeichnis und Dateien deshalb nur für den Betreiber lesbar an (`umask 077`).
+Es setzt auch das Backup-Verzeichnis auf `700`; nimm deshalb ein eigenes Verzeichnis nur für kramr, kein gemeinsam genutztes wie `/var/backups`.
+Lasse das Verzeichnis keiner anderen Person und keinem Dienst offen.
+
+Verschlüssele die Dateien, bevor sie den Server verlassen.
+Das geht im Sync-Befehl selbst, zum Beispiel mit einem `crypt`-Remote von `rclone`, der Namen und Inhalte verschlüsselt, bevor sie das Ziel erreichen:
+
+```bash
+KRAMR_BACKUP_SYNC_CMD='rclone copy /var/backups/kramr crypt-remote:kramr-backups'
+```
+
+Alternativ verpackt ein Befehl mit `age` oder `gpg` die Dateien vor dem Kopieren.
+
+Bewahre den Schlüssel bzw. das Passwort getrennt vom Server auf.
+Ohne ihn lässt sich das Backup nicht mehr einspielen; probe das mit der Restore-Probe unten.
+
+Das Skript liest nur `KRAMR_DB_USER` und `KRAMR_DB_NAME` aus der `.env` und führt sie nicht als Shell-Skript aus.
+
 ## Wiederherstellung
 
 Der Dump enthält **nur Daten**, kein Schema. Das Schema baut die Anwendung

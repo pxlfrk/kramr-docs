@@ -53,13 +53,17 @@ services:
         condition: service_healthy
     environment:
       KRAMR_SERVER_PORT: 3000
+      # The password goes into the URL as it is, so it may only contain letters,
+      # digits and - . _ ~ (docs/public/admin/installation).
       KRAMR_DB_URL: postgresql://${KRAMR_DB_USER}:${KRAMR_DB_PASSWORD}@db:5432/${KRAMR_DB_NAME}
       KRAMR_LOG_LEVEL: ${KRAMR_LOG_LEVEL:-info}
       # Required here although the application has a default: behind the proxy
       # a forgotten value means an OIDC callback to localhost and a login that
       # always fails, so the stack refuses to start instead.
       KRAMR_SERVER_PUBLIC_URL: ${KRAMR_SERVER_PUBLIC_URL:?set KRAMR_SERVER_PUBLIC_URL in .env}
-      KRAMR_SERVER_TRUST_PROXY: ${KRAMR_SERVER_TRUST_PROXY:-true}
+      # Same default as the application and ops/env-registry.yaml; the production
+      # template ops/production.env.example sets it to true for the proxy.
+      KRAMR_SERVER_TRUST_PROXY: ${KRAMR_SERVER_TRUST_PROXY:-false}
       KRAMR_SERVER_FORCE_HTTPS: ${KRAMR_SERVER_FORCE_HTTPS:-false}
       # Required — the application refuses to start without them (FR-40).
       KRAMR_OIDC_ISSUER_URL: ${KRAMR_OIDC_ISSUER_URL:?set KRAMR_OIDC_ISSUER_URL in .env}

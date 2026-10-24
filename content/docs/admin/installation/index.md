@@ -37,7 +37,7 @@ direkt aus dem Internet erreichbar.
 2. **Client beim OIDC-Anbieter anlegen:** Redirect-URI
    `<öffentliche-url>/api/auth/callback`, Post-Logout-URI
    `<öffentliche-url>/`, Scopes mindestens `openid profile email`.
-3. **`.env` ausfüllen:** Datenbankpasswort, die drei OIDC-Werte, die öffentliche URL und `KRAMR_IMAGE_TAG` mit der gewünschten Version.
+3. **`.env` ausfüllen:** Datenbankpasswort (nur Buchstaben, Ziffern und `-` `.` `_` `~`, weil Compose es unkodiert in die Verbindungsadresse setzt), die drei OIDC-Werte, die öffentliche URL und `KRAMR_IMAGE_TAG` mit der gewünschten Version.
    Das Tag ist immer eine feste Version, nie `latest`.
    Die verfügbaren Tags stehen vorübergehend in der [Paketübersicht des Images](https://github.com/users/pxlfrk/packages/container/package/kramr).
    Alle Variablen: [Umgebungsvariablen](../configuration/umgebungsvariablen.md).
