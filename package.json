@@ -22,7 +22,7 @@
     "@astrojs/sitemap": "3.7.4",
     "@prosefly/astro-components": "0.8.4",
     "@prosefly/astro-theme-lotus": "0.9.1",
-    "@scalar/api-reference": "1.75.0",
+    "@scalar/api-reference": "1.76.0",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.4.0",
     "tailwindcss": "4.3.3",
