@@ -77,6 +77,8 @@ Das verlangt zwei Dinge von dir:
 ## Sicherheits-Header
 
 Die Anwendung setzt selbst eine strenge Content-Security-Policy und weitere Header: Rahmen von fremden Seiten sind ausgeschlossen, Inhalte ohne erlaubte Herkunft werden nicht geladen, HSTS gilt ein Jahr einschließlich Subdomains.
+Eine `Permissions-Policy` schaltet Kamera, Mikrofon, Standort und weitere Browser-Funktionen ab, die kramr nicht nutzt.
+Antworten der Schnittstelle (`/api`, außer `/api/public`) bleiben nicht im Browser-Cache, damit Personendaten nicht auf einem geteilten Rechner liegen bleiben.
 Die Oberfläche kommt aus derselben Adresse wie die Schnittstelle, deshalb gibt es keine CORS-Freigabe.
 
 Dein Proxy darf diese Header nicht überschreiben oder ersetzen.
@@ -102,9 +104,12 @@ Die Sachbearbeitung der Anfragen ist nicht öffentlich.
 
 ## Webhooks und ausgehende Verbindungen
 
-Die Webhook-Adresse in den Einstellungen lehnt kramr beim Speichern ab, wenn sie offensichtlich auf ein internes Ziel zeigt: den eigenen Rechner, private Adressbereiche, Link-Local-Adressen einschließlich der Metadaten-Adresse von Cloud-Anbietern, den Adressbereich für Carrier-Grade-NAT (`100.64.0.0/10`), das NAT64-Präfix (`64:ff9b::/96`) und die IPv6-Entsprechungen.
+Die Webhook-Adresse in den Einstellungen lehnt kramr beim Speichern ab, wenn sie offensichtlich auf ein internes Ziel zeigt: den eigenen Rechner, private Adressbereiche, Link-Local-Adressen einschließlich der Metadaten-Adresse von Cloud-Anbietern, den Adressbereich für Carrier-Grade-NAT (`100.64.0.0/10`), das NAT64-Präfix (`64:ff9b::/96`), Multicast, reservierte und für Tests vorgesehene Bereiche, 6to4 und die IPv6-Entsprechungen.
+Auch die Schreibweise des eigenen Rechners mit einem Punkt am Ende und jeder Name, der auf den reservierten Namensbereich für den eigenen Rechner endet, wird abgelehnt.
 Das schützt vor einer versehentlich oder böswillig eingetragenen internen Adresse.
 Es ist ein Grundschutz.
+kramr prüft die Adresse auch vor jedem Versand erneut.
+Entfernst du einen Host aus `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS`, bekommt er keine Zustellungen mehr; sie erscheinen als Fehlschläge, bis du den Host wieder einträgst und kramr neu startest.
 Ein Hostname, der erst beim Senden auf eine interne Adresse zeigt, wird nicht erkannt.
 Für die Adressen externer Kalender (ICS) gilt dieselbe Prüfung, eine Ausnahme gibt es dort nicht.
 Lass deshalb nur Admins die Einstellungen ändern und vergib die Rolle sparsam.
