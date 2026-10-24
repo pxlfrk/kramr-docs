@@ -37,6 +37,7 @@ kramr behandelt sie deshalb wie ein Passwort:
 - Nach dem Speichern zeigt die Oberfläche nur Adresse und Host, nicht den geheimen Teil.
 - Nur Admins bekommen die Adresse überhaupt von der Anwendung geliefert, alle anderen Rollen nie.
 - Eine Adresse mit Benutzername und Passwort wird abgelehnt.
+- Das Änderungsprotokoll hält fest, wer wann einen Kalender angelegt oder entfernt hat, mit Name und Host, nie mit der Adresse.
 
 Soll der Zugang widerrufen werden, erzeugt man im Kalenderdienst einen neuen Link und ersetzt den Kalender in kramr (entfernen, neu hinzufügen).
 

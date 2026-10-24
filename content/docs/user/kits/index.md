@@ -28,6 +28,7 @@ Bei einer losen Gruppe gibt es diese Einstellung nicht.
 
 Änderst du die Zusammensetzung eines Sets, ändert das keine bereits gebuchte Position.
 Eine Buchung hält den Stand fest, der beim Buchen galt.
+Die Historie des Sets nennt jeden hinzugefügten, geänderten und entfernten Bestandteil mit Menge.
 
 ## Ein Pflicht-Set in der Buchung ändern
 
