@@ -21,6 +21,7 @@ So kann ein Teil schon abgeholt werden und der Rest später folgen.
 
 - Zurückgeben lässt sich ab der ersten Abholung, und nur Positionen, die abgeholt sind.
 - Bis alles zurück ist, zeigt die Buchung „teilweise zurückgegeben“. Die Buchung wird erst Zurückgegeben, wenn **alle** Positionen zurück sind.
+- Vorzeitig zurückgegebenes Material ist sofort wieder buchbar: Eine abgeholte Position belegt nur noch, was tatsächlich draußen ist.
 - Entfernst du beim Bearbeiten die letzten offenen Positionen und ist alles Abgeholte schon zurück, schließt kramr die Buchung ab.
 
 ## Zustand bei der Rückgabe
