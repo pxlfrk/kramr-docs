@@ -15,7 +15,12 @@ Diese Seite beschreibt, was kramr dafür bereithält.
 kramr löscht einen Kontakt nie, sondern **anonymisiert** ihn, weil Buchungen auf ihn verweisen.
 Eine Person mit der Rolle Staff oder Admin öffnet *Kontakte* und wählt in der Zeile des Kontakts im Menü *Anonymisieren*.
 Nach der Bestätigung sind Geburtsdatum, E-Mail, Handynummer, Organisation und Adresse entfernt, und der Nachname ist auf die Initiale gekürzt.
-Dieselben Angaben verschwinden aus dem Verlauf der zugehörigen Buchungen.
+Dieselben Angaben verschwinden aus dem Verlauf der zugehörigen Buchungen, ohne Rücksicht auf Groß- und Kleinschreibung.
+Auch in den Freitexten der Buchungen ersetzt kramr sie durch „[redacted]“: in Bemerkung, Stornogrund, Erlassgrund und den Notizen zu Rückgaben.
+Was der Text sonst enthält, bleibt stehen.
+Die zusätzlichen Empfänger einer Buchung werden gelöscht, sobald die Buchung zurückgegeben oder storniert ist.
+Offene Buchungen behalten ihre zusätzlichen Empfänger bis dahin, damit Erinnerungen noch ankommen; mit dem Abschluss werden sie gelöscht und auch aus dem Verlauf der Buchung entfernt.
+Für jede betroffene Buchung vermerkt der Verlauf ohne Einzelheiten, dass Kontaktdaten entfernt wurden.
 Die Aktion ist nicht umkehrbar.
 Einen Eingriff in die Datenbank braucht es dafür nicht.
 
