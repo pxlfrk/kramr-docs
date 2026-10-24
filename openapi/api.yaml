@@ -166,7 +166,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/PublicBookingRequestResponse"
         "400":
-          description: A field is malformed, the period is incomplete or reversed, a material appears twice, there are more positions than the limit allows, or a position is not a material this link may choose.
+          description: A field is malformed, the period is incomplete or reversed, or breaks the limits (error code `period-in-past` or `period-too-far-ahead` at `pickupAt`, `period-too-long` at `returnAt`), a material appears twice, there are more positions than the limit allows, or a position is not a material this link may choose.
           content:
             application/problem+json:
               schema:
@@ -216,7 +216,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/PublicBookingRequestResponse"
         "400":
-          description: The request has no period or no position.
+          description: The request has no period or no position, or its period breaks the limits (error code `period-in-past` or `period-too-far-ahead` at `pickupAt`, `period-too-long` at `returnAt`); the limits depend on today and are checked on every submit.
           content:
             application/problem+json:
               schema:

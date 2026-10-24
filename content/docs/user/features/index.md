@@ -163,6 +163,9 @@ Damit tauscht man die Einheit, ohne die Position zu entfernen; die Einheiten ste
 Eine Position ohne Einheit bietet dasselbe Feld mit „Geschäftsstelle wählt“; wählt man dort eine Einheit, wird ein Stück davon zur Position mit dieser Einheit, die übrigen bleiben ohne Einheit.
 Mehrere Positionen desselben Materials stehen zusammen unter einer Überschrift mit Bild, Name und Kategorie.
 
+Der gewünschte Zeitraum beginnt frühestens heute, dauert höchstens 90 Tage und beginnt höchstens 24 Monate im Voraus.
+Der Kalender bietet nur solche Tage an, und ein Zeitraum außerhalb davon wird am Feld bemängelt.
+
 ## Mehr dazu
 
 - [Buchungsstatus und Übergänge](../booking-status/index.md)
