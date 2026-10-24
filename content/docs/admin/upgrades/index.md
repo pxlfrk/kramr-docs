@@ -69,6 +69,10 @@ Das ist Absicht: Welche von zwei Zeilen bleibt, ist eine fachliche Entscheidung,
 3. Entscheide, welche Zeile bleibt, und führe die Zeilen zusammen. Hängen andere Tabellen an der aufzugebenden Zeile, hänge sie zuerst um, sonst verweigert der Fremdschlüssel das Löschen.
 4. Starte den Container neu. Die Migration läuft erneut.
 
+Eine Bedingung kann auch eine Höchstlänge sein: Seit Migration `0070` sind Namen von Material, Kategorien, Lagerorten, Einheiten und Parametertypen höchstens 200 Zeichen lang.
+Ist ein vorhandener Name länger, nennt die Meldung Art und ID der Zeile und ihre Länge.
+Kürze den Namen dann mit `psql`, zum Beispiel `UPDATE locations SET name = left(name, 200) WHERE id = '…';` (für Einheiten heißt die Spalte `label`), und starte den Container neu.
+
 Ziehe vorher ein Backup.
 
 ## Zurückgehen
