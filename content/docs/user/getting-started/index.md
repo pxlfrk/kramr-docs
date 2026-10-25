@@ -45,6 +45,8 @@ die erste Ausleihe unter [Anleitungen](../tutorials/index.md).
 
 ## Sitzung
 
-Du bleibst angemeldet, solange du arbeitest. Nach acht Stunden ohne Aktivität
-oder spätestens nach sieben Tagen musst du dich neu anmelden; ungespeicherte
-Eingaben gehen dann verloren.
+Du bleibst angemeldet, solange du arbeitest.
+Nach acht Stunden ohne Aktivität oder spätestens nach sieben Tagen musst du dich neu anmelden; ungespeicherte Eingaben gehen dann verloren, wenn du die Seite verlässt oder neu lädst.
+Läuft die Sitzung ab, während ein Formular offen ist, weist kramr darauf hin.
+Melde dich dann über den Link im Hinweis in einem neuen Tab an.
+Das Formular bleibt im ersten Tab offen, und du kannst dort erneut speichern.
