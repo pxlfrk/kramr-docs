@@ -68,3 +68,11 @@ Ist ein Material Bestandteil mindestens eines aktiven Sets, fragt kramr vor dem 
 Das gilt im Materialdetail und in der Sammelbearbeitung der Bestandsübersicht, dort mit den betroffenen Materialien und ihren Sets.
 Bestätigst du, wird das Material archiviert, und die Zusammensetzung der Sets bleibt unverändert.
 Es gibt keine Sperre, und das Reaktivieren fragt nie nach.
+
+## Bestandteile in der Bestandsübersicht
+
+In der Tabelle nennt die Zeile eines Sets unter dem Namen die ersten drei Bestandteile, zum Beispiel „2 × Baustrahler, Stativ, Kabeltrommel + 2 weitere“.
+Die Karte im Raster zeigt dieselbe Zeile.
+Der Pfeil vor dem Namen klappt alle Bestandteile des Sets auf.
+Im Menü „Ansicht“ klappt der Schalter „Sets aufklappen“ alle Sets der Seite auf; er ist zunächst aus, und kramr merkt ihn pro Gerät.
+Suchst du nach dem Namen eines Bestandteils, findet kramr das Set und zeigt es aufgeklappt mit genau diesem Bestandteil.

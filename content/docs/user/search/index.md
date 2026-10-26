@@ -33,6 +33,7 @@ So kommst du mit „B26-12“ und Enter direkt in die Buchung.
 - **Buchungen** über Nummer, Name der ausleihenden Person, Titel einer Sperre und die Namen der Positionen, wie in der Buchungsübersicht.
   Eine Buchung, deren Nummer genau passt, steht zuerst.
 - **Material** über Name, Kategorie und die Bezeichnung einzelner Einheiten, wie im Bestand.
+  Ein Set findest du auch über den Namen eines seiner Bestandteile; der Treffer nennt dann den Bestandteil.
 - **Kontakte** über Vor- und Nachname und Organisation, wie in der Kontaktliste.
 
 Die Suche toleriert Umlaute und kleine Tippfehler, so findet „mueller“ auch „Müller“.
