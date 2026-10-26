@@ -38,8 +38,8 @@ direkt aus dem Internet erreichbar.
    `<öffentliche-url>/api/auth/callback`, Post-Logout-URI
    `<öffentliche-url>/`, Scopes mindestens `openid profile email`.
 3. **`.env` ausfüllen:** Datenbankpasswort (nur Buchstaben, Ziffern und `-` `.` `_` `~`, weil Compose es unkodiert in die Verbindungsadresse setzt), die drei OIDC-Werte, die öffentliche URL und `KRAMR_IMAGE_TAG` mit der gewünschten Version.
-   Das Tag ist immer eine feste Version, nie `latest`.
-   Die verfügbaren Tags stehen vorübergehend in der [Paketübersicht des Images](https://github.com/users/pxlfrk/packages/container/package/kramr).
+   Das Tag ist immer eine feste Version, nie `latest`, und steht ohne vorangestelltes `v` (zum Beispiel `1.8.0`).
+   Die veröffentlichten Versionen führt die Seite [Neuigkeiten](../../user/release-notes/index.md) auf; die Tags selbst liegen in der [Paketübersicht des Images](https://github.com/users/pxlfrk/packages/container/package/kramr).
    Alle Variablen: [Umgebungsvariablen](../configuration/umgebungsvariablen.md).
 4. **Starten:**
 
@@ -61,7 +61,7 @@ direkt aus dem Internet erreichbar.
 
 ## Eigenschaften des Images
 
-Das Image ist vorübergehend öffentlich abrufbar, siehe die [Paketübersicht](https://github.com/users/pxlfrk/packages/container/package/kramr).
+Das Image ist öffentlich abrufbar, siehe die [Paketübersicht](https://github.com/users/pxlfrk/packages/container/package/kramr).
 
 - Ist signiert; wie man das prüft, steht unter [Updates](../upgrades/index.md#image-prüfen-empfohlen).
 - Läuft als Nicht-Root-Benutzer.

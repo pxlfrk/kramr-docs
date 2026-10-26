@@ -119,7 +119,7 @@ So lässt sich nachvollziehen, wann die Webhook-Adresse umgestellt wurde.
 `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS` ist die bewusste Ausnahme für ein legitimes internes Ziel, zum Beispiel einen Chat-Server im selben Docker-Netz.
 Trage dort nur Hosts ein, die du wirklich meinst.
 
-Die Versionsprüfung auf der Einstellungsseite *Version & Updates* ist der einzige weitere ausgehende Aufruf der Anwendung an einen fremden Dienst.
+Die Versionsprüfung auf der Einstellungsseite *Version & Updates* ist der einzige weitere ausgehende Aufruf der Anwendung an einen fremden Dienst, nämlich an die Image-Registry (`ghcr.io`), die sie nach den Tags des Images fragt.
 Du kannst sie abschalten, siehe [Einstellungen](../configuration/einstellungen.md).
 
 ## Daten und Löschung

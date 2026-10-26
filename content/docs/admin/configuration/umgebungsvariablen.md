@@ -20,7 +20,7 @@ Werte führen zu einem Startabbruch mit einer klaren Meldung.
 | `KRAMR_DB_NAME` | ja | - | Name der Datenbank. Kein Standardwert; der Stack startet lieber nicht, als mit einem eingebauten Namen zu laufen. |
 | `KRAMR_DB_USER` | ja | - | Benutzer der Datenbank. |
 | `KRAMR_DB_PASSWORD` | ja | - | Passwort der Datenbank. Kein Standardwert. Setze es vor dem ersten Start; die Datenbank behält das, mit dem sie angelegt wurde. Nur Buchstaben, Ziffern und `-` `.` `_` `~`, weil Compose es unkodiert in `KRAMR_DB_URL` setzt. |
-| `KRAMR_IMAGE_TAG` | ja | - | Zu startende Version, zum Beispiel `v1.2.1`. Kein Standardwert, nie `latest`. |
+| `KRAMR_IMAGE_TAG` | ja | - | Zu startende Version, zum Beispiel `1.2.1`. Kein Standardwert, nie `latest`. |
 | `KRAMR_SERVER_PUBLIC_URL` | ja (mit Compose) | - | Externe Adresse der Anwendung. Basis der OIDC-Rückkehradresse `<Adresse>/api/auth/callback`. Compose verlangt sie, damit eine vergessene Adresse den Start verhindert. |
 | `KRAMR_OIDC_ISSUER_URL` | ja | - | Issuer des OIDC-Anbieters, zeichengenau wie im `iss`-Claim (ein abschließender Schrägstrich bleibt erhalten). Alle weiteren Adressen ermittelt die Anwendung per Discovery. |
 | `KRAMR_OIDC_CLIENT_ID` | ja | - | Client-ID der Anwendung beim Anbieter. |
@@ -38,7 +38,7 @@ Werte führen zu einem Startabbruch mit einer klaren Meldung.
 | `KRAMR_PUBLISH_PORT` | nein | `3000` | Port auf der Loopback-Adresse des Hosts, nur nötig, wenn der Proxy auf dem Host läuft. |
 | `KRAMR_LOG_LEVEL` | nein | `info` | `fatal`, `error`, `warn`, `info`, `debug` oder `trace`. Wirkt nach einem Neustart des Containers. |
 | `KRAMR_PATH_UPLOADS` | nein | im Image `/app/uploads` | Ort der Material-Bilder; im Compose-Stack das Volume `uploads`. Gehört ins Backup. |
-| `KRAMR_UPDATE_GITHUB_REPO` | nein | Projekt-Repository | Repository (`Eigentümer/Name`), gegen dessen neuestes Release die Versionsprüfung vergleicht. Forks tragen ihr eigenes ein. |
+| `KRAMR_UPDATE_IMAGE` | nein | `ghcr.io/pxlfrk/kramr` | Image (`Registry/Eigentümer/Name`, ohne Tag), dessen höchster Versions-Tag die Versionsprüfung mit der laufenden Version vergleicht. Forks tragen ihr eigenes ein. |
 | `KRAMR_SEARCH_RATE_LIMIT` | nein | `120` | Anfragen je angemeldetem Nutzer und Zeitfenster an die globale Suche in der Kopfzeile. |
 | `KRAMR_SEARCH_RATE_WINDOW_SECONDS` | nein | `60` | Länge dieses Zeitfensters in Sekunden. |
 
@@ -96,7 +96,7 @@ Einrichtung und Fehlersuche stehen unter [Benachrichtigungen](benachrichtigungen
 | --- | --- | --- | --- |
 | `KRAMR_DEFAULT_REMINDER_LEAD_TIME_DAYS` | nein | `2` | Startwert der Einstellung `reminder.lead_time_days`. Vorlauf der Abhol-Erinnerung in Tagen. Ganze Zahl ab `0`. |
 | `KRAMR_DEFAULT_CONTACT_INACTIVITY_PERIOD_DAYS` | nein | `1095` | Startwert der Einstellung `contacts.inactivity_period_days`. Nach so vielen Tagen ohne Buchung wird ein Kontakt zum Anonymisieren vorgeschlagen. Ganze Zahl ab `0`. |
-| `KRAMR_DEFAULT_UPDATE_CHECK_ENABLED` | nein | `true` | Startwert der Einstellung `update_check.enabled`. Ob die Einstellungsseite *Version & Updates* bei GitHub nach einem neueren Release fragen darf. `false` für Server ohne ausgehende Verbindung. |
+| `KRAMR_DEFAULT_UPDATE_CHECK_ENABLED` | nein | `true` | Startwert der Einstellung `update_check.enabled`. Ob die Einstellungsseite *Version & Updates* bei der Image-Registry nach einer neueren Version fragen darf. `false` für Server ohne ausgehende Verbindung. |
 | `KRAMR_DEFAULT_ADDRESS_FORM` | nein | `informal` | Startwert der Einstellung `ui.address_form`. Ob die deutschen Texte „Du“ (`informal`) oder „Sie“ (`formal`) sagen, in E-Mails, Einbettung und Anfrageseiten. |
 
 Diese Variablen gelten nur, solange die Einstellung in der Oberfläche noch nicht gespeichert wurde. Die Einstellungen stehen unter [Einstellungen](einstellungen.md).

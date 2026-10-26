@@ -9,7 +9,6 @@ order: 80
 
 Diese Seite führt die veröffentlichten Versionen ab 1.0 auf, die neueste zuerst.
 Dieselbe Liste zeigt die Anwendung den Administratoren in den Einstellungen unter „Changelog“.
-Technische Release Notes zu jeder Version stehen außerdem auf der Seite „Releases“ des Projekts auf GitHub.
 
 <!-- release-notes:start - generated from CHANGELOG.md, do not edit -->
 
