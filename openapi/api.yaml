@@ -143,7 +143,7 @@ paths:
     put:
       operationId: savePublicBookingRequest
       summary: Saves an open booking request
-      description: Replaces period, group, note and all positions (FR-87, question 260). `version` is the one the caller last read; another version is a `409` of type `request-version-conflict` and nothing is written. A request that is no longer open is a `409` of type `request-not-editable`. A position must be a material the link may choose from (FR-62; an embed request its embed's scope, question 261 d); positions already in the request may stay.
+      description: Replaces period, group, note and all positions (FR-87). `version` is the one the caller last read; another version is a `409` of type `request-version-conflict` and nothing is written. A request that is no longer open is a `409` of type `request-not-editable`. A position must be a material the link may choose from (FR-62; an embed request its embed's scope); positions already in the request may stay.
       parameters:
         - name: token
           in: path
@@ -243,7 +243,7 @@ paths:
     post:
       operationId: withdrawPublicBookingRequest
       summary: Withdraws a booking request
-      description: Open or submitted requests can be withdrawn by whoever holds the link, until staff take them over (FR-87, question 260). The link then works for 30 more days, at most 180 from creation (question 268); after 90 days the request is deleted (question 269).
+      description: Open or submitted requests can be withdrawn by whoever holds the link, until staff take them over (FR-87). The link then works for 30 more days, at most 180 from creation; after 90 days the request is deleted.
       parameters:
         - name: token
           in: path
@@ -281,7 +281,7 @@ paths:
     get:
       operationId: listPublicRequestItems
       summary: The materials a request may choose from
-      description: "The picker of the editor (FR-87, question 261 d): an embed request chooses within its embed's scope, a staff-issued one (and one whose embed was deleted, question 271) among all active, online visible materials. The availability is that of the request period, for one piece, from the same function as the public list (FR-63); without a period there is none. A unit-tracked material also carries its active units with their label and, with a period, their state; the units come with the page, not through a route per row. Only for an open request."
+      description: "The picker of the editor (FR-87): an embed request chooses within its embed's scope, a staff-issued one (and one whose embed was deleted) among all active, online visible materials. The availability is that of the request period, for one piece, from the same function as the public list (FR-63); without a period there is none. A unit-tracked material also carries its active units with their label and, with a period, their state; the units come with the page, not through a route per row. Only for an open request."
       parameters:
         - name: token
           in: path
@@ -389,7 +389,7 @@ paths:
     post:
       operationId: startPublicBookingRequest
       summary: Starts a booking request from an embed
-      description: "Anonymous (FR-87, question 258 a): name, e-mail address and mobile number; the link to the request is sent to the address, which confirms it. `itemId` is the one position carried over from the material page. **The answer is the same for every well-formed start** — a link was sent, the address already has three open or submitted requests (question 272), or the honeypot field `website` was filled — so it never tells whether an address is known."
+      description: "Anonymous (FR-87): name, e-mail address and mobile number; the link to the request is sent to the address, which confirms it. `itemId` is the one position carried over from the material page. **The answer is the same for every well-formed start** — a link was sent, the address already has three open or submitted requests, or the honeypot field `website` was filled — so it never tells whether an address is known."
       parameters:
         - name: embedId
           in: path
