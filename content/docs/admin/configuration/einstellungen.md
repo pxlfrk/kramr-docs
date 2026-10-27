@@ -31,6 +31,7 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `request_mail.link_staff_issued` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail mit dem Link zur Anfrage, den die Geschäftsstelle ausgestellt hat, je in einer Du- und einer Sie-Fassung. |
 | `request_mail.taken_over` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, dass die Anfrage übernommen wurde, je in einer Du- und einer Sie-Fassung. |
 | `request_mail.declined` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, dass die Anfrage abgelehnt wurde, je in einer Du- und einer Sie-Fassung; der Text muss die Begründung enthalten. |
+| `booking.select_all_confirm_threshold` | Zahl | `50`, ohne Umgebungsvariable | Ab wie vielen hinzugefügten Positionen „Alle auswählen“ in der Materialauswahl vorher fragt. Eine ganze Zahl von 1 bis 10000. |
 | `ui.address_form` | Auswahl | `informal`, Startwert aus `KRAMR_DEFAULT_ADDRESS_FORM` | Ob die deutschen Texte „Du“ (`informal`) oder „Sie“ (`formal`) sagen. Die öffentlichen Seiten lesen sie ohne Anmeldung. |
 
 <!-- settings-registry:end -->
@@ -43,7 +44,7 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 
 | Gruppe | Seite | Inhalt |
 | --- | --- | --- |
-| Organisation | Auftritt | `organisation.name`, `ui.address_form` und die Logos für Oberfläche und E-Mails |
+| Organisation | Auftritt | `organisation.name`, `ui.address_form`, `booking.select_all_confirm_threshold` und die Logos für Oberfläche und E-Mails |
 | Organisation | Recht & Datenschutz | `legal.privacy_policy_url`, `legal.links` und `contacts.inactivity_period_days` |
 | Organisation | E-Mail-Texte | die vier `request_mail.*`-Texte, siehe [E-Mail-Texte](#e-mail-texte-an-anfragende) |
 | System | Benachrichtigungen | `reminder.lead_time_days`, die Empfänger (`notification.notify_creator`, `notification.notify_admins_on_new_booking`, `notification.always_notify_recipients`) und `notification.webhook_url`; darunter die fehlgeschlagenen Benachrichtigungen der letzten 7 Tage |

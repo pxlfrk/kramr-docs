@@ -50,3 +50,5 @@ Sie dient zum Beispiel für eine Reparatur oder eine Inventur.
 - Sie kann einen **Titel** tragen. Er steht in Übersicht, Kalender und Buchung anstelle des Ausleihers und wird bei der Suche gefunden.
 - In Übersicht und Kalender ist sie optisch abgehoben. Der Schloss-Filter der Übersicht zeigt nur Sperren, blendet sie aus oder hebt den Filter auf.
 - „Direkt genehmigen“ gibt es für Sperren nicht.
+- Alles oder einen ganzen Standort sperrst du in der Materialauswahl mit „Alle auswählen“ ([Material auswählen](../features/index.md)); die Sperre enthält dann jedes Material als eigene Position. Später angelegtes Material gehört nicht dazu.
+- Eine genehmigte Sperre über alles markiert jede überschneidende Ausleihe als Konflikt, und die Benachrichtigung über Konflikte meldet jede einmal.

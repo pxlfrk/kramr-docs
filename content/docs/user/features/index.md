@@ -80,6 +80,10 @@ einen Schritt zurückgenommen werden, falls du dich verklickt hast.
   Der Dialog sucht in Name, Kategorie und Beschreibung und lässt sich nach Kategorie, Standort, „Nur im Zeitraum Freie“ und „Nur Ausgewählte“ eingrenzen.
   „Nur Ausgewählte“ zeigt auch, was die Buchung schon enthält.
   Mehrere Materialien, Mengen und Einheiten gehen mit „Übernehmen“ in einem Schritt in die Buchung; die Auswahl bleibt beim Wechsel der Filter erhalten.
+  „Alle auswählen“ übernimmt alles, was die Filter gerade zeigen, mit dem ganzen Bestand und allen freien Einheiten; so sperrst du in einem Schritt alles oder nur einen Standort oder eine Kategorie.
+  Fragt der Dialog vorher nach, weil sehr viele Positionen dazukommen, bestätigst du mit „Hinzufügen“; „Auswahl aufheben“ nimmt nur die gezeigten Zeilen wieder heraus.
+  Was „Alle auswählen“ ausgelassen hat, steht mit Grund unter den Filtern.
+  Bei einer Ausleihe bleibt Material außen vor, das nur im Set buchbar ist, und Bestandteile eines Pflicht-Sets, das mitgebucht wird, weil sie mit dem Set entstehen.
   „Bilder anzeigen“ blendet Titelbilder ein und ist standardmäßig aus; die Einstellung merkt sich der Browser je Gerät.
   Material, das schon in der Buchung steht, ist mit „In der Buchung“ markiert; bei Material mit Einheiten sind nur die schon gebuchten Einheiten gesperrt.
   Mehr als im Zeitraum frei ist, lässt sich weiter wählen; es erscheint nur ein Hinweis auf den Konflikt.

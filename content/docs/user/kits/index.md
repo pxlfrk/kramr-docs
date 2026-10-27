@@ -18,6 +18,7 @@ Es ist selbst ein Material und kann wie jedes Material Parameter tragen.
 Bei jedem Bestandteil eines Pflicht-Sets legst du zusätzlich fest, ob er auch einzeln gebucht werden darf.
 Ist er „Nur im Set buchbar“, sperrt die Materialauswahl ihn mit diesem Grund, und das Material nennt es selbst im Kopf und in der Karte „Bestandteil von“.
 Bei einer losen Gruppe gibt es diese Einstellung nicht.
+Eine Sperre darf solches Material trotzdem enthalten, denn sie leiht nichts aus, sondern belegt es nur.
 
 ## Bestand und Verfügbarkeit
 
