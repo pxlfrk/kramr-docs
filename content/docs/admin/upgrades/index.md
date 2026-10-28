@@ -94,6 +94,12 @@ Ziehe vorher ein Backup.
 
 Siehe [Rollback](../runbooks/rollback.md).
 
+Hinweis zu den Positionsbeträgen: Die Migration `0076` ergänzt die festgeschriebenen Preise an den Buchungspositionen, den Betrag-alt-Wert an der Buchung und den Schalter „Bestandteile einzeln berechnen“ am Material.
+Sie setzt den Schalter an jedem Pflicht-Set ohne eigenen Preis, dessen Bestandteile einen Preis haben, damit bestehende Buchungen nicht kostenlos werden.
+Ein früher von Hand erfasster Betrag einer Buchung, die noch nicht zurückgegeben oder storniert war, wird nicht mehr angezeigt; er bleibt in der Historie der Buchung nachlesbar.
+Die vorherige Version schreibt Positionen ohne festgeschriebenen Preis; die neue zeigt sie als kostenlos mit dem Angebot „Preis übernehmen“.
+Die alte Spalte `amount_cents` bleibt unverändert in der Datenbank.
+
 Hinweis zu verschachtelten Standorten: Die Migration `0074` fügt den übergeordneten Standort hinzu.
 Die vorherige Version kennt ihn nicht und zeigt alle Standorte als flache Liste, gleichnamige Unterstandorte also mit demselben Namen untereinander.
 Nach einer Rückkehr auf die neue Version gilt wieder alles wie zuvor.

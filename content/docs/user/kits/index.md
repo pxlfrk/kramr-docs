@@ -15,6 +15,9 @@ Es ist selbst ein Material und kann wie jedes Material Parameter tragen.
 - **Pflicht-Set:** Es wird nur gemeinsam ausgeliehen. Buchst du das Set, bucht kramr jeden Bestandteil als eigene Position mit. Rückgabezustand, Teilabholung und Teilrückgabe gelten damit für jeden Bestandteil einzeln.
 - **Lose Gruppe:** Das Set reserviert nichts automatisch. Wer die Bestandteile will, bucht sie als eigene Positionen.
 
+Was ein Pflicht-Set kostet, legst du am Set fest: Hat es einen Preis, gilt er für das ganze Set samt Bestandteilen.
+Mit dem Schalter „Bestandteile einzeln berechnen“ trägt das Set keinen Preis, und jeder Bestandteil zählt mit seinem eigenen, siehe [Preise und Tarife](../pricing/index.md#pflicht-sets).
+
 Bei jedem Bestandteil eines Pflicht-Sets legst du zusätzlich fest, ob er auch einzeln gebucht werden darf.
 Ist er „Nur im Set buchbar“, sperrt die Materialauswahl ihn mit diesem Grund, und das Material nennt es selbst im Kopf und in der Karte „Bestandteil von“.
 Bei einer losen Gruppe gibt es diese Einstellung nicht.
