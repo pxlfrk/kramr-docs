@@ -60,6 +60,12 @@ automatisch, **bevor** die Anwendung Anfragen annimmt. Es gelten feste Regeln:
 - Eine **angewandte Migration ist unveränderlich**. Wurde sie nachträglich
   geändert, verweigert der Start mit einer eindeutigen Meldung.
 
+### Parameter-Spalten im Bestand
+
+Die Migration setzt jeden vorhandenen Parameter darauf, dass die Bestandstabelle ihn **nicht** als Spalte anbietet.
+Nach dem Update fehlen deshalb im Menü **Ansicht** alle Parameter-Spalten, bis ein Admin unter **Parameter** bei den gewünschten Parametern den Schalter „Spalte im Bestand“ einschaltet.
+Das ist gewollt und kein Fehler; eine bereits eingeschaltete Spalte erscheint wieder, sobald ihr Parameter gekennzeichnet ist.
+
 Schemaänderungen laufen in zwei Releases (erst ergänzen, später entfernen).
 So läuft die vorherige Version noch gegen das neue Schema, was den Rückweg
 einfach hält.

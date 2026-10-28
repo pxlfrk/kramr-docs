@@ -20,7 +20,9 @@ Die Einzelheiten stehen unter [Suche in der Kopfzeile](../search/index.md).
 - **Kategorien, Parameter, Bilder:** Material wird nach Kategorien geordnet,
   mit eigenen Eigenschaften beschrieben und mit Fotos versehen.
   In der Bestandsübersicht blendest du über **Ansicht** die Parameter als zusätzliche Spalten ein.
-  Angeboten werden die Parameter der gewählten Kategorie, ohne Kategorie alle.
+  Angeboten werden die Parameter, die ein Admin dafür gekennzeichnet hat, und von ihnen die der gewählten Kategorie, ohne Kategorie alle.
+  Ist kein Parameter gekennzeichnet, hat das Menü keinen Abschnitt für Parameter-Spalten.
+  Ein Admin kennzeichnet einen Parameter im Formular unter **Parameter** über den Schalter „Spalte im Bestand“ (Gruppe „Sichtbarkeit“); welche Spalte du siehst, schaltest du weiterhin selbst ein.
 - **Sets:** Ein Set bündelt mehrere Materialien. Ist es ein Pflichtset, wird
   beim Buchen jede Komponente mitgebucht.
 - **Wer darf ausleihen:** Bei jedem Material legst du fest, ob es an den
