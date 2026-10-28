@@ -30,6 +30,11 @@ Die Einzelheiten stehen unter [Suche in der Kopfzeile](../search/index.md).
   Preis. Ist ein Material für keinen von beiden verleihbar, bleibt es im
   Bestand, kann aber nur für die Eigennutzung gebucht oder gesperrt werden.
   Ein Set ist nur dann verleihbar, wenn alle seine Bestandteile es sind.
+- **Standorte verschachteln:**
+  Ein Standort lässt sich unter einen anderen hängen, etwa „Waschraum“ unter „Keller“.
+  Die Bestandsübersicht zeigt und sortiert den ganzen Pfad, und der Filter nach einem Standort schließt alle Unterstandorte ein.
+  Hat ein Unterstandort keine eigene Adresse, gilt die des übergeordneten; sie steht auch in der Packliste.
+  Ein Standort mit Unterstandorten oder Material lässt sich nicht löschen.
 - **Archivieren statt löschen:** Material wird nie gelöscht, sondern
   archiviert; die Historie bleibt erhalten.
 - **Zugehörigkeit zu Sets:**

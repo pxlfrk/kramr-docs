@@ -67,7 +67,7 @@ Das Blatt ist für den Schwarz-Weiß-Druck gemacht und enthält:
 
 - Kopf mit Name und Logo der Organisation, Status und Buchungsnummer;
 - Abholung und Rückgabe, Kontakt mit Name und Handynummer, Zuständige, Art und Bemerkung, bei einem Konflikt einen Hinweis;
-- alle Positionen in einer Tabelle, nach Lagerort gruppiert; ein langer Materialname bricht in seiner Zeile um; die Bestandteile eines Pflicht-Sets stehen eingerückt unter dem Set;
+- alle Positionen in einer Tabelle, nach Lagerort gruppiert (bei verschachtelten Lagerorten mit dem ganzen Pfad, etwa „Keller › Waschraum“), mit der Adresse unter dem Namen, wenn die Verwaltung eine eingetragen hat; ein Unterlagerort ohne eigene Adresse zeigt die Adresse des übergeordneten; ein langer Materialname bricht in seiner Zeile um; die Bestandteile eines Pflicht-Sets stehen eingerückt unter dem Set;
 - zwei Kästchen je Position für die Ausgabe: **Gepackt**, wenn das Material bereitliegt, und **Mitgenommen**, wenn es übergeben wurde;
 - drei schmale Spalten für die Rückgabe (in Ordnung, beschädigt, verloren) und eine Notiz; setze ein Kreuz, bei Teilmengen trägst du die Anzahl in die Notiz ein;
 - auf der letzten Seite einer Ausleihe die Felder für die Bestätigung von Ausgabe und Rückgabe mit Name, Datum und Unterschrift.
@@ -81,7 +81,7 @@ Scanne den QR-Code mit dem Telefon.
 Er öffnet die Buchung in kramr (nach der Anmeldung) und zeigt oben, ob der Ausdruck noch stimmt:
 
 - **Ausdruck aktuell:** Die Buchung ist seit dem Ausdruck unverändert.
-- **Seit dem Ausdruck geändert:** Termine, Kontakt, Zuständige, Bemerkung, Status oder Positionen weichen vom Blatt ab. Erzeuge die Packliste neu und drucke sie noch einmal.
+- **Seit dem Ausdruck geändert:** Termine, Kontakt, Zuständige, Bemerkung, Status, Positionen oder die Adresse eines Lagerorts weichen vom Blatt ab. Erzeuge die Packliste neu und drucke sie noch einmal.
 
 Eine erfasste Rückgabe oder Zahlung macht den Ausdruck nicht ungültig, ebenso wenig ein Konflikt.
 kramr speichert nichts über Ausdrucke und zeigt deshalb nicht, was sich geändert hat.

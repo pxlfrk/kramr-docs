@@ -60,6 +60,14 @@ Ein nie geöffneter Link, den eine Person selbst angelegt hat, gilt 7 Tage.
 Die E-Mail mit dem Link liegt bis zum Versand im Klartext in der Warteschlange und wird danach gelöscht.
 Wer einen Kontakt anonymisiert, löscht oder anonymisiert in demselben Vorgang dessen Anfragen.
 
+## Adresse eines Standorts
+
+Ein Standort kann eine Adresse tragen, zum Beispiel wenn Material bei einem Mitglied zu Hause lagert.
+Die Adresse steht in der gedruckten Packliste jeder Buchung, die Material von diesem Standort enthält, und ist für alle Rollen sichtbar, die Standorte lesen.
+Auf der Website, in der Einbindung und in den E-Mails zu Anfragen erscheint sie nie.
+Trage bei einer Privatadresse nur ein, was die Person dafür freigegeben hat; ein ausgedrucktes Blatt lässt sich nicht zurückholen.
+Die Bemerkung zu einem Standort bleibt intern und steht nicht in der Packliste.
+
 ## Was außerhalb von kramr bleibt
 
 - Das Zugriffs- und das Fehlerprotokoll des Reverse Proxys, siehe [Reverse Proxy](../installation/reverse-proxy.md), Anforderung 6.

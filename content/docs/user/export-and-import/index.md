@@ -19,6 +19,10 @@ Beachte:
 
 - kramr liest nur die Spalten der Vorlage.
 - Der Import legt **nur neue** Materialien an. Bestehende Materialien ändert er nicht.
+- Die Spalte `location` nimmt den Standort als Pfad („Keller › Waschraum“, Teile mit „›“ getrennt) oder als einzelnen Namen.
+  Ein einzelner Name gilt nur, wenn genau ein Standort so heißt; heißen mehrere so („Waschraum“ unter „Keller“ und unter „Garage“), meldet der Import die Zeile als mehrdeutig, und du gibst den ganzen Pfad an.
+  Unbekannte Standorte legt der Import nicht an; die Zeile wird übersprungen.
+  Der Export schreibt immer den ganzen Pfad.
 - Nach dem Import steht eine Zusammenfassung da, zum Beispiel „12 von 14 Zeilen angelegt, 2 übersprungen“. Eine Tabelle nennt für jede übersprungene Zeile die Zeile, die Spalte und das Problem. Korrigiere diese Zeilen und importiere die Datei erneut oder lege das Material von Hand an.
 - Eine Datei darf höchstens 1000 Zeilen mit Material enthalten. Teile größere Bestände auf mehrere Dateien auf.
 - Eine Datei aus dem Export lässt sich wieder importieren. Das Hochkomma („'“), das der Export vor einen Text setzt, der mit „=“, „+“, „-“ oder „@“ beginnt, entfernt der Import wieder.

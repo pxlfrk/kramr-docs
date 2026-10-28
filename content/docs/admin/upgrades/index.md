@@ -79,11 +79,18 @@ Eine Bedingung kann auch eine Höchstlänge sein: Seit Migration `0070` sind Nam
 Ist ein vorhandener Name länger, nennt die Meldung Art und ID der Zeile und ihre Länge.
 Kürze den Namen dann mit `psql`, zum Beispiel `UPDATE locations SET name = left(name, 200) WHERE id = '…';` (für Einheiten heißt die Spalte `label`), und starte den Container neu.
 
+Seit Migration `0074` darf ein Standortname das Zeichen „›“ nicht enthalten, weil es die Teile eines verschachtelten Standorts trennt („Keller › Waschraum“).
+Enthält ein vorhandener Name es, nennt die Meldung die ID des Standorts; benenne ihn um, zum Beispiel mit `UPDATE locations SET name = replace(name, '›', '-') WHERE id = '…';`, und starte den Container neu.
+
 Ziehe vorher ein Backup.
 
 ## Zurückgehen
 
 Siehe [Rollback](../runbooks/rollback.md).
+
+Hinweis zu verschachtelten Standorten: Die Migration `0074` fügt den übergeordneten Standort hinzu.
+Die vorherige Version kennt ihn nicht und zeigt alle Standorte als flache Liste, gleichnamige Unterstandorte also mit demselben Namen untereinander.
+Nach einer Rückkehr auf die neue Version gilt wieder alles wie zuvor.
 
 Hinweis zum Archivieren von Buchungen: Die Migration `0065` ergänzt die Spalte `archived_at` an den Buchungen.
 Die vorherige Version kennt sie nicht, dort sind archivierte Buchungen wieder für alle sichtbar, und das Genehmigen eines archivierten Entwurfs scheitert an einer Tabellenbedingung.
