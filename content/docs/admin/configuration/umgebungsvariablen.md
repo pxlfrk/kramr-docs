@@ -89,6 +89,9 @@ Einrichtung und Fehlersuche stehen unter [Benachrichtigungen](benachrichtigungen
 | Variable | Pflicht | Standard | Bedeutung |
 | --- | --- | --- | --- |
 | `KRAMR_REQUEST_LINK_KEY` | nein | - | 32 Zufallsbytes, Base64 (`openssl rand -base64 32`). Mit diesem Schlüssel legt die Anwendung ausgestellte Anfrage-Links verschlüsselt ab, damit die Kontakt-Detailansicht sie erneut kopieren kann. Ohne Schlüssel startet die Anwendung wie bisher, Links sind nur einmalig sichtbar und „Link kopieren“ erscheint nicht. Ein Wert, der keine 32 Bytes ergibt, bricht den Start ab. Bei einem Wechsel lassen sich bereits abgelegte Links nicht mehr kopieren; ausgegebene Links bleiben gültig. |
+| `KRAMR_SECRETS_KEY` | nein | - | 32 Zufallsbytes, Base64 (`openssl rand -base64 32`). Mit diesem Schlüssel legt die Anwendung Geheimnisse, die sie später wieder lesen muss, verschlüsselt in der Datenbank ab; heute den Mandantenschlüssel der amosWEB-Verbindung. Ohne Schlüssel startet die Anwendung, das amosWEB-Modul lässt sich aber nicht einschalten. Ein Wert, der keine 32 Bytes ergibt, bricht den Start ab. Den Schlüssel zusammen mit der Umgebung sichern, bevor das Modul eingeschaltet wird; bei einem Wechsel oder Verlust lässt sich die Verbindung nur in kramr trennen und muss neu hergestellt werden. |
+| `KRAMR_AMOSWEB_APP_TOKEN` | nein | - | Das App-Token, das amosWEB für kramr ausstellt. Zusammen mit `KRAMR_AMOSWEB_APP_KEY` und `KRAMR_SECRETS_KEY` Voraussetzung dafür, das amosWEB-Modul einzuschalten. Wird nur eines der beiden amosWEB-Geheimnisse gesetzt, bricht der Start ab. |
+| `KRAMR_AMOSWEB_APP_KEY` | nein | - | Ein selbst gewählter Schlüssel von mindestens 32 Zeichen (`openssl rand -base64 32`), mit dem sich amosWEB gegenüber kramr ausweist (Prüfaufruf beim Verbinden) und den kramr beim Trennen mitschickt. Muss zum Eintrag der App in amosWEB passen. |
 
 ## Startwerte fachlicher Einstellungen
 

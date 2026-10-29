@@ -3,12 +3,61 @@
 openapi: 3.1.0
 info:
   title: kramr API
-  version: 0.37.0
+  version: 0.38.0
   description: Material lending management for a youth organisation or association. Generated from the Zod schemas in @kramr/shared — do not edit by hand.
   license:
     name: MIT
     identifier: MIT
 paths:
+  /api/public/amosweb:
+    get:
+      operationId: getAmoswebReceiver
+      summary: The call amosWEB makes to check kramr
+      description: "Public by necessity: amosWEB calls it while connecting, and later to push. It answers `200 {}` to a caller that sends `Authorization: Bearer <app_key>` and `401` otherwise, and has no effect. `404` while no `KRAMR_AMOSWEB_APP_KEY` is configured. Counts against the budget of `/api/public/*`."
+      responses:
+        "200":
+          description: The app key is right.
+        "401":
+          description: The app key is missing or wrong.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: The amosWEB module has no app key configured.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    head:
+      operationId: headAmoswebReceiver
+      summary: The same check as `GET`, without a body
+      responses:
+        "200":
+          description: The app key is right.
+        "401":
+          description: The app key is missing or wrong.
+        "404":
+          description: The amosWEB module has no app key configured.
+    post:
+      operationId: postAmoswebReceiver
+      summary: The same check as `GET` for a `POST`
+      description: The body is ignored; nothing is done with it.
+      responses:
+        "200":
+          description: The app key is right.
+        "401":
+          description: The app key is missing or wrong.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: The amosWEB module has no app key configured.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
   /api/public/branding:
     get:
       operationId: getBranding
@@ -1675,6 +1724,27 @@ components:
         - addressForm
         - legalLinks
       additionalProperties: false
+    BrandingResponse:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        name:
+          type:
+            - string
+            - "null"
+        logoSvgUrl:
+          type:
+            - string
+            - "null"
+        logoPngUrl:
+          type:
+            - string
+            - "null"
+      required:
+        - name
+        - logoSvgUrl
+        - logoPngUrl
+      additionalProperties: false
     ProblemDetails:
       $schema: https://json-schema.org/draft/2020-12/schema
       type: object
@@ -2079,29 +2149,46 @@ components:
               - demand
               - heldBy
             additionalProperties: false
+        amosweb:
+          type: object
+          properties:
+            reason:
+              type: string
+              enum:
+                - unreachable
+                - unauthorized
+                - already-connected
+                - client-inactive
+                - invalid-app-key
+                - refused
+                - invalid-response
+                - target-refused
+            stage:
+              type: string
+              enum:
+                - disconnect
+                - connect
+            localOnlyAvailable:
+              type: boolean
+            blockedBy:
+              type: array
+              items:
+                type: string
+                enum:
+                  - module-off
+                  - secrets-missing
+                  - base-url-missing
+                  - already-connected
+                  - not-connected
+                  - key-unreadable
+                  - invoice-pending
+            bookingReferences:
+              type: array
+              items:
+                type: string
+          additionalProperties: false
       required:
         - type
         - title
         - status
-      additionalProperties: false
-    BrandingResponse:
-      $schema: https://json-schema.org/draft/2020-12/schema
-      type: object
-      properties:
-        name:
-          type:
-            - string
-            - "null"
-        logoSvgUrl:
-          type:
-            - string
-            - "null"
-        logoPngUrl:
-          type:
-            - string
-            - "null"
-      required:
-        - name
-        - logoSvgUrl
-        - logoPngUrl
       additionalProperties: false
