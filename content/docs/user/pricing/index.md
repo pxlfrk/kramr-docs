@@ -110,3 +110,8 @@ Trage dort keine Personendaten ein.
 Der Grund steht in der Karte beim Status und in der Historie der Buchung.
 Wechselt der Status später wieder weg von „Erlassen“, verschwindet der Grund aus der Karte; die Historie behält ihn.
 Bei einer Buchung, deren Zahlung schon vor dieser Funktion erlassen war, bleibt der Grund leer.
+
+## Artikel in amosWEB
+
+Ist das amosWEB-Modul eingeschaltet, zeigt das Material unter den Preisen den amosWEB-Artikel, mit dem es abgerechnet wird: einen eigenen Artikel oder „Standard (Fallback)“.
+Welchen Artikel ein Material bekommt, legt ein Admin in den Einstellungen von amosWEB fest.

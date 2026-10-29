@@ -3,7 +3,7 @@
 openapi: 3.1.0
 info:
   title: kramr API
-  version: 0.38.0
+  version: 0.39.0
   description: Material lending management for a youth organisation or association. Generated from the Zod schemas in @kramr/shared — do not edit by hand.
   license:
     name: MIT
@@ -2186,6 +2186,37 @@ components:
               type: array
               items:
                 type: string
+            articleRefusal:
+              type: string
+              enum:
+                - unknown-article
+                - net-article
+                - missing-article
+                - item-not-priced
+                - group-empty
+                - group-not-found
+            use:
+              type: object
+              properties:
+                fallback:
+                  type: boolean
+                extraChargeKinds:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - damaged
+                      - soiled
+                      - lost
+                itemCount:
+                  type: integer
+                  minimum: -9007199254740991
+                  maximum: 9007199254740991
+              required:
+                - fallback
+                - extraChargeKinds
+                - itemCount
+              additionalProperties: false
           additionalProperties: false
       required:
         - type

@@ -89,10 +89,41 @@ Im Bereich *Rechnungsangaben* steht dafür die ID dieser Bankverbindung.
 
 Die Felder sind gesperrt, solange das Modul ausgeschaltet oder kramr nicht verbunden ist.
 
+## Artikelgruppen
+
+Jede Rechnungsposition verweist auf einen Artikel in amosWEB.
+amosWEB liefert die Artikel gruppenweise, deshalb trägt ein Admin im Bereich *Artikel* die IDs der Artikelgruppen ein, aus denen kramr Artikel abrufen soll.
+Die ID einer Artikelgruppe steht in amosWEB in der Verwaltung der Artikel; wo genau, hängt von der Version ab, im Zweifel hilft der Support von amosWEB.
+
+*Artikelgruppe hinzufügen* ruft die Gruppe zuerst ab und zeigt ihre Artikel mit Preis.
+Nur ein Artikel, den amosWEB als Brutto-Artikel liefert, lässt sich wählen.
+Eine Gruppe, die es nicht gibt oder die leer ist, lässt sich nicht eintragen.
+
+kramr gleicht die Artikel jeden Morgen um 6 Uhr mit amosWEB ab; *Jetzt abrufen* tut es sofort.
+Der Abruf gelingt ganz oder gar nicht: Scheitert er für eine Gruppe, bleibt alles wie es war, und die Seite zeigt den Grund.
+Eine Gruppe lässt sich nur entfernen, solange keiner ihrer Artikel verwendet wird.
+
+## Fallback und Zuordnung
+
+Der *Fallback-Artikel* gilt für jedes Material und jede Art der Zusatzkosten (Beschädigung, Verschmutzung, Verlust) ohne eigenen Artikel.
+Ohne Fallback-Artikel lässt sich keine Rechnung erstellen.
+Für die drei Arten der Zusatzkosten lässt sich je ein eigener Artikel wählen.
+
+Im Bereich *Zuordnung* lässt sich für jedes Material mit Preis ein eigener Artikel wählen; die Liste zeigt, welcher Artikel gilt.
+Änderungen gelten erst nach *Speichern*.
+Das Material zeigt seinen Artikel auch im Detail, für jede Rolle, die Material lesen darf.
+
+## Wenn ein Artikel verschwindet
+
+Liefert amosWEB einen verwendeten Artikel nicht mehr oder nur noch als Netto-Artikel, gilt er als nicht nutzbar und bleibt sichtbar.
+Ein eigener Artikel eines Materials fällt dann auf den Fallback-Artikel zurück und wird mit einem Warnkennzeichen angezeigt.
+Ist es der Fallback-Artikel oder der Artikel einer Art der Zusatzkosten, sind Rechnungen gesperrt, bis ein anderer Artikel gewählt ist.
+Alle Admins bekommen einmal je Artikel eine Nachricht im Posteingang und per E-Mail; wer sie nicht möchte, schaltet sie im eigenen Profil ab.
+
 ## Integration beenden
 
 *Integration beenden* trennt kramr in amosWEB, löscht den Mandantenschlüssel in kramr und schaltet das Modul aus.
-Zuordnungen und Vorlagen bleiben erhalten.
+Artikelgruppen, Zuordnungen und Vorlagen bleiben erhalten.
 Beenden geht auch bei ausgeschaltetem Modul.
 
 Nimmt amosWEB das Trennen nicht an, weil es nicht erreichbar ist oder den Schlüssel ablehnt, bietet kramr *Nur in kramr trennen* an.
