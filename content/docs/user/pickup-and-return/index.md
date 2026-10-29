@@ -37,6 +37,9 @@ Bei jeder Rückgabe hältst du fest, in welchem Zustand das Material zurückkomm
 
 Nimmst du „Zurückgegeben“ zurück, entfernt kramr die erfassten Rückgaben und gibt dem Bestand zurück, was sie abgezogen haben.
 
+Wurde Material beschädigt oder ist es verloren, kannst du die Kosten gleich vormerken: Im Reiter *Erfasst* gibt es bei dem Vorgang den Knopf **Zusatzkosten vormerken**.
+Was dabei gilt, steht unter [Zusatzkosten](../pricing/index.md#zusatzkosten-bei-schaden-verunreinigung-und-verlust).
+
 ## Eine erfasste Rückgabe korrigieren
 
 Die Rückgabe-Ansicht hat zwei Reiter.

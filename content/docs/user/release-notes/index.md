@@ -12,6 +12,70 @@ Dieselbe Liste zeigt die Anwendung den Administratoren in den Einstellungen unte
 
 <!-- release-notes:start - generated from CHANGELOG.md, do not edit -->
 
+## Version 1.9.0 (29.10.2026)
+
+### Neue Funktionen
+
+- 📋 Der Betrag einer Buchung ist die Summe ihrer Positionen: Die Karte „Bezahlung“ zeigt je Position den Rechenweg, jede Summe lässt sich anpassen und zurücksetzen, das freie Betragsfeld entfällt.
+- 📋 Eine Position behält den Preis vom Anlegen; ändert sich der Preis des Materials, bietet sie „Preis übernehmen“ an. Ein früher von Hand erfasster Betrag einer zurückgegebenen oder stornierten Buchung steht nur noch lesend als „Erfasster Betrag (alt)“.
+- 📋 Zusatzkosten für Schaden, Verunreinigung und Verlust erfasst man in der Karte „Bezahlung“ oder auf dem Rückgabe-Bildschirm („Zusatzkosten vormerken“); sie gehen in die Summe ein, und solange sie bestehen, lässt sich die Abholung nicht zurücknehmen.
+- 📋 „Alle auswählen“ in der Materialauswahl wählt alles aus, was die Filter zeigen; bei vielen Positionen fragt der Dialog vorher nach, die Schwelle stellt die Verwaltung unter „Auftritt“ ein.
+- 📦 Standorte lassen sich verschachteln („Waschraum“ unter „Keller“); Bestandsübersicht, Filter, CSV und Packliste arbeiten mit dem ganzen Pfad, ein Unterstandort übernimmt die Adresse des übergeordneten.
+- 📦 Admins geben je Parameter frei, ob er im Menü „Ansicht“ der Bestandsübersicht als Spalte erscheint; nach dem Update ist keiner freigegeben.
+- ⚙️ Admins wählen unter „Auftritt“ einen Parameter in € als Reinigungsgebühr; sein Wert belegt den Einzelpreis bei Zusatzkosten „verunreinigt“ vor.
+
+### Verbesserungen
+
+- 📋 In einer Buchungsanfrage tauscht man die Einheit direkt in der Zeile, und mehrere Positionen desselben Materials stehen unter einer Überschrift – im Einreichen-Dialog, auf der Statusseite und in der Anfragen-Ansicht.
+- 📋 Eine Sperre darf auch Material enthalten, das sonst nur im Set buchbar ist.
+- 📋 Die Karte „Bezahlung“ gleicht der Tabelle der Materialpositionen und listet nur Positionen mit Preis oder geändertem Preis; der Bezahlt-Status steht in der Summenzeile und speichert sofort, und beschädigte oder verlorene Rückgaben tragen in den Materialpositionen ein Warnzeichen.
+- 📦 Ein Pflicht-Set lässt sich mit „Bestandteile einzeln berechnen“ so einstellen, dass jeder Bestandteil seinen eigenen Preis zählt; nach dem Update ist das bei Sets ohne eigenen Preis mit bepreisten Bestandteilen schon an, damit bestehende Buchungen nicht kostenlos werden.
+- 📦 Ein Standort trägt eine Adresse und eine interne Bemerkung; die Adresse steht in der Packliste.
+- 📦 Die Bestandsübersicht nennt unter einem Set seine ersten drei Bestandteile, „Sets aufklappen“ öffnet alle Sets der Seite, und die Suche findet ein Set über den Namen eines Bestandteils.
+- 📦 Aufgeklappte Bestandteile stehen eingerückt unter dem Set, bei einem Pflicht-Set mit durchgezogener, bei einem losen mit gestrichelter Linie.
+- 📦 Die Materialhistorie nennt das Anlegen und Umbenennen von Einheiten und Änderungen an den Bestandteilen eines Sets.
+- ⚙️ Das Anlegen und Entfernen eines externen Kalenders steht im Änderungsprotokoll.
+- ⚙️ Die Versionsprüfung fragt die Image-Registry statt GitHub; wer `KRAMR_UPDATE_GITHUB_REPO` gesetzt hatte, trägt `KRAMR_UPDATE_IMAGE` mit dem Image-Namen ein, sonst warnt der Start.
+- ⚙️ Installationsanleitung, Updateseite und Produktivvorlage nennen nur öffentlich erreichbare Adressen; Image-Tags stehen ohne „v“ (`1.8.0`).
+
+### Fehlerbehebungen
+
+- 📋 Erinnerung vor der Abholung und Hinweis auf eine überfällige Rückgabe erreichen alle vorgesehenen Empfänger und den Webhook, nicht nur den ersten.
+- 📋 Eine überfällige Rückgabe wird auch gemeldet, wenn die Anwendung am Folgetag nicht lief – einmal und bis zu sieben Tage rückwirkend.
+- 📋 Eine Konflikt-Benachrichtigung geht auch nach einem Speicherfehler nicht doppelt hinaus.
+- 📋 Kalender und Buchungsübersicht zeigen für einen Zeitraum auch bei mehr als 2000 Buchungen alle; bisher fehlten ältere.
+- 📋 Teilweise zurückgegebenes Material belegt nur, was draußen ist; falsche Konfliktwarnungen nach einer Verlustmeldung entfallen, und ein Entwurf, dessen Positionen zusammen mehr verlangen als der Bestand, ist markiert (bestehende werden beim nächsten Abgleich gemeldet).
+- 📋 Abhol- und Rückgabezeiten, Zeitraumfilter und der Jahreswechsel der Buchungsnummer gelten immer in Berliner Zeit, unabhängig von der Zeitzone des Rechners.
+- 📋 Eine Buchungsanfrage per Link nimmt nur Zeiträume ab heute an, höchstens 90 Tage lang und höchstens zwei Jahre im Voraus; der Kalender bietet nur solche Tage an.
+- 📋 Die CSV-Datei der Buchungen zeigt Umlaute in Excel richtig an.
+- 📦 Der CSV-Export öffnet in der Tabellenkalkulation keine Formeln mehr, auch nicht nach einem Semikolon; beim Re-Import kommen die Texte unverändert zurück.
+- 📦 Der Materialimport nimmt höchstens 1000 Zeilen je Datei an und nennt das.
+- 📦 Namen von Material, Kategorien, Lagerorten, Einheiten und Parametertypen sind auf 200 Zeichen begrenzt, ein überlanger Name legt die Packliste nicht mehr lahm; bestehende längere Namen vor dem Update kürzen.
+- 👤 Beim Anonymisieren eines Kontakts verschwinden seine Daten auch aus Bemerkungen, Gründen und Zusatzkosten-Bezeichnungen seiner Buchungen, unabhängig von der Schreibweise; zusätzliche Empfänger abgeschlossener Buchungen werden gelöscht, die offener beim Abschluss.
+- ⚙️ Lehnt das Speichern der E-Mail-Texte einen Text ab, nennt der Hinweis E-Mail und Fassung (Du/Sie), und der Cursor steht im ersten fehlerhaften Feld.
+- ⚙️ Hängt der Mailserver, bleibt der Versand nicht stecken, und dieselbe Benachrichtigung geht nicht doppelt hinaus.
+- ⚙️ Ein eingebundener Kalender, dessen Auslesen zu lange dauert, wird nach fünf Sekunden abgewiesen, statt die Anwendung auszubremsen.
+- 🖥️ Bei abgelaufener Sitzung zeigen Nutzerverwaltung, Profil und weitere Seiten „Erneut anmelden“ statt „nicht abrufbar“; auf Formularen öffnet die Anmeldung in einem neuen Tab, damit das Eingegebene bleibt.
+
+### Unter der Haube
+
+- 📋 Der Konfliktabgleich alle fünf Minuten lädt Buchungen gesammelt und prüft nur Buchungen mit bevorstehender Rückgabe; wird eine Buchung nach ihrer Rückgabezeit verlängert und gerät in Konflikt, wird das erneut gemeldet.
+- 📦 Scheitert der CSV-Export, antwortet kramr mit der neutralen Fehlermeldung und protokolliert den Fehler.
+- ⚙️ Löschen und Bereinigen von Benachrichtigungen ist bei großem Bestand schneller.
+- ⚙️ Neue Versionen sind signiert und tragen eine Herkunftsangabe; die Prüfung steht in der Betreiberdoku unter „Updates“.
+- ⚙️ Der Start verweigert `http://`-Adressen für öffentliche Adresse und Anmeldedienst (außer auf dem eigenen Rechner); der Admin-Bootstrap gilt nur beim konfigurierten Anmeldedienst, ein Gruppen-Claim als Text zählt als eine Gruppe.
+- ⚙️ Die Sperrliste für Webhook- und Kalenderziele ist länger (lokale Rechnernamen, Multicast, reservierte und Testbereiche, 6to4); ein Webhook-Ziel wird vor jedem Versand geprüft, ein aus `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS` entfernter Host bekommt nichts mehr.
+- ⚙️ Die SVG-Logo-Prüfung ist strenger, das Logo kommt ohne Ladeerlaubnis, das Protokoll nennt bei Einstellungen keine Werte, und Antworten der Schnittstelle landen nicht im Browser-Cache.
+- ⚙️ Die Abmelde-Adresse des Anmeldedienstes wird nur mit `https://` angenommen (`http://` nur auf dem eigenen Rechner), sonst führt die Abmeldung auf die Startseite.
+- ⚙️ Backups sind nur für den Betreiber lesbar (vor dem Kopieren außer Haus verschlüsseln, siehe Betreiberdoku), das Backup-Skript führt die `.env` nicht mehr als Skript aus, und das Datenbankpasswort darf nur Buchstaben, Ziffern und `-` `.` `_` `~` enthalten.
+- ⚙️ Die Compose-Vorlage vertraut `X-Forwarded-*` nur mit `KRAMR_SERVER_TRUST_PROXY=true` (die Produktionsvorlage setzt es; läuft kramr hinter einem Proxy und fehlt die Zeile, vor dem Update ergänzen); das Caddy-Beispiel hat kein nicht lauffähiges Rate-Limit mehr, das Image keine Frontend-Abhängigkeiten.
+- ⚙️ Die Bibliothek für Datei-Uploads ist aktualisiert (Sicherheitslücke geschlossen; kramr war nicht betroffen).
+- 🖥️ Nach dem Update meldet sich jede Person einmal neu an: Der Sitzungs-Cookie hat einen neuen Namen und ist besser gegen untergeschobene Cookies von Schwester-Subdomains geschützt.
+- 🖥️ E-Mail-Adressen werden nur übernommen, wenn der Anmeldedienst sie als bestätigt meldet; Einrichtung prüfen, sonst bekommen Betroffene keine Mails (Betreiberdoku „Anmeldung und Rollen“).
+- 🖥️ Eine Anmeldung beendet die vorige Sitzung desselben Browsers, die Glocke hält keine Sitzung mehr am Leben, und das Abfragen der eigenen Sitzung zählt nicht gegen die Begrenzung der Anmeldeversuche.
+- 🖥️ Die größten Oberflächenseiten sind intern aufgeteilt, und Verwaltungsseiten, Import, Auswertung und Versionshinweise laden erst beim Öffnen (bei Fehler mit „Erneut versuchen“).
+- 🖥️ Neue Softwarepakete werden erst nach drei Tagen Wartezeit vorgeschlagen, und die Automatisierung für Release und Aufräumen übergibt Eingaben nicht mehr als Text an die Shell.
+
 ## Version 1.8.0 (20.10.2026)
 
 ### Neue Funktionen

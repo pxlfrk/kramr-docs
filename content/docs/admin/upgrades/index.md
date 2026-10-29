@@ -94,6 +94,10 @@ Ziehe vorher ein Backup.
 
 Siehe [Rollback](../runbooks/rollback.md).
 
+Hinweis zu den Zusatzkosten: Die Migration `0077` legt die Tabelle für Zusatzkosten an und erweitert die erlaubten Arten von Historie-Einträgen.
+Sie ändert keine bestehenden Daten.
+Die vorherige Version kennt die Zusatzkosten nicht: sie zeigt sie nicht an und rechnet sie nicht in den Betrag, die Daten bleiben aber erhalten.
+
 Hinweis zu den Positionsbeträgen: Die Migration `0076` ergänzt die festgeschriebenen Preise an den Buchungspositionen, den Betrag-alt-Wert an der Buchung und den Schalter „Bestandteile einzeln berechnen“ am Material.
 Sie setzt den Schalter an jedem Pflicht-Set ohne eigenen Preis, dessen Bestandteile einen Preis haben, damit bestehende Buchungen nicht kostenlos werden.
 Ein früher von Hand erfasster Betrag einer Buchung, die noch nicht zurückgegeben oder storniert war, wird nicht mehr angezeigt; er bleibt in der Historie der Buchung nachlesbar.
