@@ -17,6 +17,18 @@ Jede Buchung, ob Ausleihe oder Sperre, hat genau einen Status.
 | Zurückgegeben | Das Material ist zurück. Endzustand. | Nein |
 | Storniert | Die Buchung wurde abgesagt. Endzustand, sie bleibt in der Historie. | Nein |
 
+## Der Status auf der Buchung
+
+Oben auf der Buchung zeigt die Karte „Status“ den Verlauf: Entwurf, Genehmigt, Abgeholt, Zurückgegeben.
+Der aktuelle Schritt hat den dicksten Balken, ein noch offener Schritt ist gestrichelt.
+Ein Schritt heißt erst „Abgeholt“, wenn das Material übergeben wurde; bis dahin steht dort „Abholung“ mit dem geplanten Tag.
+Ebenso heißt es „Rückgabe“ bis zur Rückgabe, „Genehmigung“ bis zur Genehmigung und „Zahlung“ bis zur Zahlung.
+Unter „Abrechnung“ steht dahinter die Bezahlung: Sie zeigt den Betrag und, ob er offen, bezahlt oder erlassen ist.
+Eine Buchung ohne Betrag zeigt „Kein Betrag“, eine stornierte Buchung „Gesperrt“.
+
+Hinweise wie „Konflikt“, „Überfällig“ oder „Abholung unvollständig“ stehen als Stichwort an dem Schritt, zu dem sie gehören.
+Ein Klick darauf springt zu der Karte, die die Einzelheiten nennt, zum Beispiel zu den Materialpositionen.
+
 ## Übergänge
 
 `Entwurf → Genehmigt → Abgeholt → Zurückgegeben`
