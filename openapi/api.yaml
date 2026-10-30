@@ -1896,6 +1896,163 @@ components:
         takeoverPreview:
           type: object
           properties:
+            outsideOpeningHours:
+              type: object
+              properties:
+                pickup:
+                  anyOf:
+                    - oneOf:
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: hours
+                            periods:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  from:
+                                    type: string
+                                  to:
+                                    type: string
+                                required:
+                                  - from
+                                  - to
+                                additionalProperties: false
+                            label:
+                              type:
+                                - string
+                                - "null"
+                          required:
+                            - kind
+                            - periods
+                            - label
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: holiday
+                            holiday:
+                              type: string
+                              enum:
+                                - new_year
+                                - epiphany
+                                - womens_day
+                                - maundy_thursday
+                                - good_friday
+                                - easter_sunday
+                                - easter_monday
+                                - labour_day
+                                - ascension
+                                - whit_sunday
+                                - whit_monday
+                                - corpus_christi
+                                - assumption
+                                - childrens_day
+                                - unity_day
+                                - reformation_day
+                                - all_saints
+                                - repentance_day
+                                - christmas_eve
+                                - christmas_day
+                                - boxing_day
+                          required:
+                            - kind
+                            - holiday
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: closure
+                            label:
+                              type: string
+                          required:
+                            - kind
+                            - label
+                          additionalProperties: false
+                    - type: "null"
+                return:
+                  anyOf:
+                    - oneOf:
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: hours
+                            periods:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  from:
+                                    type: string
+                                  to:
+                                    type: string
+                                required:
+                                  - from
+                                  - to
+                                additionalProperties: false
+                            label:
+                              type:
+                                - string
+                                - "null"
+                          required:
+                            - kind
+                            - periods
+                            - label
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: holiday
+                            holiday:
+                              type: string
+                              enum:
+                                - new_year
+                                - epiphany
+                                - womens_day
+                                - maundy_thursday
+                                - good_friday
+                                - easter_sunday
+                                - easter_monday
+                                - labour_day
+                                - ascension
+                                - whit_sunday
+                                - whit_monday
+                                - corpus_christi
+                                - assumption
+                                - childrens_day
+                                - unity_day
+                                - reformation_day
+                                - all_saints
+                                - repentance_day
+                                - christmas_eve
+                                - christmas_day
+                                - boxing_day
+                          required:
+                            - kind
+                            - holiday
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: closure
+                            label:
+                              type: string
+                          required:
+                            - kind
+                            - label
+                          additionalProperties: false
+                    - type: "null"
+              required:
+                - pickup
+                - return
+              additionalProperties: false
             lines:
               type: array
               items:
@@ -2090,6 +2247,7 @@ components:
               minimum: 0
               maximum: 9007199254740991
           required:
+            - outsideOpeningHours
             - lines
             - fixedContact
             - contactSuggestions
@@ -2149,6 +2307,13 @@ components:
               - demand
               - heldBy
             additionalProperties: false
+        appointments:
+          type: array
+          items:
+            type: string
+            enum:
+              - pickup
+              - return
         amosweb:
           type: object
           properties:

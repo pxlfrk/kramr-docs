@@ -33,6 +33,10 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `request_mail.declined` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, dass die Anfrage abgelehnt wurde, je in einer Du- und einer Sie-Fassung; der Text muss die Begründung enthalten. |
 | `booking.select_all_confirm_threshold` | Zahl | `50`, ohne Umgebungsvariable | Ab wie vielen hinzugefügten Positionen „Alle auswählen“ in der Materialauswahl vorher fragt. Eine ganze Zahl von 1 bis 10000. |
 | `extra_charge.cleaning_fee_parameter_type` | parameter-type | leer (keine Reinigungsgebühr vorbelegt) | Der Parameter-Typ, dessen Wert (eine Zahl in €) den Einzelpreis einer Zusatzkosten-Position „verunreinigt“ vorbelegt. Zur Auswahl stehen Zahl-Parameter mit der Einheit „€“; ohne Auswahl wird nichts vorbelegt. |
+| `office.opening_hours` | opening-hours | leer (alle Tage geschlossen, kein Hinweis) | Die Öffnungszeiten der Geschäftsstelle, je Wochentag null bis vier Zeiträume in Ortszeit. Ein Zeitraum reicht bis zum Ende ausschließlich. Solange kein Wochentag einen Zeitraum hat, zeigt kramr keinen Hinweis. |
+| `office.opening_hours_deviations` | opening-hours-deviations | leer (keine Ausnahmen) | Ausnahmen von den Wochenzeiten, etwa Betriebsferien, je mit Datum oder Zeitraum, Bezeichnung und entweder geschlossen oder abweichenden Zeiten. Eine Ausnahme gilt vor Feiertag und Wochentag. |
+| `office.federal_state` | Auswahl | `BE` (Berlin), ohne Umgebungsvariable | Das Bundesland, dessen gesetzliche Feiertage kramr berechnet. An einem Feiertag gilt die Geschäftsstelle als geschlossen. |
+| `office.church_holidays` | holiday-list | leer (keine kirchlichen Feiertage) | Die angekreuzten kirchlichen Feiertage, die zusätzlich als geschlossen gelten. Zur Auswahl stehen Heilige Drei Könige, Gründonnerstag, Fronleichnam, Mariä Himmelfahrt, Reformationstag, Allerheiligen, Buß- und Bettag und Heiligabend. |
 | `amosweb.enabled` | Ja oder Nein | `false`, ohne Umgebungsvariable | Ob das amosWEB-Modul eingeschaltet ist. Einschalten lässt es sich nur, wenn `KRAMR_AMOSWEB_APP_TOKEN`, `KRAMR_AMOSWEB_APP_KEY` und `KRAMR_SECRETS_KEY` gesetzt sind. Ausgeschaltet bleibt eine bestehende Verbindung erhalten, alle anderen amosWEB-Einstellungen sind gesperrt. Geändert wird sie unter: Verwaltung › Integrationen. |
 | `amosweb.base_url` | Text | leer | Die Adresse der amosWEB-Instanz, nur `https://` und ohne Pfad. Offensichtlich interne Ziele lehnt kramr ab. Eine bestehende Verbindung behält die Adresse, mit der sie hergestellt wurde. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Einrichtung. |
 | `amosweb.debtor_contact_id` | Text | leer | Die ID des Platzhalter-Kontakts in amosWEB, auf den Rechnungen vorerst lauten. Eine ganze Zahl; die ID steht in amosWEB beim Kontakt. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Rechnungsangaben. |
@@ -54,6 +58,7 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 | Gruppe | Seite | Inhalt |
 | --- | --- | --- |
 | Organisation | Auftritt | `organisation.name`, `ui.address_form`, `booking.select_all_confirm_threshold`, `extra_charge.cleaning_fee_parameter_type` und die Logos für Oberfläche und E-Mails |
+| Organisation | Öffnungszeiten | `office.opening_hours`, `office.federal_state`, `office.church_holidays` und `office.opening_hours_deviations`, siehe [Öffnungszeiten](#öffnungszeiten-der-geschäftsstelle) |
 | Organisation | Recht & Datenschutz | `legal.privacy_policy_url`, `legal.links` und `contacts.inactivity_period_days` |
 | Organisation | E-Mail-Texte | die vier `request_mail.*`-Texte, siehe [E-Mail-Texte](#e-mail-texte-an-anfragende) |
 | System | Benachrichtigungen | `reminder.lead_time_days`, die Empfänger (`notification.notify_creator`, `notification.notify_admins_on_new_booking`, `notification.always_notify_recipients`) und `notification.webhook_url`; darunter die fehlgeschlagenen Benachrichtigungen der letzten 7 Tage |
@@ -62,6 +67,19 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 | System | Version & Updates | die laufende Version und `update_check.enabled` |
 
 Die frühere Adresse `/settings` führt auf die Seite *Auftritt*.
+
+## Öffnungszeiten der Geschäftsstelle
+
+Auf der Seite *Öffnungszeiten* trägst du ein, wann die Geschäftsstelle besetzt ist.
+Liegt der Abhol- oder Rückgabetermin einer Ausleihe außerhalb, zeigt kramr einen Hinweis, und wer den Termin setzt oder genehmigt, bestätigt ihn bewusst.
+Der Hinweis ist weich wie der Konflikt: Er ist kein Status und sperrt nichts.
+Sperren tragen ihn nie, weil dort nichts abgeholt oder zurückgebracht wird.
+
+- **Wochenzeiten:** Je Wochentag trägst du bis zu vier Zeiträume ein, etwa 09:00–12:00 und 14:00–18:00. Ein Tag ohne Zeitraum gilt als geschlossen. Das Ende gehört nicht mehr dazu: Bei Schluss um 18:00 liegt ein Termin um 18:00 außerhalb. Ein Zeitraum reicht nicht über Mitternacht; wer länger geöffnet hat, trägt zwei Zeiträume an zwei Tagen ein.
+- **Bundesland und Feiertage:** Die gesetzlichen Feiertage des gewählten Bundeslandes (Vorgabe Berlin) berechnet kramr selbst. An einem Feiertag gilt die Geschäftsstelle als geschlossen. Kirchliche Feiertage, die im Land nicht gesetzlich sind, kreuzt du einzeln an; was im Land gesetzlich ist, ist angekreuzt und gesperrt.
+- **Ausnahmen:** Betriebsferien, Brückentage oder abweichende Zeiten trägst du mit Datum oder Zeitraum und einer Bezeichnung ein, entweder als ganztägig geschlossen oder mit eigenen Zeiträumen. Eine Ausnahme gilt vor Feiertag und Wochentag, sie kann also an einem Feiertag öffnen. Silvester und örtliche Feiertage pflegst du hier.
+- **Ohne Pflege kein Hinweis:** Solange kein Wochentag einen Zeitraum hat, zeigt kramr keinen Hinweis, auch nicht an Feiertagen.
+- **Wirkung auf bestehende Buchungen:** Der Hinweis wird bei jedem Lesen aus dem Termin und diesen Einstellungen berechnet. Wer die Zeiten ändert, ändert ihn also auch für bestehende Buchungen, ohne dass jemand neu bestätigen muss. Die Änderung steht im Verlauf der Einstellungen.
 
 ## Einbettung als eigene Seite verlinken
 

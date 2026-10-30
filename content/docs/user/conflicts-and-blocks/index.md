@@ -33,6 +33,18 @@ Die Buchung, die den Bestand hält, trägt einen neutralen Hinweis, wenn andere 
 In der Buchungsübersicht steht dafür „Beansprucht“.
 Das ist kein Konflikt: keine Rückfrage, keine Benachrichtigung, kein Filter.
 
+## Termin außerhalb der Öffnungszeiten
+
+Hat die Verwaltung die Öffnungszeiten der Geschäftsstelle eingetragen, prüft kramr die Termine einer Ausleihe.
+Liegt der Abhol- oder Rückgabetermin außerhalb dieser Zeiten, an einem Feiertag oder an einem geschlossenen Tag, zeigt kramr einen Hinweis mit dem Grund, zum Beispiel „Feiertag: Ostermontag“.
+Der Hinweis ist wie der Konflikt kein Status und sperrt nichts.
+
+- **Wo du ihn siehst:** In der Buchung steht er unter dem betroffenen Termin und als Hinweis an der Abholung oder der Rückgabe in der Statuskette; ein Klick darauf springt zum Termin. Im Formular erscheint er unter den Terminen, in der Buchungsübersicht in der Zeile.
+- **Bestätigen:** Wer einen Termin außerhalb anlegt, ändert, genehmigt oder aus einer Anfrage übernimmt, bestätigt ihn ausdrücklich. Im Formular kreuzt du „Termin außerhalb der Öffnungszeiten bestätigen“ an, beim Genehmigen bestätigst du im Dialog. Beim Bearbeiten fragt kramr nur für einen Termin, den du verschoben hast.
+- **Wann nicht:** Sperren tragen den Hinweis nie. Zurückgegebene und stornierte Buchungen auch nicht, und eine abgeholte Buchung nur noch an der Rückgabe. Beim Erfassen von Abholung oder Rückgabe fragt kramr nicht, denn dann ist es ohnehin geschehen.
+- **Filter:** In der Buchungsübersicht zeigt der Filter „Außerhalb der Öffnungszeiten“ nur diese Buchungen oder blendet sie aus. Er ist ein eigener Filter und nicht der Filter „Konflikt“.
+- **Anfragende:** Wer eine Anfrage stellt, sieht den Hinweis nicht; die Geschäftsstelle bestätigt ihn beim Übernehmen.
+
 ## Zeiträume
 
 Ein Zeitraum reicht vom Abholtermin bis zum Rückgabetermin, jeweils mit Datum und Uhrzeit.
