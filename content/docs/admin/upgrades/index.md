@@ -39,6 +39,13 @@ cosign verify-attestation ghcr.io/pxlfrk/kramr@<digest> --type slsaprovenance1 \
 Wurde die Version durch einen von Hand gesetzten Tag veröffentlicht, endet die Identität auf `@refs/tags/vX.Y.Z` statt auf `@refs/heads/main`.
 Wer geprüft hat, setzt in der `.env` den Digest mit: `KRAMR_IMAGE_TAG=X.Y.Z@sha256:…`, damit nicht später ein umgehängter Tag geladen wird.
 
+### Ungetaggte Einträge in der Paketübersicht
+
+Neben den Versions-Tags zeigt die Paketübersicht ab Version 1.9.0 pro Release einige Einträge ohne Tag.
+Das sind keine fehlgeschlagenen Releases: es sind die Signatur und die Herkunftsangabe des Images, die cosign als eigene Einträge ablegt und über einen Index mit dem Tag `sha256-…` verknüpft.
+Lösche sie nicht, sonst scheitern die beiden Prüfungen oben.
+Das Image selbst trägt weiterhin seine Tags `X.Y.Z`, `X.Y` und `latest`.
+
 ## Ablauf eines Updates
 
 1. **Backup ziehen**, siehe [Backup](../backup/index.md).
