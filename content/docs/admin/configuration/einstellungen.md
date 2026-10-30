@@ -63,6 +63,15 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 
 Die frühere Adresse `/settings` führt auf die Seite *Auftritt*.
 
+## Einbettung als eigene Seite verlinken
+
+Eine Einbettung lässt sich auch ohne iFrame verlinken, etwa in einer Mail oder einem Messenger.
+Unter *Website-Einbindung* zeigt die Einbettung ihre Adresse mit dem Knopf „Adresse kopieren“; sie sieht so aus: `https://<deine-adresse>/embed/<Einbettung>`.
+Für ein einzelnes Material hängst du `/items/<Kennung>?single` an diese Adresse.
+Die Kennung steht in der Adresszeile, wenn du das Material im Bestand öffnest (`…/items/<Kennung>`).
+Mit `?single` fehlt auf der Materialseite der Link „Zurück zur Übersicht“.
+Es zeigt sich nur, was die Einbettung ohnehin zeigt: Ein Material außerhalb ihres Umfangs bleibt „nicht zu sehen“.
+
 ## Rechtliche Links
 
 Auf der Seite *Recht & Datenschutz* pflegst du die Datenschutzerklärung und bis zu vier weitere Links, zum Beispiel Impressum, Kontakt oder die Website des Vereins.

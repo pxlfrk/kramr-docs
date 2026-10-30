@@ -159,6 +159,8 @@ das an niemanden verleihbar ist, wird gezeigt, lässt sich aber nicht anfragen.
 Bei der Übernahme wählt die Sachbearbeitung die Verleihart; Positionen, die
 dafür nicht verleihbar sind, nennt der Dialog vorab und übernimmt sie nicht.
 
+Eine Einbettung und einzelne Materialien lassen sich auch als eigene Seite verlinken; wie, steht in den [Einstellungen](../../admin/configuration/einstellungen.md#einbettung-als-eigene-seite-verlinken).
+
 Wer eine Anfrage zusammenstellt, öffnet „Material hinzufügen" und hakt dort beliebig viele Materialien an.
 Die Menge tragen sie gleich in der Zeile ein.
 „Nur Ausgewählte" zeigt, was schon angehakt ist, und das, was die Anfrage schon enthält; „Bilder anzeigen" blendet die Bilder aus und ist hier standardmäßig an.
