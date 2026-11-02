@@ -1,0 +1,43 @@
+---
+import { BaseLayout, SiteFooter, SiteHeader } from '@prosefly/astro-theme-lotus/layouts';
+import { Icon } from '@prosefly/astro-components';
+import { notFound } from '../data/not-found.de';
+import '../styles/landing.css';
+
+// GitHub Pages serves this file for every unknown address, at any depth, so
+// every link is root-relative and gets the base path after the build
+// (plugins/base-path.mjs).
+---
+
+<BaseLayout
+  title={notFound.title}
+  description={notFound.description}
+  head={[{ tag: 'meta', attrs: { name: 'robots', content: 'noindex' } }]}
+>
+  <SiteHeader surface />
+
+  <main class="k-page">
+    <section class="k-wrap k-notfound">
+      <div class="k-tag" style="--k-tilt:-1.5deg">
+        <span class="k-hole" />
+        <div class="k-mono k-small">{notFound.tag.number}</div>
+        <div class="k-notfound-code">{notFound.tag.code}</div>
+        <span class="k-pill" data-tone="draft">{notFound.tag.status}</span>
+      </div>
+      <h1 class="k-h2">{notFound.heading}</h1>
+      <p class="k-lead">{notFound.text}</p>
+      <div class="k-actions">
+        {
+          notFound.actions.map((action) => (
+            <a class:list={['k-btn', action.primary ? 'k-btn--solid' : 'k-btn--line']} href={action.href}>
+              {action.label}
+              <Icon name="lucide:arrow-right" class="size-4" />
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

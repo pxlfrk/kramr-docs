@@ -800,3 +800,23 @@ a.k-grid-card:hover {
   font-size: 0.9375rem;
   color: var(--lotus-text-muted);
 }
+
+/* 404 page */
+.k-notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding-block: 4rem 6rem;
+}
+.k-notfound-code {
+  font-family: var(--kramr-font-display);
+  font-size: clamp(3rem, 12vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.k-notfound .k-tag:hover {
+  transform: rotate(var(--k-tilt, 0deg));
+  box-shadow: 5px 5px 0 var(--kramr-shadow);
+}

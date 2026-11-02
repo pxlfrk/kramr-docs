@@ -72,6 +72,8 @@ for await (const file of walk(DIST)) {
 }
 
 if (pages === 0) problems.push(`no HTML pages in ${DIST}`);
+// GitHub Pages answers an unknown address with this file; without it the visitor gets GitHub's own page.
+if (!existsSync(join(DIST, '404.html'))) problems.push('404.html is missing');
 
 if (problems.length > 0) {
   process.stderr.write(`${[...new Set(problems)].join('\n')}\n`);
