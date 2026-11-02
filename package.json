@@ -29,7 +29,7 @@
     "typescript": "6.0.3"
   },
   "overrides": {
-    "@ai-sdk/provider-utils": "4.0.61",
+    "@ai-sdk/provider-utils": "5.0.72",
     "postcss-selector-parser": "7.1.6"
   }
 }
