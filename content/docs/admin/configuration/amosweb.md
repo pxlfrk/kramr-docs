@@ -122,6 +122,7 @@ amosWEB liefert die Artikel gruppenweise, deshalb trägt ein Admin im Bereich *A
 *Artikelgruppe hinzufügen* ruft die Gruppe zuerst ab und zeigt ihre Artikel mit Preis.
 Nur ein Artikel, den amosWEB als Brutto-Artikel liefert, lässt sich wählen.
 Eine Gruppe, die es nicht gibt oder die leer ist, lässt sich nicht eintragen.
+Weil amosWEB nur die ID einer Gruppe nennt, kannst du beim Hinzufügen einen *Bezeichner* eintragen, etwa „Zelte“; er ist freiwillig, bleibt in kramr und lässt sich in der Tabelle mit *Bezeichner ändern* später anpassen oder leeren.
 
 kramr gleicht die Artikel jeden Morgen um 6 Uhr mit amosWEB ab; *Jetzt abrufen* tut es sofort.
 Der Abruf gelingt ganz oder gar nicht: Scheitert er für eine Gruppe, bleibt alles wie es war, und die Seite zeigt den Grund.
