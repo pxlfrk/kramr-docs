@@ -29,7 +29,7 @@ Der Browser hält nur einen zufälligen Wert in einem Cookie.
 Ein doppelt gesendeter Cookie gilt als nicht vorhanden.
 Eine Sitzung endet nach acht Stunden ohne Aktivität oder sieben Tage nach der Anmeldung.
 Beide Werte sind fest.
-Ein Datenbank-Abzug oder ein Backup enthält keine verwendbaren Anmeldungen.
+Ein Datenbank-Dump oder ein Backup enthält keine verwendbaren Anmeldungen.
 Wie du alle Sitzungen einer Person sofort beendest, steht unter [Anmeldung und Rollen](../configuration/anmeldung-und-rollen.md).
 
 ## Rollen und Rechte
@@ -40,7 +40,7 @@ Anmelden allein gibt keine Rechte.
 
 - Jede Route der Anwendung legt ausdrücklich fest, wer sie aufrufen darf. Was nicht festgelegt ist, lehnt kramr ab.
 - Die Rechte prüft der Server. Die Oberfläche blendet nur aus, was ohnehin abgelehnt würde.
-- Die Rolle liest kramr bei jeder Anfrage frisch aus der Nutzerverwaltung (kurz zwischengespeichert, etwa eine Minute). Ein Rechteentzug wirkt also binnen etwa einer Minute.
+- Die Rolle liest kramr bei jeder Anfrage frisch aus der Nutzerverwaltung (kurz im Cache, etwa eine Minute). Ein Rechteentzug wirkt also binnen etwa einer Minute.
 - Im Gruppenmodus kommt die Rolle aus dem Anbieter und aktualisiert sich nur bei der Anmeldung. Ein Rechteentzug wirkt dort nach `KRAMR_OIDC_ROLES_REFRESH_MINUTES`, standardmäßig nach 60 Minuten. Wähle die Frist so kurz, wie dein Anbieter eine stille Neuanmeldung zulässt.
 
 ## Reverse Proxy und TLS
@@ -61,12 +61,12 @@ Dort liegt auch das grobe Rate-Limit.
 Die Datenbank hat keinen veröffentlichten Port.
 Das soll so bleiben.
 
-## Herkunft schreibender Anfragen
+## Schutz vor fremden Schreibanfragen
 
 Das Cookie der Sitzung schützt vor Anfragen von fremden Websites, nicht vor Anfragen von einer Schwester-Adresse derselben Organisation, etwa `www.verein.de` an `kramr.verein.de`.
 Deshalb weist kramr jede schreibende Anfrage unter `/api` ab, die der Browser als fremd kennzeichnet.
 Dazu liest es `Sec-Fetch-Site`; fehlt die Zeile, vergleicht es `Origin` mit `KRAMR_SERVER_PUBLIC_URL`.
-Fehlen beide, lässt kramr die Anfrage durch: Ein Browser sendet sie bei einem solchen Angriff immer, Skripte und Werkzeuge gegen die Schnittstelle bleiben möglich.
+Fehlen beide, lässt kramr die Anfrage durch: Ein Browser sendet sie bei einem solchen Angriff immer, Skripte und Werkzeuge gegen die API bleiben möglich.
 Die öffentlichen Routen unter `/api/public/*` sind ausgenommen, weil Einbettungen auf fremden Websites sie aufrufen.
 
 Das verlangt zwei Dinge von dir:
@@ -78,22 +78,22 @@ Das verlangt zwei Dinge von dir:
 
 Die Anwendung setzt selbst eine strenge Content-Security-Policy und weitere Header: Rahmen von fremden Seiten sind ausgeschlossen, Inhalte ohne erlaubte Herkunft werden nicht geladen, HSTS gilt ein Jahr einschließlich Subdomains.
 Eine `Permissions-Policy` schaltet Kamera, Mikrofon, Standort und weitere Browser-Funktionen ab, die kramr nicht nutzt.
-Antworten der Schnittstelle (`/api`, außer `/api/public`) bleiben nicht im Browser-Cache, damit Personendaten nicht auf einem geteilten Rechner liegen bleiben.
-Die Oberfläche kommt aus derselben Adresse wie die Schnittstelle, deshalb gibt es keine CORS-Freigabe.
+Antworten der API (`/api`, außer `/api/public`) bleiben nicht im Browser-Cache, damit Personendaten nicht auf einem geteilten Rechner liegen bleiben.
+Die Oberfläche kommt aus derselben Adresse wie die API, deshalb gibt es keine CORS-Freigabe.
 
 Dein Proxy darf diese Header nicht überschreiben oder ersetzen.
 Für `/embed/*` darf er insbesondere weder `X-Frame-Options` noch eine eigene `Content-Security-Policy` setzen.
 
 ## Öffentliche Seiten und Einbettung
 
-Ohne Anmeldung erreichbar sind nur die Seiten unter `/embed/*`, die Schnittstellen unter `/api/public/*`, die Anmelde-Routen und `/healthz`.
+Ohne Anmeldung erreichbar sind nur die Seiten unter `/embed/*`, die öffentlichen API-Routen unter `/api/public/*`, die Anmelde-Routen und `/healthz`.
 Die Sachbearbeitung der Anfragen ist nicht öffentlich.
 
 - **Katalog:** Eine Einbettung zeigt nur Material, das als online sichtbar markiert ist, und nur Parameter, die als öffentlich gelten. Standorte, interne Parameter, Buchungen und Kontakte erscheinen nie. Einzeleinheiten erscheinen mit ihrer Bezeichnung und ihrem Zustand im Materialdetail und in einer Anfrage; wähle deshalb Bezeichnungen ohne Personenbezug, etwa „Nr. 3“ statt „Zelt der Familie Müller“. Der Katalog einer Einbettung ist für jeden lesbar, der ihre Kennung kennt. Markiere deshalb nur Material als online sichtbar, das jeder sehen darf.
 - **Allow-List:** Die Einstellung für die Website-Einbindung bestimmt, welche Websites eine Einbettung einrahmen dürfen. Sie schützt vor Clickjacking und ist keine Zugriffskontrolle. Leer heißt: keine fremde Website darf einbetten. Trage nur Websites ein, die du kontrollierst, jeweils mit Schema, Host und optional Port, ohne Pfad und ohne Platzhalter.
 - **Begrenzung:** Die öffentlichen Routen haben getrennte Limits für Lesen und Schreiben je Client-Adresse, siehe [Umgebungsvariablen](../configuration/umgebungsvariablen.md). Ein verstecktes Feld und die Obergrenzen schützen vor Missbrauch. Einen externen Captcha-Dienst nutzt kramr nicht.
-- **Anfrage-Links:** Der Link einer Buchungsanfrage ist ihr einziger Zugang. Er ist lang und zufällig, befristet und lässt sich widerrufen. Ein unbekannter, abgelaufener oder widerrufener Link antwortet immer gleich, sodass niemand erfährt, ob es ihn gibt. Antworten dazu werden nie zwischengespeichert, und die Anwendung schreibt keine Pfade ins Log.
-- **Was du beisteuern musst:** Dein Proxy darf diese Links nicht protokollieren, weder im Zugriffs- noch im Fehlerprotokoll. Siehe [Reverse Proxy](../installation/reverse-proxy.md), Anforderung 6.
+- **Anfrage-Links:** Der Link einer Buchungsanfrage ist ihr einziger Zugang. Er ist lang und zufällig, befristet und lässt sich widerrufen. Ein unbekannter, abgelaufener oder widerrufener Link antwortet immer gleich, sodass niemand erfährt, ob es ihn gibt. Antworten dazu werden nie gecacht, und die Anwendung schreibt keine Pfade ins Log.
+- **Was du beisteuern musst:** Dein Proxy darf diese Links nicht protokollieren, weder im Access- noch im Error-Log. Siehe [Reverse Proxy](../installation/reverse-proxy.md), Anforderung 5.
 - **E-Mails:** Die Anfrage beginnt mit einer Mail an die angegebene Adresse. Damit wird die Adresse bestätigt, und die Antwort verrät nie, ob eine Adresse schon bekannt war. Das erfordert funktionierenden Mailversand, siehe [Benachrichtigungen](../configuration/benachrichtigungen.md).
 
 ## Uploads
@@ -104,8 +104,7 @@ Die Sachbearbeitung der Anfragen ist nicht öffentlich.
 
 ## Webhooks und ausgehende Verbindungen
 
-Die Webhook-Adresse in den Einstellungen lehnt kramr beim Speichern ab, wenn sie offensichtlich auf ein internes Ziel zeigt: den eigenen Rechner, private Adressbereiche, Link-Local-Adressen einschließlich der Metadaten-Adresse von Cloud-Anbietern, den Adressbereich für Carrier-Grade-NAT (`100.64.0.0/10`), das NAT64-Präfix (`64:ff9b::/96`), Multicast, reservierte und für Tests vorgesehene Bereiche, 6to4 und die IPv6-Entsprechungen.
-Auch die Schreibweise des eigenen Rechners mit einem Punkt am Ende und jeder Name, der auf den reservierten Namensbereich für den eigenen Rechner endet, wird abgelehnt.
+Die Webhook-Adresse in den Einstellungen lehnt kramr beim Speichern ab, wenn sie offensichtlich auf ein internes Ziel zeigt: den eigenen Rechner, private und Link-Local-Adressbereiche (einschließlich der Metadaten-Adresse von Cloud-Anbietern), Carrier-Grade-NAT, NAT64, Multicast, reservierte Bereiche und die IPv6-Entsprechungen.
 Das schützt vor einer versehentlich oder böswillig eingetragenen internen Adresse.
 Es ist ein Grundschutz.
 kramr prüft die Adresse auch vor jedem Versand erneut.
@@ -113,7 +112,7 @@ Entfernst du einen Host aus `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS`, bekommt 
 Ein Hostname, der erst beim Senden auf eine interne Adresse zeigt, wird nicht erkannt.
 Für die Adressen externer Kalender (ICS) gilt dieselbe Prüfung, eine Ausnahme gibt es dort nicht.
 Lass deshalb nur Admins die Einstellungen ändern und vergib die Rolle sparsam.
-Jede Änderung einer Einstellung hält kramr im Änderungsprotokoll fest: wer, wann, welcher Schlüssel, alter und neuer Wert.
+Jede Änderung einer Einstellung hält kramr in der Änderungshistorie fest: wer, wann, welcher Schlüssel, alter und neuer Wert.
 So lässt sich nachvollziehen, wann die Webhook-Adresse umgestellt wurde.
 
 `KRAMR_NOTIFICATION_WEBHOOK_ALLOWED_HOSTS` ist die bewusste Ausnahme für ein legitimes internes Ziel, zum Beispiel einen Chat-Server im selben Docker-Netz.
@@ -125,7 +124,7 @@ Du kannst sie abschalten, siehe [Einstellungen](../configuration/einstellungen.m
 ## Daten und Löschung
 
 kramr löscht Kontakte nie, sondern anonymisiert sie.
-Dieselbe Anonymisierung erfasst Verlaufseinträge, Benachrichtigungen und Buchungsanfragen der Person.
+Dieselbe Anonymisierung erfasst Historien-Einträge, Benachrichtigungen und Buchungsanfragen der Person.
 Material wird archiviert, nie gelöscht.
 Anonymisiert wird nie automatisch, nur auf Vorschlag durch die Sachbearbeitung.
 Die festen Aufbewahrungsfristen und der Ablauf eines Begehrens stehen unter [Datenschutzbegehren](../datenschutz/index.md).

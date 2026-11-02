@@ -1,15 +1,15 @@
 ---
-title: Suche in der Kopfzeile
+title: Globale Suche
 description: Buchungen, Material und Kontakte mit einem Suchbegriff finden, ohne vorher die richtige Liste zu öffnen.
 audience: user
 order: 52
 ---
 
-# Suche in der Kopfzeile
+# Globale Suche
 
-Die Suche in der Kopfzeile findet Buchungen, Material und Kontakte zugleich.
+Die globale Suche in der Kopfzeile findet Buchungen, Material und Kontakte zugleich.
 Du musst nicht wissen, in welcher Liste etwas steht.
-Sie steht für jede Rolle bereit, die kramr benutzen darf, auch für **ReadOnly**.
+Sie steht für jede Rolle bereit, die kramr benutzen darf, auch für **Nur-Lesen**.
 
 ## Suchen
 
@@ -46,7 +46,7 @@ Ein Treffer zeigt nur das, was zum Erkennen nötig ist, zum Beispiel keine Adres
 - Anonymisierte Kontakte erscheinen nie.
   Eine Buchung eines anonymisierten Kontakts findest du weiterhin, mit dem gekürzten Namen wie in der Übersicht.
 
-## Wenn etwas nicht klappt
+## Fehlermeldungen
 
 - „Mindestens zwei Zeichen eingeben“: Der Suchbegriff ist noch zu kurz.
 - „Zu viele Suchen – bitte kurz warten“: Es gibt eine Obergrenze pro Person und Minute.

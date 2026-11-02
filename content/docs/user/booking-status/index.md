@@ -42,10 +42,10 @@ Eine überfällige Buchung ist kein eigener Status.
 kramr zeigt sie an, wenn eine genehmigte oder abgeholte Ausleihe ihren geplanten Rückgabetermin überschritten hat.
 Eine Sperre ist nie überfällig.
 
-## Einen Schritt zurücknehmen
+## Einen Schritt rückgängig machen
 
-Jeden Statuswechsel kannst du um einen Schritt zurücknehmen, wenn du dich verklickt hast.
-Das Zurücknehmen steht in der Historie, sodass sie den Fehler und die Korrektur zeigt.
+Jeden Statuswechsel kannst du mit „Rückgängig“ um einen Schritt zurücknehmen, wenn du dich verklickt hast.
+Das steht in der Historie, sodass sie den Fehler und die Korrektur zeigt.
 Zwei Schritte löschen erfasste Tatsachen und fragen vorher nach:
 
 - **Abgeholt → Genehmigt** entfernt den Abholstand aller Positionen. Es geht nicht mehr, sobald eine Rückgabe erfasst ist.
@@ -58,7 +58,7 @@ Zwei Schritte löschen erfasste Tatsachen und fragen vorher nach:
 | Entwurf | Alles: Material, Zeitraum, Kontakt, Bemerkung, zuständige Person, zusätzliche Empfänger. |
 | Genehmigt | Zeitraum, Bemerkung, Kontakt, zuständige Person und Material. Jede Änderung an Material oder Zeitraum prüft Konflikte neu. Bereits abgeholte Positionen sind fest. |
 | Abgeholt | Neue Positionen hinzufügen, noch nicht abgeholte Positionen ändern oder entfernen, Zeitraum (zum Beispiel die Rückgabe verlängern), Bemerkung und zuständige Person. Abgeholte Positionen sowie Kontakt und Verleihart sind fest. |
-| Zurückgegeben, Storniert | Nur lesen. |
+| Zurückgegeben, Storniert | Nur ansehen. |
 
 Jede Änderung steht in der Historie.
 

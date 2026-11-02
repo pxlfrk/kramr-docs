@@ -31,9 +31,7 @@ Betreiber mit `KRAMR_OIDC_ROLES_SOURCE` festlegt:
 - **`groups`**: Die Rolle wird bei jeder Anmeldung aus einem Gruppen-Claim im
   ID-Token abgeleitet; die lokale Rollenänderung ist dann gesperrt.
 
-Die Rolle wird bei jeder Anfrage frisch aus der Nutzertabelle gelesen
-(kurz zwischengespeichert, etwa eine Minute); ein Rechteentzug wirkt also
-innerhalb etwa einer Minute.
+Die Rolle wird bei jeder Anfrage frisch aus der Nutzertabelle gelesen (kurz im Cache, etwa eine Minute); ein Rechteentzug wirkt also innerhalb etwa einer Minute.
 
 ### Gruppenmodus
 
@@ -60,17 +58,13 @@ nur beim Anmelden aktualisiert, endet eine Sitzung im Gruppenmodus spätestens
 nach `KRAMR_OIDC_ROLES_REFRESH_MINUTES` (Standard 60, mindestens 5) nach dem
 Anmelden. Das ist die Frist, binnen der ein Rechteentzug beim Anbieter wirkt.
 
-**Ein Wechsel der Quelle** stellt beim Start alle Rollen zurück und beendet
-alle Sitzungen. Für den Wechsel zurück auf `local` wird
-`KRAMR_AUTH_BOOTSTRAP_ADMIN_SUBJECT` benötigt, damit danach jemand Admin ist.
+**Ein Wechsel der Quelle** läuft beim Start in einer Transaktion, bevor die Anwendung Anfragen annimmt, stellt alle Rollen zurück und beendet alle Sitzungen. Für den Wechsel zurück auf `local` wird `KRAMR_AUTH_BOOTSTRAP_ADMIN_SUBJECT` benötigt, damit danach jemand Admin ist.
 Der Admin-Bootstrap gilt nur für das Konto dieses Subjects beim konfigurierten Anbieter (`KRAMR_OIDC_ISSUER_URL`); ein gleichnamiges Konto eines früheren Anbieters wird nicht befördert.
 
 Weitere Hinweise zum Gruppenmodus:
 
 - Ist das Mapping falsch und niemand wird Admin, hilft nur der Weg zurück auf `local`.
-  Im Gruppenmodus bleibt `KRAMR_AUTH_BOOTSTRAP_ADMIN_SUBJECT` wirkungslos.
-- Ein Rechteentzug beim Anbieter wirkt erst nach der Frist oben, nicht binnen einer Minute wie im lokalen Modus.
-  Beim Anbieter läuft die neue Anmeldung meist ohne Klick durch.
+- Beim Anbieter läuft die neue Anmeldung nach Ablauf der Frist meist ohne Klick durch.
 - Eine Rolle, die ein Login erhöht (zum Beispiel von „Kein Zugriff“ auf Staff), gilt sofort für die nächste Anfrage der Person.
 - Hat jemand mehrere zugeordnete Gruppen, gilt die höherwertige Rolle.
 - Fehlt der Gruppen-Claim im Token, etwa weil der Scope nicht freigegeben ist, landen alle ohne Zugriff.
@@ -81,11 +75,10 @@ Weitere Hinweise zum Gruppenmodus:
   Mehrere Gruppen müssen als Liste kommen; ein Text wie „Gast kramr_admin“ ist die eine Gruppe „Gast kramr_admin“ und macht niemanden zum Admin.
 - Sind die Gruppen-Variablen gesetzt, obwohl die Quelle `local` ist, nennt das Log sie einmal als ignoriert.
 
-Der Wechsel der Quelle geschieht beim Start in einer Transaktion, bevor die Anwendung Anfragen annimmt.
-Scheitert er, startet die Anwendung nicht, und nichts ist verändert.
-Auch ein Wechsel zurück auf `local` ohne `KRAMR_AUTH_BOOTSTRAP_ADMIN_SUBJECT` bricht den Start ab.
+Scheitert der Wechsel der Quelle, startet die Anwendung nicht, und nichts ist verändert.
+Das gilt auch für einen Wechsel zurück auf `local` ohne `KRAMR_AUTH_BOOTSTRAP_ADMIN_SUBJECT`.
 
-## Voraussetzungen der Anmeldung
+## Anforderungen an die Anmeldung
 
 Die drei OIDC-Pflichtvariablen werden beim Start geprüft.
 Fehlt eine, startet die Anwendung nicht und nennt alle fehlenden Werte auf einmal.
@@ -135,7 +128,7 @@ DELETE FROM sessions WHERE user_id = '<uuid>';
 Die Abmeldung wirkt sofort, ohne Neustart.
 Beim Anbieter bleibt die Person angemeldet und kann sich ohne neues Passwort wieder anmelden, solange dessen Sitzung läuft.
 
-## Mitarbeitende als Kontakt anlegen
+## Nutzer als Kontakt anlegen
 
 Wer in der eigenen Organisation Material für sich oder die Gruppe ausleiht,
 braucht dafür einen Kontakt der Art **Eigene Organisation**. In der

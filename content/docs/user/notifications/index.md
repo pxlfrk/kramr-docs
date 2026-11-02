@@ -9,7 +9,7 @@ order: 48
 
 ## Die Glocke
 
-Nutzer mit der Rolle Admin oder Staff sehen in der Kopfzeile eine Glocke.
+Nutzer mit der Rolle Administration oder Sachbearbeitung sehen in der Kopfzeile eine Glocke.
 Die Zahl daran sind deine ungelesenen Benachrichtigungen.
 
 - Ein Klick öffnet die letzten Einträge, „Alle anzeigen“ führt auf die Seite „Benachrichtigungen“.

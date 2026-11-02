@@ -1,11 +1,11 @@
 ---
-title: Backup einspielen
+title: Restore
 description: Datenbank und Bilder aus einem Backup wiederherstellen.
 audience: admin
 order: 32
 ---
 
-# Backup einspielen
+# Restore
 
 Dump und Bilder-Archiv mit **demselben Zeitstempel** gehören zusammen. Setze
 das Image-Tag, unter dem der Dump entstanden ist. Die Schritte nehmen an, dass

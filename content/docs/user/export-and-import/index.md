@@ -1,14 +1,16 @@
 ---
-title: Material per CSV importieren
-description: Bestehenden Bestand mit einer CSV-Datei anlegen.
+title: CSV-Import und -Export
+description: Bestehenden Bestand mit einer CSV-Datei anlegen und Bestand oder Buchungen als CSV weitergeben.
 audience: user
 order: 47
 ---
 
-# Material per CSV importieren
+# CSV-Import und -Export
+
+## Import
 
 Der Import ist ein Werkzeug für den Einstieg: Du legst einen vorhandenen Bestand mit einer CSV-Datei an, statt jedes Material einzeln zu erfassen.
-Dafür brauchst du die Rolle Staff oder Admin.
+Dafür brauchst du die Rolle Sachbearbeitung oder Administration.
 
 1. Öffne die Bestandsübersicht und wähle im Menü „Weitere Aktionen“ die Aktion „Material importieren (CSV)“.
 2. Lade die **Vorlage** herunter. Sie legt die Spalten fest.
@@ -43,4 +45,5 @@ Beginnt ein Text mit „=“, „+“, „-“ oder „@“ – auch erst nach e
 So liest die Tabellenkalkulation ihn als Text und führt keine Formel aus.
 Excel und LibreOffice öffnen sie; ein deutsches Excel zeigt sie bei einem Doppelklick eventuell in einer einzigen Spalte, dann hilft „Daten → Aus Text/CSV“.
 
-Für die **Buchungen** bietet die Oberfläche derzeit keine eigene Schaltfläche; der Export steht über die Schnittstelle bereit.
+Für die **Buchungen** bietet die Oberfläche derzeit keine eigene Schaltfläche.
+Angemeldet lädst du die Datei `kramr-buchungen.csv` über die Adresse `<öffentliche-url>/api/bookings/export` herunter; archivierte Buchungen enthält sie nur für die Administration.

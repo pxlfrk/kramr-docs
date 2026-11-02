@@ -1,11 +1,11 @@
 ---
-title: Überwachung
+title: Monitoring
 description: Health-Endpunkt, Versionsabfrage und Logs von kramr.
 audience: admin
 order: 35
 ---
 
-# Überwachung
+# Monitoring
 
 ## Health-Endpunkt
 

@@ -20,12 +20,12 @@ Die Buchungen selbst bleiben erhalten.
 
 Die Aktion lässt sich **nicht rückgängig** machen.
 
-## So geht es
+## Einen Kontakt anonymisieren
 
-Eine Person mit der Rolle Staff oder Admin öffnet „Kontakte“ und wählt in der Zeile des Kontakts im Menü „Anonymisieren“.
+Eine Person mit der Rolle Sachbearbeitung oder Administration öffnet „Kontakte“ und wählt in der Zeile des Kontakts im Menü „Anonymisieren“.
 Du bestätigst die Rückfrage.
 
-## Vorschläge
+## Inaktive Kontakte
 
 Wer lange nichts ausgeliehen hat, erscheint unter „Kontakte“ im Bereich „Inaktive Kontakte“ als Vorschlag.
 Die Frist stellt die Administration ein, vorgesehen sind drei Jahre.

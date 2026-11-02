@@ -26,7 +26,7 @@ Eine Sperre darf solches Material trotzdem enthalten, denn sie leiht nichts aus,
 ## Bestand und Verfügbarkeit
 
 - Der Bestand eines Pflicht-Sets ist sein eigener Bestand. Frei sind nur komplette Sets.
-- Ein Set ist nur dann für einen Personenkreis verleihbar, wenn alle Bestandteile es sind, siehe [Verleih-Einschränkung und Eigennutzung](../lending-restrictions/index.md).
+- Ein Set ist nur dann für einen Personenkreis verleihbar, wenn alle Bestandteile es sind, siehe [Verleihbarkeit und Eigennutzung](../lending-restrictions/index.md).
 
 ## Änderungen am Set
 

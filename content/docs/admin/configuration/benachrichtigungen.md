@@ -10,19 +10,13 @@ order: 24
 kramr kennt zwei Wege: **E-Mail** und **Webhook** (JSON per POST). Versendet
 wird nie direkt bei der Änderung, sondern über eine Warteschlange in der
 Datenbank. Ein Ausfall des Mailservers verliert daher nichts.
+Buchungsanfragen von Websites funktionieren nur mit Mailversand, weil der Link zur Anfrage per E-Mail kommt.
 
 ## E-Mail
 
-Der Zugang zum Mailserver steht nur in Umgebungsvariablen:
-
-| Variable | Standard | Bedeutung |
-| --- | --- | --- |
-| `KRAMR_NOTIFICATION_SMTP_HOST` | – | Mailserver. Ohne Wert ist Mailversand aus; die Anwendung startet trotzdem. |
-| `KRAMR_NOTIFICATION_SMTP_PORT` | `587` | Port. |
-| `KRAMR_NOTIFICATION_SMTP_SECURE` | `false` | Implizites TLS (üblich bei Port 465). |
-| `KRAMR_NOTIFICATION_SMTP_REQUIRE_TLS` | `true` | Ohne implizites TLS nur über STARTTLS senden. |
-| `KRAMR_NOTIFICATION_SMTP_USER`, `KRAMR_NOTIFICATION_SMTP_PASSWORD` | – | Zugangsdaten; leer für ein Relay ohne Anmeldung. |
-| `KRAMR_NOTIFICATION_SMTP_FROM` | – | Absenderadresse. Pflicht, sobald ein Mailserver gesetzt ist. |
+Der Zugang zum Mailserver steht nur in Umgebungsvariablen, siehe [Mail und Webhook](umgebungsvariablen.md#mail-und-webhook).
+Ohne `KRAMR_NOTIFICATION_SMTP_HOST` ist der Mailversand aus; die Anwendung startet trotzdem.
+Sobald ein Mailserver gesetzt ist, ist auch `KRAMR_NOTIFICATION_SMTP_FROM` Pflicht.
 
 Die Mails an die Sachbearbeitung zu einer Buchung enden mit der Schaltfläche „Buchung öffnen“.
 Im Klartext steht dieselbe Adresse darunter.
@@ -43,9 +37,6 @@ Ein Relay ohne Verschlüsselung, etwa ein Postfix im selben Docker-Netz, verlang
 `KRAMR_NOTIFICATION_SMTP_REQUIRE_TLS=false`.
 kramr schreibt dann beim Start eine Warnung ins Protokoll.
 Nutze das nur in einem Netz, dem du vertraust.
-
-Buchungsanfragen von Websites funktionieren nur mit Mailversand, weil der Link
-zur Anfrage per E-Mail kommt.
 
 ## Webhook
 

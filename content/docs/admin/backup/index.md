@@ -40,14 +40,9 @@ Ein Volume aus einem älteren Backup ist deshalb nie zu voll, nur womöglich um 
 
 Beim Entpacken bleiben die Eigentümer der Dateien erhalten, sodass die Anwendung sie weiter lesen und schreiben kann.
 
-## Einstellungen des Skripts
+## Automatisieren
 
-| Variable | Bedeutung |
-| --- | --- |
-| `KRAMR_BACKUP_DIR` | Zielverzeichnis. |
-| `KRAMR_BACKUP_RETENTION_DAYS` | Aufbewahrung in Tagen (Standard 14); ältere Paare werden entfernt. |
-| `KRAMR_BACKUP_SYNC_CMD` | Befehl, der nach erfolgreicher Sicherung ausgeführt wird, um das Verzeichnis außerhalb des Servers abzulegen (zum Beispiel `rclone copy`). |
-
+Verzeichnis, Aufbewahrung und Ablage außerhalb des Servers stellst du mit `KRAMR_BACKUP_DIR`, `KRAMR_BACKUP_RETENTION_DAYS` und `KRAMR_BACKUP_SYNC_CMD` ein, siehe [Backup-Skript](../configuration/umgebungsvariablen.md#backup-skript).
 Das Skript kopiert nicht selbst nach außen; das Ziel ist Sache des Betreibers.
 Ein nächtlicher Cron-Eintrag genügt:
 
@@ -85,8 +80,7 @@ Das Skript liest nur `KRAMR_DB_USER` und `KRAMR_DB_NAME` aus der `.env` und füh
 Der Dump enthält **nur Daten**, kein Schema. Das Schema baut die Anwendung
 beim Start aus ihren Migrationen auf. Ein Restore besteht daher aus: leere
 Datenbank und leeres Bilder-Volume → Anwendung starten → Zeilen einspielen.
-Verwende dabei das Image-Tag, unter dem der Dump entstanden ist. Die
-einzelnen Schritte stehen im Ablauf [Backup einspielen](../runbooks/restore.md).
+Verwende dabei das Image-Tag, unter dem der Dump entstanden ist. Die einzelnen Schritte stehen im Ablauf [Restore](../runbooks/restore.md).
 
 ## Restore-Probe
 

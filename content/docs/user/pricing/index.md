@@ -17,7 +17,7 @@ Er gilt in **zwei Tarifen**: für die interne Ausleihe (Jugendgruppen) und für 
 - Die **Preiseinheit** sagt, ob der Betrag pauschal gilt oder pro Tag.
 - Der **Preishinweis** nennt Bedingungen, die ein Betrag nicht ausdrückt, zum Beispiel eine Kaution.
 
-Ein Tarif, für den das Material nicht verleihbar ist, trägt keinen Preis, siehe [Verleih-Einschränkung und Eigennutzung](../lending-restrictions/index.md).
+Ein Tarif, für den das Material nicht verleihbar ist, trägt keinen Preis, siehe [Verleihbarkeit und Eigennutzung](../lending-restrictions/index.md).
 
 ## Welcher Tarif gilt
 
@@ -86,7 +86,7 @@ Du erfasst sie auf zwei Wegen:
 Eine Rückgabe „beschädigt“ oder „verloren“, auf die keine Zusatzkosten verweisen, nennt die Karte „Bezahlung“ als Hinweis.
 Das ist nur ein Hinweis; du musst nichts erfassen.
 
-Ein Admin kann in den Einstellungen einen Parameter für die **Reinigungsgebühr** wählen, siehe [Einstellungen](../../admin/configuration/einstellungen.md).
+Die Administration kann in den Einstellungen einen Parameter für die **Reinigungsgebühr** wählen, siehe [Einstellungen](../../admin/configuration/einstellungen.md).
 Hat das Material der Position diesen Parameter, belegt kramr bei der Art *verunreinigt* den Einzelpreis damit vor.
 Du kannst ihn im Dialog ändern.
 
@@ -114,4 +114,4 @@ Bei einer Buchung, deren Zahlung schon vor dieser Funktion erlassen war, bleibt 
 ## Artikel in amosWEB
 
 Ist das amosWEB-Modul eingeschaltet, zeigt das Material unter den Preisen den amosWEB-Artikel, mit dem es abgerechnet wird: einen eigenen Artikel oder „Standard (Fallback)“.
-Welchen Artikel ein Material bekommt, legt ein Admin in den Einstellungen von amosWEB fest.
+Welchen Artikel ein Material bekommt, legt die Administration in den Einstellungen von amosWEB fest.

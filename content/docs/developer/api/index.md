@@ -1,15 +1,15 @@
 ---
 title: API
-description: Was die öffentliche Schnittstelle von kramr bietet, welche Grenzen gelten und wo die Referenz steht.
+description: Was die öffentliche API von kramr bietet, welche Grenzen gelten und wo die Referenz steht.
 audience: developer
 order: 10
 ---
 
 # API
 
-kramr bietet nach außen eine kleine, lesende und anfragende Schnittstelle unter `/api/public/*`.
+kramr bietet nach außen eine kleine, lesende und anfragende API unter `/api/public/*`.
 Sie dient der Einbettung von Material und der Buchungsanfrage auf einer Website.
-Alle anderen Routen sind interne Schnittstellen zwischen der Weboberfläche und dem Server und liegen hinter der Anmeldung.
+Alle anderen Routen sind interne Routen zwischen der Weboberfläche und dem Server und liegen hinter der Anmeldung.
 Sie sind nicht für Integrationen gedacht und können sich ändern.
 
 Die **API-Referenz** dieser Seite zeigt alle öffentlichen Routen mit Parametern und Antwortformen.
@@ -29,7 +29,7 @@ Bilder werden nur in den Größen `large` und `thumb` ausgeliefert, nie als Orig
 
 - **Ohne Anmeldung:** Die öffentlichen Routen brauchen weder Sitzung noch Cookie.
 - **Rate-Limit:** Lesende und schreibende Anfragen haben je Client-Adresse getrennte Budgets. Das Limit gilt auch für unbekannte Pfade unter `/api/public/*`. Bei Überschreitung antwortet kramr mit `429`. Die Werte stellt der Betreiber ein.
-- **Zwischenspeicher:** JSON-Antworten und Fehler sind nie zwischenspeicherbar (`Cache-Control: no-store`). Bilder einer Einbettung sind öffentlich zwischenspeicherbar.
+- **Cache:** JSON-Antworten und Fehler sind nie cachebar (`Cache-Control: no-store`). Bilder einer Einbettung sind öffentlich cachebar.
 - **Fehlerformat:** Fehler kommen als JSON im Format `application/problem+json` mit einem stabilen Typ und einem Titel. Das Fehlerobjekt nennt außerdem die `requestId`; dieselbe Kennung steht im Antwortkopf `X-Request-Id` und in den Logzeilen der Anfrage.
 
 ## Anfrage-Links
@@ -49,6 +49,6 @@ Die Einbettung ist eine fertige Seite unter `/embed/<Einbettung>/…`, die du in
 Welche Websites sie einrahmen dürfen, legt der Betreiber in einer Liste fest.
 Siehe [Reverse Proxy](../../admin/installation/reverse-proxy.md) und [Sicherheit](../../admin/sicherheit/index.md).
 
-## Health
+## Health-Endpunkt
 
-`GET /healthz` ist ohne Anmeldung erreichbar; siehe die Seite [Überwachung](../../admin/monitoring/index.md).
+`GET /healthz` ist ohne Anmeldung erreichbar; siehe [Monitoring](../../admin/monitoring/index.md).

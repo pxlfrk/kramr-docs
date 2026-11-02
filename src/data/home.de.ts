@@ -123,7 +123,7 @@ export const home = {
       ],
       more: {
         label: 'Buchungsanfragen im Handbuch',
-        href: '/docs/user/features/#buchungsanfragen-von-websites',
+        href: '/docs/user/requests/',
       },
     },
     {
@@ -158,7 +158,7 @@ export const home = {
         'Suche findet auch bei Umlauten und Tippfehlern.',
         'Import per CSV, wenn schon eine Liste existiert.',
       ],
-      more: { label: 'Material und Sets im Handbuch', href: '/docs/user/features/#material' },
+      more: { label: 'Material und Sets im Handbuch', href: '/docs/user/inventory/' },
     },
     {
       id: 'uebersicht',

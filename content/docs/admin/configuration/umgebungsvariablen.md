@@ -21,7 +21,7 @@ Werte führen zu einem Startabbruch mit einer klaren Meldung.
 | `KRAMR_DB_USER` | ja | - | Benutzer der Datenbank. |
 | `KRAMR_DB_PASSWORD` | ja | - | Passwort der Datenbank. Kein Standardwert. Setze es vor dem ersten Start; die Datenbank behält das, mit dem sie angelegt wurde. Nur Buchstaben, Ziffern und `-` `.` `_` `~`, weil Compose es unkodiert in `KRAMR_DB_URL` setzt. |
 | `KRAMR_IMAGE_TAG` | ja | - | Zu startende Version, zum Beispiel `1.2.1`. Kein Standardwert, nie `latest`. |
-| `KRAMR_SERVER_PUBLIC_URL` | ja (mit Compose) | - | Externe Adresse der Anwendung. Basis der OIDC-Rückkehradresse `<Adresse>/api/auth/callback`. Compose verlangt sie, damit eine vergessene Adresse den Start verhindert. |
+| `KRAMR_SERVER_PUBLIC_URL` | ja (mit Compose) | - | Externe Adresse der Anwendung. Basis der Redirect-URI `<Adresse>/api/auth/callback`. Compose verlangt sie, damit eine vergessene Adresse den Start verhindert. |
 | `KRAMR_OIDC_ISSUER_URL` | ja | - | Issuer des OIDC-Anbieters, zeichengenau wie im `iss`-Claim (ein abschließender Schrägstrich bleibt erhalten). Alle weiteren Adressen ermittelt die Anwendung per Discovery. |
 | `KRAMR_OIDC_CLIENT_ID` | ja | - | Client-ID der Anwendung beim Anbieter. |
 | `KRAMR_OIDC_CLIENT_SECRET` | ja | - | Client-Secret der Anwendung. Steht nur in der Umgebung, nie in der Datenbank. |

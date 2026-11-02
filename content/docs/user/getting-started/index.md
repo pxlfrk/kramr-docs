@@ -12,36 +12,21 @@ Kontakte, Abholung und Rückgabe an einem Ort.
 
 ## Anmelden
 
-kramr hat keine eigenen Passwörter und keine Registrierung. Die Anmeldung
-läuft über den Anmeldedienst (OIDC), den euer Verein oder Verband schon
-nutzt. Wähle „Anmelden" und melde dich dort an.
+kramr hat keine eigenen Passwörter und keine Registrierung. Die Anmeldung läuft über den Anmeldedienst (OIDC), den euer Verein oder Verband schon nutzt. Wähle „Anmelden“ und melde dich dort an.
 
-Beim **ersten Anmelden** bekommst du zunächst die Rolle „Kein Zugriff". Eine
-Administratorin oder ein Administrator vergibt dir danach die passende Rolle.
-Erst dann siehst du Inhalte.
-
-## Rollen
-
-| Rolle | Darf |
-| --- | --- |
-| Admin | alles, dazu Nutzer, Rollen und Einstellungen verwalten |
-| Staff (Sachbearbeitung) | Material, Kontakte und Buchungen anlegen und bearbeiten |
-| ReadOnly (Nur lesen) | alles ansehen, nichts ändern |
-| Kein Zugriff | angemeldet, aber ohne Rechte |
-
-Eine geänderte Rolle gilt nach spätestens etwa einer Minute.
+Beim **ersten Anmelden** bekommst du zunächst die Rolle „Kein Zugriff“.
+Erst wenn die Administration dir eine Rolle vergibt, siehst du Inhalte.
+Welche Rolle was darf, steht unter [Rollen und Rechte](../roles/index.md).
 
 ## Die wichtigsten Bereiche
 
-- **Material:** der Bestand mit Kategorien, Parametern und Bildern.
+- **Bestand:** das Material mit Kategorien, Parametern und Bildern.
 - **Buchungen:** Ausleihen und Sperren mit Zeitraum und Status.
 - **Kontakte:** die Personen, die ausleihen.
 - **Anfragen:** Buchungsanfragen von Websites, die geprüft werden.
-- **Verwaltung:** Einstellungen, Nutzer und Einbindung (nur Admin).
+- **Verwaltung:** Kategorien, Standorte und Parameter (Stammdaten); nur für die Administration zusätzlich Nutzerverwaltung, Einstellungen, Website-Einbindung und Integrationen.
 
-Die Oberfläche richtet sich nach der Sprache deines Browsers. Mehr zu den
-Funktionen steht unter [Funktionen](../features/index.md); eine Anleitung für
-die erste Ausleihe unter [Anleitungen](../tutorials/index.md).
+Die Oberfläche richtet sich nach der Sprache deines Browsers. Einen Überblick gibt die Seite [Funktionen im Überblick](../features/index.md), eine Anleitung für die erste Ausleihe die Seite [Anleitungen](../tutorials/index.md).
 
 ## Sitzung
 

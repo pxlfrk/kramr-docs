@@ -49,11 +49,11 @@ Das Image selbst trägt weiterhin seine Tags `X.Y.Z`, `X.Y` und `latest`.
 ## Ablauf eines Updates
 
 1. **Backup ziehen**, siehe [Backup](../backup/index.md).
-2. **Änderungen lesen:** Neuigkeiten und Hinweise der Zielversion.
+2. **Änderungen lesen:** die [Neuigkeiten](../../user/release-notes/index.md) der Zielversion.
+   Stammt deine Redirect-URI beim OIDC-Anbieter aus einer älteren Installation, vergleiche sie mit `<öffentliche-url>/api/auth/callback`, **bevor** du aktualisierst; sonst scheitert jede Anmeldung beim Anbieter.
 3. In der `.env` `KRAMR_IMAGE_TAG` auf die neue Version setzen.
 4. `docker compose pull && docker compose up -d`
-5. Warten, bis `docker compose ps` den Dienst `app` als `healthy` zeigt, und
-   die Version prüfen, siehe [Überwachung](../monitoring/index.md).
+5. Warten, bis `docker compose ps` den Dienst `app` als `healthy` zeigt, und die Version prüfen, siehe [Monitoring](../monitoring/index.md).
 
 ## Migrationen
 
@@ -69,9 +69,9 @@ automatisch, **bevor** die Anwendung Anfragen annimmt. Es gelten feste Regeln:
 
 ### Parameter-Spalten im Bestand
 
-Die Migration setzt jeden vorhandenen Parameter darauf, dass die Bestandstabelle ihn **nicht** als Spalte anbietet.
-Nach dem Update fehlen deshalb im Menü **Ansicht** alle Parameter-Spalten, bis ein Admin unter **Parameter** bei den gewünschten Parametern den Schalter „Spalte im Bestand“ einschaltet.
-Das ist gewollt und kein Fehler; eine bereits eingeschaltete Spalte erscheint wieder, sobald ihr Parameter gekennzeichnet ist.
+Die Migration `0075` setzt jeden vorhandenen Parameter darauf, dass die Bestandstabelle ihn **nicht** als Spalte anbietet.
+Nach dem Update fehlen deshalb im Menü **Ansicht** alle Parameter-Spalten, bis die Sachbearbeitung oder die Administration bei den gewünschten Parametern den Schalter „Spalte im Bestand“ einschaltet.
+Das ist gewollt und kein Fehler.
 
 Schemaänderungen laufen in zwei Releases (erst ergänzen, später entfernen).
 So läuft die vorherige Version noch gegen das neue Schema, was den Rückweg
@@ -88,36 +88,30 @@ Das ist Absicht: Welche von zwei Zeilen bleibt, ist eine fachliche Entscheidung,
 3. Entscheide, welche Zeile bleibt, und führe die Zeilen zusammen. Hängen andere Tabellen an der aufzugebenden Zeile, hänge sie zuerst um, sonst verweigert der Fremdschlüssel das Löschen.
 4. Starte den Container neu. Die Migration läuft erneut.
 
-Eine Bedingung kann auch eine Höchstlänge sein: Seit Migration `0070` sind Namen von Material, Kategorien, Lagerorten, Einheiten und Parametertypen höchstens 200 Zeichen lang.
-Ist ein vorhandener Name länger, nennt die Meldung Art und ID der Zeile und ihre Länge.
-Kürze den Namen dann mit `psql`, zum Beispiel `UPDATE locations SET name = left(name, 200) WHERE id = '…';` (für Einheiten heißt die Spalte `label`), und starte den Container neu.
+Zwei Beispiele aus älteren Versionen:
 
-Seit Migration `0074` darf ein Standortname das Zeichen „›“ nicht enthalten, weil es die Teile eines verschachtelten Standorts trennt („Keller › Waschraum“).
-Enthält ein vorhandener Name es, nennt die Meldung die ID des Standorts; benenne ihn um, zum Beispiel mit `UPDATE locations SET name = replace(name, '›', '-') WHERE id = '…';`, und starte den Container neu.
+- **Höchstlänge** (ab Migration `0070`): Namen von Material, Kategorien, Standorten, Einheiten und Parametern sind höchstens 200 Zeichen lang.
+  Ist ein vorhandener Name länger, nennt die Meldung Art, ID und Länge.
+  Kürze ihn mit `psql`, zum Beispiel `UPDATE locations SET name = left(name, 200) WHERE id = '…';` (für Einheiten heißt die Spalte `label`).
+- **Zeichen „›“** (ab `0074`): Ein Standortname darf es nicht enthalten, weil es die Teile eines verschachtelten Standorts trennt („Keller › Waschraum“).
+  Benenne den Standort um, zum Beispiel mit `UPDATE locations SET name = replace(name, '›', '-') WHERE id = '…';`.
+
+Starte den Container danach neu.
 
 Ziehe vorher ein Backup.
 
-## Zurückgehen
+## Rollback
 
 Siehe [Rollback](../runbooks/rollback.md).
 
-Hinweis zu den Zusatzkosten: Die Migration `0077` legt die Tabelle für Zusatzkosten an und erweitert die erlaubten Arten von Historie-Einträgen.
-Sie ändert keine bestehenden Daten.
-Die vorherige Version kennt die Zusatzkosten nicht: sie zeigt sie nicht an und rechnet sie nicht in den Betrag, die Daten bleiben aber erhalten.
+Eine frühere Version kennt neuere Spalten und Tabellen nicht, ignoriert sie aber, und die Daten bleiben erhalten.
+Nur Anzeige und Berechnung fallen auf den alten Stand zurück, bis du wieder auf die neue Version gehst.
+Das betrifft vor allem:
 
-Hinweis zu den Positionsbeträgen: Die Migration `0076` ergänzt die festgeschriebenen Preise an den Buchungspositionen, den Betrag-alt-Wert an der Buchung und den Schalter „Bestandteile einzeln berechnen“ am Material.
-Sie setzt den Schalter an jedem Pflicht-Set ohne eigenen Preis, dessen Bestandteile einen Preis haben, damit bestehende Buchungen nicht kostenlos werden.
-Ein früher von Hand erfasster Betrag einer Buchung, die noch nicht zurückgegeben oder storniert war, wird nicht mehr angezeigt; er bleibt in der Historie der Buchung nachlesbar.
-Die vorherige Version schreibt Positionen ohne festgeschriebenen Preis; die neue zeigt sie als kostenlos mit dem Angebot „Preis übernehmen“.
-Die alte Spalte `amount_cents` bleibt unverändert in der Datenbank.
-
-Hinweis zu verschachtelten Standorten: Die Migration `0074` fügt den übergeordneten Standort hinzu.
-Die vorherige Version kennt ihn nicht und zeigt alle Standorte als flache Liste, gleichnamige Unterstandorte also mit demselben Namen untereinander.
-Nach einer Rückkehr auf die neue Version gilt wieder alles wie zuvor.
-
-Hinweis zum Archivieren von Buchungen: Die Migration `0065` ergänzt die Spalte `archived_at` an den Buchungen.
-Die vorherige Version kennt sie nicht, dort sind archivierte Buchungen wieder für alle sichtbar, und das Genehmigen eines archivierten Entwurfs scheitert an einer Tabellenbedingung.
-Nach einer Rückkehr auf die neue Version gilt wieder alles wie zuvor.
+- **Archivierte Buchungen** (ab Migration `0065`): Die alte Version zeigt sie wieder allen, und das Genehmigen eines archivierten Entwurfs scheitert an einer Tabellenbedingung.
+- **Verschachtelte Standorte** (ab `0074`): Die alte Version zeigt alle Standorte als flache Liste.
+- **Festgeschriebene Preise** (ab `0076`): Die alte Version schreibt Positionen ohne festgeschriebenen Preis; die neue zeigt sie als kostenlos mit dem Angebot „Preis übernehmen“.
+- **Zusatzkosten** (ab `0077`): Die alte Version zeigt sie nicht an und rechnet sie nicht in den Betrag.
 
 ## PostgreSQL-Hauptversion wechseln
 

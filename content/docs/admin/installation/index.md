@@ -39,7 +39,7 @@ direkt aus dem Internet erreichbar.
    `<öffentliche-url>/`, Scopes mindestens `openid profile email`.
 3. **`.env` ausfüllen:** Datenbankpasswort (nur Buchstaben, Ziffern und `-` `.` `_` `~`, weil Compose es unkodiert in die Verbindungsadresse setzt), die drei OIDC-Werte, die öffentliche URL und `KRAMR_IMAGE_TAG` mit der gewünschten Version.
    Das Tag ist immer eine feste Version, nie `latest`, und steht ohne vorangestelltes `v` (zum Beispiel `1.8.0`).
-   Die veröffentlichten Versionen führt die Seite [Neuigkeiten](../../user/release-notes/index.md) auf; die Tags selbst liegen in der [Paketübersicht des Images](https://github.com/users/pxlfrk/packages/container/package/kramr).
+   Die veröffentlichten Versionen führen die [Release Notes](../../user/release-notes/index.md) auf; die Tags selbst liegen in der [Paketübersicht des Images](https://github.com/users/pxlfrk/packages/container/package/kramr).
    Alle Variablen: [Umgebungsvariablen](../configuration/umgebungsvariablen.md).
 4. **Starten:**
 
@@ -66,8 +66,7 @@ Das Image ist öffentlich abrufbar, siehe die [Paketübersicht](https://github.c
 - Ist signiert; wie man das prüft, steht unter [Updates](../upgrades/index.md#image-prüfen-empfohlen).
 - Läuft als Nicht-Root-Benutzer.
 - Nutzt einen Init-Prozess als PID 1, damit das Stoppsignal ankommt und die Anwendung ihre Datenbankverbindungen sauber schließt.
-- Enthält nur das Kompilat, das Frontend und die Produktionsabhängigkeiten.
-- Enthält keine Geheimnisse; alles Vertrauliche kommt aus der Umgebung.
+- Enthält nur den Build, die Weboberfläche und die Produktionsabhängigkeiten, keine Geheimnisse; alles Vertrauliche kommt aus der Umgebung.
 - Hat einen eigenen Health-Check auf `/healthz`.
 - Enthält weder Shell noch `wget`; ein `docker compose exec` mit
   Shell-Befehl in den Anwendungs-Container schlägt daher fehl.
@@ -80,18 +79,10 @@ gehören ins Backup.
 
 ## Auslieferung der Oberfläche
 
-Die Anwendung liefert die Weboberfläche aus demselben Container und damit von derselben Adresse wie die Schnittstelle.
-Eine CORS-Konfiguration gibt es deshalb nicht und braucht es nicht.
-Alle Routen der Schnittstelle liegen unter `/api`; nur `/healthz` liegt daneben, weil Container-Check und Proxy darauf zeigen.
+Die Anwendung liefert die Weboberfläche aus demselben Container und von derselben Adresse wie die API, CORS ist daher nicht nötig.
+Alle API-Routen liegen unter `/api`; nur `/healthz` liegt daneben, weil Container-Check und Proxy darauf zeigen.
 Jeder andere Pfad gehört der Oberfläche, damit ein Lesezeichen oder ein Neuladen in der Anwendung landet.
-Ein unbekannter Pfad unter `/api` antwortet mit einem Fehlerobjekt, nie mit einer Seite.
 
 Dateien mit Fingerabdruck unter `/assets/` liefert die Anwendung mit einem Jahr Cache aus, `index.html` ohne Cache.
-Nach einem Update läuft ein Browser so nie mit dem alten Bundle gegen die neue Schnittstelle.
+So läuft nach einem Update nie ein altes Bundle gegen die neue API.
 Der Proxy darf diese Cache-Header nicht überschreiben.
-
-## Rückkehradresse beim Anbieter
-
-Die Rückkehradresse beim OIDC-Anbieter lautet `<öffentliche-url>/api/auth/callback`.
-Hast du früher eine andere eingetragen, passe sie beim Anbieter an, **bevor** du aktualisierst.
-Sonst scheitert jede Anmeldung beim Anbieter, bevor sie kramr erreicht.

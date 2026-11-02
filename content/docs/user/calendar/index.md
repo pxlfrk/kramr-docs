@@ -19,7 +19,7 @@ Du schaltest oben zwischen beiden um.
 
 ## Externe Termine
 
-Richtet ein Admin externe Kalender ein, erscheinen deren Termine im Kalender als Hinweis.
+Richtet die Administration externe Kalender ein, erscheinen deren Termine im Kalender als Hinweis.
 Sie tragen ein Kalender-Symbol, den Namen des Termins in dezenter Schrift und eine gepunktete Linie, damit man sie nicht mit Buchungen verwechselt.
 
 - **Nur Hinweis:** Externe Termine lassen sich nicht anklicken oder bearbeiten, und sie blockieren nichts. Eine Buchung zur selben Zeit ist weiter möglich.

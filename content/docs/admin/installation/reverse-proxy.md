@@ -29,15 +29,9 @@ festgelegte Liste unterstützter Produkte.
    `X-Forwarded-Host` müssen stimmen. Setze dazu
    `KRAMR_SERVER_TRUST_PROXY=true`. Sonst sehen Logs und das Rate-Limit alle
    Clients unter derselben Adresse.
-3. **WebSocket-Upgrade** wird durchgereicht (`Connection`, `Upgrade`).
-4. **`/healthz` ohne Rate-Limit**, damit ein externer Monitor sich nicht
-   selbst aussperrt.
-5. **Body-Limit mindestens 11 MB.** Bild-Uploads sind bis 10 MB je Datei
-   erlaubt; ein engeres Limit weist Fotos ab, bevor die Anwendung sie sieht.
-6. **Anfrage-Links nicht protokollieren.** Der Link einer Buchungsanfrage
-   steht im Pfad (`/embed/request/…` und `/api/public/requests/…`) und ist
-   der einzige Zugang zur Anfrage. Schalte für diese Präfixe sowohl das
-   Zugriffs- als auch das Fehlerprotokoll des Proxys ab.
+3. **`/healthz` ohne Rate-Limit**, damit ein externer Monitor sich nicht selbst aussperrt.
+4. **Body-Limit mindestens 11 MB.** Bild-Uploads sind bis 10 MB je Datei erlaubt; ein engeres Limit weist Fotos ab, bevor die Anwendung sie sieht.
+5. **Anfrage-Links nicht protokollieren.** Der Link einer Buchungsanfrage steht im Pfad (`/embed/request/…` und `/api/public/requests/…`) und ist der einzige Zugang zur Anfrage. Schalte für diese Präfixe sowohl das Access- als auch das Error-Log des Proxys ab.
 
 ## Einbettungen
 
@@ -82,11 +76,6 @@ proxy_set_header Host              $host;
 proxy_set_header X-Forwarded-Host  $host;
 proxy_set_header X-Forwarded-Proto $scheme;
 
-# WebSocket-Upgrade
-proxy_http_version 1.1;
-proxy_set_header Upgrade    $http_upgrade;
-proxy_set_header Connection $connection_upgrade;
-
 location = /healthz {
     proxy_pass http://app:3000;                # kein limit_req
 }
@@ -110,15 +99,12 @@ location / {
 }
 ```
 
-`$connection_upgrade` stammt aus dem Standard-`map` des NGINX Proxy Managers (`map $http_upgrade $connection_upgrade { default upgrade; "" close; }`).
-In einer nackten NGINX-Installation ergänzt du das `map` einmal auf der `http`-Ebene.
-
 Das Grob-Limit `kramr_all` muss eine Seite der eingebetteten Materialliste mit rund 25 Anfragen tragen.
 Wer enger begrenzt, sieht dessen `429` vor dem der Anwendung.
 
 ### Caddy
 
-Caddy besorgt TLS selbst und setzt `X-Forwarded-*` sowie den WebSocket-Upgrade von sich aus:
+Caddy besorgt TLS selbst und setzt `X-Forwarded-*` von sich aus:
 
 ```caddy
 kramr.example.org {
@@ -148,7 +134,7 @@ kramr.example.org {
 `rate_limit` braucht ein Caddy mit dem Modul `caddy-ratelimit`, zum Beispiel einen `xcaddy`-Build.
 Ohne das Modul lässt du den `@auth`-Block weg; das Limit der Anwendung bleibt.
 
-Caddy schreibt ein Zugriffsprotokoll nur mit der Direktive `log`; das Beispiel hat keine.
+Caddy schreibt ein Access-Log nur mit der Direktive `log`; das Beispiel hat keine.
 Wer `log` ergänzt, nimmt die Anfrage-Links aus (ab Caddy 2.8 `log_skip`, davor `skip_log`):
 
 ```caddy
@@ -156,9 +142,9 @@ Wer `log` ergänzt, nimmt die Anfrage-Links aus (ab Caddy 2.8 `log_skip`, davor 
     log_skip @requestLinks
 ```
 
-Einen Handler-Fehler, etwa ein `502` bei nicht erreichbarer Anwendung, schreibt Caddy auch ohne `log` samt Adresse in sein Standardprotokoll.
+Einen Handler-Fehler, etwa ein `502` bei nicht erreichbarer Anwendung, schreibt Caddy auch ohne `log` samt Adresse in sein Standard-Log.
 Einen Ausschluss nur für die Anfrage-Links gibt es dafür nicht.
-Du erfüllst Anforderung 6, indem du diesen Logger in den globalen Optionen ausschließt (dann fehlen alle Handler-Fehler) oder das Standardprotokoll nur kurz aufbewahrst:
+Du erfüllst Anforderung 5, indem du diesen Logger in den globalen Optionen ausschließt (dann fehlen alle Handler-Fehler) oder das Standard-Log nur kurz aufbewahrst:
 
 ```caddy
 {

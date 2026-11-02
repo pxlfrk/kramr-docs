@@ -36,8 +36,7 @@ einer Transaktion und hinterlässt keinen halben Stand.
 
 ## Anmeldung schlägt fehl
 
-- **Rückkehradresse:** Beim Anbieter muss
-  `<öffentliche-url>/api/auth/callback` genau eingetragen sein.
+- **Redirect-URI:** Beim Anbieter muss `<öffentliche-url>/api/auth/callback` genau eingetragen sein.
 - **Issuer:** `KRAMR_OIDC_ISSUER_URL` wird zeichengenau mit dem `iss`-Claim
   verglichen, einschließlich eines abschließenden Schrägstrichs.
 - **Alle Anfragen erscheinen mit derselben Adresse?** Hinter einem Proxy
@@ -52,7 +51,7 @@ einer Transaktion und hinterlässt keinen halben Stand.
 
 Der Proxy lässt weniger als 11 MB zu. Hebe sein Body-Limit an.
 
-## Ein Bild zeigt „noch nicht verfügbar"
+## Ein Bild zeigt „noch nicht verfügbar“
 
 Nach einem Restore stimmen Datenbank und Bilder-Volume nicht vom selben
 Zeitpunkt überein. Entferne das Bild und lade es erneut hoch.
@@ -73,8 +72,6 @@ Mails aber als fehlgeschlagen. Prüfe Host, Port, Zugangsdaten und Absender.
 Steht in der Fehlermeldung STARTTLS, bietet dein Mailserver keine verschlüsselte Verbindung an.
 Was dann zu tun ist, steht unter [Benachrichtigungen](../configuration/benachrichtigungen.md) im Abschnitt „Verschlüsselte Verbindung“.
 
-## Eine Person aussperren oder abmelden
+## Eine Person abmelden
 
-Alle Sitzungen einer Person lassen sich beenden, indem du ihre Zeilen in der
-Tabelle `sessions` löschst. Das wirkt sofort. Beim Anbieter bleibt die Person
-angemeldet, bis dessen eigene Sitzung endet.
+Wie du alle Sitzungen einer Person sofort beendest, steht unter [Anmeldung und Rollen](../configuration/anmeldung-und-rollen.md#alle-sitzungen-einer-person-beenden).

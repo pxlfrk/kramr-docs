@@ -63,7 +63,7 @@ Eine archivierte Buchung lässt sich nicht korrigieren.
 
 Für eine Buchung oder Sperre im Status Genehmigt oder Abgeholt erzeugt kramr ein Arbeitsblatt zum Drucken.
 Öffne die Buchung und wähle in der Aktionsbox **Packliste**; das PDF öffnet sich in einem neuen Tab, und du druckst es von dort.
-Das können alle, die die Buchung sehen dürfen, auch mit der Rolle „Nur lesen“.
+Das können alle, die die Buchung sehen dürfen, auch mit der Rolle „Nur-Lesen“.
 Für einen Entwurf, eine zurückgegebene und eine stornierte Buchung gibt es keine Packliste.
 
 Das Blatt ist für den Schwarz-Weiß-Druck gemacht und enthält:

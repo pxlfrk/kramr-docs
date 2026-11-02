@@ -23,7 +23,7 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `notification.notify_admins_on_new_booking` | Ja oder Nein | `false` | Ob alle Administratoren beim Anlegen einer Buchung benachrichtigt werden. |
 | `notification.always_notify_recipients` | Mailadressen, durch Komma getrennt | leer | Adressen, die jede Benachrichtigung erhalten, unabhängig von den beiden Schaltern darüber. |
 | `update_check.enabled` | Ja oder Nein | `true`, Startwert aus `KRAMR_DEFAULT_UPDATE_CHECK_ENABLED` | Ob die Einstellungsseite *Version & Updates* bei der Image-Registry nach einer neueren Version fragen darf. Ausgeschaltet findet kein ausgehender Aufruf statt. |
-| `embed.allowed_origins` | Webadressen, eine je Eintrag | leer (keine fremde Einbettung) | Die Webseiten, die eine Einbettung in einem Rahmen anzeigen dürfen. Geändert wird sie unter: Verwaltung der Einbettungen. |
+| `embed.allowed_origins` | Webadressen, eine je Eintrag | leer (keine fremde Einbettung) | Die Webseiten, die eine Einbettung in einem Rahmen anzeigen dürfen. Geändert wird sie unter: Verwaltung › System › Website-Einbindung. |
 | `organisation.name` | Text | leer (kramr zeigt seinen eigenen Namen) | Name der Organisation in der Kopfzeile, auf der Anmelde- und den Anfrageseiten und in E-Mails. Höchstens 80 Zeichen. |
 | `legal.privacy_policy_url` | Text | leer (keine Datenschutzerklärung verlinkt) | Adresse der Datenschutzerklärung, nur mit `https://`. Sie steht als Fußzeile auf den Anfrageseiten und der Anmeldeseite sowie in den E-Mails an Anfragende, und die Seite zum Anfordern des Links verlinkt sie im Datenschutzhinweis. |
 | `legal.links` | Liste aus Beschriftung und Adresse (höchstens 4) | leer (keine weiteren Links) | Bis zu 4 weitere Links aus Beschriftung und Adresse, zum Beispiel Impressum oder Kontakt, nur mit `https://`. Sie stehen in der gepflegten Reihenfolge hinter der Datenschutzerklärung. |
@@ -37,19 +37,19 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `office.opening_hours_deviations` | opening-hours-deviations | leer (keine Ausnahmen) | Ausnahmen von den Wochenzeiten, etwa Betriebsferien, je mit Datum oder Zeitraum, Bezeichnung und entweder geschlossen oder abweichenden Zeiten. Eine Ausnahme gilt vor Feiertag und Wochentag. |
 | `office.federal_state` | Auswahl | `BE` (Berlin), ohne Umgebungsvariable | Das Bundesland, dessen gesetzliche Feiertage kramr berechnet. An einem Feiertag gilt die Geschäftsstelle als geschlossen. |
 | `office.church_holidays` | holiday-list | leer (keine kirchlichen Feiertage) | Die angekreuzten kirchlichen Feiertage, die zusätzlich als geschlossen gelten. Zur Auswahl stehen Heilige Drei Könige, Gründonnerstag, Fronleichnam, Mariä Himmelfahrt, Reformationstag, Allerheiligen, Buß- und Bettag und Heiligabend. |
-| `amosweb.enabled` | Ja oder Nein | `false`, ohne Umgebungsvariable | Ob das amosWEB-Modul eingeschaltet ist. Einschalten lässt es sich nur, wenn `KRAMR_AMOSWEB_APP_TOKEN`, `KRAMR_AMOSWEB_APP_KEY` und `KRAMR_SECRETS_KEY` gesetzt sind. Ausgeschaltet bleibt eine bestehende Verbindung erhalten, alle anderen amosWEB-Einstellungen sind gesperrt. Geändert wird sie unter: Verwaltung › Integrationen. |
-| `amosweb.base_url` | Text | leer | Die Adresse der amosWEB-Instanz, nur `https://` und ohne Pfad. Offensichtlich interne Ziele lehnt kramr ab. Eine bestehende Verbindung behält die Adresse, mit der sie hergestellt wurde. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Einrichtung. |
-| `amosweb.debtor_contact_id` | Text | leer | Die ID des Platzhalter-Kontakts in amosWEB, auf den Rechnungen vorerst lauten. Eine ganze Zahl; die ID steht in amosWEB beim Kontakt. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Rechnungsangaben. |
-| `amosweb.debtor_address_id` | Text | leer | Die ID der Anschrift des Platzhalter-Kontakts in amosWEB. Eine ganze Zahl. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Rechnungsangaben. |
-| `amosweb.debtor_email_id` | Text | leer | Die ID der E-Mail-Adresse des Platzhalter-Kontakts in amosWEB. Optional; eine ganze Zahl. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Rechnungsangaben. |
-| `amosweb.creditor_bank_detail_id` | Text | leer | Die ID der Bankverbindung in amosWEB, auf die Rechnungen lauten. Eine ganze Zahl. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Rechnungsangaben. |
-| `amosweb.responsible_user_id` | Text | leer | Die ID der Sachbearbeitung in amosWEB, die Rechnungen angelegt bekommen. Eine ganze Zahl. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Rechnungsangaben. |
-| `amosweb.payment_term_days` | Zahl | `14` Tage, ohne Umgebungsvariable | Nach wie vielen Tagen eine Rechnung fällig ist. Eine ganze Zahl von 0 bis 365. Geändert wird sie unter: Verwaltung › Integrationen › amosWEB › Rechnungsangaben. |
+| `amosweb.enabled` | Ja oder Nein | `false`, ohne Umgebungsvariable | Ob das amosWEB-Modul eingeschaltet ist. Einschalten lässt es sich nur, wenn `KRAMR_AMOSWEB_APP_TOKEN`, `KRAMR_AMOSWEB_APP_KEY` und `KRAMR_SECRETS_KEY` gesetzt sind. Ausgeschaltet bleibt eine bestehende Verbindung erhalten, alle anderen amosWEB-Einstellungen sind gesperrt. Geändert wird sie unter: Verwaltung › System › Integrationen. |
+| `amosweb.base_url` | Text | leer | Die Adresse der amosWEB-Instanz, nur `https://` und ohne Pfad. Offensichtlich interne Ziele lehnt kramr ab. Eine bestehende Verbindung behält die Adresse, mit der sie hergestellt wurde. Geändert wird sie unter: Verwaltung › System › Integrationen › amosWEB › Einrichtung. |
+| `amosweb.debtor_contact_id` | Text | leer | Die ID des Platzhalter-Kontakts in amosWEB, auf den Rechnungen vorerst lauten. Eine ganze Zahl; die ID steht in amosWEB beim Kontakt. Geändert wird sie unter: Verwaltung › System › Integrationen › amosWEB › Rechnungsangaben. |
+| `amosweb.debtor_address_id` | Text | leer | Die ID der Anschrift des Platzhalter-Kontakts in amosWEB. Eine ganze Zahl. Geändert wird sie unter: Verwaltung › System › Integrationen › amosWEB › Rechnungsangaben. |
+| `amosweb.debtor_email_id` | Text | leer | Die ID der E-Mail-Adresse des Platzhalter-Kontakts in amosWEB. Optional; eine ganze Zahl. Geändert wird sie unter: Verwaltung › System › Integrationen › amosWEB › Rechnungsangaben. |
+| `amosweb.creditor_bank_detail_id` | Text | leer | Die ID der Bankverbindung in amosWEB, auf die Rechnungen lauten. Eine ganze Zahl. Geändert wird sie unter: Verwaltung › System › Integrationen › amosWEB › Rechnungsangaben. |
+| `amosweb.responsible_user_id` | Text | leer | Die ID der Sachbearbeitung in amosWEB, die Rechnungen angelegt bekommen. Eine ganze Zahl. Geändert wird sie unter: Verwaltung › System › Integrationen › amosWEB › Rechnungsangaben. |
+| `amosweb.payment_term_days` | Zahl | `14` Tage, ohne Umgebungsvariable | Nach wie vielen Tagen eine Rechnung fällig ist. Eine ganze Zahl von 0 bis 365. Geändert wird sie unter: Verwaltung › System › Integrationen › amosWEB › Rechnungsangaben. |
 | `ui.address_form` | Auswahl | `informal`, Startwert aus `KRAMR_DEFAULT_ADDRESS_FORM` | Ob die deutschen Texte „Du“ (`informal`) oder „Sie“ (`formal`) sagen. Die öffentlichen Seiten lesen sie ohne Anmeldung. |
 
 <!-- settings-registry:end -->
 
-## Wo welche Einstellung steht
+## Einstellungsseiten im Überblick
 
 Jede Seite hat ihren eigenen Knopf *Speichern*; er speichert nur die Felder dieser Seite.
 Wer eine Seite mit ungespeicherten Änderungen verlässt, wird vorher gefragt.
@@ -79,7 +79,7 @@ Sperren tragen ihn nie, weil dort nichts abgeholt oder zurückgebracht wird.
 - **Bundesland und Feiertage:** Die gesetzlichen Feiertage des gewählten Bundeslandes (Vorgabe Berlin) berechnet kramr selbst. An einem Feiertag gilt die Geschäftsstelle als geschlossen. Kirchliche Feiertage, die im Land nicht gesetzlich sind, kreuzt du einzeln an; was im Land gesetzlich ist, ist angekreuzt und gesperrt.
 - **Ausnahmen:** Betriebsferien, Brückentage oder abweichende Zeiten trägst du mit Datum oder Zeitraum und einer Bezeichnung ein, entweder als ganztägig geschlossen oder mit eigenen Zeiträumen. Eine Ausnahme gilt vor Feiertag und Wochentag, sie kann also an einem Feiertag öffnen. Silvester und örtliche Feiertage pflegst du hier.
 - **Ohne Pflege kein Hinweis:** Solange kein Wochentag einen Zeitraum hat, zeigt kramr keinen Hinweis, auch nicht an Feiertagen.
-- **Wirkung auf bestehende Buchungen:** Der Hinweis wird bei jedem Lesen aus dem Termin und diesen Einstellungen berechnet. Wer die Zeiten ändert, ändert ihn also auch für bestehende Buchungen, ohne dass jemand neu bestätigen muss. Die Änderung steht im Verlauf der Einstellungen.
+- **Wirkung auf bestehende Buchungen:** Der Hinweis wird bei jedem Lesen aus dem Termin und diesen Einstellungen berechnet. Wer die Zeiten ändert, ändert ihn also auch für bestehende Buchungen, ohne dass jemand neu bestätigen muss. Die Änderung steht in der Änderungshistorie der Einstellungen.
 
 ## Einbettung als eigene Seite verlinken
 
@@ -98,7 +98,7 @@ Die weiteren Links lassen sich hinzufügen, verschieben und entfernen; die Reihe
 
 Die Links erscheinen als Fußzeile auf den Seiten für Buchungsanfragen, auf der Anmeldeseite und unter den E-Mails an Anfragende.
 Die Seite zum Anfordern des Links (der Einstieg in der Einbettung) zeigt keine Fußzeile, verlinkt aber die Datenschutzerklärung in ihrem Datenschutzhinweis.
-In der Einbettung selbst, in der angemeldeten Anwendung und in den Mails an Mitarbeitende stehen keine rechtlichen Links.
+In der Einbettung selbst, in der angemeldeten Anwendung und in den Mails an die Sachbearbeitung stehen keine rechtlichen Links.
 Ohne gepflegte Links erscheint nirgends eine Fußzeile.
 
 Eine E-Mail hält die Links fest, die beim Einreihen galten; eine spätere Änderung wirkt erst auf neue Mails.
@@ -131,5 +131,5 @@ Ein unbekannter oder in dieser E-Mail nicht erlaubter Platzhalter wird beim Spei
 Die Vorschau zeigt die E-Mail mit Beispieldaten als HTML und darunter als Klartext; sie speichert nichts.
 
 Eine E-Mail hält den Text fest, mit dem sie eingereiht wurde; eine spätere Änderung wirkt erst auf neue E-Mails.
-Die E-Mails an Mitarbeitende lassen sich nicht anpassen.
-Änderungen stehen im Verlauf der Einstellungen.
+Die E-Mails an die Sachbearbeitung lassen sich nicht anpassen.
+Änderungen stehen in der Änderungshistorie der Einstellungen.

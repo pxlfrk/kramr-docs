@@ -9,8 +9,7 @@ order: 60
 
 ## Ich kann mich anmelden, sehe aber nichts – woran liegt das?
 
-Neue Konten beginnen ohne Rechte. Bitte eine Administratorin oder einen
-Administrator, dir eine Rolle zu geben.
+Neue Konten beginnen ohne Rechte. Bitte die Administration, dir eine Rolle zu geben.
 
 ## Wie lange bleibe ich angemeldet?
 

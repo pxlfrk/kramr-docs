@@ -12,7 +12,7 @@ kramr migriert nie automatisch zurück. Ein Rollback ist:
 1. Anwendung stoppen.
 2. Hat die fehlerhafte Version das Schema geändert: Datenbank aus dem
    letzten Backup **vor** dem Update wiederherstellen,
-   siehe [Backup einspielen](restore.md).
+   siehe [Restore](restore.md).
 3. In der `.env` das **vorherige** Image-Tag eintragen.
 4. Starten und den Health-Check abwarten.
 

@@ -9,7 +9,7 @@ order: 51
 
 Die Auswertung beantwortet Fragen wie „Welche Zelte waren letztes Jahr nie draußen?“, „Was ist in den Sommerferien regelmäßig knapp?“ und „Was kommt häufig beschädigt zurück?“.
 Du brauchst dafür keine eigene Tabelle: kramr zählt die Ausleihen für dich.
-Jede Rolle, die den Bestand sieht, sieht auch die Auswertung, auch **ReadOnly**.
+Jede Rolle, die den Bestand sieht, sieht auch die Auswertung, auch **Nur-Lesen**.
 Die Zahlen gelten je Material und nennen keine Personen.
 
 ## Alle Materialien vergleichen

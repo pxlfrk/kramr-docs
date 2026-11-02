@@ -56,6 +56,8 @@ Sie muss aus dem Internet erreichbar sein und lautet `<öffentliche Adresse von 
 
 Meldet amosWEB beim Verbinden, die App existiere bereits, ist sie in amosWEB schon verbunden, zum Beispiel nach einem Verlust des Schlüssels.
 Dann die App im amosWEB-Backend entfernen und noch einmal verbinden.
+Das geschieht in amosWEB unter *Einstellungen → Allgemein → Mandanten*: den Ziel-Mandanten öffnen und im Abschnitt *Verbundene Anwendungen* die App entfernen.
+Das geschieht in amosWEB unter *Einstellungen → Allgemein → Mandanten*: den Ziel-Mandanten öffnen und im Abschnitt *Verbundene Anwendungen* die App entfernen.
 
 ## Neu verbinden
 
@@ -64,36 +66,58 @@ So übernimmt kramr einen Schlüssel, den amosWEB erneuert hat.
 Scheitert das Trennen, bleibt alles wie es war.
 Scheitert danach das Verbinden, ist kramr nicht verbunden, und die Seite zeigt es.
 
-## Platzhalter-Debitor
+## Rechnungsangaben
+
+Der Bereich *Rechnungsangaben* hält alles, was kramr für eine Rechnung in amosWEB wissen muss.
+Die Felder sind gesperrt, solange das Modul ausgeschaltet oder kramr nicht verbunden ist.
+Die ID ist jeweils die Nummer, unter der amosWEB den Datensatz führt.
+
+### Platzhalter-Debitor
 
 Rechnungen lauten zunächst auf einen Platzhalter-Kontakt in amosWEB.
 Er wird vor der Freigabe der Rechnung in amosWEB durch den richtigen Debitor ersetzt.
-Im Bereich *Rechnungsangaben* trägt ein Admin die amosWEB-IDs des Platzhalter-Kontakts ein:
+Ein Admin trägt die amosWEB-IDs des Platzhalter-Kontakts ein:
 
 - die Kontakt-ID,
 - die ID seiner Anschrift,
 - optional die ID seiner E-Mail-Adresse.
 
-Die ID ist die Nummer, unter der amosWEB den Datensatz führt.
-Wo amosWEB sie anzeigt, hängt von der Version ab; im Zweifel hilft der Support von amosWEB.
+Der Platzhalter-Debitor ist ebenfalls ein Kontakt in amosWEB.
+Die Kontakt-ID steht in der Adresszeile des Browsers und auf der Startseite des Kontakts.
 
-## Kreditor
+> **Tipp:** Anschrift-ID und E-Mail-ID zeigt amosWEB nicht in der Oberfläche an, sie lassen sich aber mit den Entwicklertools des Browsers auslesen.
+> Den Kontakt in amosWEB öffnen, die Entwicklertools öffnen und im Reiter *Network* den Filter *Fetch/XHR* einschalten.
+> Danach die Seite neu laden.
+> In der Anschriften-Ressource steht unter *Data* die ID der Anschrift, in der Kommunikationen-Ressource die ID der E-Mail-Adresse.
+> Das braucht keine Anmeldung an der Schnittstelle und ist der einfachere Weg.
+>
+> **Tipp:** Alternativ liefert ein autorisierter GET-Request mit dem Client-API-Key an `<Adresse von amosWEB>/api/app/client/contacts/<Kontakt-ID>` die IDs ebenfalls in der Antwort.
 
-Die Rechnung lautet auf eine Bankverbindung des Vereins in amosWEB.
-Im Bereich *Rechnungsangaben* steht dafür die ID dieser Bankverbindung.
+### Bankverbindung
 
-## Rechnung allgemein
+Die Rechnung lautet auf eine Bankverbindung des Vereins (Kreditor) in amosWEB.
+Dafür steht die ID dieser Bankverbindung im Feld.
+Die Bankverbindung gehört zum Kontakt des Mandanten, mit dem kramr verbunden ist.
+In amosWEB unter *Einstellungen → Mandanten* den Ziel-Mandanten öffnen, über die Schaltfläche oben rechts zu seinem Kontakt wechseln und dort den Reiter *Bankverbindungen* öffnen.
+
+> **Tipp:** Auch diese ID zeigt amosWEB nicht an.
+> Auf dieser Seite die Entwicklertools des Browsers öffnen, im Reiter *Network* den Filter *Fetch/XHR* einschalten und die Seite neu laden.
+> Die Ressource `bankverbindungen?showInvisible=true` enthält unter *Data* als JSON alle Bankverbindungen des Kontakts, jeweils mit ihrer ID.
+
+### Sachbearbeitung und Zahlungsziel
 
 - *Sachbearbeiter-ID* ist die Sachbearbeitung in amosWEB, die angelegte Rechnungen zugewiesen bekommt.
 - *Zahlungsziel* ist die Zahl der Tage bis zur Fälligkeit, von 0 bis 365; Vorgabe sind 14 Tage.
 
-Die Felder sind gesperrt, solange das Modul ausgeschaltet oder kramr nicht verbunden ist.
+> **Tipp:** In amosWEB unter *Einstellungen → Allgemein → Mitarbeitende* in der Tabelle die Spalte *ID* einblenden und die ID der gewünschten Person ablesen.
 
 ## Artikelgruppen
 
 Jede Rechnungsposition verweist auf einen Artikel in amosWEB.
 amosWEB liefert die Artikel gruppenweise, deshalb trägt ein Admin im Bereich *Artikel* die IDs der Artikelgruppen ein, aus denen kramr Artikel abrufen soll.
-Die ID einer Artikelgruppe steht in amosWEB in der Verwaltung der Artikel; wo genau, hängt von der Version ab, im Zweifel hilft der Support von amosWEB.
+
+> **Tipp:** Die ID einer Artikelgruppe zeigt amosWEB unter *Einstellungen → Buchhaltung → Artikelverwaltung* im Reiter *Artikelgruppen*.
+> Neben der Gruppe das Menü mit den drei Punkten öffnen, die ID steht unten im Menü.
 
 *Artikelgruppe hinzufügen* ruft die Gruppe zuerst ab und zeigt ihre Artikel mit Preis.
 Nur ein Artikel, den amosWEB als Brutto-Artikel liefert, lässt sich wählen.
@@ -103,7 +127,7 @@ kramr gleicht die Artikel jeden Morgen um 6 Uhr mit amosWEB ab; *Jetzt abrufen* 
 Der Abruf gelingt ganz oder gar nicht: Scheitert er für eine Gruppe, bleibt alles wie es war, und die Seite zeigt den Grund.
 Eine Gruppe lässt sich nur entfernen, solange keiner ihrer Artikel verwendet wird.
 
-## Fallback und Zuordnung
+## Fallback-Artikel und Zuordnung
 
 Der *Fallback-Artikel* gilt für jedes Material und jede Art der Zusatzkosten (Beschädigung, Verschmutzung, Verlust) ohne eigenen Artikel.
 Ohne Fallback-Artikel lässt sich keine Rechnung erstellen.
@@ -113,7 +137,7 @@ Im Bereich *Zuordnung* lässt sich für jedes Material mit Preis ein eigener Art
 Änderungen gelten erst nach *Speichern*.
 Das Material zeigt seinen Artikel auch im Detail, für jede Rolle, die Material lesen darf.
 
-## Wenn ein Artikel verschwindet
+## Wenn ein Artikel in amosWEB wegfällt
 
 Liefert amosWEB einen verwendeten Artikel nicht mehr oder nur noch als Netto-Artikel, gilt er als nicht nutzbar und bleibt sichtbar.
 Ein eigener Artikel eines Materials fällt dann auf den Fallback-Artikel zurück und wird mit einem Warnkennzeichen angezeigt.
@@ -128,10 +152,4 @@ Beenden geht auch bei ausgeschaltetem Modul.
 
 Nimmt amosWEB das Trennen nicht an, weil es nicht erreichbar ist oder den Schlüssel ablehnt, bietet kramr *Nur in kramr trennen* an.
 Das löscht den Schlüssel und schaltet das Modul aus, ohne amosWEB zu benachrichtigen.
-Danach die App im amosWEB-Backend entfernen, sonst lässt sich nicht neu verbinden.
-
-## Was im Änderungsprotokoll steht
-
-Das Verbinden und das Trennen stehen im Änderungsprotokoll, mit der Adresse, dem Tenant und dem Mandanten und bei einem Trennen mit dem Hinweis, ob es in amosWEB geschah.
-Der Mandantenschlüssel steht nie darin.
-Jede Änderung einer Einstellung des Moduls steht dort ebenfalls.
+Danach die App im amosWEB-Backend entfernen, sonst lässt sich nicht neu verbinden (*Einstellungen → Allgemein → Mandanten → Ziel-Mandant → Verbundene Anwendungen*).

@@ -27,7 +27,7 @@ Ein automatisches Nachrücken einer wartenden Buchung gibt es nicht.
 Besteht beim Genehmigen eines Entwurfs schon ein Konflikt, genehmigt kramr nicht stillschweigend.
 Du bestätigst ausdrücklich „Trotzdem genehmigen“.
 
-### Hinweis bei der anderen Buchung
+### Hinweis „Beansprucht“
 
 Die Buchung, die den Bestand hält, trägt einen neutralen Hinweis, wenn andere Buchungen mehr wollen, als im Zeitraum frei ist.
 In der Buchungsübersicht steht dafür „Beansprucht“.

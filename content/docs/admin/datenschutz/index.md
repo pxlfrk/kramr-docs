@@ -13,16 +13,17 @@ Diese Seite beschreibt, was kramr dafür bereithält.
 ## Löschbegehren
 
 kramr löscht einen Kontakt nie, sondern **anonymisiert** ihn, weil Buchungen auf ihn verweisen.
-Eine Person mit der Rolle Staff oder Admin öffnet *Kontakte* und wählt in der Zeile des Kontakts im Menü *Anonymisieren*.
-Nach der Bestätigung sind Geburtsdatum, E-Mail, Handynummer, Organisation und Adresse entfernt, und der Nachname ist auf die Initiale gekürzt.
-Dieselben Angaben verschwinden aus dem Verlauf der zugehörigen Buchungen, ohne Rücksicht auf Groß- und Kleinschreibung.
-Auch in den Freitexten der Buchungen ersetzt kramr sie durch „[redacted]“: in Bemerkung, Stornogrund, Erlassgrund und den Notizen zu Rückgaben.
-Was der Text sonst enthält, bleibt stehen.
-Die zusätzlichen Empfänger einer Buchung werden gelöscht, sobald die Buchung zurückgegeben oder storniert ist.
-Offene Buchungen behalten ihre zusätzlichen Empfänger bis dahin, damit Erinnerungen noch ankommen; mit dem Abschluss werden sie gelöscht und auch aus dem Verlauf der Buchung entfernt.
-Für jede betroffene Buchung vermerkt der Verlauf ohne Einzelheiten, dass Kontaktdaten entfernt wurden.
+Die Sachbearbeitung oder die Administration führt das aus, wie unter [Kontakte anonymisieren](../../user/anonymisation/index.md) beschrieben; einen Eingriff in die Datenbank braucht es nicht.
+Was die Anonymisierung zusätzlich erfasst:
+
+- Die entfernten Angaben verschwinden auch aus der Historie der zugehörigen Buchungen, ohne Rücksicht auf Groß- und Kleinschreibung.
+  Für jede betroffene Buchung vermerkt die Historie ohne Einzelheiten, dass Kontaktdaten entfernt wurden.
+- In den Freitexten der Buchungen ersetzt kramr sie durch „[redacted]“: in Bemerkung, Stornogrund, Erlassgrund und den Notizen zu Rückgaben.
+  Was der Text sonst enthält, bleibt stehen.
+- Die zusätzlichen Empfänger einer Buchung werden gelöscht, sobald die Buchung zurückgegeben oder storniert ist, und auch aus der Historie der Buchung entfernt.
+  Offene Buchungen behalten sie bis dahin, damit Erinnerungen noch ankommen.
+
 Die Aktion ist nicht umkehrbar.
-Einen Eingriff in die Datenbank braucht es dafür nicht.
 
 ## Speicherbegrenzung
 
@@ -35,7 +36,7 @@ Gehe die Liste regelmäßig durch, zum Beispiel einmal im Jahr.
 
 Einen eigenen Auskunftsbericht gibt es nicht.
 Die Angaben zu einer Person stehen im Kontakt und in dessen Buchungen.
-Für die Weitergabe steht der CSV-Export der Buchungen zur Verfügung.
+Für die Weitergabe steht der [CSV-Export](../../user/export-and-import/index.md#export) der Buchungen zur Verfügung.
 Geht ein Begehren darüber hinaus, bedienst du es über deinen Zugriff auf die Datenbank.
 
 ## Benachrichtigungen
@@ -70,7 +71,7 @@ Die Bemerkung zu einem Standort bleibt intern und steht nicht in der Packliste.
 
 ## Was außerhalb von kramr bleibt
 
-- Das Zugriffs- und das Fehlerprotokoll des Reverse Proxys, siehe [Reverse Proxy](../installation/reverse-proxy.md), Anforderung 6.
+- Das Access- und das Error-Log des Reverse Proxys, siehe [Reverse Proxy](../installation/reverse-proxy.md), Anforderung 5.
 - Das Postfach der anfragenden Person.
 - Datensicherungen, die vor einer Löschung entstanden sind. Das gilt für jede Löschung. Wäge es gegen die Aufbewahrungsdauer deiner Sicherungen ab, siehe [Backup](../backup/index.md).
 
