@@ -21,6 +21,7 @@ Wie die Einbettung eingerichtet wird, steht unter [Reverse Proxy](../../admin/in
 
 Eine Anfrage ist noch keine Buchung; erst ihre Übernahme erzeugt einen Entwurf.
 Bei der Übernahme wählt die Sachbearbeitung Kontakt, Verleihart und zuständige Person.
+Ist der Kontakt eine Person der eigenen Organisation, steht die Verleihart fest auf Eigennutzung.
 Positionen, die für diese Verleihart nicht verleihbar sind, nennt der Dialog vorab und übernimmt sie nicht.
 Liegt ein Termin außerhalb der Öffnungszeiten, bestätigt die Sachbearbeitung ihn bei der Übernahme, siehe [Konflikte und Sperren](../conflicts-and-blocks/index.md#termin-außerhalb-der-öffnungszeiten).
 
