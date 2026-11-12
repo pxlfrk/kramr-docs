@@ -13,7 +13,7 @@ services:
   db:
     # Pinned to a digest so a Postgres patch release cannot change behaviour
     # under a fixed tag; Renovate keeps the digest current (docker:pinDigests).
-    image: postgres:18-alpine@sha256:898c60cb390d1085bc97bdd6a1ae968757421df394b071848b52b1c09c89d6a5
+    image: postgres:18-alpine@sha256:9ba53c7d41ea093baf5c1ba635ba5434c4f979880527d49bb7d9237d3193085b
     restart: unless-stopped
     environment:
       # The names on the left are what the postgres image itself requires; the
