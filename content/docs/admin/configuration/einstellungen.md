@@ -131,6 +131,9 @@ Im Text stehen Platzhalter in doppelten geschweiften Klammern; welche eine E-Mai
 Ein unbekannter oder in dieser E-Mail nicht erlaubter Platzhalter wird beim Speichern abgewiesen.
 Die Vorschau zeigt die E-Mail mit Beispieldaten als HTML und darunter als Klartext; sie speichert nichts.
 
+Unter den Texten zeigt die Tabelle „Wann erfährt der Kontakt was?“ zu jeder der vier E-Mails, welche Aktion sie auslöst und wann sie in die Warteschlange kommt.
+Sie ist reine Anzeige und liest dieselbe Liste wie die Hinweiszeilen an den Aktionen.
+
 Eine E-Mail hält den Text fest, mit dem sie eingereiht wurde; eine spätere Änderung wirkt erst auf neue E-Mails.
 Die E-Mails an die Sachbearbeitung lassen sich nicht anpassen.
 Änderungen stehen in der Änderungshistorie der Einstellungen.

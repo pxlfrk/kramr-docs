@@ -27,6 +27,16 @@ Liegt ein Termin außerhalb der Öffnungszeiten, bestätigt die Sachbearbeitung 
 
 Die Sachbearbeitung kann auch selbst einen Link für einen Kontakt ausstellen.
 
+## Wann der Kontakt eine E-Mail bekommt
+
+Der Kontakt erhält genau vier E-Mails: den Link zur Anfrage (selbst angefordert oder von der Geschäftsstelle ausgestellt), die Übernahme und die Ablehnung.
+Jede Aktion, die eine davon auslöst, nennt es vorher in einer Zeile unter dem Dialog: „Löst eine E-Mail an … aus: Anfrage übernommen“.
+Hat der Kontakt keine E-Mail-Adresse, steht dort, dass keine E-Mail ausgeht.
+Im Buchungsdetail zeigt der Bereich „Mitteilungen“ in der Seitenleiste, welche E-Mail zu dieser Buchung wann in die Warteschlange kam und ob sie gesendet wurde oder fehlschlug.
+Den Text der E-Mail zeigt er nicht.
+Eine fehlgeschlagene E-Mail steht auch bei den Benachrichtigungen in den Einstellungen.
+Die Tabelle „Wann erfährt der Kontakt was?“ auf der Seite *E-Mail-Texte* fasst die Anlässe für Admins zusammen.
+
 ## Was Anfragende sehen
 
 - **Material:** Die Einbettung zeigt nur Material, das als online sichtbar markiert ist.
