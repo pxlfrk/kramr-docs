@@ -16,6 +16,7 @@ kramr hat keine eigenen Passwörter und keine Registrierung. Die Anmeldung läuf
 
 Beim **ersten Anmelden** bekommst du zunächst die Rolle „Kein Zugriff“.
 Erst wenn die Administration dir eine Rolle vergibt, siehst du Inhalte.
+Wen du darum bittest, steht auf der Seite „Kein Zugriff“, sofern die Organisation eine Ansprechperson oder einen Hinweis hinterlegt hat.
 Welche Rolle was darf, steht unter [Rollen und Rechte](../roles/index.md).
 
 ## Die wichtigsten Bereiche

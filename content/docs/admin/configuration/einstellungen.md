@@ -25,6 +25,7 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `update_check.enabled` | Ja oder Nein | `true`, Startwert aus `KRAMR_DEFAULT_UPDATE_CHECK_ENABLED` | Ob die Einstellungsseite *Version & Updates* bei der Image-Registry nach einer neueren Version fragen darf. Ausgeschaltet findet kein ausgehender Aufruf statt. |
 | `embed.allowed_origins` | Webadressen, eine je Eintrag | leer (keine fremde Einbettung) | Die Webseiten, die eine Einbettung in einem Rahmen anzeigen dürfen. Geändert wird sie unter: Verwaltung › System › Website-Einbindung. |
 | `organisation.name` | Text | leer (kramr zeigt seinen eigenen Namen) | Name der Organisation in der Kopfzeile, auf der Anmelde- und den Anfrageseiten und in E-Mails. Höchstens 80 Zeichen. |
+| `access.contact_note` | Text | leer | Hinweis der Organisation auf der Seite „Kein Zugriff“, die eine angemeldete Person ohne Rolle sieht, zum Beispiel an wen sie sich wendet oder welche Gruppe beim Anmeldedienst fehlt. Reiner Text, höchstens 500 Zeichen, Zeilenumbrüche bleiben erhalten. Er steht unter den Admins, die in der Nutzerverwaltung als Ansprechperson markiert sind. |
 | `legal.privacy_policy_url` | Text | leer (keine Datenschutzerklärung verlinkt) | Adresse der Datenschutzerklärung, nur mit `https://`. Sie steht als Fußzeile auf den Anfrageseiten und der Anmeldeseite sowie in den E-Mails an Anfragende, und die Seite zum Anfordern des Links verlinkt sie im Datenschutzhinweis. |
 | `legal.links` | Liste aus Beschriftung und Adresse (höchstens 4) | leer (keine weiteren Links) | Bis zu 4 weitere Links aus Beschriftung und Adresse, zum Beispiel Impressum oder Kontakt, nur mit `https://`. Sie stehen in der gepflegten Reihenfolge hinter der Datenschutzerklärung. |
 | `request_mail.link_self_service` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail mit dem Link zur Anfrage, wenn die anfragende Person ihn selbst angefordert hat, je in einer Du- und einer Sie-Fassung. Gepflegt auf der Seite *E-Mail-Texte*. |
@@ -57,7 +58,7 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 
 | Gruppe | Seite | Inhalt |
 | --- | --- | --- |
-| Organisation | Auftritt | `organisation.name`, `ui.address_form`, `booking.select_all_confirm_threshold`, `extra_charge.cleaning_fee_parameter_type` und die Logos für Oberfläche und E-Mails |
+| Organisation | Auftritt | `organisation.name`, `access.contact_note`, `ui.address_form`, `booking.select_all_confirm_threshold`, `extra_charge.cleaning_fee_parameter_type` und die Logos für Oberfläche und E-Mails |
 | Organisation | Öffnungszeiten | `office.opening_hours`, `office.federal_state`, `office.church_holidays` und `office.opening_hours_deviations`, siehe [Öffnungszeiten](#öffnungszeiten-der-geschäftsstelle) |
 | Organisation | Recht & Datenschutz | `legal.privacy_policy_url`, `legal.links` und `contacts.inactivity_period_days` |
 | Organisation | E-Mail-Texte | die vier `request_mail.*`-Texte, siehe [E-Mail-Texte](#e-mail-texte-an-anfragende) |

@@ -128,6 +128,18 @@ DELETE FROM sessions WHERE user_id = '<uuid>';
 Die Abmeldung wirkt sofort, ohne Neustart.
 Beim Anbieter bleibt die Person angemeldet und kann sich ohne neues Passwort wieder anmelden, solange dessen Sitzung läuft.
 
+## Ansprechperson für Berechtigungen
+
+Wer sich anmeldet und noch keine Rolle hat, sieht die Seite „Kein Zugriff“.
+Damit sie sagt, an wen die Person sich wendet, markierst du in der Nutzerverwaltung einen oder mehrere Admins mit dem Kästchen **Ansprechperson für Berechtigungen**.
+Die Markierung ist freiwillig und gilt nur für Admins: Name und E-Mail-Adresse sehen dann alle angemeldeten Personen ohne Rolle.
+Wer die Rolle Admin verliert, verliert auch die Markierung.
+Das Setzen und Entziehen steht im Änderungsverlauf.
+
+Zusätzlich pflegst du in den Einstellungen unter Organisation › Auftritt den **Hinweis für Personen ohne Rolle** (`access.contact_note`, höchstens 500 Zeichen).
+Im Gruppenmodus genügt dieser Text, zum Beispiel mit dem Namen der Gruppe beim Anmeldedienst.
+Ohne Markierte und ohne Text zeigt die Seite nur den allgemeinen Hinweis.
+
 ## Nutzer als Kontakt anlegen
 
 Wer in der eigenen Organisation Material für sich oder die Gruppe ausleiht,
