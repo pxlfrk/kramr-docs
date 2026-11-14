@@ -59,6 +59,7 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 | Gruppe | Seite | Inhalt |
 | --- | --- | --- |
 | Organisation | Auftritt | `organisation.name`, `access.contact_note`, `ui.address_form`, `booking.select_all_confirm_threshold`, `extra_charge.cleaning_fee_parameter_type` und die Logos für Oberfläche und E-Mails |
+| Organisation | Tarife | die Liste der Tarife, siehe [Tarife](#tarife) |
 | Organisation | Öffnungszeiten | `office.opening_hours`, `office.federal_state`, `office.church_holidays` und `office.opening_hours_deviations`, siehe [Öffnungszeiten](#öffnungszeiten-der-geschäftsstelle) |
 | Organisation | Recht & Datenschutz | `legal.privacy_policy_url`, `legal.links` und `contacts.inactivity_period_days` |
 | Organisation | E-Mail-Texte | die vier `request_mail.*`-Texte, siehe [E-Mail-Texte](#e-mail-texte-an-anfragende) |
@@ -68,6 +69,19 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 | System | Version & Updates | die laufende Version und `update_check.enabled` |
 
 Die frühere Adresse `/settings` führt auf die Seite *Auftritt*.
+
+## Tarife
+
+Unter *Verwaltung* › *Organisation* › *Tarife* pflegst du die Tarife, nach denen kramr Material berechnet.
+Eine neue Installation startet mit „Intern“ und „Extern“; du kannst beide umbenennen, weitere ergänzen und entfernen.
+Es gibt höchstens 6 und mindestens einen aktiven Tarif, und die Bezeichnung darf unter den aktiven nur einmal vorkommen.
+Mit den Pfeilen legst du die Reihenfolge fest.
+Änderungen gelten sofort.
+
+Ein Tarif, der schon an einem Material oder einer Buchung hängt, wird beim Löschen archiviert statt gelöscht.
+Archivierte Tarife bleiben an alten Buchungen lesbar, sind für neue nicht wählbar und lassen sich unter *Archivierte Tarife* wieder aktivieren, solange Platz unter den 6 ist.
+Der letzte aktive Tarif lässt sich nicht archivieren oder löschen.
+Jede Änderung steht im Änderungsprotokoll.
 
 ## Öffnungszeiten der Geschäftsstelle
 
