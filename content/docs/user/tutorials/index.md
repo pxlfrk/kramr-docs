@@ -34,5 +34,5 @@ Auch das steht in der Historie, siehe [Buchungsstatus und Übergänge](../bookin
 
 ## Eine Anfrage von der Website bearbeiten
 
-Im Bereich „Anfragen“ eine eingereichte Anfrage öffnen und prüfen, was im Zeitraum frei ist. Dann als Entwurf übernehmen (Kontakt, Verleihart und zuständige Person wählen) oder mit Begründung ablehnen; die anfragende Person erfährt es per E-Mail.
+Im Bereich „Anfragen“ eine eingereichte Anfrage öffnen und prüfen, was im Zeitraum frei ist. Dann als Entwurf übernehmen (Kontakt, Tarif und zuständige Person wählen) oder mit Begründung ablehnen; die anfragende Person erfährt es per E-Mail.
 Mehr dazu unter [Buchungsanfragen von Websites](../requests/index.md).

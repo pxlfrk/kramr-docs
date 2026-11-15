@@ -21,12 +21,12 @@ Vorgabe ist: in jedem Tarif verleihbar.
   Nicht auswählbares Material ist mit dem Grund markiert.
 - Spätere Änderungen am Material ändern bestehende Buchungen nicht.
 
-## Verleihart
+## Tarif der Buchung
 
-Jede Ausleihe hat eine Verleihart: **intern**, **extern** oder **Eigennutzung**.
+Jede Ausleihe hat einen Tarif der Liste oder die **Eigennutzung**.
 Du musst sie bei jeder Ausleihe wählen; kramr belegt sie nicht aus dem Kontakt vor.
-Die Verleihart bestimmt, welcher Tarif gilt, siehe [Preise und Tarife](../pricing/index.md), und welches Material gebucht werden darf.
-Bei einer Sperre entfällt sie wie der Kontakt.
+Der Tarif bestimmt, welcher Preis gilt, siehe [Preise und Tarife](../pricing/index.md), und welches Material gebucht werden darf.
+Bei einer Sperre entfällt er wie der Kontakt.
 
 ## Eigennutzung
 
@@ -34,6 +34,6 @@ Die Eigennutzung ist für Ausleihen der eigenen Organisation.
 
 - Sie gilt für jedes aktive Material und hat keinen Tarif.
 - Sie braucht einen Kontakt der Art **Eigene Organisation**, und ein solcher Kontakt leiht nur zur Eigennutzung aus.
-- Wählst du so einen Kontakt, steht die Verleihart fest auf Eigennutzung.
+- Wählst du so einen Kontakt, steht die Wahl fest auf Eigennutzung.
 - Kontakte der eigenen Organisation brauchen keine Handynummer; die E-Mail-Adresse bleibt Pflicht.
 - Wie Administratoren aus einem Konto einen solchen Kontakt anlegen, steht unter [Anmeldung und Rollen](../../admin/configuration/anmeldung-und-rollen.md).

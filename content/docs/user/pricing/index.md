@@ -23,11 +23,11 @@ Ein Tarif, für den das Material nicht verleihbar ist, trägt keinen Preis, sieh
 
 ## Welcher Tarif gilt
 
-Die [Verleihart](../lending-restrictions/index.md) der Buchung entscheidet, bis die Buchung den Tarif selbst wählt: intern oder extern, das sind die beiden Standardtarife.
+Die Buchung wählt bei jeder Ausleihe einen Tarif oder die Eigennutzung, siehe [Verleihbarkeit und Eigennutzung](../lending-restrictions/index.md).
 In der Bestandsübersicht zeigt das Menü „Ansicht“ je Tarif eine Preisspalte, die du auch sortieren kannst.
 Die Eigennutzung hat keinen Tarif und kostet nichts.
 
-In der Buchungsübersicht kannst du nach der Verleihart filtern, auch mit einem Klick auf ihre Kennzeichnung in einer Zeile.
+In der Buchungsübersicht kannst du nach dem Tarif filtern, auch mit einem Klick auf seine Kennzeichnung in einer Zeile.
 Der Filter „kostenpflichtig“ oder „kostenlos“ bezieht sich auf den Betrag der Buchung, siehe [Betrag einer Buchung](#betrag-einer-buchung).
 
 ## Betrag einer Buchung
@@ -55,7 +55,7 @@ Das gilt auch, wenn das Material inzwischen kostenlos ist: Die Karte „Bezahlun
 Die übrigen kostenlosen Positionen zählt eine Zeile unter der Liste.
 Eine Anpassung bleibt beim Übernehmen erhalten, es sei denn, die Position verliert dabei ihren Preis.
 
-Wechselst du die Verleihart einer Buchung vor der Abholung, schreibt kramr alle Positionen nach dem neuen Tarif neu fest und entfernt alle Anpassungen.
+Wechselst du den Tarif einer Buchung vor der Abholung, schreibt kramr alle Positionen nach dem neuen Tarif neu fest und entfernt alle Anpassungen.
 Die Historie nennt je Position den alten und den neuen Preis.
 
 ### Eine Position anpassen

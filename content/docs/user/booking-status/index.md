@@ -57,7 +57,7 @@ Zwei Schritte löschen erfasste Tatsachen und fragen vorher nach:
 | --- | --- |
 | Entwurf | Alles: Material, Zeitraum, Kontakt, Bemerkung, zuständige Person, zusätzliche Empfänger. |
 | Genehmigt | Zeitraum, Bemerkung, Kontakt, zuständige Person und Material. Jede Änderung an Material oder Zeitraum prüft Konflikte neu. Bereits abgeholte Positionen sind fest. |
-| Abgeholt | Neue Positionen hinzufügen, noch nicht abgeholte Positionen ändern oder entfernen, Zeitraum (zum Beispiel die Rückgabe verlängern), Bemerkung und zuständige Person. Abgeholte Positionen sowie Kontakt und Verleihart sind fest. |
+| Abgeholt | Neue Positionen hinzufügen, noch nicht abgeholte Positionen ändern oder entfernen, Zeitraum (zum Beispiel die Rückgabe verlängern), Bemerkung und zuständige Person. Abgeholte Positionen sowie Kontakt und Tarif sind fest. |
 | Zurückgegeben, Storniert | Nur ansehen. |
 
 Jede Änderung steht in der Historie.

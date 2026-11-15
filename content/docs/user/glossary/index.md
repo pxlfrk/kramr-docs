@@ -19,7 +19,7 @@ order: 70
 | Buchung | Eine Ausleihe oder eine Sperre mit Zeitraum, Positionen und Status. |
 | Einbettung | Material und Anfrage auf der Website eures Vereins. |
 | Einheit | Ein einzelnes, eigens bezeichnetes Stück, zum Beispiel ein bestimmtes Zelt. |
-| Eigennutzung | Verleihart für Ausleihen der eigenen Organisation, ohne Tarif. |
+| Eigennutzung | Wahl für Ausleihen der eigenen Organisation, ohne Tarif. |
 | Entwurf | Status einer noch nicht bestätigten Buchung. |
 | Historie | Die Liste aller Änderungen an einer Buchung oder einem Material, mit Zeitpunkt und Person. |
 | Kein Zugriff | Rolle ohne Rechte. Jedes neue Konto beginnt hier. |
@@ -34,7 +34,6 @@ order: 70
 | Sachbearbeitung | Rolle, die Material, Kontakte und Buchungen verwaltet. Dieselbe Bezeichnung nennt auch die Person, die eine Buchung betreut (die zuständige Sachbearbeitung). |
 | Set | Ein Material, das mehrere andere bündelt. |
 | Sperre | Eine Buchung ohne Kontakt, die Material im Zeitraum belegt. |
-| Tarif | Preis für interne oder externe Ausleihe. Siehe [Preise und Tarife](../pricing/index.md). |
-| Verleihart | Intern, extern oder Eigennutzung. Sie bestimmt den Tarif. |
+| Tarif | Preis- und Verleihbarkeitsstufe, die eine Buchung wählt. Siehe [Preise und Tarife](../pricing/index.md). |
 | Vormerkung | Ein Entwurf: Er belegt nichts, wird aber bei Konflikten angezeigt. |
 | Zusatzkosten | Kosten für Schaden, Verunreinigung oder Verlust, die zum Betrag einer Ausleihe hinzukommen. Siehe [Preise und Tarife](../pricing/index.md#zusatzkosten-bei-schaden-verunreinigung-und-verlust). |

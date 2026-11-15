@@ -29,7 +29,7 @@ Der Knopf ist gesperrt, bis Abhol- und Rückgabetermin eingetragen sind, damit d
 - **Mehr als frei:** Du kannst mehr wählen, als im Zeitraum frei ist; kramr weist nur auf den Konflikt hin, siehe [Konflikte und Sperren](../conflicts-and-blocks/index.md).
 
 Bei einer Ausleihe bleibt Material außen vor, das nur im Set buchbar ist, und Bestandteile eines Pflicht-Sets, das mitgebucht wird, weil sie mit dem Set entstehen.
-Material, das für die gewählte Verleihart nicht verleihbar ist, ist mit dem Grund markiert, siehe [Verleihbarkeit und Eigennutzung](../lending-restrictions/index.md).
+Material, das im gewählten Tarif nicht verleihbar ist, ist mit dem Grund markiert, siehe [Verleihbarkeit und Eigennutzung](../lending-restrictions/index.md).
 
 ### Sets in der Buchung
 
@@ -38,7 +38,7 @@ Material, das für die gewählte Verleihart nicht verleihbar ist, ist mit dem Gr
   Ändert sich später die Menge des Sets, bietet seine Zeile „Bestandteile anpassen“ an, in der Auswahl wie in der Buchung.
 - Mitgenommene Bestandteile stehen unter ihrem Set, eingerückt, mit gestrichelter Linie und der Marke „aus Set“.
   Die Zugehörigkeit ist nur eine Anzeige: Jeder Bestandteil bleibt eine eigene Position, die du ändern oder entfernen kannst.
-  Bestandteile, die schon in der Buchung stehen oder für die Verleihart nicht buchbar sind, überspringt kramr und nennt sie im Hinweis.
+  Bestandteile, die schon in der Buchung stehen oder im Tarif nicht buchbar sind, überspringt kramr und nennt sie im Hinweis.
 - Bei einem **Pflicht-Set** zeigt das Formular die mitreservierten Bestandteile als nur lesbare Zeilen unter dem Set, mit durchgezogener Linie.
   Wie du ein Pflicht-Set in einer bestehenden Buchung änderst, steht unter [Sets](../kits/index.md#ein-pflicht-set-in-der-buchung-ändern).
 - Entfernst du ein Set mit Bestandteilen, fragt kramr „Bestandteile auch entfernen?“: „Mit entfernen“ nimmt sie mit, „Behalten“ lässt sie als gewöhnliche Positionen stehen.
@@ -57,7 +57,7 @@ Das geht beim Anlegen und beim Bearbeiten, solange der Ausleiher noch änderbar 
 
 Wiederkehrende Ausleihen oder Sperren legst du aus einer bestehenden Buchung an: Im Buchungsdetail öffnet „Duplizieren“ das Formular vorbefüllt.
 
-- **Übernommen** werden Ausleiher, Verleihart, Material mit Menge bzw. Einheit und die zusätzlichen Empfänger, bei einer Sperre ihr Titel.
+- **Übernommen** werden Ausleiher, Tarif, Material mit Menge bzw. Einheit und die zusätzlichen Empfänger, bei einer Sperre ihr Titel.
 - **Neu einzutragen** sind Zeitraum und Bemerkung.
   Status, Betrag, Zahlung und alles zu Abholung und Rückgabe kommen nicht mit.
 - **Nicht mehr buchbar** ist etwa archiviertes Material oder ein anonymisierter Kontakt; so etwas fehlt im Entwurf, und ein Hinweis über dem Formular nennt es.
