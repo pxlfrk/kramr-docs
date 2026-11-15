@@ -170,3 +170,13 @@ Die Bestätigung nennt, an wie vielen Kategorien und Materialien die Person eing
 Wie die Zuordnung an Kategorie und Material wirkt, steht unter [Bestand verwalten](../../user/inventory/index.md#ansprechperson).
 Die Person, die als Standardperson gewählt ist, lässt sich nicht löschen: wähle zuerst eine andere Person oder *Keine*.
 Nur ein Admin ändert das Verzeichnis; Sachbearbeitung sieht es in Auswahllisten.
+
+### Ansprechperson in der Einbettung
+
+Eine Einbettung zeigt die Ansprechperson nur, wenn zwei Dinge zusammenkommen.
+In der Einbettung (*Verwaltung › System › Website-Einbindung*) ist *Ansprechperson anzeigen* angehakt; die Vorgabe ist aus, und der Haken gilt nur für diese eine Einbettung.
+Und an der Person selbst ist angehakt, welche Felder öffentlich sind: Name, Foto, E-Mail und Handynummer, jeweils einzeln, Vorgabe alle aus.
+Im Materialdetail der Einbettung steht dann unter „Bei Fragen“ die wirksame Ansprechperson des Materials mit genau diesen Feldern; die Funktion zeigt die Einbettung nie.
+Gibt die Person kein Feld frei, erscheint der Abschnitt nicht.
+Nimm einen Haken zurück, ist das Feld sofort nicht mehr öffentlich; ein bereits geladenes Foto kann im Zwischenspeicher eines Browsers noch bis zu einer Minute stehen bleiben.
+Gib Felder nur mit dem Einverständnis der Person frei, die Einbettung ist ohne Anmeldung erreichbar.
