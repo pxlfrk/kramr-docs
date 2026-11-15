@@ -165,5 +165,7 @@ kramr erkennt den Typ am Inhalt, kodiert das Bild neu, entfernt alle Metadaten w
 Foto, Name, E-Mail und Handynummer sind personenbezogene Daten; speichere sie nur mit dem Einverständnis der Person.
 
 Eine Person löschst du nach einer Bestätigung; Foto und Kontaktdaten werden dabei gelöscht.
+Die Bestätigung nennt, an wie vielen Kategorien und Materialien die Person eingetragen ist; diese erben danach wieder.
+Wie die Zuordnung an Kategorie und Material wirkt, steht unter [Bestand verwalten](../../user/inventory/index.md#ansprechperson).
 Die Person, die als Standardperson gewählt ist, lässt sich nicht löschen: wähle zuerst eine andere Person oder *Keine*.
 Nur ein Admin ändert das Verzeichnis; Sachbearbeitung sieht es in Auswahllisten.

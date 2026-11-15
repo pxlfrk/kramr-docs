@@ -1,6 +1,6 @@
 ---
 title: Bestand verwalten
-description: Material anlegen und ordnen, Standorte verschachteln, mehrere Materialien auf einmal ändern und den Bestand als Tabelle oder Raster ansehen.
+description: Material anlegen und ordnen, Ansprechpersonen zuordnen, Standorte verschachteln, mehrere Materialien auf einmal ändern und den Bestand als Tabelle oder Raster ansehen.
 audience: user
 order: 22
 ---
@@ -24,6 +24,18 @@ In der Bestandsübersicht blendest du über **Ansicht** Parameter als zusätzlic
 Angeboten werden die Parameter, die beim Parameter mit dem Schalter „Spalte im Bestand“ (Gruppe „Sichtbarkeit“) gekennzeichnet sind, und von ihnen die der gewählten Kategorie, ohne Kategorie alle.
 Ist kein Parameter gekennzeichnet, fehlt dieser Abschnitt im Menü.
 Welche Spalte du siehst, schaltest du selbst ein.
+
+## Ansprechperson
+
+Zu jedem Material lässt sich festhalten, wen man bei Fragen anspricht.
+Die Personen pflegt die Administration unter *Verwaltung › Organisation › Ansprechpersonen*.
+
+- An einer Kategorie wählst du im Formular „Erbt“, eine Person oder „Keine Person“; Unterkategorien und ihr Material übernehmen das.
+- Am Material wählst du in der Karte „Ansprechperson“ dasselbe; die Wahl wird sofort gespeichert.
+- Es gilt der nächste ausdrückliche Wert vom Material aufwärts über die Kategorien, zuletzt die Standardperson der Organisation; „Keine Person“ beendet die Suche.
+- An der Auswahl steht, was beim Erben gelten würde und woher, und unter der Auswahl die Person, die gerade gilt.
+- Der Standort spielt dabei keine Rolle.
+- Die Karte sehen Sachbearbeitung und Administration, Leserechte allein genügen nicht.
 
 ## Standorte
 
