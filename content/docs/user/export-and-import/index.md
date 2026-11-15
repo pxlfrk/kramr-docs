@@ -20,6 +20,9 @@ Dafür brauchst du die Rolle Sachbearbeitung oder Administration.
 Beachte:
 
 - kramr liest nur die Spalten der Vorlage.
+- Preis und Verleihbarkeit stehen je aktivem Tarif in zwei Spalten, `price_cents:<Tarif>` und `lendable:<Tarif>`; die Vorlage nennt die Tarife in ihrer Reihenfolge.
+  Der Import ordnet die Spalte über die Bezeichnung zu.
+  Eine Spalte zu einem unbekannten Tarif macht die Datei ungültig, eine fehlende Spalte heißt „verleihbar, kostenlos“.
 - Der Import legt **nur neue** Materialien an. Bestehende Materialien ändert er nicht.
 - Die Spalte `location` nimmt den Standort als Pfad („Keller › Waschraum“, Teile mit „›“ getrennt) oder als einzelnen Namen.
   Ein einzelner Name gilt nur, wenn genau ein Standort so heißt; heißen mehrere so („Waschraum“ unter „Keller“ und unter „Garage“), meldet der Import die Zeile als mehrdeutig, und du gibst den ganzen Pfad an.

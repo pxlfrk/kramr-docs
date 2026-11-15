@@ -79,8 +79,9 @@ Eine neue Installation startet mit „Intern“ und „Extern“; du kannst beid
 Es gibt höchstens 6 und mindestens einen aktiven Tarif, und die Bezeichnung darf unter den aktiven nur einmal vorkommen.
 Mit den Pfeilen legst du die Reihenfolge fest.
 Änderungen gelten sofort.
+Ein neu angelegter Tarif ist an jedem Material zunächst verleihbar und kostenlos; die Preise setzt du am Material oder per CSV-Import.
 
-Ein Tarif, der schon an einem Material oder einer Buchung hängt, wird beim Löschen archiviert statt gelöscht.
+Ein Tarif, der schon an einem Material (mit einem Preis oder als „nicht verleihbar“) oder einer Buchung hängt, wird beim Löschen archiviert statt gelöscht.
 Archivierte Tarife bleiben an alten Buchungen lesbar, sind für neue nicht wählbar und lassen sich unter *Archivierte Tarife* wieder aktivieren, solange Platz unter den 6 ist.
 Der letzte aktive Tarif lässt sich nicht archivieren oder löschen.
 Jede Änderung steht im Änderungsprotokoll.

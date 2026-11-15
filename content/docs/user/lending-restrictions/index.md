@@ -9,13 +9,16 @@ order: 45
 
 ## Wer darf ausleihen
 
-Bei jedem Material legst du fest, ob es an den **internen** Personenkreis (Jugendgruppen), den **externen** Personenkreis (Privatpersonen) oder an beide verliehen wird.
-Vorgabe ist beide.
+Bei jedem Material legst du je **Tarif** fest, ob es an diesen Personenkreis verliehen wird, zum Beispiel an Jugendgruppen („Intern“) oder an Privatpersonen („Extern“).
+Vorgabe ist: in jedem Tarif verleihbar.
 
-- Ein Personenkreis, der das Material nicht ausleihen darf, hat dafür keinen Preis.
-- Sind beide ausgeschaltet, bleibt das Material aktiv im Bestand. Es lässt sich dann nur für die Eigennutzung buchen oder sperren, und eine Website-Anfrage ist dafür nicht möglich.
+- Ein Tarif, in dem das Material nicht verleihbar ist, hat dafür keinen Preis.
+- Ist es in allen Tarifen ausgeschaltet, bleibt das Material aktiv im Bestand.
+  Es lässt sich dann nur für die Eigennutzung buchen oder sperren, und eine Website-Anfrage ist dafür nicht möglich.
 - Ein Set ist nur verleihbar, wenn alle Bestandteile es sind.
-- Bestand, Buchung und Einbettung zeigen die Einschränkung an. Nicht auswählbares Material ist mit dem Grund markiert.
+- Bestand, Buchung und Einbettung zeigen die Einschränkung an.
+  Die Einbettung nennt jeden Tarif mit seinem Preis oder „nicht verleihbar“.
+  Nicht auswählbares Material ist mit dem Grund markiert.
 - Spätere Änderungen am Material ändern bestehende Buchungen nicht.
 
 ## Verleihart

@@ -716,27 +716,36 @@ components:
                   minimum: 0
                   maximum: 9007199254740991
                 - type: "null"
-            priceInternalCents:
-              anyOf:
-                - type: integer
-                  minimum: 0
-                  maximum: 9007199254740991
-                - type: "null"
-            priceExternalCents:
-              anyOf:
-                - type: integer
-                  minimum: 0
-                  maximum: 9007199254740991
-                - type: "null"
+            tariffs:
+              type: array
+              items:
+                type: object
+                properties:
+                  tariffId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  name:
+                    type: string
+                  priceCents:
+                    anyOf:
+                      - type: integer
+                        minimum: 0
+                        maximum: 9007199254740991
+                      - type: "null"
+                  lendable:
+                    type: boolean
+                required:
+                  - tariffId
+                  - name
+                  - priceCents
+                  - lendable
+                additionalProperties: false
             priceUnit:
               type: string
               enum:
                 - flat
                 - per_day
-            lendableInternal:
-              type: boolean
-            lendableExternal:
-              type: boolean
             availability:
               anyOf:
                 - type: object
@@ -862,11 +871,8 @@ components:
             - stock
             - isKit
             - componentCount
-            - priceInternalCents
-            - priceExternalCents
+            - tariffs
             - priceUnit
-            - lendableInternal
-            - lendableExternal
             - availability
             - description
             - priceNote
@@ -925,27 +931,36 @@ components:
                     minimum: 0
                     maximum: 9007199254740991
                   - type: "null"
-              priceInternalCents:
-                anyOf:
-                  - type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  - type: "null"
-              priceExternalCents:
-                anyOf:
-                  - type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  - type: "null"
+              tariffs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tariffId:
+                      type: string
+                      format: uuid
+                      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    name:
+                      type: string
+                    priceCents:
+                      anyOf:
+                        - type: integer
+                          minimum: 0
+                          maximum: 9007199254740991
+                        - type: "null"
+                    lendable:
+                      type: boolean
+                  required:
+                    - tariffId
+                    - name
+                    - priceCents
+                    - lendable
+                  additionalProperties: false
               priceUnit:
                 type: string
                 enum:
                   - flat
                   - per_day
-              lendableInternal:
-                type: boolean
-              lendableExternal:
-                type: boolean
               availability:
                 anyOf:
                   - type: object
@@ -975,11 +990,8 @@ components:
               - stock
               - isKit
               - componentCount
-              - priceInternalCents
-              - priceExternalCents
+              - tariffs
               - priceUnit
-              - lendableInternal
-              - lendableExternal
               - availability
             additionalProperties: false
         total:
@@ -1110,27 +1122,36 @@ components:
                     minimum: 0
                     maximum: 9007199254740991
                   - type: "null"
-              priceInternalCents:
-                anyOf:
-                  - type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  - type: "null"
-              priceExternalCents:
-                anyOf:
-                  - type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  - type: "null"
+              tariffs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tariffId:
+                      type: string
+                      format: uuid
+                      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    name:
+                      type: string
+                    priceCents:
+                      anyOf:
+                        - type: integer
+                          minimum: 0
+                          maximum: 9007199254740991
+                        - type: "null"
+                    lendable:
+                      type: boolean
+                  required:
+                    - tariffId
+                    - name
+                    - priceCents
+                    - lendable
+                  additionalProperties: false
               priceUnit:
                 type: string
                 enum:
                   - flat
                   - per_day
-              lendableInternal:
-                type: boolean
-              lendableExternal:
-                type: boolean
               availability:
                 anyOf:
                   - type: object
@@ -1188,11 +1209,8 @@ components:
               - stock
               - isKit
               - componentCount
-              - priceInternalCents
-              - priceExternalCents
+              - tariffs
               - priceUnit
-              - lendableInternal
-              - lendableExternal
               - availability
               - units
               - isMandatorySet
@@ -1436,27 +1454,36 @@ components:
                                 minimum: 0
                                 maximum: 9007199254740991
                               - type: "null"
-                          priceInternalCents:
-                            anyOf:
-                              - type: integer
-                                minimum: 0
-                                maximum: 9007199254740991
-                              - type: "null"
-                          priceExternalCents:
-                            anyOf:
-                              - type: integer
-                                minimum: 0
-                                maximum: 9007199254740991
-                              - type: "null"
+                          tariffs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                tariffId:
+                                  type: string
+                                  format: uuid
+                                  pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                                name:
+                                  type: string
+                                priceCents:
+                                  anyOf:
+                                    - type: integer
+                                      minimum: 0
+                                      maximum: 9007199254740991
+                                    - type: "null"
+                                lendable:
+                                  type: boolean
+                              required:
+                                - tariffId
+                                - name
+                                - priceCents
+                                - lendable
+                              additionalProperties: false
                           priceUnit:
                             type: string
                             enum:
                               - flat
                               - per_day
-                          lendableInternal:
-                            type: boolean
-                          lendableExternal:
-                            type: boolean
                           availability:
                             anyOf:
                               - type: object
@@ -1486,11 +1513,8 @@ components:
                           - stock
                           - isKit
                           - componentCount
-                          - priceInternalCents
-                          - priceExternalCents
+                          - tariffs
                           - priceUnit
-                          - lendableInternal
-                          - lendableExternal
                           - availability
                         additionalProperties: false
                       - type: "null"
@@ -1835,23 +1859,30 @@ components:
                 pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
               name:
                 type: string
-              priceInternalCents:
-                anyOf:
-                  - type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  - type: "null"
-              priceExternalCents:
-                anyOf:
-                  - type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  - type: "null"
+              prices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tariffId:
+                      type: string
+                      format: uuid
+                      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    tariffName:
+                      type: string
+                    priceCents:
+                      type: integer
+                      minimum: 0
+                      maximum: 9007199254740991
+                  required:
+                    - tariffId
+                    - tariffName
+                    - priceCents
+                  additionalProperties: false
             required:
               - id
               - name
-              - priceInternalCents
-              - priceExternalCents
+              - prices
             additionalProperties: false
         kitMemberships:
           type: array

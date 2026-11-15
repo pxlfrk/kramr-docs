@@ -1,6 +1,6 @@
 ---
 title: Preise und Tarife
-description: Wie der Preis eines Materials in zwei Tarifen geführt wird und welcher für eine Buchung gilt.
+description: Wie der Preis eines Materials je Tarif geführt wird und welcher für eine Buchung gilt.
 audience: user
 order: 46
 ---
@@ -8,20 +8,23 @@ order: 46
 # Preise und Tarife
 
 Der Preis ist ein optionales Feld jedes Materials.
-Er gilt in **zwei Tarifen**: für die interne Ausleihe (Jugendgruppen) und für den privaten oder externen Verleih.
+Er gilt **je Tarif**: Die Administration pflegt die Tarife in den Einstellungen, eine neue Installation startet mit „Intern“ für Jugendgruppen und „Extern“ für den privaten Verleih.
+Im Materialformular steht im Block „Verleihbar an“ je aktivem Tarif eine Zeile mit Schalter und Preis, in der Reihenfolge der Tarife.
 
 ## Je Tarif
 
 - **Leer** heißt kostenlos.
+  Das gilt auch für einen neu angelegten Tarif: Jedes Material ist darin zunächst verleihbar und kostenlos, bis du einen Preis setzt oder den Tarif am Material ausschaltest.
 - **Befüllt** heißt kostenpflichtig mit dem angegebenen Betrag in Euro, zum Beispiel 12,50.
-- Die **Preiseinheit** sagt, ob der Betrag pauschal gilt oder pro Tag.
+- Die **Preiseinheit** gilt für alle Tarife eines Materials und sagt, ob der Betrag pauschal gilt oder pro Tag.
 - Der **Preishinweis** nennt Bedingungen, die ein Betrag nicht ausdrückt, zum Beispiel eine Kaution.
 
 Ein Tarif, für den das Material nicht verleihbar ist, trägt keinen Preis, siehe [Verleihbarkeit und Eigennutzung](../lending-restrictions/index.md).
 
 ## Welcher Tarif gilt
 
-Die [Verleihart](../lending-restrictions/index.md) der Buchung entscheidet: intern oder extern.
+Die [Verleihart](../lending-restrictions/index.md) der Buchung entscheidet, bis die Buchung den Tarif selbst wählt: intern oder extern, das sind die beiden Standardtarife.
+In der Bestandsübersicht zeigt das Menü „Ansicht“ je Tarif eine Preisspalte, die du auch sortieren kannst.
 Die Eigennutzung hat keinen Tarif und kostet nichts.
 
 In der Buchungsübersicht kannst du nach der Verleihart filtern, auch mit einem Klick auf ihre Kennzeichnung in einer Zeile.
