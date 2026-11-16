@@ -63,6 +63,7 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 | Organisation | Tarife | die Liste der Tarife, siehe [Tarife](#tarife) |
 | Organisation | Ansprechpersonen | `custodian.default` und das Verzeichnis der Ansprechpersonen, siehe [Ansprechpersonen](#ansprechpersonen) |
 | Organisation | Öffnungszeiten | `office.opening_hours`, `office.federal_state`, `office.church_holidays` und `office.opening_hours_deviations`, siehe [Öffnungszeiten](#öffnungszeiten-der-geschäftsstelle) |
+| Organisation | Ausleihbedingungen | der Bedingungstext in Fassungen, siehe [Ausleihbedingungen](#ausleihbedingungen) |
 | Organisation | Recht & Datenschutz | `legal.privacy_policy_url`, `legal.links` und `contacts.inactivity_period_days` |
 | Organisation | E-Mail-Texte | die vier `request_mail.*`-Texte, siehe [E-Mail-Texte](#e-mail-texte-an-anfragende) |
 | System | Benachrichtigungen | `reminder.lead_time_days`, die Empfänger (`notification.notify_creator`, `notification.notify_admins_on_new_booking`, `notification.always_notify_recipients`) und `notification.webhook_url`; darunter die fehlgeschlagenen Benachrichtigungen der letzten 7 Tage |
@@ -110,6 +111,26 @@ Für ein einzelnes Material hängst du `/items/<Kennung>?single` an diese Adress
 Die Kennung steht in der Adresszeile, wenn du das Material im Bestand öffnest (`…/items/<Kennung>`).
 Mit `?single` fehlt auf der Materialseite der Link „Zurück zur Übersicht“.
 Es zeigt sich nur, was die Einbettung ohnehin zeigt: Ein Material außerhalb ihres Umfangs bleibt „nicht zu sehen“.
+
+## Ausleihbedingungen
+
+Auf der Seite *Ausleihbedingungen* pflegst du einen Bedingungstext, den die anfragende Seite beim Einreichen einer Anfrage zur Kenntnis nimmt.
+kramr liefert keinen Mustertext; Wortlaut und rechtliche Wirksamkeit der Klick-Bestätigung prüft die Organisation selbst.
+Der Text ist reiner Text mit höchstens 20 000 Zeichen; eine Leerzeile trennt Absätze.
+
+Der Text besteht aus **Fassungen**.
+Du bearbeitest einen **Entwurf**, siehst die **Vorschau** in der Darstellung der öffentlichen Seite und **veröffentlichst** ihn.
+Eine veröffentlichte Fassung bekommt die nächste Nummer, gilt ab diesem Zeitpunkt und lässt sich nie mehr ändern oder zurückziehen; eine Änderung ist eine neue Fassung, die sich im Text von der gültigen unterscheiden muss.
+Ein neuer Entwurf beginnt mit dem Text der gültigen Fassung.
+Bearbeitet jemand anderes gleichzeitig den Entwurf, meldet kramr es und lädt auf Wunsch den aktuellen Stand.
+Das Veröffentlichen steht mit der Nummer der Fassung im Audit-Log.
+
+Solange keine Fassung veröffentlicht ist, fragt kramr keine Kenntnisnahme ab.
+Danach muss jede Anfrage über einen Selbst-Link oder einen ausgestellten Link die gültige Fassung bestätigen; ausgenommen ist ein ausgestellter Link für einen eigenen Kontakt.
+An der Anfrage stehen Fassung und Zeitpunkt.
+Veröffentlichst du eine neue Fassung, während jemand eine Anfrage vorbereitet, muss diese Person die neue Fassung beim Einreichen bestätigen.
+
+Eine öffentliche Seite zeigt die gültige und jede frühere Fassung unter `/embed/terms` und `/embed/terms/<Nummer>`; sie ist als „Ausleihbedingungen“ in der Fußzeile der Anfrageseiten und unter den E-Mails an Anfragende verlinkt, solange eine Fassung veröffentlicht ist.
 
 ## Rechtliche Links
 

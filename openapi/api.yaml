@@ -126,6 +126,61 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
+  /api/public/lending-terms:
+    get:
+      operationId: getPublicLendingTerms
+      summary: The valid lending terms
+      description: Anonymous (FR-117). Never a draft.
+      responses:
+        "200":
+          description: The valid version.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicLendingTerms"
+        "404":
+          description: No version is published.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/lending-terms/{number}:
+    get:
+      operationId: getPublicLendingTermsVersion
+      summary: A published version of the lending terms
+      description: Anonymous (FR-117). `404` for a number that is not a published version.
+      parameters:
+        - name: number
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: The version, with the number valid now.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicLendingTerms"
+        "404":
+          description: No such published version.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
   /api/public/embeds/{embedId}:
     get:
       operationId: getPublicEmbed
@@ -242,7 +297,7 @@ paths:
     post:
       operationId: submitPublicBookingRequest
       summary: Submits an open booking request
-      description: "Moves the request to the inbox of the staff (FR-87, ADR 0029). Needs a period and at least one position, **not** availability: positions that are not free are accepted and marked on the status page. `version` must be the current one. Afterwards the request can only be read and withdrawn."
+      description: "Moves the request to the inbox of the staff (FR-87, ADR 0029). Needs a period and at least one position, **not** availability: positions that are not free are accepted and marked on the status page. `version` must be the current one. Afterwards the request can only be read and withdrawn. `termsVersion` is the lending-terms version the requester acknowledged (FR-117)."
       parameters:
         - name: token
           in: path
@@ -265,7 +320,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/PublicBookingRequestResponse"
         "400":
-          description: The request has no period or no position, or its period breaks the limits (error code `period-in-past` or `period-too-far-ahead` at `pickupAt`, `period-too-long` at `returnAt`); the limits depend on today and are checked on every submit.
+          description: The request has no period or no position, or its period breaks the limits (error code `period-in-past` or `period-too-far-ahead` at `pickupAt`, `period-too-long` at `returnAt`); the limits depend on today and are checked on every submit. With a published version of the lending terms and a link that asks for it, a missing `termsVersion` is refused at `termsVersion` with the message `terms-required` (FR-117).
           content:
             application/problem+json:
               schema:
@@ -277,7 +332,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
         "409":
-          description: "`request-version-conflict` or `request-not-editable`, as for a save."
+          description: "`request-version-conflict` or `request-not-editable`, as for a save; `terms-changed` when `termsVersion` is not the version valid now, or is sent although none is asked for (FR-117)."
           content:
             application/problem+json:
               schema:
@@ -1323,8 +1378,16 @@ components:
           type: integer
           minimum: 1
           maximum: 9007199254740991
+        termsVersion:
+          default: null
+          anyOf:
+            - type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            - type: "null"
       required:
         - version
+        - termsVersion
       additionalProperties: false
     SaveBookingRequest:
       $schema: https://json-schema.org/draft/2020-12/schema
@@ -1509,6 +1572,39 @@ components:
                   - name
                   - description
                 additionalProperties: false
+            lendingTerms:
+              type: object
+              properties:
+                required:
+                  type: boolean
+                currentNumber:
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                    - type: "null"
+                acknowledged:
+                  anyOf:
+                    - type: object
+                      properties:
+                        number:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                        acknowledgedAt:
+                          type: string
+                          format: date-time
+                          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                      required:
+                        - number
+                        - acknowledgedAt
+                      additionalProperties: false
+                    - type: "null"
+              required:
+                - required
+                - currentNumber
+                - acknowledged
+              additionalProperties: false
             lineLimit:
               type: integer
               minimum: -9007199254740991
@@ -1773,6 +1869,7 @@ components:
             - tariffName
             - tariffChoice
             - tariffs
+            - lendingTerms
             - lineLimit
             - lines
             - itemUnits
@@ -1860,6 +1957,30 @@ components:
         - categories
         - tariffs
       additionalProperties: false
+    PublicLendingTerms:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        number:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        text:
+          type: string
+        publishedAt:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+        currentNumber:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+      required:
+        - number
+        - text
+        - publishedAt
+        - currentNumber
+      additionalProperties: false
     PublicSettingsResponse:
       $schema: https://json-schema.org/draft/2020-12/schema
       type: object
@@ -1894,9 +2015,16 @@ components:
             - privacyPolicyUrl
             - links
           additionalProperties: false
+        lendingTermsNumber:
+          anyOf:
+            - type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            - type: "null"
       required:
         - addressForm
         - legalLinks
+        - lendingTermsNumber
       additionalProperties: false
     BrandingResponse:
       $schema: https://json-schema.org/draft/2020-12/schema

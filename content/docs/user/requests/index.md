@@ -28,6 +28,11 @@ Ist der Kontakt eine Person der eigenen Organisation, steht die Wahl fest auf Ei
 Positionen, die in diesem Tarif nicht verleihbar sind, nennt der Dialog vorab und übernimmt sie nicht.
 Liegt ein Termin außerhalb der Öffnungszeiten, bestätigt die Sachbearbeitung ihn bei der Übernahme, siehe [Konflikte und Sperren](../conflicts-and-blocks/index.md#termin-außerhalb-der-öffnungszeiten).
 
+Hat die Organisation Ausleihbedingungen veröffentlicht, bestätigt die anfragende Person beim Einreichen, dass sie die gültige Fassung gelesen hat; den Text öffnet ein Verweis im Dialog.
+Bei einem für einen eigenen Kontakt ausgestellten Link entfällt die Bestätigung.
+Wird die Fassung zwischen dem Öffnen des Dialogs und dem Einreichen geändert, bestätigt die Person die neue Fassung.
+Die Statusseite nennt die bestätigte Fassung mit dem Zeitpunkt.
+
 Die Sachbearbeitung kann auch selbst einen Link für einen Kontakt ausstellen.
 
 ## Wann der Kontakt eine E-Mail bekommt
