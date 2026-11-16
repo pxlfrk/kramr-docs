@@ -29,6 +29,7 @@ Der Knopf ist gesperrt, bis Abhol- und Rückgabetermin eingetragen sind, damit d
 - **Mehr als frei:** Du kannst mehr wählen, als im Zeitraum frei ist; kramr weist nur auf den Konflikt hin, siehe [Konflikte und Sperren](../conflicts-and-blocks/index.md).
 
 Bei einer Ausleihe bleibt Material außen vor, das nur im Set buchbar ist, und Bestandteile eines Pflicht-Sets, das mitgebucht wird, weil sie mit dem Set entstehen.
+Unter dem Feld „Tarif“ stehen die Beschreibung des gewählten Tarifs und sein interner Hinweis, falls die Administration sie gepflegt hat; sie helfen bei der Wahl, wenn unklar ist, in welche Gruppe der Ausleiher fällt.
 Material, das im gewählten Tarif nicht verleihbar ist, ist mit dem Grund markiert, siehe [Verleihbarkeit und Eigennutzung](../lending-restrictions/index.md).
 
 ### Sets in der Buchung

@@ -78,6 +78,9 @@ Unter *Verwaltung* › *Organisation* › *Tarife* pflegst du die Tarife, nach d
 Eine neue Installation startet mit „Intern“ und „Extern“; du kannst beide umbenennen, weitere ergänzen und entfernen.
 Es gibt höchstens 6 und mindestens einen aktiven Tarif, und die Bezeichnung darf unter den aktiven nur einmal vorkommen.
 Mit den Pfeilen legst du die Reihenfolge fest.
+Jeder Tarif trägt eine **Beschreibung** (höchstens 300 Zeichen, reiner Text), die sagt, für wen er gilt, und einen **Hinweis** (höchstens 500 Zeichen, reiner Text), der der Sachbearbeitung sagt, wie sie im Zweifel entscheidet; beide sind optional und lassen sich über „Bearbeiten“ ändern.
+Die Beschreibung ist für Außenstehende gedacht, der Hinweis bleibt intern: Er geht nur an Sachbearbeitung und Administration, nie an die Rolle „nur lesen“ und nie an eine öffentliche Seite.
+Die beiden Tarife einer neuen Installation tragen eine Beispielbeschreibung, die du anpasst.
 Änderungen gelten sofort.
 Ein neu angelegter Tarif ist an jedem Material zunächst verleihbar und kostenlos; die Preise setzt du am Material oder per CSV-Import.
 
