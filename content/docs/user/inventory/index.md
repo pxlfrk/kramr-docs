@@ -30,12 +30,26 @@ Welche Spalte du siehst, schaltest du selbst ein.
 Zu jedem Material lässt sich festhalten, wen man bei Fragen anspricht.
 Die Personen pflegt die Administration unter *Verwaltung › Organisation › Ansprechpersonen*.
 
-- An einer Kategorie wählst du im Formular „Erbt“, eine Person oder „Keine Person“; Unterkategorien und ihr Material übernehmen das.
-- Am Material wählst du in der Karte „Ansprechperson“ dasselbe; die Wahl wird sofort gespeichert.
+- Die Zeile zeigt den Wert und, woher er kommt: „Geerbt · Kategorie Zelte“ (gestrichelt) oder „Lokal gesetzt“. Geerbtes überschreibst du mit „Überschreiben“, einen lokalen Wert änderst du mit „Ändern“ oder setzt ihn mit „Auf geerbt zurücksetzen“ zurück.
+- An einer Kategorie stellst du das im Formular ein; Unterkategorien und ihr Material übernehmen den Wert.
+- Am Material wirkt die Wahl sofort, in der Karte „Ansprechperson“.
+- „Keine Person“ ist ein Wert wie jeder andere und lässt sich auch lokal setzen.
 - Es gilt der nächste ausdrückliche Wert vom Material aufwärts über die Kategorien, zuletzt die Standardperson der Organisation; „Keine Person“ beendet die Suche.
-- An der Auswahl steht, was beim Erben gelten würde und woher, und unter der Auswahl die Person, die gerade gilt.
+- Bei einem lokalen Wert steht darunter, was die Ebene darüber liefern würde.
 - Der Standort spielt dabei keine Rolle.
 - Die Karte sehen Sachbearbeitung und Administration, Leserechte allein genügen nicht.
+
+### Rücksprache vor der Genehmigung
+
+Bei besonderem Material, etwa Technik oder Fahrzeugen, soll vor der Genehmigung jemand vom Fach gefragt werden.
+Dafür gibt es neben der Ansprechperson die Zeile „Rücksprache vor der Genehmigung“ mit „Erforderlich“ und „Nicht erforderlich“, die sich wie die Ansprechperson vererbt und unabhängig von ihr überschreiben lässt.
+
+- Du setzt sie an der Kategorie (mit „Speichern“) und am Material (sofort gespeichert); sie vererbt sich wie die Ansprechperson, und der nächste ausdrückliche Wert gewinnt.
+- Ohne ausdrücklichen Wert gilt „nicht erforderlich“.
+- Sie wirkt nur, wenn für das Material eine Ansprechperson gilt; sonst steht an der Auswahl ein Hinweis.
+- Die Bestandteile eines Pflicht-Sets zählen mit ihrer eigenen Kategorie.
+- Eine Sperre braucht nie eine Rücksprache, eine Ausleihe jede, auch die Eigennutzung.
+- Jede Änderung der Auswahl steht in der Historie des Materials.
 
 ## Standorte
 

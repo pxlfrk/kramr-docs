@@ -27,6 +27,16 @@ Ein automatisches Nachrücken einer wartenden Buchung gibt es nicht.
 Besteht beim Genehmigen eines Entwurfs schon ein Konflikt, genehmigt kramr nicht stillschweigend.
 Du bestätigst ausdrücklich „Trotzdem genehmigen“.
 
+### Rücksprache vor der Genehmigung
+
+Braucht Material der Buchung eine Rücksprache (siehe [Inventar](../inventory/index.md)), zeigt die Buchung die Karte „Rücksprache“: je Person ihre Kontaktdaten, ihre Positionen und ob die Rücksprache „Offen“ oder „Mündlich geklärt“ ist.
+Hast du mit der Person gesprochen, wählst du „Rücksprache gehalten“ und trägst bei Bedarf eine Notiz ein; mit „Vermerk zurücknehmen“ wird die Rücksprache wieder offen.
+Beides geht im Entwurf und in genehmigten Buchungen, später zeigt die Karte nur noch an.
+
+Beim Genehmigen mit offener Rücksprache bestätigst du im Dialog ausdrücklich, wie bei „Trotzdem genehmigen“; kramr hält nichts auf, und die Bestätigung steht in der Historie.
+Wechselt die Ansprechperson des Materials, ist die neue Person offen.
+Bei der Übernahme einer Anfrage weist ein Hinweis auf die Rücksprache hin, ohne Bestätigung.
+
 ### Hinweis „Beansprucht“
 
 Die Buchung, die den Bestand hält, trägt einen neutralen Hinweis, wenn andere Buchungen mehr wollen, als im Zeitraum frei ist.

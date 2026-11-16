@@ -2158,6 +2158,37 @@ components:
                 - pickup
                 - return
               additionalProperties: false
+            consultations:
+              type: array
+              items:
+                type: object
+                properties:
+                  custodian:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                      name:
+                        type: string
+                      role:
+                        type:
+                          - string
+                          - "null"
+                    required:
+                      - id
+                      - name
+                      - role
+                    additionalProperties: false
+                  itemNames:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - custodian
+                  - itemNames
+                additionalProperties: false
             lines:
               type: array
               items:
@@ -2353,6 +2384,7 @@ components:
               maximum: 9007199254740991
           required:
             - outsideOpeningHours
+            - consultations
             - lines
             - fixedContact
             - contactSuggestions
@@ -2419,6 +2451,21 @@ components:
             enum:
               - pickup
               - return
+        consultations:
+          type: array
+          items:
+            type: object
+            properties:
+              custodianId:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+              name:
+                type: string
+            required:
+              - custodianId
+              - name
+            additionalProperties: false
         amosweb:
           type: object
           properties:

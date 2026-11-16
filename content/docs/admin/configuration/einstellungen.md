@@ -171,6 +171,12 @@ Wie die Zuordnung an Kategorie und Material wirkt, steht unter [Bestand verwalte
 Die Person, die als Standardperson gewählt ist, lässt sich nicht löschen: wähle zuerst eine andere Person oder *Keine*.
 Nur ein Admin ändert das Verzeichnis; Sachbearbeitung sieht es in Auswahllisten.
 
+### Rücksprache vor der Genehmigung
+
+Ob vor der Genehmigung die Ansprechperson gefragt werden muss, legst du an Kategorie und Material fest (Auswahl „Rücksprache vor der Genehmigung“, siehe [Benutzerhandbuch](../../user/inventory/index.md)).
+Es gibt dafür keine globale Einstellung; ohne ausdrücklichen Wert gilt „nicht erforderlich“.
+Das Kennzeichen steht im Änderungsprotokoll; wird eine Person gelöscht, entfällt auch ihr Rücksprache-Vermerk an Buchungen, die Historie bleibt.
+
 ### Ansprechperson in der Einbettung
 
 Eine Einbettung zeigt die Ansprechperson nur, wenn zwei Dinge zusammenkommen.
