@@ -20,7 +20,9 @@ Wie die Einbettung eingerichtet wird, steht unter [Reverse Proxy](../../admin/in
    Die anfragende Person erfährt es per E-Mail.
 
 Eine Anfrage ist noch keine Buchung; erst ihre Übernahme erzeugt einen Entwurf.
-Bei der Übernahme wählt die Sachbearbeitung Kontakt, Tarif oder Eigennutzung und zuständige Person.
+Die anfragende Seite wählt in der Einbettung oder im Anfrage-Editor ihren Tarif anhand der öffentlichen Beschreibung; ohne Tarif lässt sich die Anfrage nicht einreichen, bei einem für einen eigenen Kontakt ausgestellten Link entfällt die Wahl.
+Material, das im gewählten Tarif nicht verleihbar ist, lässt sich nicht neu in die Anfrage aufnehmen; eine Position, die erst durch einen Tarifwechsel betroffen ist, bleibt stehen, und der Einreichen-Dialog warnt davor.
+Bei der Übernahme ist der gewünschte Tarif vorbelegt und als Wunsch gekennzeichnet; die Sachbearbeitung bestätigt ihn oder wählt Kontakt, einen anderen Tarif oder Eigennutzung und zuständige Person.
 Unter der Tarifwahl stehen Beschreibung und interner Hinweis des gewählten Tarifs.
 Ist der Kontakt eine Person der eigenen Organisation, steht die Wahl fest auf Eigennutzung.
 Positionen, die in diesem Tarif nicht verleihbar sind, nennt der Dialog vorab und übernimmt sie nicht.

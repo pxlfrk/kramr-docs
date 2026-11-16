@@ -1129,6 +1129,13 @@ components:
               format: uuid
               pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
             - type: "null"
+        tariffId:
+          default: null
+          anyOf:
+            - type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+            - type: "null"
         unitIds:
           default: []
           maxItems: 50
@@ -1147,6 +1154,7 @@ components:
         - mobile
         - organisation
         - itemId
+        - tariffId
         - unitIds
         - website
       additionalProperties: false
@@ -1349,6 +1357,12 @@ components:
             - type: string
               maxLength: 2000
             - type: "null"
+        tariffId:
+          anyOf:
+            - type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+            - type: "null"
         lines:
           maxItems: 200
           type: array
@@ -1389,6 +1403,7 @@ components:
         - returnAt
         - organisation
         - note
+        - tariffId
         - lines
       additionalProperties: false
     PublicBookingRequestResponse:
@@ -1458,6 +1473,42 @@ components:
               type:
                 - string
                 - "null"
+            tariffId:
+              anyOf:
+                - type: string
+                  format: uuid
+                  pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                - type: "null"
+            tariffName:
+              default: null
+              type:
+                - string
+                - "null"
+            tariffChoice:
+              type: string
+              enum:
+                - required
+                - not-needed
+            tariffs:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  name:
+                    type: string
+                  description:
+                    type:
+                      - string
+                      - "null"
+                required:
+                  - id
+                  - name
+                  - description
+                additionalProperties: false
             lineLimit:
               type: integer
               minimum: -9007199254740991
@@ -1718,6 +1769,10 @@ components:
             - pickupAt
             - returnAt
             - note
+            - tariffId
+            - tariffName
+            - tariffChoice
+            - tariffs
             - lineLimit
             - lines
             - itemUnits
@@ -1780,9 +1835,30 @@ components:
               - name
               - parentId
             additionalProperties: false
+        tariffs:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+              name:
+                type: string
+              description:
+                type:
+                  - string
+                  - "null"
+            required:
+              - id
+              - name
+              - description
+            additionalProperties: false
       required:
         - embed
         - categories
+        - tariffs
       additionalProperties: false
     PublicSettingsResponse:
       $schema: https://json-schema.org/draft/2020-12/schema
