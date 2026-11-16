@@ -104,6 +104,10 @@ Ziehe vorher ein Backup.
 
 Siehe [Rollback](../runbooks/rollback.md).
 
+Eine Ausnahme von der Zwei-Release-Regel bilden die **Tarife** (ab Migration `0090`):
+Sie entfernen die früheren Preis- und Verleihbarkeitsfelder des Materials im selben Release, das die Tarife einführt.
+Zurück auf eine Version vor den Tarifen geht es deshalb **nur über das Backup** vor dem Update.
+
 Eine frühere Version kennt neuere Spalten und Tabellen nicht, ignoriert sie aber, und die Daten bleiben erhalten.
 Nur Anzeige und Berechnung fallen auf den alten Stand zurück, bis du wieder auf die neue Version gehst.
 Das betrifft vor allem:

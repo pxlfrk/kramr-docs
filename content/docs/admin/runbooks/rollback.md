@@ -20,5 +20,7 @@ Hat die fehlerhafte Version das Schema nicht geändert, genügen die Schritte 1,
 3 und 4; das Backup wird nicht gebraucht. Die Regel, Schemaänderungen auf zwei
 Releases zu verteilen, hält diesen einfachen Fall zum Normalfall.
 
+Eine Ausnahme sind die Tarife (ab Migration `0090`): Sie entfernen alte Felder im selben Release, ein Rollback auf eine Version davor braucht immer das Backup, siehe [Updates und Migrationen](../upgrades/index.md).
+
 Beim Wechsel der PostgreSQL-Hauptversion ist das Backup dagegen immer nötig;
 siehe [Updates und Migrationen](../upgrades/index.md).
