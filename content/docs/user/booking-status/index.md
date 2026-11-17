@@ -29,6 +29,15 @@ Eine Buchung ohne Betrag zeigt „Kein Betrag“, eine stornierte Buchung „Ges
 Hinweise wie „Konflikt“, „Überfällig“ oder „Abholung unvollständig“ stehen als Stichwort an dem Schritt, zu dem sie gehören.
 Ein Klick darauf springt zu der Karte, die die Einzelheiten nennt, zum Beispiel zu den Materialpositionen.
 
+## Der Leihschein
+
+Wenn Sie eine Ausleihe in einem Tarif genehmigen, hält kramr sie als Revision fest: Zeitraum, Tarif, Positionen, Preise und die gültigen Ausleihbedingungen.
+Daraus entsteht der Leihschein als PDF, mit Unterschriftsfeld und dem vollen Text der Bedingungen.
+Sie öffnen ihn im Buchungsdetail über „Leihschein“, jede Rolle mit Lesezugriff kann das.
+Der Leihschein zeigt immer die festgehaltene Revision, auch wenn die Buchung später geändert wird.
+Nehmen Sie die Genehmigung mit „Zurück zu Entwurf“ zurück, bleibt der Leihschein abrufbar und trägt den Vermerk „Nicht mehr gültig“; die nächste Genehmigung legt eine neue Revision fest.
+Eigennutzung und Sperren haben keinen Leihschein, ebenso Ausleihen, die vor Einführung des Leihscheins genehmigt wurden.
+
 ## Übergänge
 
 `Entwurf → Genehmigt → Abgeholt → Zurückgegeben`
