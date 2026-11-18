@@ -38,6 +38,18 @@ Der Leihschein zeigt immer die festgehaltene Revision, auch wenn die Buchung sp�
 Nehmen Sie die Genehmigung mit „Zurück zu Entwurf“ zurück, bleibt der Leihschein abrufbar und trägt den Vermerk „Nicht mehr gültig“; die nächste Genehmigung legt eine neue Revision fest.
 Eigennutzung und Sperren haben keinen Leihschein, ebenso Ausleihen, die vor Einführung des Leihscheins genehmigt wurden.
 
+## Bestätigung des Leihscheins
+
+Mit der Genehmigung einer Ausleihe in einem Tarif bekommt der Ausleihkontakt eine E-Mail mit dem Leihschein im Anhang und einem Link.
+Auf der Seite hinter dem Link liest er Leihschein und Ausleihbedingungen und bestätigt mit einem Klick; das ist genau eine Bestätigung je Revision, ein zweiter Klick ändert nichts.
+kramr speichert dabei Zeitpunkt, Name und E-Mail-Adresse des Kontakts, aber keine IP-Adresse.
+Der Link gilt bis 30 Tage nach der geplanten Rückgabe, höchstens 180 Tage, und endet mit „Zurück zu Entwurf“, mit der Stornierung und mit der Anonymisierung des Kontakts.
+Hat der Kontakt keine E-Mail-Adresse, geht keine Mail hinaus, und Sie tragen die Bestätigung selbst ein.
+Im Buchungsdetail zeigt die Zeile „Bestätigung“ den Zustand: ausstehend oder bestätigt, per Link oder vor Ort.
+Mit „Vor Ort bestätigt“ vermerken Sie eine Bestätigung auf Papier oder mündlich, mit einem kurzen Vermerk ohne Personendaten; das steht in der Historie.
+Fehlt die Bestätigung, bleibt die Abholung möglich; der Schritt „Abholung“ trägt dann den Hinweis „Bestätigung ausstehend“, und unter „Als abgeholt erfassen“ steht ein Satz dazu, mehr nicht.
+Eine Erinnerung an die ausstehende Bestätigung gibt es nicht.
+
 ## Übergänge
 
 `Entwurf → Genehmigt → Abgeholt → Zurückgegeben`

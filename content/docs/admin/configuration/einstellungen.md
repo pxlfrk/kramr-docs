@@ -33,6 +33,7 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `request_mail.link_staff_issued` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail mit dem Link zur Anfrage, den die Geschäftsstelle ausgestellt hat, je in einer Du- und einer Sie-Fassung. |
 | `request_mail.taken_over` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, dass die Anfrage übernommen wurde, je in einer Du- und einer Sie-Fassung. |
 | `request_mail.declined` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, dass die Anfrage abgelehnt wurde, je in einer Du- und einer Sie-Fassung; der Text muss die Begründung enthalten. |
+| `request_mail.lending_slip` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail mit dem Leihschein, die der Ausleihkontakt bei der Genehmigung einer Ausleihe in einem Tarif erhält, je in einer Du- und einer Sie-Fassung; erlaubte Platzhalter sind die Buchungsnummer, der Name der Organisation und das Ende der Gültigkeit des Links. |
 | `booking.select_all_confirm_threshold` | Zahl | `50`, ohne Umgebungsvariable | Ab wie vielen hinzugefügten Positionen „Alle auswählen“ in der Materialauswahl vorher fragt. Eine ganze Zahl von 1 bis 10000. |
 | `extra_charge.cleaning_fee_parameter_type` | parameter-type | leer (keine Reinigungsgebühr vorbelegt) | Der Parameter-Typ, dessen Wert (eine Zahl in €) den Einzelpreis einer Zusatzkosten-Position „verunreinigt“ vorbelegt. Zur Auswahl stehen Zahl-Parameter mit der Einheit „€“; ohne Auswahl wird nichts vorbelegt. |
 | `office.opening_hours` | opening-hours | leer (alle Tage geschlossen, kein Hinweis) | Die Öffnungszeiten der Geschäftsstelle, je Wochentag null bis vier Zeiträume in Ortszeit. Ein Zeitraum reicht bis zum Ende ausschließlich. Solange kein Wochentag einen Zeitraum hat, zeigt kramr keinen Hinweis. |
@@ -65,7 +66,7 @@ Was sofort gespeichert wird, etwa ein Logo oder ein externer Kalender, steht in 
 | Organisation | Öffnungszeiten | `office.opening_hours`, `office.federal_state`, `office.church_holidays` und `office.opening_hours_deviations`, siehe [Öffnungszeiten](#öffnungszeiten-der-geschäftsstelle) |
 | Organisation | Ausleihbedingungen | der Bedingungstext in Fassungen, siehe [Ausleihbedingungen](#ausleihbedingungen) |
 | Organisation | Recht & Datenschutz | `legal.privacy_policy_url`, `legal.links` und `contacts.inactivity_period_days` |
-| Organisation | E-Mail-Texte | die vier `request_mail.*`-Texte, siehe [E-Mail-Texte](#e-mail-texte-an-anfragende) |
+| Organisation | E-Mail-Texte | die fünf `request_mail.*`-Texte, siehe [E-Mail-Texte](#e-mail-texte-an-anfragende) |
 | System | Benachrichtigungen | `reminder.lead_time_days`, die Empfänger (`notification.notify_creator`, `notification.notify_admins_on_new_booking`, `notification.always_notify_recipients`) und `notification.webhook_url`; darunter die fehlgeschlagenen Benachrichtigungen der letzten 7 Tage |
 | System | Externe Kalender | die eingebundenen Kalender, siehe [Externe Kalender](externe-kalender.md) |
 | System | Website-Einbindung | `embed.allowed_origins` und die Einbettungen |
@@ -149,7 +150,8 @@ Umgibt die einbettende Website den Code mit einem eigenen `sandbox`-Attribut, br
 
 ## E-Mail-Texte an Anfragende
 
-Auf der Seite *E-Mail-Texte* änderst du Betreff und Text der vier E-Mails, die Anfragende erhalten: den Link zur Anfrage (selbst angefordert oder von der Geschäftsstelle ausgestellt), die Übernahme und die Ablehnung.
+Auf der Seite *E-Mail-Texte* änderst du Betreff und Text der fünf E-Mails an Anfragende und Ausleihkontakte: den Link zur Anfrage (selbst angefordert oder von der Geschäftsstelle ausgestellt), die Übernahme, die Ablehnung und die Mail mit dem Leihschein zur Bestätigung.
+Die Schaltfläche „Leihschein bestätigen“, der PDF-Anhang und der Fuß mit dem Grund der Mail sind fest.
 Jede E-Mail gibt es in einer Du- und einer Sie-Fassung; welche verschickt wird, bestimmt die eingestellte Anrede.
 Eine Fassung ist entweder ganz die Vorgabe oder ganz angepasst, teilweise leere Felder nimmt kramr nicht an.
 „Auf Vorgabe zurücksetzen“ stellt die Vorgabe wieder her, bei den Link-Mails auch die Sicherheitshinweise.
