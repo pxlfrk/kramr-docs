@@ -104,6 +104,14 @@
       }
     },
     {
+      "tag": "script",
+      "attrs": {
+        "defer": true,
+        "src": "https://umami.achimkraemer.com/script.js",
+        "data-website-id": "4c623f3a-c5c7-49ea-a75c-a5ae699a2ec9"
+      }
+    },
+    {
       "tag": "style",
       "src": "src/styles/kramr.css"
     }
