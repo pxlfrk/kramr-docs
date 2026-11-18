@@ -99,6 +99,15 @@ Nichts geht verloren: Nummer und Historie bleiben, und „Reaktivieren“ bringt
 - **Keine Nachricht:** Archivieren und Reaktivieren lösen keine Benachrichtigung aus und stehen in der Historie.
 - **Auswertung:** Eine archivierte zurückgegebene Ausleihe fehlt in der [Auswertung der Nutzung](../usage/index.md), auch für vergangene Zeiträume; nach dem Reaktivieren zählt sie wieder.
 
+## Änderungen nach der Bestätigung
+
+Ändern Sie eine genehmigte Ausleihe wesentlich (Zeitraum, Tarif, Ausleihkontakt, Positionen, Mengen, Beträge, Zusatzkosten), zeigt das Buchungsdetail „Änderung noch nicht mitgeteilt“ mit den Änderungen vorher und nachher.
+Eine Mail geht erst hinaus, wenn Sie „Kontakt informieren“ klicken: Das legt eine neue Revision fest und schickt dem Ausleihkontakt genau eine Mail mit dem neuen Leihschein.
+Der Link der alten Revision zeigt dann nur noch „Überholt“.
+Zusatzkosten und Änderungen nach der Rückgabe verlangen keine neue Bestätigung.
+Beim Stornieren bekommt der Kontakt eine Mail ohne den Stornogrund, wenn er schon einen Leihschein hatte.
+Interne Bemerkung, Zuständige und Zusatzempfänger sind keine wesentlichen Änderungen.
+
 ## Schnell ausleihen
 
 Neben dem normalen Weg über den Entwurf gibt es „Buchung anlegen und direkt genehmigen“.
