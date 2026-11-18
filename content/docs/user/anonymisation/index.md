@@ -17,6 +17,7 @@ Der Nachname wird auf die Initiale gekürzt, der Vorname bleibt.
 Dieselben Angaben verschwinden aus der Historie der zugehörigen Buchungen.
 Auch Benachrichtigungen und Buchungsanfragen dieser Person werden gelöscht oder anonymisiert.
 Die Buchungen selbst bleiben erhalten.
+Auch auf den Leihscheinen und in den Bestätigungen steht danach der anonymisierte Name; Nummer, Zeitpunkt und Fassung der Bedingungen bleiben, siehe [Der Leihschein](../booking-status/index.md#der-leihschein).
 
 Die Aktion lässt sich **nicht rückgängig** machen.
 

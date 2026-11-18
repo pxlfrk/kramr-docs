@@ -25,6 +25,15 @@ Was die Anonymisierung zusätzlich erfasst:
 
 Die Aktion ist nicht umkehrbar.
 
+## Leihscheine und Bestätigungen
+
+Ist eine Ausleihe genehmigt worden, hat kramr ihren Leihschein als Revision festgehalten, und ein Kontakt kann ihn bestätigt haben.
+Beim Anonymisieren ersetzt kramr darin Name und E-Mail-Adresse des Kontakts, ebenso seine Angaben in den Bezeichnungen der Zusatzkosten und in Vermerken zu einer Bestätigung vor Ort.
+Als Nachweis bleiben die Buchungsnummer, der Zeitpunkt, die Fassung der Ausleihbedingungen und die Prüfsumme auf dem Leihschein.
+Die Prüfsumme bleibt dieselbe wie bei der Genehmigung; sie beweist daher nicht mehr den Inhalt, sondern nur noch, dass es diesen Leihschein gab.
+kramr löscht dabei nichts.
+Wie lange die Organisation Nachweise aufbewahrt, legt sie selbst fest und lässt es rechtlich prüfen; der Hinweis dazu steht unter [Ausleihbedingungen](../configuration/einstellungen.md#ausleihbedingungen).
+
 ## Speicherbegrenzung
 
 Kontakte ohne neue Buchung seit einer einstellbaren Frist listet *Kontakte → Inaktive Kontakte* als Vorschlag.
