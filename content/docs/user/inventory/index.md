@@ -49,6 +49,7 @@ Dafür gibt es neben der Ansprechperson die Zeile „Rücksprache vor der Genehm
 - Sie wirkt nur, wenn für das Material eine Ansprechperson gilt; sonst steht an der Auswahl ein Hinweis.
 - Die Bestandteile eines Pflicht-Sets zählen mit ihrer eigenen Kategorie.
 - Eine Sperre braucht nie eine Rücksprache, eine Ausleihe jede, auch die Eigennutzung.
+- In der Einbettung steht am Materialdetail der Hinweis, dass vor der Ausgabe eine Rücksprache nötig ist und das die Bearbeitung verlängern kann; bei einem Pflicht-Set, wenn einer seiner Bestandteile sie braucht. Eine Person nennt der Hinweis nicht.
 - Jede Änderung der Auswahl steht in der Historie des Materials.
 
 ## Standorte

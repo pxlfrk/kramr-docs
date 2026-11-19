@@ -57,6 +57,7 @@ services:
       # digits and - . _ ~ (docs/public/admin/installation).
       KRAMR_DB_URL: postgresql://${KRAMR_DB_USER}:${KRAMR_DB_PASSWORD}@db:5432/${KRAMR_DB_NAME}
       KRAMR_LOG_LEVEL: ${KRAMR_LOG_LEVEL:-info}
+      KRAMR_ENVIRONMENT: ${KRAMR_ENVIRONMENT:-production}
       # Required here although the application has a default: behind the proxy
       # a forgotten value means an OIDC callback to localhost and a login that
       # always fails, so the stack refuses to start instead.

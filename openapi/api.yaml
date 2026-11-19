@@ -212,6 +212,88 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
+  /api/public/consultations/{token}:
+    get:
+      operationId: getPublicConsultation
+      summary: The summary behind a reply link
+      description: "Anonymous (FR-121, ADR 0029): the link is the only credential. Answers the summary fixed when the mail was sent, never the live booking and never a price. **An unknown, expired or ended link is one and the same 404.** `Cache-Control: no-store`; the path is never logged."
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: The reply link of a request (43 characters, base64url). The only credential.
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9_-]{43}$
+      responses:
+        "200":
+          description: The summary, with the answer once there is one.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicConsultation"
+        "404":
+          description: No usable link.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The read budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  /api/public/consultations/{token}/reply:
+    post:
+      operationId: replyPublicConsultation
+      summary: Confirms or declines the consultation
+      description: "Anonymous (FR-121): the answer is final for this request. A decline needs a reason; a note (for staff) and a condition (also on the packing list) are optional, each up to 1000 characters. The staff member in charge is notified."
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: The reply link of a request (43 characters, base64url). The only credential.
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9_-]{43}$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplyConsultationRequest"
+      responses:
+        "200":
+          description: The summary with the answer.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicConsultation"
+        "400":
+          description: A decline without a reason, or a text that is too long.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: No usable link.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: Already answered (`urn:kramr:problem:consultation-already-replied`).
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "429":
+          description: The write budget of the public API is used up.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
   /api/public/acceptances/{token}:
     get:
       operationId: getPublicAcceptance
@@ -1086,6 +1168,8 @@ components:
                     - phone
                   additionalProperties: false
                 - type: "null"
+            consultationNotice:
+              type: boolean
           required:
             - id
             - name
@@ -1107,6 +1191,7 @@ components:
             - components
             - units
             - custodian
+            - consultationNotice
           additionalProperties: false
       required:
         - item
@@ -2116,6 +2201,148 @@ components:
         - legacyAmount
         - terms
       additionalProperties: false
+    ReplyConsultationRequest:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        verdict:
+          type: string
+          enum:
+            - confirmed
+            - declined
+        reason:
+          default: null
+          anyOf:
+            - type: string
+              maxLength: 1000
+            - type: "null"
+        note:
+          default: null
+          anyOf:
+            - type: string
+              maxLength: 1000
+            - type: "null"
+        condition:
+          default: null
+          anyOf:
+            - type: string
+              maxLength: 1000
+            - type: "null"
+      required:
+        - verdict
+        - reason
+        - note
+        - condition
+      additionalProperties: false
+    PublicConsultation:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      type: object
+      properties:
+        state:
+          type: string
+          enum:
+            - open
+            - answered
+        expiresAt:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+        reference:
+          type: string
+        pickup:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+        return:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+        borrower:
+          type: object
+          properties:
+            name:
+              type: string
+            organisation:
+              type:
+                - string
+                - "null"
+            phone:
+              type:
+                - string
+                - "null"
+            email:
+              type:
+                - string
+                - "null"
+          required:
+            - name
+            - organisation
+            - phone
+            - email
+          additionalProperties: false
+        lines:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              quantity:
+                type: integer
+                minimum: -9007199254740991
+                maximum: 9007199254740991
+              componentOf:
+                type:
+                  - string
+                  - "null"
+            required:
+              - name
+              - quantity
+              - componentOf
+            additionalProperties: false
+        reply:
+          anyOf:
+            - type: object
+              properties:
+                verdict:
+                  type: string
+                  enum:
+                    - confirmed
+                    - declined
+                reason:
+                  type:
+                    - string
+                    - "null"
+                note:
+                  type:
+                    - string
+                    - "null"
+                condition:
+                  type:
+                    - string
+                    - "null"
+                repliedAt:
+                  type: string
+                  format: date-time
+                  pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+              required:
+                - verdict
+                - reason
+                - note
+                - condition
+                - repliedAt
+              additionalProperties: false
+            - type: "null"
+      required:
+        - state
+        - expiresAt
+        - reference
+        - pickup
+        - return
+        - borrower
+        - lines
+        - reply
+      additionalProperties: false
     PublicEmbedResponse:
       $schema: https://json-schema.org/draft/2020-12/schema
       type: object
@@ -2275,10 +2502,17 @@ components:
           type:
             - string
             - "null"
+        environment:
+          type: string
+          enum:
+            - production
+            - development
+            - demo
       required:
         - name
         - logoSvgUrl
         - logoPngUrl
+        - environment
       additionalProperties: false
     ProblemDetails:
       $schema: https://json-schema.org/draft/2020-12/schema
@@ -2899,9 +3133,19 @@ components:
                 pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
               name:
                 type: string
+              state:
+                type: string
+                enum:
+                  - open
+                  - requested
+                  - confirmed
+                  - declined
+                  - verbal
+                  - stale
             required:
               - custodianId
               - name
+              - state
             additionalProperties: false
         amosweb:
           type: object

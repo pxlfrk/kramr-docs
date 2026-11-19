@@ -11,6 +11,42 @@ Die [Produktivvorlage](https://pxlfrk.github.io/kramr-docs/downloads/production.
 Variablen, die du für den Betrieb setzt. Diese Seite führt alle auf. Echte Werte gehören nur in die `.env` auf dem Server. Ungültige
 Werte führen zu einem Startabbruch mit einer klaren Meldung.
 
+## Geheimnisse als Docker-Secrets
+
+Statt eines Werts in der `.env` kannst du ein Geheimnis als Datei übergeben, etwa als [Docker-Secret](https://docs.docker.com/compose/how-tos/use-secrets/).
+Dafür setzt du die Variable mit dem Zusatz `_FILE` auf den Pfad der Datei, zum Beispiel `KRAMR_OIDC_CLIENT_SECRET_FILE=/run/secrets/oidc_client_secret`.
+Der Inhalt der Datei ist dann der Wert, ein abschließender Zeilenumbruch entfällt.
+
+Das gilt für diese Variablen:
+`KRAMR_DB_URL`, `KRAMR_OIDC_CLIENT_SECRET`, `KRAMR_NOTIFICATION_SMTP_PASSWORD`, `KRAMR_SECRETS_KEY`, `KRAMR_REQUEST_LINK_KEY`, `KRAMR_AMOSWEB_APP_TOKEN` und `KRAMR_AMOSWEB_APP_KEY`.
+
+- Setze je Geheimnis nur eines von beiden. Sind Variable und Datei gesetzt, bricht der Start mit einer Meldung ab.
+- Eine fehlende, nicht lesbare oder leere Datei bricht den Start ebenfalls ab. Die Meldung nennt die Variable und den Pfad, nie den Inhalt.
+- Die Datei wird einmal beim Start gelesen. Nach einem Wechsel des Geheimnisses startest du den Container neu.
+- `KRAMR_DB_URL_FILE` enthält die fertige Verbindungs-URL. Anders als bei Compose baust du sie selbst aus Benutzer, Passwort und Datenbankname.
+- Compose reicht `_FILE`-Variablen nur durch, wenn sie im `environment`-Block des Dienstes stehen. Ein Beispiel in einer eigenen Override-Datei:
+
+```yaml
+services:
+  app:
+    environment:
+      KRAMR_DB_URL: ''
+      KRAMR_DB_URL_FILE: /run/secrets/kramr_db_url
+      KRAMR_OIDC_CLIENT_SECRET: ''
+      KRAMR_OIDC_CLIENT_SECRET_FILE: /run/secrets/kramr_oidc_client_secret
+    secrets:
+      - kramr_db_url
+      - kramr_oidc_client_secret
+
+secrets:
+  kramr_db_url:
+    file: /srv/kramr/secrets/db_url
+  kramr_oidc_client_secret:
+    file: /srv/kramr/secrets/oidc_client_secret
+```
+
+Die mitgelieferte `compose.yaml` verlangt `KRAMR_OIDC_CLIENT_SECRET` und `KRAMR_DB_PASSWORD` weiterhin in der `.env`; setze dort einen Platzhalter oder passe die Datei an.
+
 <!-- env-registry:start - generated from ops/env-registry.yaml, do not edit -->
 
 ## Pflicht im Compose-Betrieb
@@ -37,6 +73,7 @@ Werte führen zu einem Startabbruch mit einer klaren Meldung.
 | `KRAMR_DB_URL` | ja (ohne Compose) | - | PostgreSQL-Verbindungsstring. Compose baut ihn aus `KRAMR_DB_NAME`, `KRAMR_DB_USER` und `KRAMR_DB_PASSWORD`. |
 | `KRAMR_PUBLISH_PORT` | nein | `3000` | Port auf der Loopback-Adresse des Hosts, nur nötig, wenn der Proxy auf dem Host läuft. |
 | `KRAMR_LOG_LEVEL` | nein | `info` | `fatal`, `error`, `warn`, `info`, `debug` oder `trace`. Wirkt nach einem Neustart des Containers. |
+| `KRAMR_ENVIRONMENT` | nein | `production` | `production`, `development` oder `demo`. Bei `development` und `demo` zeigt die Oberfläche dauerhaft eine Leiste über der Kopfzeile und ein Präfix im Tab-Titel, damit niemand eine Test- oder Demoinstanz für die echte hält. Ein anderer Wert verhindert den Start. Wirkt nach einem Neustart des Containers. |
 | `KRAMR_PATH_UPLOADS` | nein | im Image `/app/uploads` | Ort der Material-Bilder; im Compose-Stack das Volume `uploads`. Gehört ins Backup. |
 | `KRAMR_UPDATE_IMAGE` | nein | `ghcr.io/pxlfrk/kramr` | Image (`Registry/Eigentümer/Name`, ohne Tag), dessen höchster Versions-Tag die Versionsprüfung mit der laufenden Version vergleicht. Forks tragen ihr eigenes ein. |
 | `KRAMR_SEARCH_RATE_LIMIT` | nein | `120` | Anfragen je angemeldetem Nutzer und Zeitfenster an die globale Suche in der Kopfzeile. |

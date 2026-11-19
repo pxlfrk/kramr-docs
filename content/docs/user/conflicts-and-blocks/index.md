@@ -29,13 +29,35 @@ Du bestätigst ausdrücklich „Trotzdem genehmigen“.
 
 ### Rücksprache vor der Genehmigung
 
-Braucht Material der Buchung eine Rücksprache (siehe [Inventar](../inventory/index.md)), zeigt die Buchung die Karte „Rücksprache“: je Person ihre Kontaktdaten, ihre Positionen und ob die Rücksprache „Offen“ oder „Mündlich geklärt“ ist.
+Braucht Material der Buchung eine Rücksprache (siehe [Inventar](../inventory/index.md)), zeigt die Buchung die Karte „Rücksprache“: je Person ihre Kontaktdaten, ihre Positionen und den Stand der Rücksprache.
 Hast du mit der Person gesprochen, wählst du „Rücksprache gehalten“ und trägst bei Bedarf eine Notiz ein; mit „Vermerk zurücknehmen“ wird die Rücksprache wieder offen.
 Beides geht im Entwurf und in genehmigten Buchungen, später zeigt die Karte nur noch an.
+
+#### Zusammenfassung per Mail senden
+
+Statt anzurufen, schickst du der Person mit „Zusammenfassung senden“ eine Mail mit den Positionen, die sie betreffen, dem Zeitraum und dem Namen des Ausleihers.
+Telefon und E-Mail des Ausleihers kommen nur mit, wenn du sie im Dialog freigibst; Preise stehen nie in der Mail.
+Die Person öffnet den Link und bestätigt oder lehnt ab (eine Begründung ist Pflicht) und kann eine Anmerkung für dich und eine Auflage mitgeben, die auch auf der Packliste steht.
+Die Antwort gilt endgültig; du wirst benachrichtigt, und die Karte zeigt „Bestätigt“ oder „Abgelehnt“.
+Der Link gilt bis zum Abholtermin, höchstens 30 Tage, und endet, wenn du „Rücksprache gehalten“ vermerkst, erneut sendest oder die Buchung abgeholt, storniert oder archiviert wird.
+Genehmigen kannst du ohne Rückfrage, wenn die Person bestätigt hat oder „Rücksprache gehalten“ vermerkt ist; bei „Angefragt“ und „Abgelehnt“ bestätigst du im Dialog ausdrücklich.
+Ohne hinterlegte E-Mail-Adresse der Person oder nach dem Abholtermin gibt es den Knopf nicht.
 
 Beim Genehmigen mit offener Rücksprache bestätigst du im Dialog ausdrücklich, wie bei „Trotzdem genehmigen“; kramr hält nichts auf, und die Bestätigung steht in der Historie.
 Wechselt die Ansprechperson des Materials, ist die neue Person offen.
 Bei der Übernahme einer Anfrage weist ein Hinweis auf die Rücksprache hin, ohne Bestätigung.
+
+#### Veraltete Rücksprache
+
+Eine Antwort oder ein Vermerk gilt für den Zeitraum, den Ausleiher und die Positionen der Person, wie sie beim Senden oder Vermerken waren.
+Änderst du danach den Zeitraum, tauschst eine Einheit, änderst die Menge, fügst eine Position der Person hinzu oder entfernst eine, oder wechselt der Ausleiher, zeigt die Karte „Veraltet“ und darunter, was sich seitdem geändert hat.
+Änderungen an Positionen einer anderen Person und das Umbenennen von Material zählen nicht, und machst du eine Änderung rückgängig, gilt die Rücksprache wieder.
+Mit „Erneut senden“ fragst du die Person neu, oder du vermerkst nach einem Gespräch erneut „Rücksprache gehalten“.
+Genehmigen geht bei „Veraltet“ wie bei „Abgelehnt“ nur mit ausdrücklicher Bestätigung; der Dialog nennt die Person mit „(veraltet)“.
+
+#### Abholung ohne geklärte Rücksprache
+
+Ist die Rücksprache noch offen, angefragt, abgelehnt oder veraltet, kannst du trotzdem abholen: Unter „Als abgeholt erfassen“ steht, mit wem sie nicht geklärt ist, und der Schritt „Abholung“ trägt einen Hinweis, kramr hält nichts auf.
 
 ### Hinweis „Beansprucht“
 

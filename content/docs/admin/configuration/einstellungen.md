@@ -37,6 +37,7 @@ Die Variablen stehen unter [Umgebungsvariablen](umgebungsvariablen.md).
 | `request_mail.booking_changed` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, die der Ausleihkontakt nach „Kontakt informieren“ bei einer Änderung der Buchung erhält, je in einer Du- und einer Sie-Fassung; die Gegenüberstellung der Änderungen, die Schaltfläche „Leihschein bestätigen“ und der Leihschein im Anhang sind fest; erlaubte Platzhalter sind die Buchungsnummer, der Name der Organisation und das Ende der Gültigkeit des Links. |
 | `request_mail.extra_charges` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, die der Ausleihkontakt bei erfassten Zusatzkosten erhält, je in einer Du- und einer Sie-Fassung; der aktualisierte Leihschein hängt an, eine Bestätigung wird nicht verlangt; erlaubte Platzhalter sind die Buchungsnummer und der Name der Organisation. |
 | `request_mail.booking_cancelled` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail, die der Ausleihkontakt bei der Stornierung einer Buchung mit Leihschein erhält, je in einer Du- und einer Sie-Fassung; der Stornogrund wird nie genannt; erlaubte Platzhalter sind die Buchungsnummer und der Name der Organisation. |
+| `request_mail.consultation_summary` | Texte einer E-Mail (Du- und Sie-Fassung) | leer (die Vorgabe) | Betreff und Text der Mail an die Ansprechperson mit der Zusammenfassung zur Rücksprache und dem Link zur Antwortseite, je in einer Du- und einer Sie-Fassung; Zusammenfassung, Angaben zum Ausleiher und Schaltfläche bleiben fest; erlaubte Platzhalter sind die Buchungsnummer, der Name der Organisation, der Name der Ansprechperson und das Gültigkeitsende des Links. |
 | `booking.select_all_confirm_threshold` | Zahl | `50`, ohne Umgebungsvariable | Ab wie vielen hinzugefügten Positionen „Alle auswählen“ in der Materialauswahl vorher fragt. Eine ganze Zahl von 1 bis 10000. |
 | `extra_charge.cleaning_fee_parameter_type` | parameter-type | leer (keine Reinigungsgebühr vorbelegt) | Der Parameter-Typ, dessen Wert (eine Zahl in €) den Einzelpreis einer Zusatzkosten-Position „verunreinigt“ vorbelegt. Zur Auswahl stehen Zahl-Parameter mit der Einheit „€“; ohne Auswahl wird nichts vorbelegt. |
 | `office.opening_hours` | opening-hours | leer (alle Tage geschlossen, kein Hinweis) | Die Öffnungszeiten der Geschäftsstelle, je Wochentag null bis vier Zeiträume in Ortszeit. Ein Zeitraum reicht bis zum Ende ausschließlich. Solange kein Wochentag einen Zeitraum hat, zeigt kramr keinen Hinweis. |
@@ -201,6 +202,8 @@ Die Person, die als Standardperson gewählt ist, lässt sich nicht löschen: wä
 Nur ein Admin ändert das Verzeichnis; Sachbearbeitung sieht es in Auswahllisten.
 
 ### Rücksprache vor der Genehmigung
+
+Betreff und Text der Mail „Zusammenfassung an die Ansprechperson“ passt du unter Mail-Texte an (Auswahl „Zusammenfassung an die Ansprechperson (Rücksprache)“, Du- und Sie-Fassung); Zusammenfassung, Angaben zum Ausleiher und Schaltfläche bleiben fest.
 
 Ob vor der Genehmigung die Ansprechperson gefragt werden muss, legst du an Kategorie und Material fest (Auswahl „Rücksprache vor der Genehmigung“, siehe [Benutzerhandbuch](../../user/inventory/index.md)).
 Es gibt dafür keine globale Einstellung; ohne ausdrücklichen Wert gilt „nicht erforderlich“.
